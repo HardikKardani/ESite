@@ -1,0 +1,46 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Add Company";
+}
+
+
+<div class="content-area">
+    <div id="toparea" class="style4"></div>
+    <div class="card p-2">
+        <div class="row mb-3">
+            <div class="col-6"></div>
+            <div class="col-6 text-right">
+                <a data-title="Add Company" class="get_pn" href="/Company/AddCompany">
+                    <button class="btn btn-primary inline-block focus:outline-none bg-brand-500 mt-1 text-white hover:bg-brand-600 hover:text-white  text-md font-medium py-2 px-4 rounded">
+                        + Add Company
+                    </button>
+                </a>
+            </div>
+        </div>
+        <div class="console-panel no-header">
+            <div class="console-panel-body no-padding">
+                <div class="table-container">
+                    <table class="table table-striped console-table table-bordered table-hover mb-0"
+                           id="CompanyDataTable">
+                        <thead class="sorticon-pos">
+                           
+                            <tr>
+                                <th>Company Name</th>
+                                <th>Address</th>
+                                <th>Mobile</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="console-footer">
+                <div class="dt-bottom-container"></div>
+            </div>
+        </div>
+    </div>
+
+
+</div><!-- Content Area -->
+<script src="/JsController/Company.js"></script>

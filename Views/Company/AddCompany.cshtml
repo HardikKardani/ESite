@@ -1,0 +1,208 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = "Add Company";
+}
+<!-- SmartWizard -->
+<link href="/js/plugins/smart-wizard/smart_wizard.min.css" rel="stylesheet" type="text/css" />
+<link href="/js/plugins/smart-wizard/smart_wizard_theme_circles.min.css" rel="stylesheet" type="text/css" />
+<link href="/js/plugins/smart-wizard/smart_wizard_theme_arrows.min.css" rel="stylesheet" type="text/css" />
+<link href="/js/plugins/smart-wizard/smart_wizard_theme_dots.min.css" rel="stylesheet" type="text/css" />
+<!-- SmartWizard -->
+<div class="content-area">
+	<div id="toparea" class="style4"></div>
+
+	<div class="card p-1">
+		<div class="console-panel grid-stack-item-content">
+
+			<div class="console-panel-body-noscroll">
+				<!-- External toolbar sample -->
+				<form action="#" id="myForm" data-toggle="validator" method="post" accept-charset="utf-8">
+
+					<!-- SmartWizard html -->
+					<div id="smartwizard">
+						<ul>
+							<li><a href="#step-1"><small>Company Details</small></a></li>
+							<li><a href="#step-2"><small>User Details</small></a></li>
+
+						</ul>
+
+						<div>
+							<div id="step-1">
+
+								<div id="form-step-0" role="form" data-toggle="validator">
+									<div class="form-group">
+										<label> Name:</label>
+										<input type="text" class="form-control" id="ComapnyName"
+											   placeholder="Company Name" required>
+										<div class="help-block with-errors text-danger"></div>
+									</div>
+									<div class="form-group">
+										<label>Address:</label>
+										<input type="text" class="form-control" id="ComapnyAddress"
+											   placeholder="Company Address" required>
+										<div class="help-block with-errors text-danger"></div>
+									</div>
+									<div class="form-group">
+										<label>Contact Number:</label>
+										<input type="text" class="form-control" id="ContactNumber"
+											   placeholder="Contact Number" required>
+										<div class="help-block with-errors text-danger"></div>
+									</div>
+								</div>
+
+							</div>
+							<div id="step-2">
+								<div id="form-step-1" role="form" data-toggle="validator">
+									<div class="form-group">
+										<label for="Username">UserName:</label>
+										<input type="text" class="form-control" name="Username"
+											   id="Username" placeholder="Username" required>
+										<div class="help-block with-errors"></div>
+									</div>
+									<div class="form-group">
+										<label for="Password">Password:</label>
+										<input type="password" class="form-control" placeholder="Password"
+											   id="password-field" required>
+										<span toggle="#password-field"
+											  class="position-absolute fa fa-fw fa-eye field-icon toggle-password"
+											  onclick="togglePasswordVisibility(this)"></span></span>
+										<div class="help-block with-errors"></div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+				</form>
+			</div>
+		</div><!-- Console Panel -->
+
+	</div>
+</div><!-- Content Area -->
+<script>
+    function togglePasswordVisibility(icon) {
+        const passwordField = document.getElementById("password-field");
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+            icon.classList.remove("fa-eye");
+            icon.classList.add("fa-eye-slash");
+        } else {
+            passwordField.type = "password";
+            icon.classList.remove("fa-eye-slash");
+            icon.classList.add("fa-eye");
+        }
+    }
+</script>
+<!-- Include jQuery Validator plugin -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
+<script src="/js/plugins/smart-wizard/jquery.smartWizard.min.js"></script><!-- Smart Wizard -->
+
+
+<!-- Pagelevel Initializations Of Plugins -->
+<script src="/js/page-level/step-form.js"></script><!-- Common Scripts -->
+<script>
+    function jsLogin() {
+        debugger;
+
+        var form = $("#DataForm");
+        form.validator('validate');
+        var elmErr = form.find('.has-error');
+        if (elmErr && elmErr.length > 0) {
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Please Fill Username & Password",
+            });
+            return false;
+        } else {
+            loader(1);
+            var model = {
+                Username: $('#txtUserName').val(),
+                Password: $('#txtPassword').val()
+            }
+            $.ajax({
+                type: "POST",
+                url: '/Login/UserLogin',
+                data: model,
+                success: function (data) {
+                    if (data.status) {
+                        window.location.href = data.response;
+                    }
+                    else {
+                        loader(0);
+                        Messagealert('w', data.message);
+                    }
+                },
+                error: function (req, status, err) {
+                    loader(0);
+                    Messagealert('e', 'something went wrong' + status + err);
+                }
+            })
+
+            return false;
+        }
+
+    }
+    function loader(id) {
+        //1 to show and 0 to hide loader
+        if (id == 1) {
+            $('.myloader-container').show();
+        }
+        else {
+            $('.myloader-container').hide();
+        }
+    }
+
+    function Messagealert(type, msg) {
+        if (type == "s")// s :  Success Message
+        {
+            //swal("Success", msg, "success");
+            // Swal.fire('Success', msg, 'success')
+            Swal.fire({
+                title: 'Success',
+                text: msg,
+                icon: 'success',
+                confirmButtonColor: '#28a745',
+                confirmButtonText: 'OK'
+            })
+        }
+        else if (type == "w")// w :  Warning Message
+        {
+            //swal("Warning", msg, "warning");
+            //Swal.fire("Warning", msg, "warning");
+            Swal.fire({
+                title: 'Warning',
+                text: msg,
+                icon: 'warning',
+                confirmButtonColor: '#ffc107',
+                confirmButtonText: 'OK'
+            })
+        }
+        else if (type == "i")// i :  Information Message
+        {
+            //swal("Information", msg, "info");
+            //Swal.fire("Information", msg, "info");
+            Swal.fire({
+                title: 'Information',
+                text: msg,
+                icon: 'info',
+                confirmButtonColor: '#17a2b8',
+                confirmButtonText: 'OK'
+            })
+        }
+        else if (type == "e")// e :  Error Message
+        {
+            //swal("Error", msg, "error");
+            //Swal.fire("Error", msg, "error");
+            Swal.fire({
+                title: 'Error',
+                text: msg,
+                icon: 'error',
+                confirmButtonColor: '#dc3545',
+                confirmButtonText: 'OK'
+            })
+        }
+    }
+</script>

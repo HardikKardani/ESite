@@ -1,0 +1,575 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = "Home";
+}
+
+<style>
+	.sitetable.table.dataTable thead .sorting,
+	.sitetable.table.dataTable thead .sorting_asc,
+	.sitetable.table.dataTable thead .sorting_desc {
+		background: none;
+	}
+</style>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css">
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.flash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"></script> 
+
+<div class="content-area">
+
+	<div class="grid-stack gs-area">
+		<div class="grid-stack-item" data-gs-x="0" data-gs-y="0" data-gs-width="2" data-gs-height="4"
+			 data-gs-min-height="4" data-gs-min-width="3">
+			<div class="console-panel grid-stack-item-content console-no-header"
+				 style="background-color: #fdcf6e;">
+				<div class="console-panel-body align-center">
+
+					<div class="">
+						<ul class="top-header-btns">
+
+							<li>
+
+								<img src="/img/automation.png" style="height:50px;width:50px"><br />
+								
+								</li>
+
+							<li>
+								<span id="IDSite"></span>
+								<h6 class="mb-0">ID Site </h6>
+							</li>
+							<li>
+								<span id="ODSite">30</span>
+								<h6 class="mb-0">OD Site</h6>
+							</li>
+							<li>
+								<span id="IDODSite">60</span>
+								<h6 class="mb-0">ID/OD Site</h6>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div><!-- Console Panel -->
+		</div>
+
+		<div class="grid-stack-item" data-gs-x="3" data-gs-y="0" data-gs-width="2" data-gs-height="4"
+			 data-gs-min-height="4" data-gs-min-width="3">
+			<div class="console-panel grid-stack-item-content console-no-header"
+				 style="background-color: #81df97;">
+				<div class="console-panel-body align-center">
+					<ul class="top-header-btns">
+						
+						
+						<li> <img src="/img/Solar1.png" style="height:50px;width:50px"></li>
+						<li>
+							<h4 id="SolarHybridSite">5 sites</h4>
+							<h6>Solar Hybrid Site</h6>
+						</li>
+					</ul>
+				</div>
+			</div><!-- Console Panel -->
+		</div>
+
+
+		<div class="grid-stack-item" data-gs-x="6" data-gs-y="0" data-gs-width="3" data-gs-height="4"
+			 data-gs-min-height="4" data-gs-min-width="3">
+			<div class="console-panel grid-stack-item-content console-no-header"
+				 style="background-color: #90aff1;">
+				<div class="console-panel-body align-center">
+					<ul class="top-header-btns">
+						<li> <i class="fas fa-fire-alt" style="font-size: 3em;"></i></li>
+						<li>
+							<h4 id="FullSolar">10 sites</h4>
+							<h6>Full Solar</h6>
+						</li>
+					</ul>
+				</div>
+			</div><!-- Console Panel -->
+		</div>
+
+		<div class="grid-stack-item" data-gs-x="9" data-gs-y="0" data-gs-width="3" data-gs-height="4"
+			 data-gs-min-height="4" data-gs-min-width="3">
+			<div class="console-panel grid-stack-item-content console-no-header"
+				 style="background-color: #0ebfffcc;">
+				<div class="console-panel-body align-center">
+					<ul class="top-header-btns">
+						<li> <img src="/img/dg.png" style="height:50px;width:50px"></li>
+						<li>
+							<h4 id="GDC">0 sites</h4>
+							<h6>CDC (Genset + Batt)</h6>
+						</li>
+					</ul>
+				</div>
+			</div><!-- Console Panel -->
+		</div>
+
+
+		<div class="grid-stack-item" data-gs-x="0" data-gs-y="7" data-gs-width="3" data-gs-height="12"
+			 data-gs-min-height="10" data-gs-min-width="3">
+			<div class="console-panel grid-stack-item-content">
+				<div class="console-panel-header">
+					<div class="cph-left">
+						<h5>Site Status</h5>
+					</div>
+					<div class="cph-right">
+						<ul class="top-header-btns">
+							<li>
+								<a class="collapse-panel" href="#" title="Collapse/Uncollapse Panel"
+								   data-rel="tooltip"> <i class="icon dripicons-chevron-up"></i></a>
+							</li>
+							<li class="dropdown">
+								<a href="#" data-toggle="dropdown" title="Panel Options" data-rel="tooltip">
+									<i class="icon dripicons-dots-3"></i>
+								</a>
+								<div class="dropdown-menu  dropdown-menu-right theme-media">
+									<div class="dropdown-menu-header">
+										<div class="dmh-inner">
+											<h4>Panel Options</h4>
+										</div>
+									</div>
+									<a class="dropdown-item cp" href="#" title="">
+										<span class="color-fill-icon" style="background-color:#fff;"></span>
+										Header Background Color
+									</a>
+									<a class="dropdown-item header-fontcolor" href="#" title="">
+										<span class="color-fill-icon" style="background-color:#333"></span>
+										Header Font Color Dark/Light
+									</a>
+								</div>
+							</li>
+							<li>
+								<a class="removeWidget" href="#" title="Remove Panel" data-rel="tooltip">
+									<i class="icon dripicons-cross"></i>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div><!-- Panel Header -->
+				<div class="console-panel-body ">
+					<div class="chart-container">
+						<canvas id="donutchart1" width="100" height="95"></canvas>
+					</div>
+				</div>
+			</div><!-- Console Panel -->
+		</div>
+		<div class="grid-stack-item" data-gs-x="3" data-gs-y="7" data-gs-width="3" data-gs-height="12"
+			 data-gs-min-height="10" data-gs-min-width="3">
+			<div class="console-panel grid-stack-item-content">
+				<div class="console-panel-header">
+					<div class="cph-left">
+						<h5>Site Running On </h5>
+					</div>
+					<div class="cph-right">
+						<ul class="top-header-btns">
+							<li>
+								<a class="collapse-panel" href="#" title="Collapse/Uncollapse Panel"
+								   data-rel="tooltip"> <i class="icon dripicons-chevron-up"></i></a>
+							</li>
+							<li class="dropdown">
+								<a href="#" data-toggle="dropdown" title="Panel Options" data-rel="tooltip">
+									<i class="icon dripicons-dots-3"></i>
+								</a>
+								<div class="dropdown-menu  dropdown-menu-right theme-media">
+									<div class="dropdown-menu-header">
+										<div class="dmh-inner">
+											<h4>Panel Options</h4>
+										</div>
+									</div>
+									<a class="dropdown-item cp" href="#" title="">
+										<span class="color-fill-icon" style="background-color:#fff;"></span>
+										Header Background Color
+									</a>
+									<a class="dropdown-item header-fontcolor" href="#" title="">
+										<span class="color-fill-icon" style="background-color:#333"></span>
+										Header Font Color Dark/Light
+									</a>
+								</div>
+							</li>
+							<li>
+								<a class="removeWidget" href="#" title="Remove Panel" data-rel="tooltip">
+									<i class="icon dripicons-cross"></i>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div><!-- Panel Header -->
+				<div class="console-panel-body ">
+					<div class="chart-container">
+						<canvas id="donutchart2" width="100" height="95"></canvas>
+					</div>
+				</div>
+			</div><!-- Console Panel -->
+		</div>
+		<div class="grid-stack-item" data-gs-x="6" data-gs-y="7" data-gs-width="3" data-gs-height="12"
+			 data-gs-min-height="10" data-gs-min-width="3">
+			<div class="console-panel grid-stack-item-content">
+				<div class="console-panel-header">
+					<div class="cph-left">
+						<h5>Site Running On </h5>
+					</div>
+					<div class="cph-right">
+						<ul class="top-header-btns">
+							<li>
+								<a class="collapse-panel" href="#" title="Collapse/Uncollapse Panel"
+								   data-rel="tooltip"> <i class="icon dripicons-chevron-up"></i></a>
+							</li>
+							<li class="dropdown">
+								<a href="#" data-toggle="dropdown" title="Panel Options" data-rel="tooltip">
+									<i class="icon dripicons-dots-3"></i>
+								</a>
+								<div class="dropdown-menu  dropdown-menu-right theme-media">
+									<div class="dropdown-menu-header">
+										<div class="dmh-inner">
+											<h4>Panel Options</h4>
+										</div>
+									</div>
+									<a class="dropdown-item cp" href="#" title="">
+										<span class="color-fill-icon" style="background-color:#fff;"></span>
+										Header Background Color
+									</a>
+									<a class="dropdown-item header-fontcolor" href="#" title="">
+										<span class="color-fill-icon" style="background-color:#333"></span>
+										Header Font Color Dark/Light
+									</a>
+								</div>
+							</li>
+							<li>
+								<a class="removeWidget" href="#" title="Remove Panel" data-rel="tooltip">
+									<i class="icon dripicons-cross"></i>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div><!-- Panel Header -->
+				<div class="console-panel-body">
+					<div class="progress-item">
+						<div> <span>Battery</span> <span id="Battery">10 <span>(32%)</span></span> </div>
+						<div class="progress">
+							<div class="progress-bar bg-primary" style="width:32%"></div>
+						</div><!-- progress -->
+					</div>
+					<div class="progress-item">
+						<div><span>Solar</span><span id="Solar">12 <span>(38%)</span></span></div>
+						<div class="progress">
+							<div class="progress-bar bg-danger" style="width:38%"></div>
+						</div><!-- progress -->
+					</div>
+					<div class="progress-item">
+						<div> <span>Genset</span> <span id="Genset">9<span>(29%)</span></span> </div>
+						<div class="progress">
+							<div class="progress-bar bg-warning " style="width:29%"></div>
+						</div><!-- progress -->
+					</div>
+					<div class="progress-item">
+						<div> <span>EB</span> <span id="EB">0 <span>(0%)</span></span> </div>
+						<div class="progress">
+							<div class="progress-bar bg-info " style="width:0%"></div>
+						</div><!-- progress -->
+					</div>
+				</div>
+			</div><!-- Console Panel -->
+		</div>
+		<div class="grid-stack-item" data-gs-x="9" data-gs-y="7" data-gs-width="3" data-gs-height="12"
+			 data-gs-min-height="10" data-gs-min-width="3">
+			<div class="console-panel grid-stack-item-content">
+				<div class="console-panel-header">
+					<div class="cph-left">
+						<h5>Alert Status</h5>
+					</div>
+					<div class="cph-right">
+						<ul class="top-header-btns">
+							<li>
+								<a class="switch-full" href="#" title="Expand Panel To Full Screen"
+								   data-rel="tooltip"> <i class="icon dripicons-expand-2"></i></a>
+							</li>
+							<li>
+								<a class="collapse-panel" href="#" title="Collapse/Uncollapse Panel"
+								   data-rel="tooltip"> <i class="icon dripicons-chevron-up"></i></a>
+							</li>
+							<li class="dropdown">
+								<a href="#" data-toggle="dropdown" title="Panel Options" data-rel="tooltip">
+									<i class="icon dripicons-dots-3"></i>
+								</a>
+								<div class="dropdown-menu  dropdown-menu-right theme-media">
+									<div class="dropdown-menu-header">
+										<div class="dmh-inner">
+											<h4>Panel Options</h4>
+										</div>
+									</div>
+									<a class="dropdown-item cp" href="#" title="">
+										<span class="color-fill-icon" style="background-color:#fff;"></span>
+										Header Background Color
+									</a>
+									<a class="dropdown-item header-fontcolor" href="#" title="">
+										<span class="color-fill-icon" style="background-color:#333"></span>
+										Header Font Color Dark/Light
+									</a>
+								</div>
+							</li>
+							<li>
+								<a class="removeWidget" href="#" title="Remove Panel" data-rel="tooltip">
+									<i class="icon dripicons-cross"></i>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div><!-- Panel Header -->
+				<div class="console-panel-body">
+					<div class="steamline m-t-40">
+						<div class="sl-item">
+							<div class="sl-left bg-warning">
+								<i class="bg-warning icon dripicons-bell"></i>
+							</div>
+							<div class="sl-right">
+								<div class="font-medium flex justify-content-between">
+									<span class="bg-warning">NTSR</span><span class="sl-date"> 03:25 PM</span>
+								</div>
+								<div class="desc">NTSR |<span id="Alret1"></span></div>
+							</div>
+						</div>
+						<div class="sl-item">
+							<div class="sl-left bg-warning">
+								<i class="bg-warning icon dripicons-bell"></i>
+							</div>
+							<div class="sl-right">
+								<div class="font-medium flex justify-content-between">
+									<span class="bg-warning">NTSR</span> <span class="sl-date">11:52 AM</span>
+								</div>
+								<div class="desc">NTSR | <span id="Alret2"></span></div>
+							</div>
+						</div>
+						<div class="sl-item">
+							<div class="sl-left bg-danger "><i class=" icon dripicons-bell"></i></div>
+							<div class="sl-right">
+								<div class="font-medium flex justify-content-between">
+									<span class="bg-danger">NTSR</span> <span class="sl-date">11:52 AM</span>
+								</div>
+								<div class="desc">NTSR | <span id="Alret3"></span></div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div><!-- Console Panel -->
+		</div>
+		<div class="grid-stack-item" data-gs-x="0" data-gs-y="29" data-gs-width="6" data-gs-height="17"
+			 data-gs-min-height="10" data-gs-min-width="3">
+			<div class="console-panel grid-stack-item-content">
+				<div class="console-panel-header">
+					<div class="cph-left">
+						<h5>Sites</h5>
+					</div>
+					<div class="cph-right">
+						<div class="get_dt_button"></div>
+						<ul class="top-header-btns">
+							<li>
+								<a class="switch-full" href="#" title="Expand Panel To Full Screen"
+								   data-rel="tooltip"> <i class="icon dripicons-expand-2"></i></a>
+							</li>
+							<li>
+								<a class="collapse-panel" href="#" title="Collapse/Uncollapse Panel"
+								   data-rel="tooltip"> <i class="icon dripicons-chevron-up"></i></a>
+							</li>
+							<li class="dropdown">
+								<a href="#" data-toggle="dropdown" title="Panel Options" data-rel="tooltip">
+									<i class="icon dripicons-dots-3"></i>
+								</a>
+								<div class="dropdown-menu  dropdown-menu-right theme-media">
+									<div class="dropdown-menu-header">
+										<div class="dmh-inner">
+											<h4>Panel Options</h4>
+										</div>
+									</div>
+									<a class="dropdown-item cp" href="#" title="">
+										<span class="color-fill-icon" style="background-color:#fff;"></span>
+										Header Background Color
+									</a>
+									<a class="dropdown-item header-fontcolor" href="#" title="">
+										<span class="color-fill-icon" style="background-color:#333"></span>
+										Header Font Color Dark/Light
+									</a>
+								</div>
+							</li>
+							<li>
+								<a class="removeWidget" href="#" title="Remove Panel" data-rel="tooltip">
+									<i class="icon dripicons-cross"></i>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div><!-- Panel Header -->
+				<div class="console-panel-body no-padding">
+					<div class="table-container">
+						<table class="table table-striped console-table table-bordered table-hover mb-0"
+							   id="ticketstable">
+							<thead class="sorticon-pos">
+								<tr class="filtersRow">
+									<th class="filterhead"></th>
+									<th class="filterhead"></th>
+									<th class="filterhead"></th>
+								</tr>
+								<tr>
+									<th>Site Name</th>
+									<th>Cluster</th>
+									<th>Site In charge</th>
+								</tr>
+							</thead>
+							<tbody></tbody>
+						</table>
+					</div>
+				</div>
+				<div class="console-footer">
+					<div class="dt-bottom-container"></div>
+				</div>
+			</div><!-- Console Panel -->
+		</div>
+		<div class="grid-stack-item" data-gs-x="6" data-gs-y="29" data-gs-width="6" data-gs-height="17"
+			 data-gs-min-height="10" data-gs-min-width="3">
+			<div class="console-panel grid-stack-item-content">
+				<div class="console-panel-header">
+					<div class="cph-left">
+						<h5>Maps View</h5>
+					</div>
+					<div class="cph-right">
+						<ul class="top-header-btns">
+							<li>
+								<a class="switch-full" href="#" title="Expand Panel To Full Screen"
+								   data-rel="tooltip"> <i class="icon dripicons-expand-2"></i></a>
+							</li>
+							<li>
+								<a class="collapse-panel" href="#" title="Collapse/Uncollapse Panel"
+								   data-rel="tooltip"> <i class="icon dripicons-chevron-up"></i></a>
+							</li>
+							<li class="dropdown">
+								<a href="#" data-toggle="dropdown" title="Panel Options" data-rel="tooltip">
+									<i class="icon dripicons-dots-3"></i>
+								</a>
+								<div class="dropdown-menu  dropdown-menu-right theme-media">
+									<div class="dropdown-menu-header">
+										<div class="dmh-inner">
+											<h4>Panel Options</h4>
+										</div>
+									</div>
+									<a class="dropdown-item cp" href="#" title="">
+										<span class="color-fill-icon" style="background-color:#fff;"></span>
+										Header Background Color
+									</a>
+									<a class="dropdown-item header-fontcolor" href="#" title="">
+										<span class="color-fill-icon" style="background-color:#333"></span>
+										Header Font Color Dark/Light
+									</a>
+								</div>
+							</li>
+							<li>
+								<a class="removeWidget" href="#" title="Remove Panel" data-rel="tooltip">
+									<i class="icon dripicons-cross"></i>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div><!-- Panel Header -->
+				<div class="console-panel-body no-padding">
+					<iframe width="100%" height="400" frameborder="0" scrolling="no" marginheight="0"
+							marginwidth="0"
+							src="https://www.openstreetmap.org/export/embed.html?bbox=-74.0060,40.7128,-74.0060,40.7128"></iframe>
+				</div>
+			</div><!-- Console Panel -->
+		</div>
+		<div class="grid-stack-item" data-gs-x="0" data-gs-y="46" data-gs-width="12" data-gs-height="12"
+			 data-gs-min-height="10" data-gs-min-width="12">
+			<div class="console-panel grid-stack-item-content">
+				<div class="console-panel-header">
+					<div class="cph-left">
+						<h5>Live Site Status</h5>
+					</div>
+					<div class="cph-right">
+						<div class="get_dt_button"></div>
+						<ul class="top-header-btns">
+							<li>
+								<a class="collapse-panel" href="#" title="Collapse/Uncollapse Panel"
+								   data-rel="tooltip"> <i class="icon dripicons-chevron-up"></i></a>
+							</li>
+							<li class="dropdown">
+								<a href="#" data-toggle="dropdown" title="Panel Options" data-rel="tooltip">
+									<i class="icon dripicons-dots-3"></i>
+								</a>
+								<div class="dropdown-menu  dropdown-menu-right theme-media">
+									<div class="dropdown-menu-header">
+										<div class="dmh-inner">
+											<h4>Panel Options</h4>
+										</div>
+									</div>
+									<a class="dropdown-item cp" href="#" title="">
+										<span class="color-fill-icon" style="background-color:#fff;"></span>
+										Header Background Color
+									</a>
+									<a class="dropdown-item header-fontcolor" href="#" title="">
+										<span class="color-fill-icon" style="background-color:#333"></span>
+										Header Font Color Dark/Light
+									</a>
+								</div>
+							</li>
+							<li>
+								<a class="removeWidget" href="#" title="Remove Panel" data-rel="tooltip">
+									<i class="icon dripicons-cross"></i>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div><!-- Panel Header -->
+				<div class="console-panel-body no-padding">
+					<div class="table-container">
+						<table class="sitetable table table-striped console-table table-bordered table-hover mb-0"
+							   id="Sitetable">
+							<thead class="sorticon-pos">
+							
+								<tr>
+									<th rowspan="2">S No</th>
+									<th rowspan="2">Site ID</th>
+									<th rowspan="2">Site Name</th>
+									<th rowspan="2">Data Received On</th>
+									<th rowspan="2">SiteRunning ON </th>
+									<th colspan="7">AC</th>
+									<th colspan="4">Battery</th>
+									<th colspan="6">Rectifier</th>
+								</tr>
+								<tr>
+									<th>R</th>
+									<th>Y</th>
+									<th>B</th>
+									<th>R</th>
+									<th>Y</th>
+									<th>B</th>
+									<th>Freq</th>
+									<th>Status</th>
+									<th>Total Current</th>
+									<th>Voltage</th>
+									<th>Current Rem Capcity</th>
+									<th>Qty</th>
+									<th>Total Power</th>
+									<th>I/P Voltage</th>
+									<th>O/P Current</th>
+									<th>I/P Voltage</th>
+									<th>O/P Current</th>
+								</tr>
+							</thead>
+							<tbody></tbody>
+						</table>
+					</div>
+				</div>
+				<div class="console-footer">
+					<div class="dt-bottom-container"></div>
+				</div>
+			</div><!-- Console Panel -->
+		</div>
+
+
+	</div>
+
+</div><!-- Content Area -->
+<!-- Pagelevel Initializations Of Plugins -->
+<script src="/JsController/DashboardJs.js"></script>

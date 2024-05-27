@@ -1,0 +1,417 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Assets";
+}
+<div class="content-area">
+	<div id="toparea" class="style4"></div>
+	<!-- Content Area -->
+	<div class="card">
+					
+
+						<div class="console-panel-body">
+							<div class="console-form-body">
+								<div class="mytab theme1">
+									<ul class="nav nav-tabs">
+										<li> <a class="nav-link active" data-toggle="tab" data-target="#Rectifier"><i
+													class="fa fa-bolt"></i> Rectifier </a> </li>
+										<li> <a class="nav-link" data-toggle="tab" data-target="#Battery"><i
+													class="fa fa-battery-full"></i>Battery</a> </li>
+										<li> <a class="nav-link" data-toggle="tab" data-target="#DG"><i
+													class="fab fa-codepen"></i>DG</a> </li>
+										<li> <a class="nav-link" data-toggle="tab" data-target="#Solar"><i
+													class="fa fa-certificate"></i>Solar</a> </li>
+										<li> <a class="nav-link" data-toggle="tab" data-target="#Other"><i
+													class="far fa-chart-bar"></i>Other</a> </li>
+									</ul><!-- Selectors -->
+
+									<div class="tab-content">
+
+										<div class="tab-pane show active" id="Rectifier">
+											<form id="rectifierForm" data-toggle="validator" class="console-panel no-header">
+											<div class="row ">
+												<div class="col-6 form-group">
+													<label for="inputName" class="control-label">No of Rectifier</label>
+													<input type="text" class="form-control" id="noOfRectifier"
+														placeholder="No of Rectifier" required>
+												</div>
+												<div class="col-6 form-group">
+													<label for="inputName" class="control-label">Type</label>
+													<input type="text" class="form-control" id="type"
+														placeholder="Type" required>
+												</div>
+												<div class="col-6 form-group">
+													<label for="inputName" class="control-label">Make</label>
+													<input type="text" class="form-control" id="make"
+														placeholder="Make" required>
+												</div>
+												<div class="col-6 form-group">
+													<label for="inputName" class="control-label">Model</label>
+													<input type="text" class="form-control" id="model"
+														placeholder="Model" required>
+												</div>
+												<div class="col-6 form-group">
+													<label for="inputName" class="control-label">Manufacturer</label>
+													<input type="text" class="form-control" id="manufacture"
+														placeholder="Manufacturer" required>
+												</div>
+												<div class="col-6 form-group">
+													<label>Last Serviced On</label>
+													<input class="form-control" type="date" value="2011-08-19T13:45:00"
+														id="lastServicedOn">
+												</div>
+												<div class="col-6 form-group">
+													<label>Next Service On</label>
+													<input class="form-control" type="date" value="2011-08-19T13:45:00"
+														id="nextServiceOn">
+												</div>
+												
+												<div class="col-6 form-group">
+													<label>Warranty Start Date</label>
+													<input class="form-control form-controlSolar" type="date" value="2011-08-19T13:45:00"
+														id="warrantyStartDate">
+												</div>
+												<div class="col-6 form-group">
+													<label>Warranty End Date</label>
+													<input class="form-control form-controlSolar" type="date" value="2011-08-19T13:45:00"
+														id="warrantyEndDate">
+												</div>
+												<div class="col-6 form-group">
+													<label>Remarks</label>
+													<textarea class="form-control" rows="3" id="remarks"></textarea>
+												</div>
+												<div class="col-6 form-group">
+													<div class="console-checkbox-list">
+														
+														<label class="con-check">
+															<input type="checkbox" id="nextService"> Notify the Next Service
+															<span class="checkmark"></span>
+														</label>
+													</div>
+												</div>
+											</div>
+											</form>
+											<div class="footer text-right">
+												<a data-title="e@site Setting" class="get_pn p-1" href=""><button
+														class="btn btn-success ml-auto" id="btnSave" type="submit">Save</button></a>
+												<a data-title="e@site Setting" class="get_pn p-1" href=""><button
+														class="btn btn-danger ml-auto" type="button">Reload</button></a>
+											</div>
+										</div>
+										<div class="tab-pane fade" id="Battery">
+											<div class="row">
+
+												<div class="col-6 form-group">
+													<label for="inputName" class="control-label">No of Battery
+														Pack</label>
+													<input type="text" class="form-control" id="inputName"
+														placeholder="No of Battery Pack" required>
+												</div>
+												<div class="col-6 form-group">
+													<label for="inputName" class="control-label">Type</label>
+													<input type="text" class="form-control" id="inputName"
+														placeholder="Type" required>
+												</div>
+												<div class="col-6 form-group">
+													<label for="inputName" class="control-label">Make</label>
+													<input type="text" class="form-control" id="inputName"
+														placeholder="Make" required>
+												</div>
+												<div class="col-6 form-group">
+													<label for="inputName" class="control-label">Model</label>
+													<input type="text" class="form-control" id="inputName"
+														placeholder="Model" required>
+												</div>
+												<div class="col-6 form-group">
+													<label for="inputName" class="control-label">Manufacturer</label>
+													<input type="text" class="form-control" id="inputName"
+														placeholder="Manufacturer" required>
+												</div>
+												<div class="col-6 form-group">
+													<label for="inputName" class="control-label">Capacity</label>
+													<input type="text" class="form-control" id="inputName"
+														placeholder="Capacity" required>
+												</div>
+												<div class="col-6 form-group">
+													<label for="inputName" class="control-label">No of Cells</label>
+													<input type="text" class="form-control" id="inputName"
+														placeholder="No of Cells" required>
+												</div>
+												<div class="col-6 form-group">
+													<label>Last Serviced On</label>
+													<input class="form-control" type="date" value="2011-08-19T13:45:00"
+														id="example-date-input">
+												</div>
+												<div class="col-6 form-group">
+													<label>Next Service On</label>
+													<input class="form-control" type="date" value="2011-08-19T13:45:00"
+														id="example-date-input">
+												</div>
+												<div class="col-6 form-group">
+													<label>Warranty Start Date</label>
+													<input class="form-control form-controlSolar" type="date" value="2011-08-19T13:45:00"
+														id="example-date-input">
+												</div>
+												<div class="col-6 form-group">
+													<label>Warranty End Date</label>
+													<input class="form-control form-controlSolar" type="date" value="2011-08-19T13:45:00"
+														id="example-date-input">
+												</div>
+												<div class="col-6 form-group">
+													<label>Remarks</label>
+													<textarea class="form-control" rows="3"></textarea>
+												</div>
+												<div class="col-6 form-group">
+													<div class="console-checkbox-list">
+														
+														<label class="con-check">
+															<input type="checkbox"> Notify the Next Service
+															<span class="checkmark"></span>
+														</label>
+													</div>
+												</div>
+											</div>
+											<div class="footer text-right">
+												<a data-title="e@site Setting" class="get_pn p-1" href=""><button
+														class="btn btn-success ml-auto" type="submit">Save</button></a>
+												<a data-title="e@site Setting" class="get_pn p-1" href=""><button
+														class="btn btn-danger ml-auto" type="button">Reload</button></a>
+											</div>
+										</div>
+										<div class="tab-pane fade" id="DG">
+											<div class="row ">
+												<div class="col-6 form-group">
+													<label>No of DG</label>
+													<select class="select2 form-control" id="NoofDg" required>
+														<option value="0">0</option>
+														<option value="1">1</option>
+														<option value="2">2</option>
+														<option value="3">3</option>
+													</select>
+												</div>
+												<div class="col-6 form-group"></div>
+											</div>
+											<div id="dhtml"></div>
+											<div class="footer text-right">
+												<a data-title="e@site Setting" class="get_pn p-1" href=""><button
+														class="btn btn-success ml-auto" type="submit">Save</button></a>
+												<a data-title="e@site Setting" class="get_pn p-1" href=""><button
+														class="btn btn-danger ml-auto" type="button">Reload</button></a>
+											</div>
+										</div>
+										<div class="tab-pane fade" id="Solar">
+											<div class="row">
+												<div class="col-6 form-group">
+													<div class="console-checkbox-list">
+														<br />
+														<label class="con-check">
+															<input type="checkbox" onchange="toggleInputs()"
+																id="IsSolar"> Is Solar Available
+															<span class="checkmark"></span>
+														</label>
+													</div>
+												</div>
+												<div class="col-6 form-group">
+													<label for="inputName" class="control-label">Type</label>
+													<input type="text" class="form-control form-controlSolar" id="inputName"
+														placeholder="Type" required>
+												</div>
+												<div class="col-6 form-group">
+													<label for="inputName" class="control-label">Make</label>
+													<input type="text" class="form-control form-controlSolar" id="inputName"
+														placeholder="Make" required>
+												</div>
+												<div class="col-6 form-group">
+													<label for="inputName" class="control-label">Model</label>
+													<input type="text" class="form-control form-controlSolar" id="inputName"
+														placeholder="Model" required>
+												</div>
+												<div class="col-6 form-group">
+													<label for="inputName" class="control-label">Manufacturer</label>
+													<input type="text" class="form-control form-controlSolar" id="inputName"
+														placeholder="Manufacturer" required>
+												</div>
+												<div class="col-6 form-group">
+													<label for="inputName" class="control-label">Capacity</label>
+													<input type="text" class="form-control form-controlSolar" id="inputName"
+														placeholder="Capacity" required>
+												</div>
+												<div class="col-6 form-group">
+													<label for="inputName" class="control-label">No of panels</label>
+													<input type="text" class="form-control form-controlSolar" id="inputName"
+														placeholder="No of panels" required>
+												</div>
+												<div class="col-6 form-group">
+													<label>Last Serviced On</label>
+													<input class="form-control form-controlSolar" type="date" value="2011-08-19T13:45:00"
+														id="example-date-input">
+												</div>
+												<div class="col-6 form-group">
+													<label>Next Service On</label>
+													<input class="form-control form-controlSolar" type="date" value="2011-08-19T13:45:00"
+														id="example-date-input">
+												</div>
+												<div class="col-6 form-group">
+													<label>Warranty Start Date</label>
+													<input class="form-control form-controlSolar" type="date" value="2011-08-19T13:45:00"
+														id="example-date-input">
+												</div>
+												<div class="col-6 form-group">
+													<label>Warranty End Date</label>
+													<input class="form-control form-controlSolar" type="date" value="2011-08-19T13:45:00"
+														id="example-date-input">
+												</div>
+												<div class="col-6 form-group">
+													<label>Remarks</label>
+													<textarea class="form-control form-controlSolar"  rows="3"></textarea>
+												</div>
+												<div class="col-6 form-group">
+													<div class="console-checkbox-list">
+														
+														<label class="con-check">
+															<input type="checkbox"> Notify the Next Service
+															<span class="checkmark form-controlSolar"></span>
+														</label>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="tab-pane fade" id="Other">
+											<div class="text-right mb-2">
+												<button class="btn btn-primary" id="AddAsset">Add Asset</button>
+											</div>
+											<table class="table table-striped datatable console-table">
+												<thead>
+													<tr>
+														<th>Asset</th>
+														<th>Type</th>
+														<th>Description</th>
+														<th>Action</th>
+													</tr>
+												</thead>
+												<tbody>
+													
+												</tbody>
+											</table>
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+				</div>
+
+	<aside class="more-opt-panel"></aside>
+</div><!-- Theme Content -->
+<script>
+	$(document).ready(function () {
+		$('#AddAsset').click(function () {
+			$('tbody').append(
+				'<tr>' +
+				'<td><input type="text" class="form-control" placeholder="Asset"></td>' +
+				'<td><input type="text" class="form-control" placeholder="Type"></td>' +
+				'<td><input type="text" class="form-control" placeholder="Description"></td>' +
+				'<td><button class="btn btn-danger remove-row">Remove</button></td>' +
+				'</tr>'
+			);
+		});
+
+		$(document).on('click', '.remove-row', function () {
+			$(this).closest('tr').remove();
+		});
+	});
+</script>
+<script>
+	$(document).ready(function () {
+		// Initialize Select2
+
+		var html = "";
+		html += '<div class="row">';
+		html += '<div class="col-6 form-group">';
+		html += '	<label for="inputName" class="control-label">No of Battery Pack</label>';
+		html += '	<input type="text" class="form-control" id="inputName"';
+		html += '		placeholder="No of Battery Pack" required>';
+		html += '</div>';
+		html += '<div class="col-6 form-group">';
+		html += '	<label for="inputName" class="control-label">Type</label>';
+		html += '	<input type="text" class="form-control" id="inputName"';
+		html += '		placeholder="Type" required>';
+		html += '</div>';
+		html += '<div class="col-6 form-group">';
+		html += '	<label for="inputName" class="control-label">Make</label>';
+		html += '	<input type="text" class="form-control" id="inputName"';
+		html += '		placeholder="Make" required>';
+		html += '</div>';
+		html += '<div class="col-6 form-group">';
+		html += '	<label for="inputName" class="control-label">Model</label>';
+		html += '	<input type="text" class="form-control" id="inputName"';
+		html += '		placeholder="Model" required>';
+		html += '</div>';
+		html += '<div class="col-6 form-group">';
+		html += '	<label for="inputName" class="control-label">Manufacturer</label>';
+		html += '	<input type="text" class="form-control" id="inputName"';
+		html += '		placeholder="Manufacturer" required>';
+		html += '</div>';
+		html += '<div class="col-6 form-group">';
+		html += '	<label for="inputName" class="control-label">KVA</label>';
+		html += '	<input type="text" class="form-control" id="inputName"';
+		html += '		placeholder="KVA" required>';
+		html += '</div>';
+		html += '<div class="col-6 form-group">';
+		html += '	<label for="inputName" class="control-label">Fuel Capacity</label>';
+		html += '	<input type="text" class="form-control" id="inputName"';
+		html += '		placeholder="Fuel Capacity" required>';
+		html += '</div>';
+		html += '<div class="col-6 form-group">';
+		html += '	<label>Last Serviced On</label>';
+		html += '	<input class="form-control" type="date" value="2011-08-19T13:45:00" id="example-date-input">';
+		html += '</div>';
+		html += '<div class="col-6 form-group">';
+		html += '	<label>Next Service On</label>';
+		html += '	<input class="form-control" type="date" value="2011-08-19T13:45:00" id="example-date-input">';
+		html += '</div>';
+		html += '<div class="col-6 form-group">';
+		html += '	<label>Warranty Start Date</label>';
+		html += '	<input class="form-control form-controlSolar" type="date" value="2011-08-19T13:45:00"';
+		html += '		id="example-date-input">';
+		html += '</div>';
+		html += '<div class="col-6 form-group">';
+		html += '	<label>Warranty End Date</label>';
+		html += '	<input class="form-control form-controlSolar" type="date" value="2011-08-19T13:45:00"';
+		html += '		id="example-date-input">';
+		html += '</div>';
+		html += '<div class="col-6 form-group">';
+		html += '	<label>Remarks</label>';
+		html += '	<textarea class="form-control" rows="3"></textarea>';
+		html += '</div>';
+		html += '</div>';
+		// Function to add <h1></h1> elements based on selected value
+		function addH1Elements(value) {
+			$('#dhtml').empty(); // Clear previous content
+			for (var i = 0; i < value; i++) {
+				$('#dhtml').append(html); // Append <h1></h1> elements
+			}
+		}
+
+		// Listen for changes in the select element
+		$('#NoofDg').change(function () {
+			debugger;
+			var selectedValue = $(this).val();
+			addH1Elements(selectedValue); // Call the function to add <h1></h1> elements
+		});
+
+		// Initial call to add <h1></h1> elements based on the default selected value
+		addH1Elements($('#NoofDg').val());
+	});
+</script>
+<script>
+	function toggleInputs() {
+		var isSolarCheckbox = document.getElementById('IsSolar');
+		var inputFields = document.querySelectorAll('.form-controlSolar');
+		for (var i = 0; i < inputFields.length; i++) {
+			inputFields[i].disabled = !isSolarCheckbox.checked;
+		}
+	}
+	// Call the function once on page load to ensure initial state is correct
+	toggleInputs();
+</script>

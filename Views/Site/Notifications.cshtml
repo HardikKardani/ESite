@@ -1,0 +1,58 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "SiteDashboard";
+}
+<!-- AM Charts Start -->
+		<script src="https://www.amcharts.com/lib/4/core.js"></script>
+		<script src="https://www.amcharts.com/lib/4/charts.js"></script>
+		<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+		<!-- AM Charts End -->
+
+<style>
+	.col .card {
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	.col .card {
+		width: calc(50% - 10px);
+		/* Adjust the width based on your preference */
+		margin: 1px;
+		/* Add some margin between images */
+		height: 30px;
+		width: 30px;
+		/* Maintain aspect ratio */
+		object-fit: cover;
+		text-align: center;
+		/* Ensure images cover the entire space */
+	}
+
+	
+	.card {
+		border: none;
+	}
+</style>
+<div class="content-area">
+	<div id="toparea" class="style4"></div>
+	<div class="card p-3">
+		<div class="row">
+			<div class="col-12">
+				<div class="table-container scrollbar">
+					<table class="table table-striped console-table" id="notificationsTable">
+						<tbody>
+						
+						</tbody>
+					</table>
+					<div class="console-footer">
+						<div class="dt-bottom-container"></div>
+					</div>
+				</div>
+			</div>
+	
+		</div>
+	</div><!-- Content Area -->
+
+	<aside class="more-opt-panel"></aside>
+</div><!-- Theme Content -->
+<script src="/JsController/SiteNotificationsJs.js"></script>

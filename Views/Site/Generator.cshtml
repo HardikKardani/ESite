@@ -1,0 +1,413 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "SiteDashboard";
+}
+<!-- AM Charts Start -->
+		<script src="https://www.amcharts.com/lib/4/core.js"></script>
+		<script src="https://www.amcharts.com/lib/4/charts.js"></script>
+		<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+		<!-- AM Charts End -->
+
+<style>
+	.col .card {
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	.col .card {
+		width: calc(50% - 10px);
+		/* Adjust the width based on your preference */
+		margin: 1px;
+		/* Add some margin between images */
+		height: 30px;
+		width: 30px;
+		/* Maintain aspect ratio */
+		object-fit: cover;
+		text-align: center;
+		/* Ensure images cover the entire space */
+	}
+
+	#chartdiv {
+		width: 700px;
+		height: 300px;
+		max-width: 100%
+	}
+
+	#BCCchartdiv {
+		width: 700px;
+		height: 300px;
+		max-width: 100%
+	}
+
+	#BCchartdiv {
+		width: 700px;
+		height: 300px;
+		max-width: 100%
+	}
+
+	.card {
+		border: none;
+	}
+</style>
+<div class="content-area">
+	<div id="toparea" class="style4"></div>
+	<div class="card p-3">
+		<div class="row">
+			<div class="col-4">
+				<div class="form-group">
+					<h5>Select Site</h5>
+					<select class="select2 form-control">
+						<option value="Site1">Site 1</option>
+						<option value="Site1">Site 2</option>
+					</select>
+				</div>
+			</div>
+			<div class="col-4 m-4">
+				<div class="form-group">
+					<button class="btn btn-accent ">Show</button>
+				</div>
+			</div>
+
+			<div class="col-12">
+				<div class="mytab theme1">
+					<ul class="nav nav-tabs">
+						<li>
+							<a class="nav-link active" data-toggle="tab" data-target="#Summary">
+								Summary
+							</a>
+						</li>
+						<li> <a class="nav-link" data-toggle="tab" data-target="#RawData">Raw Data</a> </li>
+
+					</ul><!-- Selectors -->
+
+
+					<div class="tab-content">
+						<div class="tab-pane  show active" id="Summary">
+							<div class="card">
+								<div class="card-body">
+									<div class="grid-stack gs-area">
+										<div class="grid-stack-item" data-gs-x="0" data-gs-y="0" data-gs-width="3"
+											 data-gs-height="15" data-gs-min-height="15" data-gs-min-width="3">
+											<div class="console-panel grid-stack-item-content">
+												<div class="console-panel-header">
+													<div class="cph-left">
+														<h5>Parameter Status</h5>
+													</div>
+													<div class="cph-right">
+														<ul class="top-header-btns">
+
+															<li>
+																<a class="collapse-panel" href="#" title="Collapse/Uncollapse Panel"
+																   data-rel="tooltip"> <i class="icon dripicons-chevron-up"></i></a>
+															</li>
+															<li class="dropdown">
+																<a href="#" data-toggle="dropdown" title="Panel Options" data-rel="tooltip">
+																	<i class="icon dripicons-dots-3"></i>
+																</a>
+																<div class="dropdown-menu  dropdown-menu-right theme-media">
+																	<div class="dropdown-menu-header">
+																		<div class="dmh-inner">
+																			<h4>Panel Options</h4>
+																		</div>
+																	</div>
+																	<a class="dropdown-item cp" href="#" title="">
+																		<span class="color-fill-icon" style="background-color:#fff;"></span>
+																		Header Background Color
+																	</a>
+																	<a class="dropdown-item header-fontcolor" href="#" title="">
+																		<span class="color-fill-icon" style="background-color:#333"></span>
+																		Header Font Color Dark/Light
+																	</a>
+																</div>
+															</li>
+															<li>
+																<a class="removeWidget" href="#" title="Remove Panel" data-rel="tooltip">
+																	<i class="icon dripicons-cross"></i>
+																</a>
+															</li>
+														</ul>
+													</div>
+												</div><!-- Panel Header -->
+
+												<div class="console-panel-body align-center">
+
+													<label>R Voltage :</label> <span class="text-warning" id="RVoltage">0 V</span><br />
+													<label>Y Volatge :</label> <span class="text-warning" id="YVoltage">0 V</span><br />
+													<label>B Voltage :</label> <span class="text-warning" id="BVoltage">0 V</span><br />
+													<label>R Current :</label> <span class="text-warning" id="RCurrent">0 A</span><br />
+													<label>Y Current :</label> <span class="text-warning" id="YCurrent">0 A</span><br />
+													<label>B Current :</label> <span class="text-warning" id="BCurrent">0 A</span><br />
+													<label>Fuel Level :</label> <span class="text-warning" id="FuelLevel">682.75 Ltrs</span><br />
+													<label>DG Energy :</label> <span class="text-warning" id="DGEnergy"> KWH</span><br />
+													<label>DG Run Time :</label> <span class="text-warning" id="DGRunTime"> Hrs</span><br />
+												</div>
+											</div>
+										</div>
+										<div class="grid-stack-item" data-gs-x="3" data-gs-y="0" data-gs-width="6"
+											 data-gs-height="15" data-gs-min-height="15" data-gs-min-width="6">
+											<div class="console-panel grid-stack-item-content">
+												<div class="console-panel-header">
+													<div class="cph-left">
+														<h5>Consumption (Kwh)</h5>
+													</div>
+													<div class="cph-right">
+														<ul class="top-header-btns">
+
+															<li>
+																<a class="collapse-panel" href="#" title="Collapse/Uncollapse Panel"
+																   data-rel="tooltip"> <i class="icon dripicons-chevron-up"></i></a>
+															</li>
+															<li class="dropdown">
+																<a href="#" data-toggle="dropdown" title="Panel Options" data-rel="tooltip">
+																	<i class="icon dripicons-dots-3"></i>
+																</a>
+																<div class="dropdown-menu  dropdown-menu-right theme-media">
+																	<div class="dropdown-menu-header">
+																		<div class="dmh-inner">
+																			<h4>Panel Options</h4>
+																		</div>
+																	</div>
+																	<a class="dropdown-item cp" href="#" title="">
+																		<span class="color-fill-icon" style="background-color:#fff;"></span>
+																		Header Background Color
+																	</a>
+																	<a class="dropdown-item header-fontcolor" href="#" title="">
+																		<span class="color-fill-icon" style="background-color:#333"></span>
+																		Header Font Color Dark/Light
+																	</a>
+																</div>
+															</li>
+															<li>
+																<a class="removeWidget" href="#" title="Remove Panel" data-rel="tooltip">
+																	<i class="icon dripicons-cross"></i>
+																</a>
+															</li>
+														</ul>
+													</div>
+												</div><!-- Panel Header -->
+												<div class="console-panel-body align-center">
+
+													<div class="chart-container">
+														<div id="chartdiv"></div>
+													</div>
+
+												</div>
+											</div>
+										</div>
+										<div class="grid-stack-item" data-gs-x="10" data-gs-y="0" data-gs-width="3"
+											 data-gs-height="15" data-gs-min-height="15" data-gs-min-width="3">
+											<div class="console-panel grid-stack-item-content">
+												<div class="console-panel-header">
+													<div class="cph-left">
+														<h5>DG Run Hours</h5>
+													</div>
+													<div class="cph-right">
+														<ul class="top-header-btns">
+
+															<li>
+																<a class="collapse-panel" href="#" title="Collapse/Uncollapse Panel"
+																   data-rel="tooltip"> <i class="icon dripicons-chevron-up"></i></a>
+															</li>
+															<li class="dropdown">
+																<a href="#" data-toggle="dropdown" title="Panel Options" data-rel="tooltip">
+																	<i class="icon dripicons-dots-3"></i>
+																</a>
+																<div class="dropdown-menu  dropdown-menu-right theme-media">
+																	<div class="dropdown-menu-header">
+																		<div class="dmh-inner">
+																			<h4>Panel Options</h4>
+																		</div>
+																	</div>
+																	<a class="dropdown-item cp" href="#" title="">
+																		<span class="color-fill-icon" style="background-color:#fff;"></span>
+																		Header Background Color
+																	</a>
+																	<a class="dropdown-item header-fontcolor" href="#" title="">
+																		<span class="color-fill-icon" style="background-color:#333"></span>
+																		Header Font Color Dark/Light
+																	</a>
+																</div>
+															</li>
+															<li>
+																<a class="removeWidget" href="#" title="Remove Panel" data-rel="tooltip">
+																	<i class="icon dripicons-cross"></i>
+																</a>
+															</li>
+														</ul>
+													</div>
+												</div><!-- Panel Header -->
+												<div class="console-panel-body align-center">
+
+													<div class="chart-container">
+														<div id="BCchartdiv"></div>
+													</div>
+
+												</div>
+											</div>
+										</div>
+										<div class="grid-stack-item" data-gs-x="3" data-gs-y="16" data-gs-width="6"
+											 data-gs-height="15" data-gs-min-height="15" data-gs-min-width="3">
+											<div class="console-panel grid-stack-item-content">
+												<div class="console-panel-header">
+													<div class="cph-left">
+														<h5>Recent Alarms</h5>
+													</div>
+													<div class="cph-right">
+														<ul class="top-header-btns">
+
+															<li>
+																<a class="collapse-panel" href="#" title="Collapse/Uncollapse Panel"
+																   data-rel="tooltip"> <i class="icon dripicons-chevron-up"></i></a>
+															</li>
+															<li class="dropdown">
+																<a href="#" data-toggle="dropdown" title="Panel Options" data-rel="tooltip">
+																	<i class="icon dripicons-dots-3"></i>
+																</a>
+																<div class="dropdown-menu  dropdown-menu-right theme-media">
+																	<div class="dropdown-menu-header">
+																		<div class="dmh-inner">
+																			<h4>Panel Options</h4>
+																		</div>
+																	</div>
+																	<a class="dropdown-item cp" href="#" title="">
+																		<span class="color-fill-icon" style="background-color:#fff;"></span>
+																		Header Background Color
+																	</a>
+																	<a class="dropdown-item header-fontcolor" href="#" title="">
+																		<span class="color-fill-icon" style="background-color:#333"></span>
+																		Header Font Color Dark/Light
+																	</a>
+																</div>
+															</li>
+															<li>
+																<a class="removeWidget" href="#" title="Remove Panel" data-rel="tooltip">
+																	<i class="icon dripicons-cross"></i>
+																</a>
+															</li>
+														</ul>
+													</div>
+												</div><!-- Panel Header -->
+												<div class="console-panel-body no-padding">
+
+													<div class="table-container">
+														<table class="table table-striped console-table table-bordered table-hover mb-0"
+															   id="alarmsstablesDG">
+															<thead class="sorticon-pos">
+																<tr>
+																	<th>Sr No</th>
+																	<th>Alarms</th>
+																	<th>Alarms Date</th>
+																	<th>Severvity</th>
+																</tr>
+															</thead>
+															<tbody></tbody>
+														</table>
+													</div>
+
+												</div>
+												<div class="console-footer">
+													<div class="dt-bottom-containers"></div>
+												</div>
+											</div>
+										</div>
+										<div class="grid-stack-item" data-gs-x="9" data-gs-y="16" data-gs-width="3"
+											 data-gs-height="15" data-gs-min-height="15" data-gs-min-width="3">
+											<div class="console-panel grid-stack-item-content">
+												<div class="console-panel-header">
+													<div class="cph-left">
+														<h5>Battery Consumption</h5>
+													</div>
+													<div class="cph-right">
+														<ul class="top-header-btns">
+															<li>
+																<a class="collapse-panel" href="#" title="Collapse/Uncollapse Panel"
+																   data-rel="tooltip"> <i class="icon dripicons-chevron-up"></i></a>
+															</li>
+															<li class="dropdown">
+																<a href="#" data-toggle="dropdown" title="Panel Options" data-rel="tooltip">
+																	<i class="icon dripicons-dots-3"></i>
+																</a>
+																<div class="dropdown-menu  dropdown-menu-right theme-media">
+																	<div class="dropdown-menu-header">
+																		<div class="dmh-inner">
+																			<h4>Panel Options</h4>
+																		</div>
+																	</div>
+																	<a class="dropdown-item cp" href="#" title="">
+																		<span class="color-fill-icon" style="background-color:#fff;"></span>
+																		Header Background Color
+																	</a>
+																	<a class="dropdown-item header-fontcolor" href="#" title="">
+																		<span class="color-fill-icon" style="background-color:#333"></span>
+																		Header Font Color Dark/Light
+																	</a>
+																</div>
+															</li>
+															<li>
+																<a class="removeWidget" href="#" title="Remove Panel" data-rel="tooltip">
+																	<i class="icon dripicons-cross"></i>
+																</a>
+															</li>
+														</ul>
+													</div>
+												</div><!-- Panel Header -->
+												<div class="console-panel-body align-center">
+
+													<div class="chart-container">
+														<div id="BCCchartdiv"></div>
+													</div>
+
+												</div>
+											</div>
+										</div>
+									</div>
+
+								</div>
+
+
+							</div>
+						</div>
+						<div class="tab-pane  fade" id="RawData">
+							<div class="card">
+								<div class="card-body">
+
+									<div class="table-container">
+										<table class="table table-striped console-table table-bordered table-hover mb-0"
+											   id="DGtables">
+											<thead class="sorticon-pos">
+												<tr>
+													<th>Sr No</th>
+													<th>Time</th>
+													<th>R volt</th>
+													<th>V volt</th>
+													<th>B volt</th>
+													<th>R current</th>
+													<th>Y Current</th>
+													<th>B Current</th>
+													<th>Frequency</th>
+												</tr>
+											</thead>
+											<tbody></tbody>
+										</table>
+									</div>
+								</div>
+								<div class="console-footer">
+					<div class="dt-bottom-container"></div>
+				</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+	</div><!-- Content Area -->
+
+	<aside class="more-opt-panel"></aside>
+</div><!-- Theme Content -->
+<script src="/JsController/SiteGeneratorJs.js"></script>
+<script src="https://www.amcharts.com/lib/4/core.js"></script>
+<script src="https://www.amcharts.com/lib/4/charts.js"></script>
+<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>

@@ -1,0 +1,53 @@
+﻿div.error {
+    color: red;
+}
+
+.btn-action {
+    color: black !important;
+}
+
+.btnmdlsubmit {
+    width: 160px !important;
+}
+
+.card-header > .card-tools {
+    float: right;
+    margin-right: -0.625rem !important;
+}
+
+.card.card-outline-tabs .card-tools {
+    margin: 0;
+}
+
+.table td {
+    padding: 0.50rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+}
+
+.datatable th, .datatable td {
+    white-space: nowrap;
+}
+
+
+table.dataTable thead tr.bg-dark > .dtfc-fixed-left, table.dataTable thead tr.bg-dark > .dtfc-fixed-right, table.dataTable tfoot tr.bg-dark > .dtfc-fixed-left, table.dataTable tfoot tr.bg-dark > .dtfc-fixed-right {
+    top: 0;
+    bottom: 0;
+    z-index: 3;
+    background-color: #343a40 !important;
+}
+
+.custom-file-label.form-control-sm {
+    height: calc(1.8125rem + 2px);
+    padding: 0.25rem 0.5rem;
+}
+.custom-file-label.form-control-sm::after {
+        padding: 0.25rem 0.5rem;
+}
+table.dataTable tbody tr > .dtfc-fixed-left,
+table.dataTable tbody tr > .dtfc-fixed-right {
+    background-color: #b2d7ff;
+}
+.dataTables_empty {
+    background-color: transparent !important; 
+}
