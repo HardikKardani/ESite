@@ -4,16 +4,16 @@
     ViewData["Title"] = "SiteDashboard";
 }
 <style>
-    #temp,
+ #temp,
     #Battery,
     #Solar,
     #Grid,
     #Generator {
         text-align: center;
-        width: 300px;
-        height: 200px;
+        width: 700px;
+        height: 300px;
         max-width: 100%
-    }
+    } 
 
     #Camera {
         width: 500px;
@@ -51,10 +51,13 @@
     </div>
 
     <div class="grid-stack gs-area">
-        <div class="grid-stack-item" data-gs-x="0" data-gs-y="0" data-gs-width="12" data-gs-height="5"
-             data-gs-min-height="5" data-gs-min-width="3">
-            <div class="console-panel grid-stack-item-content console-no-header">
+        <div class="grid-stack-item" data-gs-x="0" data-gs-y="0" data-gs-width="12" data-gs-height="7"
+             data-gs-min-height="7" data-gs-min-width="3">
+            <div class="console-panel grid-stack-item-content ">
                 <div class="console-panel-body align-center">
+                    <div class="cph-left">
+                        <h5>Site Details</h5><br/>
+                    </div>
                     <div class="row">
                         <div class="col-lg-12 col-md-12">
                             <div class="row mb-3">
@@ -72,18 +75,23 @@
                                 </div>
                                 <div class="col-lg-2 col-md-12">
                                     <label>State</label> :<span class="text-warning" id="state"></span><br />
-                                    <label>Temp</label> :<span class="text-warning" id="temp"></span>
+                                    <label>Site Running On</label> :<span class="text-success" id="siteRunningOn"></span>
+
                                 </div>
                                 <div class="col-lg-2 col-md-12">
                                     <label>Country</label> :<span class="text-warning" id="country"></span><br />
-                                    <label>Site Running On</label> :<span class="text-success" id="siteRunningOn"></span>
+                                    <label>No of Tenant : <span class="text-warning " id="noOfTenant"></span></label>
                                 </div>
                                 <div class="col-lg-2 col-md-12">
                                     <label>As on</label>:<span class="text-warning " id="searchOn">
                                     </span>
                                 </div>
                                 <div class="col-lg-2 col-md-12">
-                                    <label>No of Tenant : <span class="text-warning " id="noOfTenant"></span></label>
+                                    <a class="" href="/Site/Map" title=""><i class="icon dripicons-location"></i>Site Direction</a>
+                                    
+                                </div>
+                                <div class="col-lg-2 col-md-12">
+                                    <a class="" href="/Site/LiveData" data-toggle="modal" data-target=".siteImages" title=""><i class="fa fa-building"></i> Site Images</a>
                                 </div>
                             </div>
                         </div>
@@ -93,7 +101,42 @@
                 </div>
             </div><!-- Console Panel -->
         </div>
-        <div class="grid-stack-item" data-gs-x="0" data-gs-y="6" data-gs-width="12" data-gs-height="26"
+        <div class="grid-stack-item" data-gs-x="6" data-gs-y="8" data-gs-width="12" data-gs-height="6"
+             data-gs-min-height="6" data-gs-min-width="3">
+            <div class="console-panel grid-stack-item-content console-no-header">
+                <div class="console-panel-body align-center">
+                    <div class="cph-left">
+                        <h5>System Status</h5><br />
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12">
+                            <div class="row mb-3">
+                                <div class="col-lg-3 col-md-12">
+                                    <label>System Voltage</label> :<span class="text-warning" id="systemVolatge">52.5 V</span><br />
+                                    <label>Rectifier Power</label> :<span class="text-warning" id="rectifierPower">20 W</span>
+                                </div>
+                                <div class="col-lg-3 col-md-12">
+                                    <label>Load Current</label> :<span class="text-warning" id="loadCurrent">0.1 A</span><br />
+                                    <label>Temperature</label> :<span class="text-warning" id="temperature"> 31.4 C</span>
+                                </div>
+                                <div class="col-lg-3 col-md-12">
+                                    <label>Rectifier Current</label> :<span class="text-warning" id="rectifierCurrent">0.4 A</span><br />
+                                    <label>Ac Voltage</label> :<span class="text-warning" id="acVoltage"> 198.1 V</span>
+                                </div>
+                                <div class="col-lg-3 col-md-12">
+                                    <label>Battery Current</label> :<span class="text-warning" id="batteryCurrent">0.7 A</span><br />
+                                    <label>System Power</label> :<span class="text-warning" id="systemPower">5 W</span>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div><!-- Console Panel -->
+        </div>
+        <div class="grid-stack-item" data-gs-x="0" data-gs-y="15" data-gs-width="12" data-gs-height="26"
              data-gs-min-height="26" data-gs-min-width="3">
             <div class="console-panel grid-stack-item-content console-no-header">
                 <div class="console-panel-body">
@@ -112,8 +155,8 @@
                             <div class="tab-pane fade show active" id="tab4">
                                 <div class="grid-stack gs-area" style="overflow:hidden">
                                     <div class="grid-stack-item" data-gs-x="0" data-gs-y="8"
-                                         data-gs-width="3" data-gs-height="12" data-gs-min-height="12"
-                                         data-gs-min-width="3">
+                                         data-gs-width="4" data-gs-height="12" data-gs-min-height="12"
+                                         data-gs-min-width="4">
                                         <div class="console-panel grid-stack-item-content">
                                             <div class="console-panel-header">
                                                 <div class="cph-left">
@@ -209,15 +252,15 @@
                                                         <div class="row">
                                                             <div class="col-4 text-center">
                                                                 <Span id="BRCt">O A</Span> <br />
-                                                                <span class="text-warning ">R Ct</span>
+                                                                <span class="text-warning ">R CT</span>
                                                             </div>
                                                             <div class="col-4 text-center">
                                                                 <Span id="BVCt">O A</Span><br />
-                                                                <span class="text-warning ">V Ct</span>
+                                                                <span class="text-warning ">Y CT</span>
                                                             </div>
                                                             <div class="col-4 text-center">
                                                                 <Span id="BBCt">O A</Span><br />
-                                                                <span class="text-warning ">B Ct</span>
+                                                                <span class="text-warning ">B CT</span>
                                                             </div>
                                                         </div>
                                                         <div class="row">
@@ -231,7 +274,7 @@
                                                             </div>
                                                             <div class="col-4 text-center">
                                                                 <Span id="gBat">O V</Span> <br />
-                                                                <span class="text-warning ">Bat Volt</span>
+                                                                <span class="text-warning ">Bat VOLT</span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -240,9 +283,9 @@
                                             </div>
                                         </div>
                                     </div><!-- Console Panel gen -->
-                                    <div class="grid-stack-item" data-gs-x="3" data-gs-y="8"
-                                         data-gs-width="3" data-gs-height="12" data-gs-min-height="12"
-                                         data-gs-min-width="3">
+                                    <div class="grid-stack-item" data-gs-x="4" data-gs-y="8"
+                                         data-gs-width="4" data-gs-height="12" data-gs-min-height="12"
+                                         data-gs-min-width="4">
                                         <div class="console-panel grid-stack-item-content">
                                             <div class="console-panel-header">
                                                 <div class="cph-left">
@@ -319,22 +362,22 @@
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-6 text-center ">
-                                                                <Span id="IPCt"></Span> :<br />
-                                                                <span class="text-warning ">I/P Ct</span>
+                                                                <Span id="IPCt"></Span> <br />
+                                                                <span class="text-warning ">I/P CT</span>
                                                             </div>
                                                             <div class="col-6 text-center">
                                                                 <Span id="IPVolt"></Span> :<br />
-                                                                <span class="text-warning ">I/P Volt</span>
+                                                                <span class="text-warning ">I/P VOLT</span>
                                                             </div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-6 text-center">
                                                                 <Span id="OPCt"> </Span><br />
-                                                                <span class="text-warning ">O/P Ct</span>
+                                                                <span class="text-warning ">O/P CT</span>
                                                             </div>
                                                             <div class="col-6 text-center">
-                                                                <Span id="OPVolt"></Span> :<br />
-                                                                <span class="text-warning ">O/P Volt</span>
+                                                                <Span id="OPVolt"></Span> <br />
+                                                                <span class="text-warning ">O/P VOLT</span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -343,9 +386,9 @@
                                             </div>
                                         </div>
                                     </div><!-- Console Panel solar -->
-                                    <div class="grid-stack-item" data-gs-x="6" data-gs-y="8"
-                                         data-gs-width="3" data-gs-height="12" data-gs-min-height="12"
-                                         data-gs-min-width="2">
+                                    <div class="grid-stack-item" data-gs-x="8" data-gs-y="8"
+                                         data-gs-width="4" data-gs-height="12" data-gs-min-height="12"
+                                         data-gs-min-width="4">
                                         <div class="console-panel grid-stack-item-content">
                                             <div class="console-panel-header">
                                                 <div class="cph-left">
@@ -423,22 +466,22 @@
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-6 text-center">
-                                                                <Span id="RIPCt"></Span> :<br />
-                                                                <span class="text-warning ">I/P Ct</span>
+                                                                <Span id="RIPCt"></Span> <br />
+                                                                <span class="text-warning ">I/P CT</span>
                                                             </div>
                                                             <div class="col-6 text-center">
-                                                                <Span id="RIPVolt"></Span> :<br />
-                                                                <span class="text-warning ">I/P Volt</span>
+                                                                <Span id="RIPVolt"></Span> <br />
+                                                                <span class="text-warning ">I/P VOLT</span>
                                                             </div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-6 text-center">
                                                                 <Span id="ROPCt"></Span> <br />
-                                                                <span class="text-warning ">O/P Ct</span>
+                                                                <span class="text-warning ">O/P CT</span>
                                                             </div>
                                                             <div class="col-6 text-center">
-                                                                <Span id="OPVolt"></Span> :<br />
-                                                                <span class="text-warning ">O/P Volt</span>
+                                                                <Span id="OPVolt"></Span> <br />
+                                                                <span class="text-warning ">O/P VOLT</span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -447,9 +490,9 @@
                                             </div>
                                         </div>
                                     </div><!-- Console Panel rec -->
-                                    <div class="grid-stack-item" data-gs-x="9" data-gs-y="8"
-                                         data-gs-width="3" data-gs-height="12" data-gs-min-height="12"
-                                         data-gs-min-width="3">
+                                    <div class="grid-stack-item" data-gs-x="0" data-gs-y="20"
+                                         data-gs-width="4" data-gs-height="12" data-gs-min-height="12"
+                                         data-gs-min-width="4">
                                         <div class="console-panel grid-stack-item-content">
                                             <div class="console-panel-header">
                                                 <div class="cph-left">
@@ -531,32 +574,33 @@
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-4 text-center">
-                                                                <Span id="GRVOLT"></Span> :<br />
+                                                                <Span id="GRVOLT"></Span> <br />
                                                                 <span class="text-warning ">R VOLT</span>
                                                             </div>
                                                             <div class="col-4 text-center">
-                                                                <Span id="GVVOLT"></Span> :<br />
-                                                                <span class="text-warning ">V VOLT</span>
+                                                                <Span id="GVVOLT"></Span> <br />
+                                                                <span class="text-warning ">Y VOLT</span>
                                                             </div>
                                                             <div class="col-4 text-center">
-                                                                <Span id="GBVOLT"></Span> :<br />
+                                                                <Span id="GBVOLT"></Span> <br />
                                                                 <span class="text-warning ">B VOLT</span>
                                                             </div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-4 text-center">
-                                                                <Span id="GRCR"></Span> :<br />
+                                                                <Span id="GRCR"></Span> <br />
                                                                 <span class="text-warning ">R CR</span>
                                                             </div>
                                                             <div class="col-4 text-center">
-                                                                <Span id="GVCt"></Span> :<br />
-                                                                <span class="text-warning ">V Ct</span>
+                                                                <Span id="GVCt"></Span> <br />
+                                                                <span class="text-warning ">Y CT</span>
                                                             </div>
                                                             <div class="col-4 text-center">
-                                                                <Span id="GBCR"></Span> :<br />
+                                                                <Span id="GBCR"></Span> <br />
                                                                 <span class="text-warning ">B CR</span>
                                                             </div>
                                                         </div>
+
                                                     </div>
                                                 </div>
                                                 </a>
@@ -564,9 +608,9 @@
                                         </div><!-- Console Panel -->
                                     </div><!-- Console Panel grid -->
                                     
-                                    <div class="grid-stack-item" data-gs-x="0" data-gs-y="20"
-                                         data-gs-width="3" data-gs-height="12" data-gs-min-height="12"
-                                         data-gs-min-width="3">
+                                    <div class="grid-stack-item" data-gs-x="4" data-gs-y="20"
+                                         data-gs-width="4" data-gs-height="12" data-gs-min-height="12"
+                                         data-gs-min-width="4">
                                         <div class="console-panel grid-stack-item-content">
                                             <div class="console-panel-header">
                                                 <div class="cph-left">
@@ -649,14 +693,14 @@
 
                                                         <div class="row">
                                                             <div class="col-6 text-center">
-                                                                <Span id="BattreyType">Lithium</Span> :<br />
+                                                                <Span id="BattreyType">Lithium</Span> <br />
                                                                 <span class="text-warning ">
                                                                     Battery
                                                                     Type
                                                                 </span>
                                                             </div>
                                                             <div class="col-6 text-center">
-                                                                <Span id="NoOfBattery">22 Nos</Span> :<br />
+                                                                <Span id="NoOfBattery">22 Nos</Span> <br />
                                                                 <span class="text-warning ">
                                                                     No of
                                                                     Battery
@@ -665,24 +709,24 @@
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-6 text-center">
-                                                                <Span id="Ct">-76.00 A</Span> :<br />
-                                                                <span class="text-warning ">Ct</span>
+                                                                <Span id="Ct">-76.00 A</Span> <br />
+                                                                <span class="text-warning ">CT</span>
                                                             </div>
                                                             <div class="col-6 text-center">
-                                                                <Span id="Volt">48.01 V</Span> :<br />
+                                                                <Span id="Volt">48.01 V</Span> <br />
                                                                 <span class="text-warning ">VOLT</span>
                                                             </div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-6 text-center">
-                                                                <Span id="AvgBatTemp">26.64 C</Span> :<br />
+                                                                <Span id="AvgBatTemp">26.64 C</Span> <br />
                                                                 <span class="text-warning ">
                                                                     Avg
                                                                     Bat.Temp
                                                                 </span>
                                                             </div>
                                                             <div class="col-6 text-center">
-                                                                <Span id="AvgEngTemp">26.64 C</Span> :<br />
+                                                                <Span id="AvgEngTemp">26.64 C</Span> <br />
                                                                 <span class="text-warning ">
                                                                     Avg
                                                                     Eng.Temp
@@ -706,7 +750,7 @@
     </div>
     <br/>
     <div class="grid-stack gs-area">
-        <div class="grid-stack-item" data-gs-x="0" data-gs-y="32"
+        <div class="grid-stack-item" data-gs-x="0" data-gs-y="41"
              data-gs-width="12" data-gs-height="8" data-gs-min-height="8"
              data-gs-min-width="12">
             <div class="console-panel grid-stack-item-content">
@@ -812,7 +856,7 @@
     </div>
     <br />
     <div class="grid-stack gs-area">
-        <div class="grid-stack-item" data-gs-x="0" data-gs-y="40"
+        <div class="grid-stack-item" data-gs-x="0" data-gs-y="49"
              data-gs-width="12" data-gs-height="12" data-gs-min-height="12"
              data-gs-min-width="6">
             <div class="console-panel grid-stack-item-content">
@@ -883,7 +927,7 @@
     </div>
     <br/>
     <div class="grid-stack gs-area">
-        <div class="grid-stack-item" data-gs-x="0" data-gs-y="52"
+        <div class="grid-stack-item" data-gs-x="0" data-gs-y="61"
              data-gs-width="12" data-gs-height="17" data-gs-min-height="10"
              data-gs-min-width="3">
             <div class="console-panel grid-stack-item-content">
@@ -970,5 +1014,62 @@
         </div>
     </div>
     
+</div>
+<!-- Images Modal -->
+<div class="modal fade bd-example-modal-lg siteImages" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Site Dircetion</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row" id="Camera">
+                    <div class="col-6">
+                        <h6>Cam 1</h6>
+                        <img src="/images/Ex.jpg" alt="Image 1">
+                    </div>
+                    <div class="col-6">
+                        <h6>Cam 2</h6>
+                        <img src="/images/Ex.jpg" alt="Image 1">
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+
+
+<!--Site Details Modal -->
+<div class="modal fade bd-example-modal-lg siteDirection" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Site Dircetion</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-6"> <label>Site ID</label> :<span class="text-warning">01</span></div>
+                    <div class="col-6"> <label>Site Name</label> :<span class="text-warning">Abc</span></div>
+                    <div class="col-12"> <label>Site Type</label> :<span class="text-warning">Hybrid</span></div>
+                    <div class="col-6"> <label>Lat</label> :<span class="text-warning">11.023</span></div>
+                    <div class="col-6"> <label>Lang</label> :<span class="text-warning">89.054</span></div>
+                    <div class="col-6"> <label>Cluster</label> :<span class="text-warning">Leeds</span></div>
+                    <div class="col-6"> <label>State</label> :<span class="text-warning">U k</span></div>
+                    <div class="col-12"> <label>Site In Charge</label> :<span class="text-warning">Jhon</span></div>
+                    <div class="col-6"><button class="btn btn-small btn-primary">Site Directions</button></div>
+                    <div class="col-6"><button class="btn btn-small btn-primary">View Site Data</button></div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
 </div>
 <script src="/JsController/SiteDashboardJs.js"></script>

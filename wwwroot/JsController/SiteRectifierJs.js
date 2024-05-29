@@ -5,13 +5,16 @@
 })
 
 function FillCardDataList(data) {
-    $("#NoofRectifier").html(data[0].NoofRectifier);
-    $("#AvgInputVolt").html(data[0].AvgInputVolt);
-    $("#TotalInputCurrent").html(data[0].TotalInputCurrent);
-    $("#AvgOutputVolt").html(data[0].AvgOutputVolt);
-    $("#TotalOutputCurrent").html(data[0].TotalOutputCurrent);
-    $("#DCOnState").html(data[0].DCOnState);
-    $("#DCOffState").html(data[0].DCOffState);
+    $("#IV").html(data[0].IV);
+    $("#IC").html(data[0].IC);
+    $("#OV").html(data[0].OV);
+    $("#OC").html(data[0].OC);
+    $("#PowerUse").html(data[0].PowerUse);
+    $("#MaxPower").html(data[0].MaxPower);
+    $("#Temperature").html(data[0].Temperature);
+    $("#Type").html(data[0].Type);
+    $("#Status").html(data[0].Status);
+    $("#DRO").html(data[0].DRO);
 }
 function Fillchartdiv(data) {
     // Create chart instance
@@ -44,7 +47,7 @@ function Fillchartdiv(data) {
         series1.dataFields.valueY = "Solar";
         series1.dataFields.dateX = "date";
         series1.yAxis = valueAxis1;
-        series1.name = "Solar";
+        series1.name = "Input Voltage";
         series1.tooltipText = "{name}: [bold]{valueY}[/]";
         series1.strokeWidth = 2;
 
@@ -52,7 +55,7 @@ function Fillchartdiv(data) {
         series2.dataFields.valueY = "Current";
         series2.dataFields.dateX = "date";
         series2.yAxis = valueAxis2;
-        series2.name = "Current";
+        series2.name = "Output Voltage";
         series2.tooltipText = "{name}: [bold]{valueY}[/]";
         series2.strokeWidth = 2;
 
@@ -94,7 +97,7 @@ function FillBCchartdiv(data) {
         series1.dataFields.valueY = "Solar";
         series1.dataFields.dateX = "date";
         series1.yAxis = valueAxis1;
-        series1.name = "Input Voltage";
+        series1.name = "Input Current";
         series1.tooltipText = "{name}: [bold]{valueY}[/]";
         series1.strokeWidth = 2;
 
@@ -102,7 +105,7 @@ function FillBCchartdiv(data) {
         series2.dataFields.valueY = "Current";
         series2.dataFields.dateX = "date";
         series2.yAxis = valueAxis2;
-        series2.name = "Input Current";
+        series2.name = "Output Current";
         series2.tooltipText = "{name}: [bold]{valueY}[/]";
         series2.strokeWidth = 2;
 
@@ -145,7 +148,7 @@ function FillBCCchartdiv(data) {
         series1.dataFields.valueY = "Current";
         series1.dataFields.dateX = "date";
         series1.yAxis = valueAxis1;
-        series1.name = "Battery Charging";
+        series1.name = "Max Power";
         series1.tooltipText = "{name}: [bold]{valueY}[/]";
         series1.strokeWidth = 2;
 
@@ -153,7 +156,7 @@ function FillBCCchartdiv(data) {
         series2.dataFields.valueY = "DGCurrent";
         series2.dataFields.dateX = "date";
         series2.yAxis = valueAxis2;
-        series2.name = "Battery Voltage";
+        series2.name = "Power Usage";
         series2.tooltipText = "{name}: [bold]{valueY}[/]";
         series2.strokeWidth = 2;
 

@@ -18,7 +18,8 @@
 <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.flash.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"></script> 
+<script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
 
 <div class="content-area">
 
@@ -473,9 +474,10 @@
 					</div>
 				</div><!-- Panel Header -->
 				<div class="console-panel-body no-padding">
-					<iframe width="100%" height="400" frameborder="0" scrolling="no" marginheight="0"
+					<div id="map" style="width:100%;height:400;"></div>
+					@* <iframe width="100%" height="400" frameborder="0" scrolling="no" marginheight="0"
 							marginwidth="0"
-							src="https://www.openstreetmap.org/export/embed.html?bbox=-74.0060,40.7128,-74.0060,40.7128"></iframe>
+							src="https://www.openstreetmap.org/export/embed.html?bbox=-74.0060,40.7128,-74.0060,40.7128"></iframe> *@
 				</div>
 			</div><!-- Console Panel -->
 		</div>
@@ -528,27 +530,35 @@
 							<thead class="sorticon-pos">
 							
 								<tr>
-									<th rowspan="2">S No</th>
-									<th rowspan="2">Site ID</th>
-									<th rowspan="2">Site Name</th>
-									<th rowspan="2">Data Received On</th>
-									<th rowspan="2">SiteRunning ON </th>
-									<th colspan="7">AC</th>
-									<th colspan="4">Battery</th>
-									<th colspan="6">Rectifier</th>
+									<th rowspan="3">S No</th>
+									<th rowspan="3">Site ID</th>
+									<th rowspan="3">Site Name</th>
+									<th rowspan="3">Data Received On</th>
+									<th rowspan="3">SiteRunning ON </th>
+									<th rowspan="2" colspan="4" class="text-center">System </th>
+									<th colspan="7" class="text-center">AC</th>
+									<th rowspan="2" colspan="3" class="text-center">Battery</th>
+									<th rowspan="2" colspan="6" class="text-center">Rectifier</th>
 								</tr>
 								<tr>
+									<th colspan="3" class="text-center">Voltage</th>
+									<th colspan="3" class="text-center">Current</th>
+									<th rowspan="2" class="text-center">Freq</th>
+								</tr>
+								<tr>
+									<th>Voltage</th>
+									<th>Load Current</th>
+									<th>Power</th>
+									<th>Soc</th>
 									<th>R</th>
 									<th>Y</th>
 									<th>B</th>
 									<th>R</th>
 									<th>Y</th>
 									<th>B</th>
-									<th>Freq</th>
 									<th>Status</th>
 									<th>Total Current</th>
 									<th>Voltage</th>
-									<th>Current Rem Capcity</th>
 									<th>Qty</th>
 									<th>Total Power</th>
 									<th>I/P Voltage</th>
@@ -571,5 +581,80 @@
 	</div>
 
 </div><!-- Content Area -->
+<!--Site Details Modal -->
+<div class="modal fade bd-example-modal-lg siteDirection" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Site Details</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-4"> <label>Site ID</label> :<span class="text-warning">01</span></div>
+					<div class="col-6"> <label>Site Name</label> :<span class="text-warning">Abc</span></div>
+					<div class="col-12"> <label>Site Type</label> :<span class="text-warning">Hybrid</span></div>
+					<div class="col-6"> <label>Lat</label> :<span class="text-warning">11.023</span></div>
+					<div class="col-6"> <label>Lang</label> :<span class="text-warning">89.054</span></div>
+					<div class="col-6"> <label>Cluster</label> :<span class="text-warning">Leeds</span></div>
+					<div class="col-6"> <label>State</label> :<span class="text-warning">U k</span></div>
+					<div class="col-12"> <label>Site In Charge</label> :<span class="text-warning">Jhon</span></div>
+					 <div class="col-lg-2 col-md-12">
+						<a class="" href="/Site/Map" title=""><i class="icon dripicons-location"></i>Site Direction</a>
+                                    
+                                </div>
+                                <div class="col-lg-3 col-md-12">
+                                    <a class="" href="/Site/LiveData" title=""><i class="fa fa-building"></i>View Site Data</a>
+                                </div>
+                                </div>
+					<div class="row p-2" id="Camera">
+						<div class="col-12"><h6>Sites Images</h6></div>
+						<div class="col-6">
+							<img src="/images/Ex.jpg" alt="Image 1">
+						</div>
+						<div class="col-6">
+							<img src="/images/Ex.jpg" alt="Image 1">
+						</div>
+					</div>
+					
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
 <!-- Pagelevel Initializations Of Plugins -->
 <script src="/JsController/DashboardJs.js"></script>
+<script>
+
+	$(document).ready(function () {
+
+		// Initialize the map
+		var map = L.map('map').setView([51.505, -0.09], 13);
+
+		// Add the OpenStreetMap tiles
+		L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+			maxZoom: 19,
+		}).addTo(map);
+
+		// Add a pointer (marker) at a specific location
+		var marker = L.marker([51.5, -0.09]).addTo(map);
+
+		// Add a popup to the marker
+
+	
+		// marker.bindPopup(html);
+
+		// Add a click event to the marker to open the popup
+
+		marker.on('click', function (e) {
+			$('.siteDirection').modal('show');
+		});
+
+	})
+
+
+</script>
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>

@@ -261,6 +261,10 @@ $(window).on("load", function () {
             { "data": "SiteName" },
             { "data": "DataReceivedOn" },
             { "data": "SiteRunningON" },
+            { "data": "vvoltage"},
+            { "data": "loadCurrent"},
+            { "data": "power"},
+            { "data": "Soc" },
             { "data": "rR" },
             { "data": "yY" },
             { "data": "bB" },
@@ -271,7 +275,6 @@ $(window).on("load", function () {
             { "data": "Status" },
             { "data": "TotalCurrent" },
             { "data": "Voltage" },
-            { "data": "CurrentRemCapcity" },
             { "data": "Qty" },
             { "data": "TotalPower" },
             { "data": "IPVoltage" },
@@ -311,7 +314,6 @@ $(window).on("load", function () {
 
             
             $("#Sitetable_wrapper  .dt-filters").css("display", "none");
-            $(_container).find("input").attr('placeholder', 'Search From Table');
             $("#Sitetable_wrapper  .dt-bottom").appendTo(_bottom_container);
 
             

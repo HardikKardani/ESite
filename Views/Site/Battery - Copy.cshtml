@@ -8,46 +8,47 @@
 		<script src="https://www.amcharts.com/lib/4/charts.js"></script>
 		<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
 		<!-- AM Charts End -->
+
 <style>
-    .col .card {
-        display: flex;
-        flex-wrap: wrap;
-    }
+	.col .card {
+		display: flex;
+		flex-wrap: wrap;
+	}
 
-    .col .card {
-        width: calc(50% - 10px);
-        /* Adjust the width based on your preference */
-        margin: 1px;
-        /* Add some margin between images */
-        height: 30px;
-        width: 30px;
-        /* Maintain aspect ratio */
-        object-fit: cover;
-        text-align: center;
-        /* Ensure images cover the entire space */
-    }
+	.col .card {
+		width: calc(50% - 10px);
+		/* Adjust the width based on your preference */
+		margin: 1px;
+		/* Add some margin between images */
+		height: 30px;
+		width: 30px;
+		/* Maintain aspect ratio */
+		object-fit: cover;
+		text-align: center;
+		/* Ensure images cover the entire space */
+	}
 
-    #chartdiv {
-        width: 700px;
-        height: 300px;
-        max-width: 100%
-    }
+	#chartdiv {
+		width: 700px;
+		height: 300px;
+		max-width: 100%
+	}
 
-    #BCCchartdiv {
-        width: 700px;
-        height: 300px;
-        max-width: 100%
-    }
+	#BCCchartdiv {
+		width: 700px;
+		height: 300px;
+		max-width: 100%
+	}
 
-    #BCchartdiv {
-        width: 700px;
-        height: 300px;
-        max-width: 100%
-    }
+	#BCchartdiv {
+		width: 700px;
+		height: 300px;
+		max-width: 100%
+	}
 
-    .card {
-        border: none;
-    }
+	.card {
+		border: none;
+	}
 </style>
 <div class="content-area">
 	<div id="toparea" class="style4"></div>
@@ -62,20 +63,29 @@
 					</select>
 				</div>
 			</div>
-			<div class="col-4 m-4">
+			<div class="col-4">
+				<div class="form-group">
+					<h5>Select Battery Type</h5>
+					<select class="select2 form-control">
+						<option value="Site1">Lithium</option>
+						<option value="Site1">VLRI</option>
+					</select>
+				</div>
+			</div>
+			<div class="col-4 mt-4">
 				<div class="form-group">
 					<button class="btn btn-accent ">Show</button>
 				</div>
 			</div>
-			<div class="col-8">
-				<h5>Rectifier Details</h5><br />
-			</div>
-			<div class="col-4">
-				<div class="form-group" style="float: right;">
-					<button class="btn btn-accent">Download</button>
-				</div>
-			</div>
 
+				<div class="col-8">
+					<h5>Battery Details</h5><br />
+				</div>
+				<div class="col-4">
+					<div class="form-group" style="float: right;">
+						<button class="btn btn-accent">Download</button>
+					</div>
+				</div>
 			<div class="col-12">
 				<div class="mytab theme1">
 					<ul class="nav nav-tabs">
@@ -138,17 +148,20 @@
 												</div><!-- Panel Header -->
 
 												<div class="console-panel-body align-center">
-
-													<label>Input Voltage (V):</label> <span class="text-warning" id="IV">8 nos</span><br />
-													<label>Input Current (C) :</label> <span class="text-warning" id="IC">0 V</span><br />
-													<label>Output Voltage (V):</label> <span class="text-warning" id="OV">8 nos</span><br />
-													<label>Output Current (C) :</label> <span class="text-warning" id="OC">0 A</span><br />
-													<label>Power Use (KWH) :</label> <span class="text-warning" id="PowerUse">0 V</span><br />
-													<label>Max Power (KWH) :</label> <span class="text-warning" id="MaxPower">0 A</span><br />
-													<label>Temperature :</label> <span class="text-warning" id="Temperature"></span><br />
-													<label>Type :</label> <span class="text-warning" id="Type"></span><br />
-													<label>Status :</label> <span class="text-warning" id="Status"></span><br />
-													<label>Data Received On :</label> <span class="text-warning" id="DRO"></span><br />
+													
+													<label>Battery Type :</label> <span class="text-warning" id="BatteryType">Lithum</span><br />
+													<label>No of Battery :</label> <span class="text-warning" id="NoofBattery">22 </span><br />
+													<label>Current :</label> <span class="text-warning" id="Current"> -61.00 A</span><br />
+													<label>Voltage :</label> <span class="text-warning" id="Voltage ">49.49 V</span><br />
+													<label>Avg Battery Tempature :</label> <span class="text-warning" id="ABT">
+														30.55
+														C
+													</span><br />
+													<label>Avg Enviroment Tempature :</label> <span class="text-warning" id="AET">
+														30.55
+														C
+													</span><br />
+													<label>Data Received On:</label> <span class="text-warning" id="DRO">									</span><br />
 												</div>
 											</div>
 										</div>
@@ -157,7 +170,7 @@
 											<div class="console-panel grid-stack-item-content">
 												<div class="console-panel-header">
 													<div class="cph-left">
-														<h5>Input vs Output Voltage</h5>
+														<h5>Voltage (V)</h5>
 													</div>
 													<div class="cph-right">
 														<ul class="top-header-btns">
@@ -203,12 +216,12 @@
 												</div>
 											</div>
 										</div>
-										<div class="grid-stack-item" data-gs-x="0" data-gs-y="13" data-gs-width="6"
-											 data-gs-height="15" data-gs-min-height="15" data-gs-min-width="6">
+										<div class="grid-stack-item" data-gs-x="0" data-gs-y="12" data-gs-width="6"
+											 data-gs-height="12" data-gs-min-height="12" data-gs-min-width="6">
 											<div class="console-panel grid-stack-item-content">
 												<div class="console-panel-header">
 													<div class="cph-left">
-														<h5>Input Vs Output Current</h5>
+														<h5>Current (C)</h5>
 													</div>
 													<div class="cph-right">
 														<ul class="top-header-btns">
@@ -255,11 +268,11 @@
 											</div>
 										</div>
 										<div class="grid-stack-item" data-gs-x="6" data-gs-y="12" data-gs-width="6"
-											 data-gs-height="15" data-gs-min-height="15" data-gs-min-width="6">
+											 data-gs-height="12" data-gs-min-height="12" data-gs-min-width="6">
 											<div class="console-panel grid-stack-item-content">
 												<div class="console-panel-header">
 													<div class="cph-left">
-														<h5>MAx Power Vs Power Usage</h5>
+														<h5>Temperature</h5>
 													</div>
 													<div class="cph-right">
 														<ul class="top-header-btns">
@@ -304,8 +317,181 @@
 												</div>
 											</div>
 										</div>
-										<div class="grid-stack-item" data-gs-x="0" data-gs-y="27" data-gs-width="12"
-											 data-gs-height="15" data-gs-min-height="15" data-gs-min-width="12">
+										<div class="grid-stack-item" data-gs-x="0" data-gs-y="24" data-gs-width="4"
+											 data-gs-height="15" data-gs-min-height="15" data-gs-min-width="4">
+											<div class="console-panel grid-stack-item-content">
+												<div class="console-panel-header">
+													<div class="cph-left">
+														<h5>Battery Status</h5>
+													</div>
+													<div class="cph-right">
+														<ul class="top-header-btns">
+
+															<li>
+																<a class="collapse-panel" href="#" title="Collapse/Uncollapse Panel"
+																   data-rel="tooltip"> <i class="icon dripicons-chevron-up"></i></a>
+															</li>
+															<li class="dropdown">
+																<a href="#" data-toggle="dropdown" title="Panel Options" data-rel="tooltip">
+																	<i class="icon dripicons-dots-3"></i>
+																</a>
+																<div class="dropdown-menu  dropdown-menu-right theme-media">
+																	<div class="dropdown-menu-header">
+																		<div class="dmh-inner">
+																			<h4>Panel Options</h4>
+																		</div>
+																	</div>
+																	<a class="dropdown-item cp" href="#" title="">
+																		<span class="color-fill-icon" style="background-color:#fff;"></span>
+																		Header Background Color
+																	</a>
+																	<a class="dropdown-item header-fontcolor" href="#" title="">
+																		<span class="color-fill-icon" style="background-color:#333"></span>
+																		Header Font Color Dark/Light
+																	</a>
+																</div>
+															</li>
+															<li>
+																<a class="removeWidget" href="#" title="Remove Panel" data-rel="tooltip">
+																	<i class="icon dripicons-cross"></i>
+																</a>
+															</li>
+														</ul>
+													</div>
+												</div><!-- Panel Header -->
+												<div class="console-panel-body align-center">
+
+													<div class="container mt-4">
+														<div class="row g-4">
+															<div class="col">
+																<div class="card bg-success">
+																	<h5 class="card-title">1</h5>
+																</div>
+															</div>
+															<div class="col">
+																<div class="card bg-success">
+																	<h5 class="card-title">2</h5>
+																</div>
+															</div>
+
+															<div class="col">
+																<div class="card bg-success">
+																	<h5 class="card-title">3</h5>
+																</div>
+															</div>
+															<div class="col">
+																<div class="card bg-success">
+																	<h5 class="card-title">4</h5>
+																</div>
+															</div>
+															<div class="col">
+																<div class="card bg-success">
+																	<h5 class="card-title">5</h5>
+																</div>
+															</div>
+															<div class="col">
+																<div class="card bg-success">
+																	<h5 class="card-title">6</h5>
+																</div>
+															</div>
+															<div class="col">
+																<div class="card bg-success">
+																	<h5 class="card-title">7</h5>
+																</div>
+															</div>
+															<div class="col">
+																<div class="card bg-success">
+																	<h5 class="card-title">8</h5>
+																</div>
+															</div>
+															<div class="col">
+																<div class="card bg-success">
+																	<h5 class="card-title">9</h5>
+																</div>
+															</div>
+															<div class="col">
+																<div class="card bg-success">
+																	<h5 class="card-title">10</h5>
+																</div>
+															</div>
+															<div class="col">
+																<div class="card bg-success">
+																	<h5 class="card-title">11</h5>
+																</div>
+															</div>
+															<div class="col">
+																<div class="card bg-success">
+																	<h5 class="card-title">12</h5>
+																</div>
+															</div>
+															<div class="col">
+																<div class="card bg-success">
+																	<h5 class="card-title">13</h5>
+																</div>
+															</div>
+															<div class="col">
+																<div class="card bg-success">
+																	<h5 class="card-title">14</h5>
+																</div>
+															</div>
+															<div class="col">
+																<div class="card bg-success">
+																	<h5 class="card-title">15</h5>
+																</div>
+															</div>
+															<div class="col">
+																<div class="card bg-success">
+																	<h5 class="card-title">16</h5>
+																</div>
+															</div>
+															<div class="col">
+																<div class="card bg-success">
+																	<h5 class="card-title">17</h5>
+																</div>
+															</div>
+															<div class="col">
+																<div class="card bg-success">
+																	<h5 class="card-title">18</h5>
+																</div>
+															</div>
+															<div class="col">
+																<div class="card bg-success">
+																	<h5 class="card-title">19</h5>
+																</div>
+															</div>
+															<div class="col">
+																<div class="card bg-success">
+																	<h5 class="card-title">20</h5>
+																</div>
+															</div>
+															<div class="col">
+																<div class="card bg-success">
+																	<h5 class="card-title">21</h5>
+																</div>
+															</div>
+															<div class="col">
+																<div class="card bg-success">
+																	<h5 class="card-title">22</h5>
+																</div>
+															</div>
+															<div class="col">
+																<div class="card bg-success">
+																	<h5 class="card-title">23</h5>
+																</div>
+															</div>
+															<div class="col">
+																<div class="card bg-success">
+																	<h5 class="card-title">24</h5>
+																</div>
+															</div>
+														</div>
+													</div>
+
+												</div>
+											</div>
+										</div>
+										<div class="grid-stack-item" data-gs-x="4" data-gs-y="24" data-gs-width="8"
+											 data-gs-height="15" data-gs-min-height="12" data-gs-min-width="8">
 											<div class="console-panel grid-stack-item-content">
 												<div class="console-panel-header">
 													<div class="cph-left">
@@ -347,7 +533,6 @@
 													</div>
 												</div><!-- Panel Header -->
 												<div class="console-panel-body no-padding">
-
 													<div class="table-container">
 														<table class="table table-striped console-table table-bordered table-hover mb-0"
 															   id="alarmsstablesDG">
@@ -362,11 +547,29 @@
 															<tbody></tbody>
 														</table>
 													</div>
-
 												</div>
 												<div class="console-footer">
 													<div class="dt-bottom-containers"></div>
 												</div>
+												<!-- <div class="console-panel-body no-padding">
+
+													<div class="table-container">
+														<table
+															class="table table-striped console-table table-bordered table-hover mb-0"
+															id="alarmsstables">
+															<thead class="sorticon-pos">
+																<tr>
+																	<th>Sr No</th>
+																	<th>Alarms</th>
+																	<th>Alarms Date</th>
+																	<th>Severvity</th>
+																</tr>
+															</thead>
+															<tbody></tbody>
+														</table>
+													</div>
+
+												</div> -->
 											</div>
 										</div>
 										
@@ -416,45 +619,47 @@
 
 									<div class="table-container">
 										<table class="table table-striped console-table table-bordered table-hover mb-0"
-											   id="Solartables">
+											   id="Batterytables">
 											<thead class="sorticon-pos">
 												<tr>
-													<th>Sr No</th>
+													<th>Battery No</th>
 													<th>Time</th>
-													<th>Serial No</th>
-													<th>I/P Voltage (V)</th>
-													<th>I/P Current (A)</th>
-													<th>I/P Power (KW)</th>
-													<th>Solar (Kwh)</th>
-													<th>Solar Run Time (Hrs)</th>
-													<th>O/P Voltage (V)</th>
-													<th>O/P Current (A)</th>
-													<th>Temp (*C)</th>
-													<th>DC State</th>
-													<th>Status</th>
+													<th>Cell 1</th>
+													<th>Cell 2</th>
+													<th>Cell 3</th>
+													<th>Cell 4</th>
+													<th>Cell 5</th>
+													<th>Cell 6</th>
+													<th>Cell 7</th>
+													<th>Cell 8</th>
+													<th>Cell 9</th>
+													<th>Cell 10</th>
+													<th>Cell 11</th>
+													<th>Cell 12</th>
+													<th>Cell Min</th>
+													<th>Cell Max</th>
 												</tr>
 											</thead>
 											<tbody></tbody>
 										</table>
 									</div>
-									<div class="console-footer">
+								</div>
+								<div class="console-footer">
 					<div class="dt-bottom-container"></div>
 				</div>
-								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-
-
 	</div><!-- Content Area -->
 
 	<aside class="more-opt-panel"></aside>
 </div><!-- Theme Content -->
-<script src="/JsController/SiteRectifierJs.js"></script>
+<script src="/JsController/SiteBatteryJs.js"></script>
+<!-- AM Charts Start -->
 <script src="https://www.amcharts.com/lib/4/core.js"></script>
 <script src="https://www.amcharts.com/lib/4/charts.js"></script>
 <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
-
+<!-- AM Charts End -->

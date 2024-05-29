@@ -11,6 +11,8 @@ function FillCardDataList(data) {
     $("#Voltage").html(data[0].Voltage);
     $("#ABT").html(data[0].ABT);
     $("#AET").html(data[0].AET);
+    $("#DRO").html(data[0].DRO);
+    
     
 }
 function Fillchartdiv(data) {
@@ -232,8 +234,15 @@ $(window).on("load", function () {
         },
         "dom": '<"top"<"dt-filters"f>>rFt<"dt-bottom"<"dt-information"li><"dt-pagination"p>>',
         "columns": [
-            { "data": "BatteryNo" },
+            { "data": "Slno" },
+            { "data": "SiteID" },
             { "data": "Date" },
+            { "data": "PAckID" },
+            { "data": "BMSModel" },
+            { "data": "BMSVersion" },
+            { "data": "BMSSerialNo" },
+            { "data": "BMSVolt" },
+            { "data": "BMSCurrent" },
             { "data": "Cell1" },
             { "data": "Cell2" },
             { "data": "Cell3" },

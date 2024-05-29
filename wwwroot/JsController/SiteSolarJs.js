@@ -43,7 +43,7 @@ function Fillchartdiv(data) {
         series1.dataFields.valueY = "Solar";
         series1.dataFields.dateX = "date";
         series1.yAxis = valueAxis1;
-        series1.name = "Solar";
+        series1.name = "R Voltage";
         series1.tooltipText = "{name}: [bold]{valueY}[/]";
         series1.strokeWidth = 2;
 
@@ -51,9 +51,16 @@ function Fillchartdiv(data) {
         series2.dataFields.valueY = "Current";
         series2.dataFields.dateX = "date";
         series2.yAxis = valueAxis2;
-        series2.name = "Current";
+        series2.name = "B Voltage";
         series2.tooltipText = "{name}: [bold]{valueY}[/]";
         series2.strokeWidth = 2;
+        var series3 = chart.series.push(new am4charts.LineSeries());
+        series3.dataFields.valueY = "Current";
+        series3.dataFields.dateX = "date";
+        series3.yAxis = valueAxis2;
+        series3.name = "Y Voltage";
+        series3.tooltipText = "{name}: [bold]{valueY}[/]";
+        series3.strokeWidth = 2;
 
         // Add legend
         chart.legend = new am4charts.Legend();
@@ -93,7 +100,7 @@ function FillBCchartdiv(data) {
         series1.dataFields.valueY = "Solar";
         series1.dataFields.dateX = "date";
         series1.yAxis = valueAxis1;
-        series1.name = "Input Voltage";
+        series1.name = "R Current";
         series1.tooltipText = "{name}: [bold]{valueY}[/]";
         series1.strokeWidth = 2;
 
@@ -101,60 +108,17 @@ function FillBCchartdiv(data) {
         series2.dataFields.valueY = "Current";
         series2.dataFields.dateX = "date";
         series2.yAxis = valueAxis2;
-        series2.name = "Input Current";
+        series2.name = "B Current";
         series2.tooltipText = "{name}: [bold]{valueY}[/]";
         series2.strokeWidth = 2;
 
-        // Add legend
-        chart.legend = new am4charts.Legend();
-
-        // Add cursor
-        chart.cursor = new am4charts.XYCursor();
-    });
-}
-function FillBCCchartdiv(data) {
-    // Create chart instance
-    am4core.ready(function () {
-        // Themes begin
-        am4core.useTheme(am4themes_animated);
-        // Themes end
-
-        // Create chart instance
-        var chart = am4core.create("BCCchartdiv", am4charts.XYChart);
-        debugger
-        // Add data
-        chart.data = $.parseJSON(data);
-
-        // Create axes
-        var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
-        var valueAxis1 = chart.yAxes.push(new am4charts.ValueAxis());
-        var valueAxis2 = chart.yAxes.push(new am4charts.ValueAxis());
-
-        // Adjust value axis
-        valueAxis1.min = 50;
-        valueAxis1.max = 500;
-        valueAxis1.renderer.opposite = true;
-
-        valueAxis2.min = 50;
-        valueAxis2.max = 500;
-        valueAxis2.renderer.opposite = false;
-
-        // Create series
-        var series1 = chart.series.push(new am4charts.LineSeries());
-        series1.dataFields.valueY = "Current";
-        series1.dataFields.dateX = "date";
-        series1.yAxis = valueAxis1;
-        series1.name = "Battery Charging";
-        series1.tooltipText = "{name}: [bold]{valueY}[/]";
-        series1.strokeWidth = 2;
-
-        var series2 = chart.series.push(new am4charts.LineSeries());
-        series2.dataFields.valueY = "DGCurrent";
-        series2.dataFields.dateX = "date";
-        series2.yAxis = valueAxis2;
-        series2.name = "Battery Voltage";
-        series2.tooltipText = "{name}: [bold]{valueY}[/]";
-        series2.strokeWidth = 2;
+        var series3 = chart.series.push(new am4charts.LineSeries());
+        series3.dataFields.valueY = "Current";
+        series3.dataFields.dateX = "date";
+        series3.yAxis = valueAxis2;
+        series3.name = "Y Current";
+        series3.tooltipText = "{name}: [bold]{valueY}[/]";
+        series3.strokeWidth = 2;
 
         // Add legend
         chart.legend = new am4charts.Legend();
@@ -225,7 +189,6 @@ $(window).on("load", function () {
                 FillCardDataList(data.Table);
                 Fillchartdiv(JSON.stringify(data.Table1) );
                 FillBCchartdiv(JSON.stringify(data.Table2));
-                FillBCCchartdiv(JSON.stringify(data.Table3));
                 alarmstbale(data.Table4);
                 // Manipulate the JSON response data if needed
                 return data.Table5; // Assuming your data is nested under a 'data' key

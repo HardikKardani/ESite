@@ -1,0 +1,159 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "SiteDashboard";
+}
+<style>
+    @@media screen and (max-width: 1440px) {
+        .table-containers {
+            width: 80%; /* or any other suitable width for small screens */
+            overflow-x: auto; /* or any other suitable overflow setting for small screens */
+        }
+    }
+
+        .card {
+            border: none;
+        }
+
+        .console-panel-body {
+            /* Set the width to be the same as the stack area */
+            width: inherit;
+            /* or specify a fixed width or percentage */
+            max-width: inherit;
+            /* optional: limit maximum width */
+            /* Add other styling properties as needed */
+        }
+</style>
+	 <div class="content-area">
+                <div id="toparea" class="style4"></div>
+                <div class="card p-4">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+
+                                <div class="row mb-3">
+                                    <div class="col-lg-8 col-md-12">
+                                        <div class="row">
+
+                                            <div class="col">
+                                                <div class="input-group">
+                                                    <div class="input-group-append">
+                                                        <div class="input-group-text"><i class="far fa-calendar"></i>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" class="form-control datepicker-here"
+                                                        data-language='en' data-date-format="MM dd,yyyy"
+                                                        placeholder="From">
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="input-group">
+                                                    <div class="input-group-append">
+                                                        <div class="input-group-text"><i class="far fa-calendar"></i>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" class="form-control datepicker-here"
+                                                        data-language='en' data-date-format="MM dd,yyyy"
+                                                        placeholder="To">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-auto">
+                                        <button class="btn btn-accent ">Search</button>
+                                    </div>
+                                    <div class="col ">
+                                        <button class="btn btn-success">Excel</button>
+                                    </div>
+                                </div>
+
+                                <div class="mytab theme1">
+                                    <ul class="nav nav-tabs">
+                                        <li> <a class="nav-link active" data-toggle="tab" data-target="#GeneralStatus">
+                                            Solar General Status</a>
+                                        </li>
+                                        <li> <a class="nav-link" data-toggle="tab"
+                                                data-target="#IndivualStatus">Solar Indivual Status</a> </li>
+
+                                    </ul><!-- Selectors -->
+
+
+                                    <div class="tab-content">
+                                        <div class="tab-pane  show active" id="GeneralStatus">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <div class="table-container">
+                                                        <table
+                                                            class="table table-striped console-table table-bordered table-hover mb-0"
+                                                            id="SolarGeneralStatus">
+                                                            <thead class="sorticon-pos">
+                                                                <tr>
+                                                                    <th>S No.</th>
+                                                                    <th>Date</th>
+                                                                    <th>Time</th>
+                                                                    <th>Active Charger Count</th>
+                                                                    <th>Active HLV Count</th>
+                                                                    <th>Solar AM</th>
+                                                                    <th>Total Solar KWH</th>
+                                                                    <th>Total Solar HR</th>
+                                                                    <th>Solar Status</th>
+                                                                    <th>Installed Charger</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody></tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                    <div class="console-footer">
+                                        <div class="dt-bottom-containers"></div>
+                                    </div>
+            
+            
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane  fade" id="IndivualStatus">
+                                            <div class="card">
+                                                <div class="card-body">
+            
+                                                    <div class="table-container">
+                                                        <table
+                                                            class="table table-striped console-table table-bordered table-hover mb-0"
+                                                            id="SolarIstatus">
+                                                            <thead class="sorticon-pos">
+                                                                <tr>
+                                                                    <th>Site Id</th>
+                                                                    <th>Date</th>
+                                                                    <th>Time</th>
+                                                                    <th>EB Run Hrs</th>
+                                                                    <th>DG Energy</th>
+                                                                    <th>DG Run Hrs</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody></tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                																			<div class="console-footer">
+				<div class="dt-bottom-container"></div>
+</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                               
+                              
+                            </div><!-- Content Area -->
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+                <aside class="more-opt-panel"></aside>
+            </div><!-- Theme Content -->
+<script src="/js/page-level/datatable/datatableForSiteBatteryDetails.js"></script>
+

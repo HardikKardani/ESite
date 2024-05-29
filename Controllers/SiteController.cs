@@ -51,7 +51,15 @@ namespace Esite.Controllers
         {
             return View();
         }
-        [HttpGet]
+		public IActionResult Map()
+		{
+			return View();
+		}
+		public IActionResult LiveData()
+		{
+			return View();
+		}
+		[HttpGet]
         public IActionResult GetCardDataList()
         {
             ResponseViewModel responseViewModel = new ResponseViewModel();

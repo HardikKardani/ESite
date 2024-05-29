@@ -67,7 +67,14 @@
 					<button class="btn btn-accent ">Show</button>
 				</div>
 			</div>
-
+			<div class="col-8">
+				<h5>Solar Details</h5><br />
+			</div>
+			<div class="col-4">
+				<div class="form-group" style="float: right;">
+					<button class="btn btn-accent">Download</button>
+				</div>
+			</div>
 			<div class="col-12">
 				<div class="mytab theme1">
 					<ul class="nav nav-tabs">
@@ -86,8 +93,8 @@
 							<div class="card">
 								<div class="card-body">
 									<div class="grid-stack gs-area">
-										<div class="grid-stack-item" data-gs-x="0" data-gs-y="0" data-gs-width="3"
-											 data-gs-height="10" data-gs-min-height="10" data-gs-min-width="3">
+										<div class="grid-stack-item" data-gs-x="0" data-gs-y="0" data-gs-width="4"
+											 data-gs-height="12" data-gs-min-height="12" data-gs-min-width="4">
 											<div class="console-panel grid-stack-item-content">
 												<div class="console-panel-header">
 													<div class="cph-left">
@@ -138,12 +145,12 @@
 												</div>
 											</div>
 										</div>
-										<div class="grid-stack-item" data-gs-x="3" data-gs-y="0" data-gs-width="6"
-											 data-gs-height="12" data-gs-min-height="12" data-gs-min-width="6">
+										<div class="grid-stack-item" data-gs-x="4" data-gs-y="0" data-gs-width="8"
+											 data-gs-height="12" data-gs-min-height="12" data-gs-min-width="8">
 											<div class="console-panel grid-stack-item-content">
 												<div class="console-panel-header">
 													<div class="cph-left">
-														<h5>Consumption (Kwh)</h5>
+														<h5>Voltage (V)</h5>
 													</div>
 													<div class="cph-right">
 														<ul class="top-header-btns">
@@ -189,58 +196,7 @@
 												</div>
 											</div>
 										</div>
-										<div class="grid-stack-item" data-gs-x="10" data-gs-y="0" data-gs-width="3"
-											 data-gs-height="12" data-gs-min-height="12" data-gs-min-width="3">
-											<div class="console-panel grid-stack-item-content">
-												<div class="console-panel-header">
-													<div class="cph-left">
-														<h5>Solar Run Hrs</h5>
-													</div>
-													<div class="cph-right">
-														<ul class="top-header-btns">
-
-															<li>
-																<a class="collapse-panel" href="#" title="Collapse/Uncollapse Panel"
-																   data-rel="tooltip"> <i class="icon dripicons-chevron-up"></i></a>
-															</li>
-															<li class="dropdown">
-																<a href="#" data-toggle="dropdown" title="Panel Options" data-rel="tooltip">
-																	<i class="icon dripicons-dots-3"></i>
-																</a>
-																<div class="dropdown-menu  dropdown-menu-right theme-media">
-																	<div class="dropdown-menu-header">
-																		<div class="dmh-inner">
-																			<h4>Panel Options</h4>
-																		</div>
-																	</div>
-																	<a class="dropdown-item cp" href="#" title="">
-																		<span class="color-fill-icon" style="background-color:#fff;"></span>
-																		Header Background Color
-																	</a>
-																	<a class="dropdown-item header-fontcolor" href="#" title="">
-																		<span class="color-fill-icon" style="background-color:#333"></span>
-																		Header Font Color Dark/Light
-																	</a>
-																</div>
-															</li>
-															<li>
-																<a class="removeWidget" href="#" title="Remove Panel" data-rel="tooltip">
-																	<i class="icon dripicons-cross"></i>
-																</a>
-															</li>
-														</ul>
-													</div>
-												</div><!-- Panel Header -->
-												<div class="console-panel-body align-center">
-
-													<div class="chart-container">
-														<div id="BCchartdiv"></div>
-													</div>
-
-												</div>
-											</div>
-										</div>
-										<div class="grid-stack-item" data-gs-x="3" data-gs-y="12" data-gs-width="6"
+										<div class="grid-stack-item" data-gs-x="0" data-gs-y="12" data-gs-width="6"
 											 data-gs-height="15" data-gs-min-height="15" data-gs-min-width="3">
 											<div class="console-panel grid-stack-item-content">
 												<div class="console-panel-header">
@@ -305,15 +261,16 @@
 												</div>
 											</div>
 										</div>
-										<div class="grid-stack-item" data-gs-x="9" data-gs-y="12" data-gs-width="3"
-											 data-gs-height="15" data-gs-min-height="15" data-gs-min-width="3">
+										<div class="grid-stack-item" data-gs-x="6" data-gs-y="12" data-gs-width="6"
+											 data-gs-height="15" data-gs-min-height="15" data-gs-min-width="6">
 											<div class="console-panel grid-stack-item-content">
 												<div class="console-panel-header">
 													<div class="cph-left">
-														<h5>Battery Charging</h5>
+														<h5>Current</h5>
 													</div>
 													<div class="cph-right">
 														<ul class="top-header-btns">
+
 															<li>
 																<a class="collapse-panel" href="#" title="Collapse/Uncollapse Panel"
 																   data-rel="tooltip"> <i class="icon dripicons-chevron-up"></i></a>
@@ -349,12 +306,13 @@
 												<div class="console-panel-body align-center">
 
 													<div class="chart-container">
-														<div id="BCCchartdiv"></div>
+														<div id="BCchartdiv"></div>
 													</div>
 
 												</div>
 											</div>
 										</div>
+
 									</div>
 
 								</div>
@@ -363,6 +321,39 @@
 							</div>
 						</div>
 						<div class="tab-pane  fade" id="RawData">
+							<div class="row mb-3">
+								<div class="col-lg-8 col-md-12">
+									<div class="row">
+
+										<div class="col">
+											<div class="input-group">
+												<div class="input-group-append">
+													<div class="input-group-text"><i class="far fa-calendar"></i></div>
+												</div>
+												<input type="text" class="form-control datepicker-here"
+													data-language='en' data-date-format="MM dd,yyyy" placeholder="From">
+											</div>
+										</div>
+										<div class="col">
+											<div class="input-group">
+												<div class="input-group-append">
+													<div class="input-group-text"><i class="far fa-calendar"></i></div>
+												</div>
+												<input type="text" class="form-control datepicker-here"
+													data-language='en' data-date-format="MM dd,yyyy" placeholder="To">
+											</div>
+										</div>
+
+									</div>
+								</div>
+								<div class="col-lg-auto">
+									<button class="btn btn-accent ">Search</button>
+								</div>
+								<div class="col">
+									<button class="btn btn-success">Excel</button>
+								</div>
+
+							</div>
 							<div class="card">
 								<div class="card-body">
 

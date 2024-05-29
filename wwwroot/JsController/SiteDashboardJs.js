@@ -2,7 +2,6 @@
     
     FillCardDataList();
     
-
     
 })
 
@@ -19,7 +18,6 @@ function FillCardDataList() {
             $("#region").html(data.Table[0].region);
             $("#typeOfCooling").html(data.Table[0].typeOfCooling);
             $("#state").html(data.Table[0].state);
-            $("#temp").html(data.Table[0].temp);
             $("#country").html(data.Table[0].country);
             $("#siteRunningOn").html(data.Table[0].siteRunningOn);
             $("#searchOn").html(data.Table[0].searchOn);
@@ -71,6 +69,12 @@ function FillCardDataList() {
             if (data.Table[0].Action5 == '1') {
                 $('#Action5').prop('checked', true);
             }
+            $("#systemPower").html(data.Table[0].systemPower);
+            $("#batteryCurrent").html(data.Table[0].batteryCurrent);
+            $("#acVoltage").html(data.Table[0].acVoltage);
+            $("#rectifierCurrent").html(data.Table[0].rectifierCurrent);
+            $("#temperature").html(data.Table[0].temperature);
+            $("#loadCurrent").html(data.Table[0].loadCurrent);
         }
     });
 }

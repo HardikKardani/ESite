@@ -34,6 +34,12 @@
 		max-width: 100%
 	}
 
+	#BCCCchartdiv {
+		width: 700px;
+		height: 300px;
+		max-width: 100%
+	}
+
 	#BCCchartdiv {
 		width: 700px;
 		height: 300px;
@@ -66,6 +72,14 @@
 			<div class="col-4 m-4">
 				<div class="form-group">
 					<button class="btn btn-accent ">Show</button>
+				</div>
+			</div>
+			<div class="col-8">
+				<h5>DG Details</h5><br />
+			</div>
+			<div class="col-4">
+				<div class="form-group" style="float: right;">
+					<button class="btn btn-accent">Download</button>
 				</div>
 			</div>
 
@@ -139,8 +153,8 @@
 													<label>Y Current :</label> <span class="text-warning" id="YCurrent">0 A</span><br />
 													<label>B Current :</label> <span class="text-warning" id="BCurrent">0 A</span><br />
 													<label>Fuel Level :</label> <span class="text-warning" id="FuelLevel">682.75 Ltrs</span><br />
-													<label>DG Energy :</label> <span class="text-warning" id="DGEnergy"> KWH</span><br />
-													<label>DG Run Time :</label> <span class="text-warning" id="DGRunTime"> Hrs</span><br />
+													<label>Frequency :</label> <span class="text-warning" id="Frequency"> KWH</span><br />
+													<label>Data Received On :</label> <span class="text-warning" id="DRO"> Hrs</span><br />
 												</div>
 											</div>
 										</div>
@@ -149,7 +163,7 @@
 											<div class="console-panel grid-stack-item-content">
 												<div class="console-panel-header">
 													<div class="cph-left">
-														<h5>Consumption (Kwh)</h5>
+														<h5>Voltage (V)</h5>
 													</div>
 													<div class="cph-right">
 														<ul class="top-header-btns">
@@ -200,7 +214,7 @@
 											<div class="console-panel grid-stack-item-content">
 												<div class="console-panel-header">
 													<div class="cph-left">
-														<h5>DG Run Hours</h5>
+														<h5>Fuel Level</h5>
 													</div>
 													<div class="cph-right">
 														<ul class="top-header-btns">
@@ -246,8 +260,108 @@
 												</div>
 											</div>
 										</div>
-										<div class="grid-stack-item" data-gs-x="3" data-gs-y="16" data-gs-width="6"
-											 data-gs-height="15" data-gs-min-height="15" data-gs-min-width="3">
+										<div class="grid-stack-item" data-gs-x="0" data-gs-y="16" data-gs-width="6"
+											 data-gs-height="15" data-gs-min-height="15" data-gs-min-width="6">
+											<div class="console-panel grid-stack-item-content">
+												<div class="console-panel-header">
+													<div class="cph-left">
+														<h5>Current (C)</h5>
+													</div>
+													<div class="cph-right">
+														<ul class="top-header-btns">
+															<li>
+																<a class="collapse-panel" href="#" title="Collapse/Uncollapse Panel"
+																   data-rel="tooltip"> <i class="icon dripicons-chevron-up"></i></a>
+															</li>
+															<li class="dropdown">
+																<a href="#" data-toggle="dropdown" title="Panel Options" data-rel="tooltip">
+																	<i class="icon dripicons-dots-3"></i>
+																</a>
+																<div class="dropdown-menu  dropdown-menu-right theme-media">
+																	<div class="dropdown-menu-header">
+																		<div class="dmh-inner">
+																			<h4>Panel Options</h4>
+																		</div>
+																	</div>
+																	<a class="dropdown-item cp" href="#" title="">
+																		<span class="color-fill-icon" style="background-color:#fff;"></span>
+																		Header Background Color
+																	</a>
+																	<a class="dropdown-item header-fontcolor" href="#" title="">
+																		<span class="color-fill-icon" style="background-color:#333"></span>
+																		Header Font Color Dark/Light
+																	</a>
+																</div>
+															</li>
+															<li>
+																<a class="removeWidget" href="#" title="Remove Panel" data-rel="tooltip">
+																	<i class="icon dripicons-cross"></i>
+																</a>
+															</li>
+														</ul>
+													</div>
+												</div><!-- Panel Header -->
+												<div class="console-panel-body align-center">
+
+													<div class="chart-container">
+														<div id="BCCCchartdiv"></div>
+													</div>
+
+												</div>
+											</div>
+										</div>
+										<div class="grid-stack-item" data-gs-x="6" data-gs-y="16" data-gs-width="6"
+											 data-gs-height="15" data-gs-min-height="15" data-gs-min-width="6">
+											<div class="console-panel grid-stack-item-content">
+												<div class="console-panel-header">
+													<div class="cph-left">
+														<h5>Frequency</h5>
+													</div>
+													<div class="cph-right">
+														<ul class="top-header-btns">
+															<li>
+																<a class="collapse-panel" href="#" title="Collapse/Uncollapse Panel"
+																   data-rel="tooltip"> <i class="icon dripicons-chevron-up"></i></a>
+															</li>
+															<li class="dropdown">
+																<a href="#" data-toggle="dropdown" title="Panel Options" data-rel="tooltip">
+																	<i class="icon dripicons-dots-3"></i>
+																</a>
+																<div class="dropdown-menu  dropdown-menu-right theme-media">
+																	<div class="dropdown-menu-header">
+																		<div class="dmh-inner">
+																			<h4>Panel Options</h4>
+																		</div>
+																	</div>
+																	<a class="dropdown-item cp" href="#" title="">
+																		<span class="color-fill-icon" style="background-color:#fff;"></span>
+																		Header Background Color
+																	</a>
+																	<a class="dropdown-item header-fontcolor" href="#" title="">
+																		<span class="color-fill-icon" style="background-color:#333"></span>
+																		Header Font Color Dark/Light
+																	</a>
+																</div>
+															</li>
+															<li>
+																<a class="removeWidget" href="#" title="Remove Panel" data-rel="tooltip">
+																	<i class="icon dripicons-cross"></i>
+																</a>
+															</li>
+														</ul>
+													</div>
+												</div><!-- Panel Header -->
+												<div class="console-panel-body align-center">
+
+													<div class="chart-container">
+														<div id="BCCchartdiv"></div>
+													</div>
+
+												</div>
+											</div>
+										</div>
+										<div class="grid-stack-item" data-gs-x="0" data-gs-y="30" data-gs-width="12"
+											 data-gs-height="15" data-gs-min-height="15" data-gs-min-width="12">
 											<div class="console-panel grid-stack-item-content">
 												<div class="console-panel-header">
 													<div class="cph-left">
@@ -311,56 +425,6 @@
 												</div>
 											</div>
 										</div>
-										<div class="grid-stack-item" data-gs-x="9" data-gs-y="16" data-gs-width="3"
-											 data-gs-height="15" data-gs-min-height="15" data-gs-min-width="3">
-											<div class="console-panel grid-stack-item-content">
-												<div class="console-panel-header">
-													<div class="cph-left">
-														<h5>Battery Consumption</h5>
-													</div>
-													<div class="cph-right">
-														<ul class="top-header-btns">
-															<li>
-																<a class="collapse-panel" href="#" title="Collapse/Uncollapse Panel"
-																   data-rel="tooltip"> <i class="icon dripicons-chevron-up"></i></a>
-															</li>
-															<li class="dropdown">
-																<a href="#" data-toggle="dropdown" title="Panel Options" data-rel="tooltip">
-																	<i class="icon dripicons-dots-3"></i>
-																</a>
-																<div class="dropdown-menu  dropdown-menu-right theme-media">
-																	<div class="dropdown-menu-header">
-																		<div class="dmh-inner">
-																			<h4>Panel Options</h4>
-																		</div>
-																	</div>
-																	<a class="dropdown-item cp" href="#" title="">
-																		<span class="color-fill-icon" style="background-color:#fff;"></span>
-																		Header Background Color
-																	</a>
-																	<a class="dropdown-item header-fontcolor" href="#" title="">
-																		<span class="color-fill-icon" style="background-color:#333"></span>
-																		Header Font Color Dark/Light
-																	</a>
-																</div>
-															</li>
-															<li>
-																<a class="removeWidget" href="#" title="Remove Panel" data-rel="tooltip">
-																	<i class="icon dripicons-cross"></i>
-																</a>
-															</li>
-														</ul>
-													</div>
-												</div><!-- Panel Header -->
-												<div class="console-panel-body align-center">
-
-													<div class="chart-container">
-														<div id="BCCchartdiv"></div>
-													</div>
-
-												</div>
-											</div>
-										</div>
 									</div>
 
 								</div>
@@ -369,6 +433,39 @@
 							</div>
 						</div>
 						<div class="tab-pane  fade" id="RawData">
+							<div class="row mb-3">
+								<div class="col-lg-8 col-md-12">
+									<div class="row">
+
+										<div class="col">
+											<div class="input-group">
+												<div class="input-group-append">
+													<div class="input-group-text"><i class="far fa-calendar"></i></div>
+												</div>
+												<input type="text" class="form-control datepicker-here"
+													   data-language='en' data-date-format="MM dd,yyyy" placeholder="From">
+											</div>
+										</div>
+										<div class="col">
+											<div class="input-group">
+												<div class="input-group-append">
+													<div class="input-group-text"><i class="far fa-calendar"></i></div>
+												</div>
+												<input type="text" class="form-control datepicker-here"
+													   data-language='en' data-date-format="MM dd,yyyy" placeholder="To">
+											</div>
+										</div>
+
+									</div>
+								</div>
+								<div class="col-lg-auto">
+									<button class="btn btn-accent ">Search</button>
+								</div>
+								<div class="col">
+									<button class="btn btn-success">Excel</button>
+								</div>
+
+							</div>
 							<div class="card">
 								<div class="card-body">
 
