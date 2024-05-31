@@ -3,13 +3,23 @@
 	Layout = "~/Views/Shared/_Layout.cshtml";
 	ViewData["Title"] = "Home";
 }
-
+<!-- AM Charts Start -->
+<script src="https://www.amcharts.com/lib/4/core.js"></script>
+<script src="https://www.amcharts.com/lib/4/charts.js"></script>
+<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+<!-- AM Charts End -->
 <style>
 	.sitetable.table.dataTable thead .sorting,
 	.sitetable.table.dataTable thead .sorting_asc,
 	.sitetable.table.dataTable thead .sorting_desc {
 		background: none;
 	}
+
+	tr {
+		cursor: pointer;
+	}
+
+	
 </style>
 <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css">
@@ -200,7 +210,8 @@
 				</div><!-- Panel Header -->
 				<div class="console-panel-body ">
 					<div class="chart-container">
-						<canvas id="donutchart2" width="100" height="95"></canvas>
+						<div id="singleStackedBarChart"></div>
+						@* <canvas id="singleStackedBarChart" width="100" height="95"></canvas> *@
 					</div>
 				</div>
 			</div><!-- Console Panel -->
@@ -279,7 +290,7 @@
 			<div class="console-panel grid-stack-item-content">
 				<div class="console-panel-header">
 					<div class="cph-left">
-						<h5>Alert Status</h5>
+						<h5>Green Status</h5>
 					</div>
 					<div class="cph-right">
 						<ul class="top-header-btns">
@@ -320,7 +331,8 @@
 					</div>
 				</div><!-- Panel Header -->
 				<div class="console-panel-body">
-					<div class="steamline m-t-40">
+					<div id="GreenStatusChart"></div>
+				@* 	<div class="steamline m-t-40">
 						<div class="sl-item">
 							<div class="sl-left bg-warning">
 								<i class="bg-warning icon dripicons-bell"></i>
@@ -353,7 +365,7 @@
 							</div>
 						</div>
 
-					</div>
+					</div> *@
 				</div>
 			</div><!-- Console Panel -->
 		</div>
@@ -626,13 +638,22 @@
 	</div>
 </div>
 <!-- Pagelevel Initializations Of Plugins -->
-<script src="/JsController/DashboardJs.js"></script>
+<script src="/JsController/DashboardJs.js" asp-append-version="true"></script>
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/locales/de_DE.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/geodata/germanyLow.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/fonts/notosans-sc.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/percent.js"></script>
+
 <script>
 
 	$(document).ready(function () {
 
 		// Initialize the map
-		var map = L.map('map').setView([51.505, -0.09], 13);
+		var map = L.map('map').setView([-2.5489, 118.0149], 5); // Set
 
 		// Add the OpenStreetMap tiles
 		L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -640,7 +661,7 @@
 		}).addTo(map);
 
 		// Add a pointer (marker) at a specific location
-		var marker = L.marker([51.5, -0.09]).addTo(map);
+		var marker = L.marker([-2.5489, 118.0149]).addTo(map); // Marker for Indonesia
 
 		// Add a popup to the marker
 
@@ -655,6 +676,170 @@
 
 	})
 
-
+	
 </script>
-<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+<script>
+	$(document).ready(function () {
+
+		am5.ready(function () {
+
+			// Create root element
+			var root = am5.Root.new("singleStackedBarChart");
+
+			// Set themes
+			root.setThemes([
+				am5themes_Animated.new(root)
+			]);
+
+			// Create chart
+			var chart = root.container.children.push(am5xy.XYChart.new(root, {
+				panX: false,
+				panY: false,
+				paddingLeft: 0,
+				layout: root.verticalLayout
+			}));
+
+			var data = [{
+				"year": "Site Running On",
+				"EB/Grid": 30,
+				"DG": 20,
+				"Battery": 20,
+				"Solar": 30,
+			}];
+
+			// Create axes
+			var xRenderer = am5xy.AxisRendererX.new(root, {
+				minorGridEnabled: true
+			});
+			var xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(root, {
+				categoryField: "year",
+				renderer: xRenderer,
+				tooltip: am5.Tooltip.new(root, {})
+			}));
+
+			xRenderer.grid.template.setAll({
+				location: 1
+			});
+
+			xAxis.data.setAll(data);
+
+			var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
+				min: 0,
+				max: 100, // Limit y-axis to 0-100
+				renderer: am5xy.AxisRendererY.new(root, {
+					strokeOpacity: 0.1
+				})
+			}));
+
+			// Add series
+			function makeSeries(name, fieldName) {
+				var series = chart.series.push(am5xy.ColumnSeries.new(root, {
+					name: name,
+					stacked: true,
+					xAxis: xAxis,
+					yAxis: yAxis,
+					valueYField: fieldName,
+					categoryXField: "year"
+				}));
+
+				series.columns.template.setAll({
+					tooltipText: "{name}, {valueYField}: {valueY}%",
+					tooltipY: am5.percent(10)
+				});
+				series.data.setAll(data);
+
+				// Make stuff animate on load
+				series.appear();
+
+				series.bullets.push(function () {
+					return am5.Bullet.new(root, {
+						sprite: am5.Label.new(root, {
+							text: "{valueYField}:{valueY}%",
+							fill: root.interfaceColors.get("alternativeText"),
+							centerY: am5.p50,
+							centerX: am5.p50,
+							populateText: true
+						})
+					});
+				});
+			}
+
+			makeSeries("Site Running On", "EB/Grid");
+			makeSeries("Site Running On", "DG");
+			makeSeries("Site Running On", "Battery");
+			makeSeries("Site Running On", "Solar");
+
+			// Make stuff animate on load
+			chart.appear(1000, 100);
+
+		}); // end am5.ready()
+
+		am5.ready(function () {
+			// Create root element
+			var root = am5.Root.new("GreenStatusChart");
+
+			// Set themes
+			root.setThemes([
+				am5themes_Animated.new(root)
+			]);
+
+			// Create chart
+			var chart = root.container.children.push(am5percent.PieChart.new(root, {
+				startAngle: 180,
+				endAngle: 360,
+				layout: root.verticalLayout,
+				innerRadius: am5.percent(50),
+				labelsEnabled: false // Disable labels in the chart
+			}));
+
+			// Create series
+			var series = chart.series.push(am5percent.PieSeries.new(root, {
+				startAngle: 180,
+				endAngle: 360,
+				valueField: "value",
+				categoryField: "category",
+				alignLabels: false,
+				slices: {
+					template: {
+						fill: function (dataItem) {
+							var category = dataItem.get("category");
+							if (category === "Solar") {
+								return am5.color(0xff0000); // Red for Solar
+							} else if (category === "EB") {
+								return am5.color(0xffff00); // Yellow for EB
+							} else if (category === "Battery") {
+								return am5.color(0x00ff00); // Green for Battery
+							}
+							return fill;
+						}
+					}
+				}
+			}));
+
+			series.states.create("hidden", {
+				startAngle: 180,
+				endAngle: 180
+			});
+
+			series.slices.template.setAll({
+				cornerRadius: 5
+			});
+
+			series.ticks.template.setAll({
+				forceHidden: true
+			});
+
+			// Set data
+			var data = [
+				{ value: 100 / 3, category: "Solar" },
+				{ value: 100 / 3, category: "EB" },
+				{ value: 100 / 3, category: "Battery" }
+			];
+
+			series.data.setAll(data);
+
+			series.appear(1000, 100);
+		});
+
+	});
+</script>

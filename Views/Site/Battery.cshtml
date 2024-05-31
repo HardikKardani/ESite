@@ -10,6 +10,14 @@
 		<!-- AM Charts End -->
 
 <style>
+	@@media screen and (max-width: 1440px) {
+		.table-containers {
+			width: 60%; /* or any other suitable width for small screens */
+			overflow-x: auto; /* or any other suitable overflow setting for small screens */
+		}
+
+		
+	}
 	.col .card {
 		display: flex;
 		flex-wrap: wrap;
@@ -105,7 +113,7 @@
 								<div class="card-body">
 									<div class="grid-stack gs-area">
 										<div class="grid-stack-item" data-gs-x="0" data-gs-y="0" data-gs-width="4"
-											 data-gs-height="12" data-gs-min-height="12" data-gs-min-width="4">
+											 data-gs-height="15" data-gs-min-height="15" data-gs-min-width="4">
 											<div class="console-panel grid-stack-item-content">
 												<div class="console-panel-header">
 													<div class="cph-left">
@@ -148,7 +156,40 @@
 												</div><!-- Panel Header -->
 
 												<div class="console-panel-body align-center">
-													
+													<table>
+														<tr>
+															<td><label>Battery Type :</label></td>
+
+															<td>
+																<span class="text-warning" id="BatteryType">Lithum</span>
+																<br />
+															</td>
+														</tr>
+														<tr>
+															<td><label>No of Battery :</label></td>
+
+															<td>
+																<span class="text-warning" id="NoofBattery">22 </span>
+																<br />
+															</td>
+														</tr>
+														<tr>
+															<td><label>Current :</label></td>
+
+															<td>
+																<span class="text-warning" id="Current"> -61.00 A</span>
+																<br />
+															</td>
+														</tr>
+														<tr>
+															<td><label>Data Received On:</label></td>
+
+															<td>
+																<span class="text-warning" id="DRO"></span>
+																<br />
+															</td>
+														</tr>
+													</table>
 													<label>Battery Type :</label> <span class="text-warning" id="BatteryType">Lithum</span><br />
 													<label>No of Battery :</label> <span class="text-warning" id="NoofBattery">22 </span><br />
 													<label>Current :</label> <span class="text-warning" id="Current"> -61.00 A</span><br />
@@ -166,7 +207,7 @@
 											</div>
 										</div>
 										<div class="grid-stack-item" data-gs-x="4" data-gs-y="0" data-gs-width="8"
-											 data-gs-height="12" data-gs-min-height="12" data-gs-min-width="8">
+											 data-gs-height="15" data-gs-min-height="15" data-gs-min-width="8">
 											<div class="console-panel grid-stack-item-content">
 												<div class="console-panel-header">
 													<div class="cph-left">
@@ -216,8 +257,8 @@
 												</div>
 											</div>
 										</div>
-										<div class="grid-stack-item" data-gs-x="0" data-gs-y="12" data-gs-width="6"
-											 data-gs-height="12" data-gs-min-height="12" data-gs-min-width="6">
+										<div class="grid-stack-item" data-gs-x="0" data-gs-y="15" data-gs-width="6"
+											 data-gs-height="15" data-gs-min-height="15" data-gs-min-width="6">
 											<div class="console-panel grid-stack-item-content">
 												<div class="console-panel-header">
 													<div class="cph-left">
@@ -267,8 +308,8 @@
 												</div>
 											</div>
 										</div>
-										<div class="grid-stack-item" data-gs-x="6" data-gs-y="12" data-gs-width="6"
-											 data-gs-height="12" data-gs-min-height="12" data-gs-min-width="6">
+										<div class="grid-stack-item" data-gs-x="6" data-gs-y="30" data-gs-width="6"
+											 data-gs-height="15" data-gs-min-height="15" data-gs-min-width="6">
 											<div class="console-panel grid-stack-item-content">
 												<div class="console-panel-header">
 													<div class="cph-left">
@@ -317,261 +358,7 @@
 												</div>
 											</div>
 										</div>
-										<div class="grid-stack-item" data-gs-x="0" data-gs-y="24" data-gs-width="4"
-											 data-gs-height="15" data-gs-min-height="15" data-gs-min-width="4">
-											<div class="console-panel grid-stack-item-content">
-												<div class="console-panel-header">
-													<div class="cph-left">
-														<h5>Battery Status</h5>
-													</div>
-													<div class="cph-right">
-														<ul class="top-header-btns">
-
-															<li>
-																<a class="collapse-panel" href="#" title="Collapse/Uncollapse Panel"
-																   data-rel="tooltip"> <i class="icon dripicons-chevron-up"></i></a>
-															</li>
-															<li class="dropdown">
-																<a href="#" data-toggle="dropdown" title="Panel Options" data-rel="tooltip">
-																	<i class="icon dripicons-dots-3"></i>
-																</a>
-																<div class="dropdown-menu  dropdown-menu-right theme-media">
-																	<div class="dropdown-menu-header">
-																		<div class="dmh-inner">
-																			<h4>Panel Options</h4>
-																		</div>
-																	</div>
-																	<a class="dropdown-item cp" href="#" title="">
-																		<span class="color-fill-icon" style="background-color:#fff;"></span>
-																		Header Background Color
-																	</a>
-																	<a class="dropdown-item header-fontcolor" href="#" title="">
-																		<span class="color-fill-icon" style="background-color:#333"></span>
-																		Header Font Color Dark/Light
-																	</a>
-																</div>
-															</li>
-															<li>
-																<a class="removeWidget" href="#" title="Remove Panel" data-rel="tooltip">
-																	<i class="icon dripicons-cross"></i>
-																</a>
-															</li>
-														</ul>
-													</div>
-												</div><!-- Panel Header -->
-												<div class="console-panel-body align-center">
-
-													<div class="container mt-4">
-														<div class="row g-4">
-															<div class="col">
-																<div class="card bg-success">
-																	<h5 class="card-title">1</h5>
-																</div>
-															</div>
-															<div class="col">
-																<div class="card bg-success">
-																	<h5 class="card-title">2</h5>
-																</div>
-															</div>
-
-															<div class="col">
-																<div class="card bg-success">
-																	<h5 class="card-title">3</h5>
-																</div>
-															</div>
-															<div class="col">
-																<div class="card bg-success">
-																	<h5 class="card-title">4</h5>
-																</div>
-															</div>
-															<div class="col">
-																<div class="card bg-success">
-																	<h5 class="card-title">5</h5>
-																</div>
-															</div>
-															<div class="col">
-																<div class="card bg-success">
-																	<h5 class="card-title">6</h5>
-																</div>
-															</div>
-															<div class="col">
-																<div class="card bg-success">
-																	<h5 class="card-title">7</h5>
-																</div>
-															</div>
-															<div class="col">
-																<div class="card bg-success">
-																	<h5 class="card-title">8</h5>
-																</div>
-															</div>
-															<div class="col">
-																<div class="card bg-success">
-																	<h5 class="card-title">9</h5>
-																</div>
-															</div>
-															<div class="col">
-																<div class="card bg-success">
-																	<h5 class="card-title">10</h5>
-																</div>
-															</div>
-															<div class="col">
-																<div class="card bg-success">
-																	<h5 class="card-title">11</h5>
-																</div>
-															</div>
-															<div class="col">
-																<div class="card bg-success">
-																	<h5 class="card-title">12</h5>
-																</div>
-															</div>
-															<div class="col">
-																<div class="card bg-success">
-																	<h5 class="card-title">13</h5>
-																</div>
-															</div>
-															<div class="col">
-																<div class="card bg-success">
-																	<h5 class="card-title">14</h5>
-																</div>
-															</div>
-															<div class="col">
-																<div class="card bg-success">
-																	<h5 class="card-title">15</h5>
-																</div>
-															</div>
-															<div class="col">
-																<div class="card bg-success">
-																	<h5 class="card-title">16</h5>
-																</div>
-															</div>
-															<div class="col">
-																<div class="card bg-success">
-																	<h5 class="card-title">17</h5>
-																</div>
-															</div>
-															<div class="col">
-																<div class="card bg-success">
-																	<h5 class="card-title">18</h5>
-																</div>
-															</div>
-															<div class="col">
-																<div class="card bg-success">
-																	<h5 class="card-title">19</h5>
-																</div>
-															</div>
-															<div class="col">
-																<div class="card bg-success">
-																	<h5 class="card-title">20</h5>
-																</div>
-															</div>
-															<div class="col">
-																<div class="card bg-success">
-																	<h5 class="card-title">21</h5>
-																</div>
-															</div>
-															<div class="col">
-																<div class="card bg-success">
-																	<h5 class="card-title">22</h5>
-																</div>
-															</div>
-															<div class="col">
-																<div class="card bg-success">
-																	<h5 class="card-title">23</h5>
-																</div>
-															</div>
-															<div class="col">
-																<div class="card bg-success">
-																	<h5 class="card-title">24</h5>
-																</div>
-															</div>
-														</div>
-													</div>
-
-												</div>
-											</div>
-										</div>
-										<div class="grid-stack-item" data-gs-x="4" data-gs-y="24" data-gs-width="8"
-											 data-gs-height="15" data-gs-min-height="12" data-gs-min-width="8">
-											<div class="console-panel grid-stack-item-content">
-												<div class="console-panel-header">
-													<div class="cph-left">
-														<h5>Recent Alarms</h5>
-													</div>
-													<div class="cph-right">
-														<ul class="top-header-btns">
-
-															<li>
-																<a class="collapse-panel" href="#" title="Collapse/Uncollapse Panel"
-																   data-rel="tooltip"> <i class="icon dripicons-chevron-up"></i></a>
-															</li>
-															<li class="dropdown">
-																<a href="#" data-toggle="dropdown" title="Panel Options" data-rel="tooltip">
-																	<i class="icon dripicons-dots-3"></i>
-																</a>
-																<div class="dropdown-menu  dropdown-menu-right theme-media">
-																	<div class="dropdown-menu-header">
-																		<div class="dmh-inner">
-																			<h4>Panel Options</h4>
-																		</div>
-																	</div>
-																	<a class="dropdown-item cp" href="#" title="">
-																		<span class="color-fill-icon" style="background-color:#fff;"></span>
-																		Header Background Color
-																	</a>
-																	<a class="dropdown-item header-fontcolor" href="#" title="">
-																		<span class="color-fill-icon" style="background-color:#333"></span>
-																		Header Font Color Dark/Light
-																	</a>
-																</div>
-															</li>
-															<li>
-																<a class="removeWidget" href="#" title="Remove Panel" data-rel="tooltip">
-																	<i class="icon dripicons-cross"></i>
-																</a>
-															</li>
-														</ul>
-													</div>
-												</div><!-- Panel Header -->
-												<div class="console-panel-body no-padding">
-													<div class="table-container">
-														<table class="table table-striped console-table table-bordered table-hover mb-0"
-															   id="alarmsstablesDG">
-															<thead class="sorticon-pos">
-																<tr>
-																	<th>Sr No</th>
-																	<th>Alarms</th>
-																	<th>Alarms Date</th>
-																	<th>Severvity</th>
-																</tr>
-															</thead>
-															<tbody></tbody>
-														</table>
-													</div>
-												</div>
-												<div class="console-footer">
-													<div class="dt-bottom-containers"></div>
-												</div>
-												<!-- <div class="console-panel-body no-padding">
-
-													<div class="table-container">
-														<table
-															class="table table-striped console-table table-bordered table-hover mb-0"
-															id="alarmsstables">
-															<thead class="sorticon-pos">
-																<tr>
-																	<th>Sr No</th>
-																	<th>Alarms</th>
-																	<th>Alarms Date</th>
-																	<th>Severvity</th>
-																</tr>
-															</thead>
-															<tbody></tbody>
-														</table>
-													</div>
-
-												</div> -->
-											</div>
-										</div>
+										
 										
 									</div>
 
@@ -617,7 +404,7 @@
 							<div class="card">
 								<div class="card-body">
 
-									<div class="table-container">
+									<div class="table-containers">
 										<table class="table table-striped console-table table-bordered table-hover mb-0"
 											   id="Batterytables">
 											<thead class="sorticon-pos">
@@ -631,7 +418,7 @@
 													<th rowspan="2">BMS Serial No</th>
 													<th rowspan="2">BMS Volt</th>
 													<th rowspan="2">BMS Current</th>
-													<th colspan="16">Battery Cell Voltage (V)</th>
+													<th colspan="14">Battery Cell Voltage (V)</th>
 													<th colspan="3">Temperature (Cel.)</th>
 												</tr>
 												<tr>
@@ -671,7 +458,7 @@
 
 	<aside class="more-opt-panel"></aside>
 </div><!-- Theme Content -->
-<script src="/JsController/SiteBatteryJs.js"></script>
+<script src="/JsController/SiteBatteryJs.js" asp-append-version="true"></script>
 <!-- AM Charts Start -->
 <script src="https://www.amcharts.com/lib/4/core.js"></script>
 <script src="https://www.amcharts.com/lib/4/charts.js"></script>

@@ -55,7 +55,7 @@ function Fillchartdiv(data) {
         series2.tooltipText = "{name}: [bold]{valueY}[/]";
         series2.strokeWidth = 2;
         var series3 = chart.series.push(new am4charts.LineSeries());
-        series3.dataFields.valueY = "Current";
+        series3.dataFields.valueY = "Vo";
         series3.dataFields.dateX = "date";
         series3.yAxis = valueAxis2;
         series3.name = "Y Voltage";
@@ -113,7 +113,7 @@ function FillBCchartdiv(data) {
         series2.strokeWidth = 2;
 
         var series3 = chart.series.push(new am4charts.LineSeries());
-        series3.dataFields.valueY = "Current";
+        series3.dataFields.valueY = "Vo";
         series3.dataFields.dateX = "date";
         series3.yAxis = valueAxis2;
         series3.name = "Y Current";
@@ -125,54 +125,6 @@ function FillBCchartdiv(data) {
 
         // Add cursor
         chart.cursor = new am4charts.XYCursor();
-    });
-}
-function alarmstbale(data) {
-    alarmsstablesDG = $('#alarmsstablesDG').DataTable({
-        "data": data,
-        "dom": '<"top"<"dt-filters"f>>rFt<"dt-bottom"<"dt-information"li><"dt-pagination"p>>',
-        "columnDefs": [{
-            "targets": 'no-sort',
-            "orderable": false,
-        }],
-        "responsive": true,
-        "colReorder": {
-            realtime: false
-        },
-        "columns": [
-            { "data": "srNo" },
-            { "data": "alarms" },
-            { "data": "alarmsDate" },
-            { "data": "severvity" },
-            // Add more column definitions as needed
-        ],
-        "createdRow": function (row, data, dataIndex) {
-            var lastCellData = data.severvity; // Get data from the last cell
-            var $lastCell = $(row).children('td').last(); // Select the last cell
-            var badgeHTML = ''; // Initialize HTML content
-            if (lastCellData === 'Info') {
-                badgeHTML = '<span class="badge badge-success badge-pill">Success</span>';
-            } else if (lastCellData === 'Minor') {
-                badgeHTML = '<span class="badge badge-warning badge-pill">Warning</span>';
-            } else if (lastCellData === 'Danger') {
-                badgeHTML = '<span class="badge badge-danger badge-pill">Danger</span>';
-            }
-            $lastCell.html(badgeHTML);
-        },
-        "stateSave": false,
-        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]], // Customize the options for records per page
-        initComplete: function () {
-            // Move Search To Panel Header
-            let _container = $(this).parents('.console-panel').find('.get_dt_search');
-            let _bottom_container = $(this).parents('.console-panel').find('.dt-bottom-containers');
-
-            $("#alarmsstablesDG_wrapper .dataTables_filter input").appendTo(_container);
-            $("#alarmsstablesDG_wrapper .dt-filters").css("display", "none");
-            $(_container).find("input").attr('placeholder', 'Search From Table');
-            $("#alarmsstablesDG_wrapper .dt-bottom").appendTo(_bottom_container);
-
-
-        },
     });
 }
 
@@ -189,7 +141,6 @@ $(window).on("load", function () {
                 FillCardDataList(data.Table);
                 Fillchartdiv(JSON.stringify(data.Table1) );
                 FillBCchartdiv(JSON.stringify(data.Table2));
-                alarmstbale(data.Table4);
                 // Manipulate the JSON response data if needed
                 return data.Table5; // Assuming your data is nested under a 'data' key
             }

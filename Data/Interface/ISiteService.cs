@@ -17,5 +17,7 @@ namespace ESite.Data.Interface
         ResponseViewModel GetBatteryData();
         ResponseViewModel GetGridData();
         ResponseViewModel GetNotificationsData();
-	}
+        ResponseViewModel GetSysytemData();
+        
+    }
 }

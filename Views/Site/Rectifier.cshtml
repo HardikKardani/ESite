@@ -95,7 +95,7 @@
 								<div class="card-body">
 									<div class="grid-stack gs-area">
 										<div class="grid-stack-item" data-gs-x="0" data-gs-y="0" data-gs-width="4"
-											 data-gs-height="12" data-gs-min-height="12" data-gs-min-width="4">
+											 data-gs-height="15" data-gs-min-height="15" data-gs-min-width="4">
 											<div class="console-panel grid-stack-item-content">
 												<div class="console-panel-header">
 													<div class="cph-left">
@@ -153,7 +153,7 @@
 											</div>
 										</div>
 										<div class="grid-stack-item" data-gs-x="4" data-gs-y="0" data-gs-width="8"
-											 data-gs-height="12" data-gs-min-height="12" data-gs-min-width="8">
+											 data-gs-height="15" data-gs-min-height="15" data-gs-min-width="8">
 											<div class="console-panel grid-stack-item-content">
 												<div class="console-panel-header">
 													<div class="cph-left">
@@ -203,7 +203,7 @@
 												</div>
 											</div>
 										</div>
-										<div class="grid-stack-item" data-gs-x="0" data-gs-y="13" data-gs-width="6"
+										<div class="grid-stack-item" data-gs-x="0" data-gs-y="15" data-gs-width="6"
 											 data-gs-height="15" data-gs-min-height="15" data-gs-min-width="6">
 											<div class="console-panel grid-stack-item-content">
 												<div class="console-panel-header">
@@ -254,7 +254,7 @@
 												</div>
 											</div>
 										</div>
-										<div class="grid-stack-item" data-gs-x="6" data-gs-y="12" data-gs-width="6"
+										<div class="grid-stack-item" data-gs-x="6" data-gs-y="15" data-gs-width="6"
 											 data-gs-height="15" data-gs-min-height="15" data-gs-min-width="6">
 											<div class="console-panel grid-stack-item-content">
 												<div class="console-panel-header">
@@ -301,71 +301,6 @@
 														<div id="BCCchartdiv"></div>
 													</div>
 
-												</div>
-											</div>
-										</div>
-										<div class="grid-stack-item" data-gs-x="0" data-gs-y="27" data-gs-width="12"
-											 data-gs-height="15" data-gs-min-height="15" data-gs-min-width="12">
-											<div class="console-panel grid-stack-item-content">
-												<div class="console-panel-header">
-													<div class="cph-left">
-														<h5>Recent Alarms</h5>
-													</div>
-													<div class="cph-right">
-														<ul class="top-header-btns">
-
-															<li>
-																<a class="collapse-panel" href="#" title="Collapse/Uncollapse Panel"
-																   data-rel="tooltip"> <i class="icon dripicons-chevron-up"></i></a>
-															</li>
-															<li class="dropdown">
-																<a href="#" data-toggle="dropdown" title="Panel Options" data-rel="tooltip">
-																	<i class="icon dripicons-dots-3"></i>
-																</a>
-																<div class="dropdown-menu  dropdown-menu-right theme-media">
-																	<div class="dropdown-menu-header">
-																		<div class="dmh-inner">
-																			<h4>Panel Options</h4>
-																		</div>
-																	</div>
-																	<a class="dropdown-item cp" href="#" title="">
-																		<span class="color-fill-icon" style="background-color:#fff;"></span>
-																		Header Background Color
-																	</a>
-																	<a class="dropdown-item header-fontcolor" href="#" title="">
-																		<span class="color-fill-icon" style="background-color:#333"></span>
-																		Header Font Color Dark/Light
-																	</a>
-																</div>
-															</li>
-															<li>
-																<a class="removeWidget" href="#" title="Remove Panel" data-rel="tooltip">
-																	<i class="icon dripicons-cross"></i>
-																</a>
-															</li>
-														</ul>
-													</div>
-												</div><!-- Panel Header -->
-												<div class="console-panel-body no-padding">
-
-													<div class="table-container">
-														<table class="table table-striped console-table table-bordered table-hover mb-0"
-															   id="alarmsstablesDG">
-															<thead class="sorticon-pos">
-																<tr>
-																	<th>Sr No</th>
-																	<th>Alarms</th>
-																	<th>Alarms Date</th>
-																	<th>Severvity</th>
-																</tr>
-															</thead>
-															<tbody></tbody>
-														</table>
-													</div>
-
-												</div>
-												<div class="console-footer">
-													<div class="dt-bottom-containers"></div>
 												</div>
 											</div>
 										</div>
@@ -418,20 +353,24 @@
 										<table class="table table-striped console-table table-bordered table-hover mb-0"
 											   id="Solartables">
 											<thead class="sorticon-pos">
+
 												<tr>
-													<th>Sr No</th>
-													<th>Time</th>
-													<th>Serial No</th>
-													<th>I/P Voltage (V)</th>
-													<th>I/P Current (A)</th>
-													<th>I/P Power (KW)</th>
-													<th>Solar (Kwh)</th>
-													<th>Solar Run Time (Hrs)</th>
-													<th>O/P Voltage (V)</th>
-													<th>O/P Current (A)</th>
-													<th>Temp (*C)</th>
-													<th>DC State</th>
-													<th>Status</th>
+													<th rowspan="2">Sr No</th>
+													<th rowspan="2">Site ID </th>
+													<th rowspan="2">Date Time</th>
+													<th colspan="2">Input</th>
+													<th colspan="2">Output</th>
+													<th rowspan="2">Max Power</th>
+													<th rowspan="2">Power Use</th>
+													<th rowspan="2">Temperature</th>
+													<th rowspan="2">Type</th>
+													<th rowspan="2">Status</th>
+												</tr>
+												<tr>
+													<th>Voltage</th>
+													<th>Current</th>
+													<th>Voltage</th>
+													<th>Current</th>
 												</tr>
 											</thead>
 											<tbody></tbody>
@@ -453,7 +392,7 @@
 
 	<aside class="more-opt-panel"></aside>
 </div><!-- Theme Content -->
-<script src="/JsController/SiteRectifierJs.js"></script>
+<script src="/JsController/SiteRectifierJs.js" asp-append-version="true"></script>
 <script src="https://www.amcharts.com/lib/4/core.js"></script>
 <script src="https://www.amcharts.com/lib/4/charts.js"></script>
 <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>

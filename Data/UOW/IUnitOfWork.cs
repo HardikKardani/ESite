@@ -18,5 +18,6 @@ namespace ESite.Data.UOW
         ISiteService siteService { get; }
 		IAssetService assetService { get; }
 
+
 	}
 }

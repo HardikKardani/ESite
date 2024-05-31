@@ -59,7 +59,11 @@ namespace Esite.Controllers
 		{
 			return View();
 		}
-		[HttpGet]
+        public IActionResult SystemDetails()
+        {
+            return View();
+        }
+        [HttpGet]
         public IActionResult GetCardDataList()
         {
             ResponseViewModel responseViewModel = new ResponseViewModel();
@@ -165,7 +169,20 @@ namespace Esite.Controllers
 			}
 			return Json(responseViewModel);
 		}
+        public IActionResult GetSysytemData(Int32 SiteID)
+        {
+            ResponseViewModel responseViewModel = new ResponseViewModel();
+            try
+            {
+                responseViewModel = _uow.siteService.GetSysytemData();
+            }
+            catch (Exception ex)
+            {
+                responseViewModel.Message = DataComman.GetString(ex);
+            }
+            return Json(responseViewModel);
+        }
+        
 
-
-	}
+    }
 }

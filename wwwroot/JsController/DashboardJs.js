@@ -85,61 +85,61 @@ function renderLineChart(data) {
             }
         }
     });
-    var ctx = document.getElementById("donutchart2").getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-            labels: data.Table2.map(d => d.title),
-            datasets: [{
-                label: 'Running On',
-                data: data.Table2.map(d => d.value),
-                backgroundColor: [
-                    '#afd6fa',
-                    '#82b1dd',
-                    '#6ea1cf'
-                ]
-            }]
-        },
-        options: {
-            title: {
-                display: false,
-            },
-            tooltips: {
-                mode: 'nearest',
-                intersect: false,
-                position: 'nearest',
-                xPadding: 10,
-                yPadding: 10,
-                caretPadding: 10
-            },
-            legend: {
-                display: false
-            },
-            responsive: true,
-            maintainAspectRatio: true,
-            scales: {
-                xAxes: [{
-                    display: false,
-                    gridLines: false,
-                    scaleLabel: {
-                        display: true,
-                        labelString: 'Month'
-                    }
-                }],
-                yAxes: [{
-                    display: false,
-                    gridLines: false,
-                    scaleLabel: {
-                        display: true,
-                        labelString: 'Value'
-                    },
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
-            }
-        }
-    });
+    //var ctx = document.getElementById("donutchart2").getContext('2d');
+    //var myChart = new Chart(ctx, {
+    //    type: 'doughnut',
+    //    data: {
+    //        labels: data.Table2.map(d => d.title),
+    //        datasets: [{
+    //            label: 'Running On',
+    //            data: data.Table2.map(d => d.value),
+    //            backgroundColor: [
+    //                '#afd6fa',
+    //                '#82b1dd',
+    //                '#6ea1cf'
+    //            ]
+    //        }]
+    //    },
+    //    options: {
+    //        title: {
+    //            display: false,
+    //        },
+    //        tooltips: {
+    //            mode: 'nearest',
+    //            intersect: false,
+    //            position: 'nearest',
+    //            xPadding: 10,
+    //            yPadding: 10,
+    //            caretPadding: 10
+    //        },
+    //        legend: {
+    //            display: false
+    //        },
+    //        responsive: true,
+    //        maintainAspectRatio: true,
+    //        scales: {
+    //            xAxes: [{
+    //                display: false,
+    //                gridLines: false,
+    //                scaleLabel: {
+    //                    display: true,
+    //                    labelString: 'Month'
+    //                }
+    //            }],
+    //            yAxes: [{
+    //                display: false,
+    //                gridLines: false,
+    //                scaleLabel: {
+    //                    display: true,
+    //                    labelString: 'Value'
+    //                },
+    //                ticks: {
+    //                    beginAtZero: true
+    //                }
+    //            }]
+    //        }
+    //    }
+    //});
 }
 
 var ticketstable;

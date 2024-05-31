@@ -26,6 +26,10 @@
         justify-content: center;
         align-items: center;
     }
+
+    #alink{
+        cursor: pointer;
+    }
 </style>
 <div class="content-area">
     <div class="row p-2">
@@ -53,8 +57,9 @@
     <div class="grid-stack gs-area">
         <div class="grid-stack-item" data-gs-x="0" data-gs-y="0" data-gs-width="12" data-gs-height="7"
              data-gs-min-height="7" data-gs-min-width="3">
-            <div class="console-panel grid-stack-item-content ">
+            <div class="console-panel grid-stack-item-content console-no-header">
                 <div class="console-panel-body align-center">
+
                     <div class="cph-left">
                         <h5>Site Details</h5><br/>
                     </div>
@@ -91,7 +96,7 @@
                                     
                                 </div>
                                 <div class="col-lg-2 col-md-12">
-                                    <a class="" href="/Site/LiveData" data-toggle="modal" data-target=".siteImages" title=""><i class="fa fa-building"></i> Site Images</a>
+                                    <a class="" href="/Site/LiveData" data-toggle="modal" data-target=".siteImages" title=""><i class="fa fa-building"></i> Site Photo</a>
                                 </div>
                             </div>
                         </div>
@@ -106,7 +111,7 @@
             <div class="console-panel grid-stack-item-content console-no-header">
                 <div class="console-panel-body align-center">
                     <div class="cph-left">
-                        <h5>System Status</h5><br />
+                        <a href="/Site/SystemDetails"><h5 id="alink">System Status</h5></a><br />
                     </div>
                     <div class="row">
                         <div class="col-lg-12 col-md-12">
@@ -136,8 +141,136 @@
                 </div>
             </div><!-- Console Panel -->
         </div>
-        <div class="grid-stack-item" data-gs-x="0" data-gs-y="15" data-gs-width="12" data-gs-height="26"
-             data-gs-min-height="26" data-gs-min-width="3">
+        <div class="grid-stack-item" data-gs-x="0" data-gs-y="15"
+             data-gs-width="8" data-gs-height="15" data-gs-min-height="10"
+             data-gs-min-width="8">
+            <div class="console-panel grid-stack-item-content">
+                <div class="console-panel-header">
+                    <div class="cph-left">
+                        <h5>Site Power Source Details</h5>
+                    </div>
+                    <div class="cph-right">
+                        <ul class="top-header-btns">
+                            <li>
+                                <a class="switch-full" href="#"
+                                   title="Expand Panel To Full Screen"
+                                   data-rel="tooltip">
+                                    <i class="icon dripicons-expand-2"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="collapse-panel" href="#"
+                                   title="Collapse/Uncollapse Panel"
+                                   data-rel="tooltip">
+                                    <i class="icon dripicons-chevron-up"></i>
+                                </a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" data-toggle="dropdown"
+                                   title="Panel Options" data-rel="tooltip">
+                                    <i class="icon dripicons-dots-3"></i>
+                                </a>
+                                <div class="dropdown-menu  dropdown-menu-right theme-media">
+                                    <div class="dropdown-menu-header">
+                                        <div class="dmh-inner">
+                                            <h4>Panel Options</h4>
+                                        </div>
+                                    </div>
+                                    <a class="dropdown-item cp" href="#"
+                                       title="">
+                                        <span class="color-fill-icon"
+                                              style="background-color:#fff;"></span>
+                                        Header Background Color
+                                    </a>
+                                    <a class="dropdown-item header-fontcolor"
+                                       href="#" title="">
+                                        <span class="color-fill-icon"
+                                              style="background-color:#333"></span>
+                                        Header Font Color Dark/Light
+                                    </a>
+                                </div>
+                            </li>
+                            <li>
+                                <a class="removeWidget" href="#"
+                                   title="Remove Panel" data-rel="tooltip">
+                                    <i class="icon dripicons-cross"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div><!-- Panel Header -->
+                <div class="console-panel-body no-padding">
+                    <div id="floatingBarChart" ></div>
+                </div>
+
+            </div><!-- Console Panel -->
+        </div>
+         <div class="grid-stack-item" data-gs-x="8" data-gs-y="15"
+             data-gs-width="4" data-gs-height="15" data-gs-min-height="10"
+             data-gs-min-width="4">
+            <div class="console-panel grid-stack-item-content">
+                <div class="console-panel-header">
+                    <div class="cph-left">
+                        <h5>Total Run Hour Details</h5>
+                    </div>
+                    <div class="cph-right">
+                        <ul class="top-header-btns">
+                            <li>
+                                <a class="switch-full" href="#"
+                                   title="Expand Panel To Full Screen"
+                                   data-rel="tooltip">
+                                    <i class="icon dripicons-expand-2"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="collapse-panel" href="#"
+                                   title="Collapse/Uncollapse Panel"
+                                   data-rel="tooltip">
+                                    <i class="icon dripicons-chevron-up"></i>
+                                </a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" data-toggle="dropdown"
+                                   title="Panel Options" data-rel="tooltip">
+                                    <i class="icon dripicons-dots-3"></i>
+                                </a>
+                                <div class="dropdown-menu  dropdown-menu-right theme-media">
+                                    <div class="dropdown-menu-header">
+                                        <div class="dmh-inner">
+                                            <h4>Panel Options</h4>
+                                        </div>
+                                    </div>
+                                    <a class="dropdown-item cp" href="#"
+                                       title="">
+                                        <span class="color-fill-icon"
+                                              style="background-color:#fff;"></span>
+                                        Header Background Color
+                                    </a>
+                                    <a class="dropdown-item header-fontcolor"
+                                       href="#" title="">
+                                        <span class="color-fill-icon"
+                                              style="background-color:#333"></span>
+                                        Header Font Color Dark/Light
+                                    </a>
+                                </div>
+                            </li>
+                            <li>
+                                <a class="removeWidget" href="#"
+                                   title="Remove Panel" data-rel="tooltip">
+                                    <i class="icon dripicons-cross"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div><!-- Panel Header -->
+                <div class="console-panel-body no-padding">
+                    <div id="BarChart" ></div>
+                </div>
+
+            </div><!-- Console Panel -->
+        </div>
+        <div class="grid-stack-item" data-gs-x="0" data-gs-y="31" data-gs-width="12" data-gs-height="32"
+             data-gs-min-height="32" data-gs-min-width="3">
             <div class="console-panel grid-stack-item-content console-no-header">
                 <div class="console-panel-body">
                     <div class="mytab theme1">
@@ -155,7 +288,7 @@
                             <div class="tab-pane fade show active" id="tab4">
                                 <div class="grid-stack gs-area" style="overflow:hidden">
                                     <div class="grid-stack-item" data-gs-x="0" data-gs-y="8"
-                                         data-gs-width="4" data-gs-height="12" data-gs-min-height="12"
+                                         data-gs-width="4" data-gs-height="14" data-gs-min-height="14"
                                          data-gs-min-width="4">
                                         <div class="console-panel grid-stack-item-content">
                                             <div class="console-panel-header">
@@ -284,7 +417,7 @@
                                         </div>
                                     </div><!-- Console Panel gen -->
                                     <div class="grid-stack-item" data-gs-x="4" data-gs-y="8"
-                                         data-gs-width="4" data-gs-height="12" data-gs-min-height="12"
+                                         data-gs-width="4" data-gs-height="14" data-gs-min-height="14"
                                          data-gs-min-width="4">
                                         <div class="console-panel grid-stack-item-content">
                                             <div class="console-panel-header">
@@ -387,7 +520,7 @@
                                         </div>
                                     </div><!-- Console Panel solar -->
                                     <div class="grid-stack-item" data-gs-x="8" data-gs-y="8"
-                                         data-gs-width="4" data-gs-height="12" data-gs-min-height="12"
+                                         data-gs-width="4" data-gs-height="14" data-gs-min-height="14"
                                          data-gs-min-width="4">
                                         <div class="console-panel grid-stack-item-content">
                                             <div class="console-panel-header">
@@ -491,7 +624,7 @@
                                         </div>
                                     </div><!-- Console Panel rec -->
                                     <div class="grid-stack-item" data-gs-x="0" data-gs-y="20"
-                                         data-gs-width="4" data-gs-height="12" data-gs-min-height="12"
+                                         data-gs-width="4" data-gs-height="14" data-gs-min-height="14"
                                          data-gs-min-width="4">
                                         <div class="console-panel grid-stack-item-content">
                                             <div class="console-panel-header">
@@ -609,7 +742,7 @@
                                     </div><!-- Console Panel grid -->
                                     
                                     <div class="grid-stack-item" data-gs-x="4" data-gs-y="20"
-                                         data-gs-width="4" data-gs-height="12" data-gs-min-height="12"
+                                         data-gs-width="4" data-gs-height="14" data-gs-min-height="14"
                                          data-gs-min-width="4">
                                         <div class="console-panel grid-stack-item-content">
                                             <div class="console-panel-header">
@@ -750,7 +883,7 @@
     </div>
     <br/>
     <div class="grid-stack gs-area">
-        <div class="grid-stack-item" data-gs-x="0" data-gs-y="41"
+        <div class="grid-stack-item" data-gs-x="0" data-gs-y="57"
              data-gs-width="12" data-gs-height="8" data-gs-min-height="8"
              data-gs-min-width="12">
             <div class="console-panel grid-stack-item-content">
@@ -856,7 +989,7 @@
     </div>
     <br />
     <div class="grid-stack gs-area">
-        <div class="grid-stack-item" data-gs-x="0" data-gs-y="49"
+        <div class="grid-stack-item" data-gs-x="0" data-gs-y="65"
              data-gs-width="12" data-gs-height="12" data-gs-min-height="12"
              data-gs-min-width="6">
             <div class="console-panel grid-stack-item-content">
@@ -927,7 +1060,7 @@
     </div>
     <br/>
     <div class="grid-stack gs-area">
-        <div class="grid-stack-item" data-gs-x="0" data-gs-y="61"
+        <div class="grid-stack-item" data-gs-x="0" data-gs-y="77"
              data-gs-width="12" data-gs-height="17" data-gs-min-height="10"
              data-gs-min-width="3">
             <div class="console-panel grid-stack-item-content">
@@ -1020,7 +1153,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Site Dircetion</h5>
+                <h5 class="modal-title">Site Photo</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -1028,11 +1161,11 @@
             <div class="modal-body">
                 <div class="row" id="Camera">
                     <div class="col-6">
-                        <h6>Cam 1</h6>
+                        
                         <img src="/images/Ex.jpg" alt="Image 1">
                     </div>
                     <div class="col-6">
-                        <h6>Cam 2</h6>
+                        
                         <img src="/images/Ex.jpg" alt="Image 1">
                     </div>
                 </div>
@@ -1072,4 +1205,277 @@
         </div>
     </div>
 </div>
-<script src="/JsController/SiteDashboardJs.js"></script>
+<script src="/JsController/SiteDashboardJs.js" asp-append-version="true"></script>
+
+<script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+<script>
+    $(document).ready(function () {
+
+    am5.ready(function () {
+
+        // Create root element
+        // https://www.amcharts.com/docs/v5/getting-started/#Root_element
+        var root = am5.Root.new("floatingBarChart");
+
+
+        // Set themes
+        // https://www.amcharts.com/docs/v5/concepts/themes/
+        root.setThemes([
+            am5themes_Animated.new(root)
+        ]);
+
+
+        // Create chart
+        // https://www.amcharts.com/docs/v5/charts/xy-chart/
+        var chart = root.container.children.push(am5xy.XYChart.new(root, {
+            panX: false,
+            panY: false,
+            wheelX: "panX",
+            wheelY: "zoomX",
+            layout: root.verticalLayout,
+            paddingLeft: 0
+        }));
+
+
+        // Add legend
+        // https://www.amcharts.com/docs/v5/charts/xy-chart/legend-xy-series/
+        var legend = chart.children.push(am5.Legend.new(root, {
+            centerX: am5.p50,
+            x: am5.p50
+        }))
+
+        var colors = chart.get("colors");
+
+        // Data
+        var data = [{
+            name: "Solar",
+            startTime: 8,
+            endTime: 11,
+            columnSettings: {
+                stroke: colors.getIndex(1),
+                fill: colors.getIndex(1)
+            }
+        }, {
+            name: "DG",
+            startTime: 10,
+            endTime: 13,
+            columnSettings: {
+                stroke: colors.getIndex(3),
+                fill: colors.getIndex(3)
+            }
+        }, {
+            name: "EB",
+            startTime: 11,
+            endTime: 18,
+            columnSettings: {
+                stroke: colors.getIndex(5),
+                fill: colors.getIndex(5)
+            }
+        }, {
+            name: "Battery",
+            startTime: 15,
+            endTime: 19,
+            columnSettings: {
+                stroke: colors.getIndex(7),
+                fill: colors.getIndex(7)
+            }
+        }];
+
+
+        // Create axes
+        // https://www.amcharts.com/docs/v5/charts/xy-chart/axes/
+        var yRenderer = am5xy.AxisRendererY.new(root, {
+            minorGridEnabled: true
+        });
+        var yAxis = chart.yAxes.push(
+            am5xy.CategoryAxis.new(root, {
+                categoryField: "name",
+                renderer: yRenderer,
+                tooltip: am5.Tooltip.new(root, {})
+            })
+        );
+
+        yRenderer.grid.template.setAll({
+            location: 1
+        })
+
+        yAxis.data.setAll(data);
+
+        var xAxis = chart.xAxes.push(
+            am5xy.ValueAxis.new(root, {
+                renderer: am5xy.AxisRendererX.new(root, {
+                    strokeOpacity: 0.1,
+                    minGridDistance: 60
+                })
+            })
+        );
+
+
+        // Add series
+        // https://www.amcharts.com/docs/v5/charts/xy-chart/series/
+        var series = chart.series.push(am5xy.ColumnSeries.new(root, {
+            name: "Income",
+            xAxis: xAxis,
+            yAxis: yAxis,
+            openValueXField: "startTime",
+            valueXField: "endTime",
+            categoryYField: "name",
+            sequencedInterpolation: true
+        }));
+
+        series.columns.template.setAll({
+            height: am5.percent(100),
+            templateField: "columnSettings",
+            tooltipText: "[bold]{name}[/]\n{categoryY}: {valueX}"
+        });
+
+        series.data.setAll(data);
+
+        // Make stuff animate on load
+        // https://www.amcharts.com/docs/v5/concepts/animations/
+        series.appear();
+        chart.appear(1000, 100);
+
+    }); // end am5.ready()
+    });
+</script>
+<script>
+    $(document).ready(function () {
+
+        am5.ready(function () {
+
+            // Create root element
+            // https://www.amcharts.com/docs/v5/getting-started/#Root_element
+            var root = am5.Root.new("BarChart");
+
+            // Set themes
+            // https://www.amcharts.com/docs/v5/concepts/themes/
+            root.setThemes([
+                am5themes_Animated.new(root)
+            ]);
+
+            // Create chart
+            // https://www.amcharts.com/docs/v5/charts/xy-chart/
+            var chart = root.container.children.push(am5xy.XYChart.new(root, {
+                panX: false,
+                panY: false,
+                wheelX: "none",
+                wheelY: "none",
+                paddingLeft: 0
+            }));
+
+            // Add cursor
+            // https://www.amcharts.com/docs/v5/charts/xy-chart/cursor/
+            var cursor = chart.set("cursor", am5xy.XYCursor.new(root, {}));
+            cursor.lineY.set("visible", false);
+
+            // Create axes
+            // https://www.amcharts.com/docs/v5/charts/xy-chart/axes/
+            var xRenderer = am5xy.AxisRendererX.new(root, {
+                minGridDistance: 30,
+                minorGridEnabled: true
+            });
+
+            var xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(root, {
+                maxDeviation: 0,
+                categoryField: "name",
+                renderer: xRenderer,
+                tooltip: am5.Tooltip.new(root, {})
+            }));
+
+            xRenderer.grid.template.set("visible", false);
+
+            var yRenderer = am5xy.AxisRendererY.new(root, {});
+            var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
+                maxDeviation: 0,
+                min: 0,
+                extraMax: 0.1,
+                renderer: yRenderer
+            }));
+
+            yRenderer.grid.template.setAll({
+                strokeDasharray: [2, 2]
+            });
+
+            // Create series
+            // https://www.amcharts.com/docs/v5/charts/xy-chart/series/
+            var series = chart.series.push(am5xy.ColumnSeries.new(root, {
+                name: "Series 1",
+                xAxis: xAxis,
+                yAxis: yAxis,
+                valueYField: "value",
+                sequencedInterpolation: true,
+                categoryXField: "name",
+                tooltip: am5.Tooltip.new(root, { dy: -25, labelText: "{valueY}" })
+            }));
+
+
+            series.columns.template.setAll({
+                cornerRadiusTL: 5,
+                cornerRadiusTR: 5,
+                strokeOpacity: 0
+            });
+
+            series.columns.template.adapters.add("fill", (fill, target) => {
+                return chart.get("colors").getIndex(series.columns.indexOf(target));
+            });
+
+            series.columns.template.adapters.add("stroke", (stroke, target) => {
+                return chart.get("colors").getIndex(series.columns.indexOf(target));
+            });
+
+            // Set data
+            var data = [
+                {
+                    name: "Solar",
+                    value: 4,
+                    bulletSettings: { src: "/img/Solar1.png" }
+                },
+                {
+                    name: "EB/Grid",
+                    value: 6,
+                    bulletSettings: { src: "/img/eb.png" }
+                },
+                {
+                    name: "Battery",
+                    value: 4,
+                    bulletSettings: { src: "/img/automation.png" }
+                },
+                {
+                    name: "DG",
+                    value: 10,
+                    bulletSettings: { src: "/img/dg.png" }
+                }
+            ];
+
+            series.bullets.push(function () {
+                return am5.Bullet.new(root, {
+                    locationY: 1,
+                    sprite: am5.Picture.new(root, {
+                        templateField: "bulletSettings",
+                        width: 50,
+                        height: 50,
+                        centerX: am5.p50,
+                        centerY: am5.p50,
+                        shadowColor: am5.color(0x000000),
+                        shadowBlur: 4,
+                        shadowOffsetX: 4,
+                        shadowOffsetY: 4,
+                        shadowOpacity: 0.6
+                    })
+                });
+            });
+
+            xAxis.data.setAll(data);
+            series.data.setAll(data);
+
+            // Make stuff animate on load
+            // https://www.amcharts.com/docs/v5/concepts/animations/
+            series.appear(1000);
+            chart.appear(1000, 100);
+
+        }); // end am5.ready()
+    });
+</script>

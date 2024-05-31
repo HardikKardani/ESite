@@ -34,6 +34,18 @@
 		max-width: 100%
 	}
 
+	#RCchartdiv {
+		width: 700px;
+		height: 300px;
+		max-width: 100%
+	}
+
+	#SCchartdiv {
+		width: 700px;
+		height: 300px;
+		max-width: 100%
+	}
+
 	#BCCchartdiv {
 		width: 700px;
 		height: 300px;
@@ -63,15 +75,6 @@
 					</select>
 				</div>
 			</div>
-			<div class="col-4">
-				<div class="form-group">
-					<h5>Select Battery Type</h5>
-					<select class="select2 form-control">
-						<option value="Site1">Lithium</option>
-						<option value="Site1">VLRI</option>
-					</select>
-				</div>
-			</div>
 			<div class="col-4 mt-4">
 				<div class="form-group">
 					<button class="btn btn-accent ">Show</button>
@@ -79,7 +82,7 @@
 			</div>
 
 				<div class="col-8">
-					<h5>Battery Details</h5><br />
+					<h5>System Details</h5><br />
 				</div>
 				<div class="col-4">
 					<div class="form-group" style="float: right;">
@@ -105,7 +108,7 @@
 								<div class="card-body">
 									<div class="grid-stack gs-area">
 										<div class="grid-stack-item" data-gs-x="0" data-gs-y="0" data-gs-width="4"
-											 data-gs-height="12" data-gs-min-height="12" data-gs-min-width="4">
+											 data-gs-height="15" data-gs-min-height="15" data-gs-min-width="4">
 											<div class="console-panel grid-stack-item-content">
 												<div class="console-panel-header">
 													<div class="cph-left">
@@ -149,24 +152,21 @@
 
 												<div class="console-panel-body align-center">
 													
-													<label>Battery Type :</label> <span class="text-warning" id="BatteryType">Lithum</span><br />
-													<label>No of Battery :</label> <span class="text-warning" id="NoofBattery">22 </span><br />
-													<label>Current :</label> <span class="text-warning" id="Current"> -61.00 A</span><br />
-													<label>Voltage :</label> <span class="text-warning" id="Voltage ">49.49 V</span><br />
-													<label>Avg Battery Tempature :</label> <span class="text-warning" id="ABT">
-														30.55
-														C
-													</span><br />
-													<label>Avg Enviroment Tempature :</label> <span class="text-warning" id="AET">
-														30.55
-														C
-													</span><br />
+													<label>Sys Voltage (V) :</label> <span class="text-warning" id="SysVoltage">Lithum</span><br />
+													<label>HVDC Voltage (V) :</label> <span class="text-warning" id="HVDCV">22 </span><br />
+													<label> Rectifier Total Current :</label> <span class="text-warning" id="RTC"> -61.00 A</span><br />
+													<label>Solar Total Current (C):</label> <span class="text-warning" id="STC">49.49 V</span><br />
+													<label>DCDC Total Current (C):</label> <span class="text-warning" id="DCDC">49.49 V</span><br />
+													<label>HVDC Total Current (C):</label> <span class="text-warning" id="HVDC">49.49 V</span><br />
+													<label>Load Total Current (C):</label> <span class="text-warning" id="Load">49.49 V</span><br />
+													<label>Battery Temp (Cel.):</label> <span class="text-warning" id="BatteryTemp">49.49 V</span><br />
+													<label>Enviroment Temp (Cel.):</label> <span class="text-warning" id="EnvironmentTemp">49.49 V</span><br />
 													<label>Data Received On:</label> <span class="text-warning" id="DRO">									</span><br />
 												</div>
 											</div>
 										</div>
 										<div class="grid-stack-item" data-gs-x="4" data-gs-y="0" data-gs-width="8"
-											 data-gs-height="12" data-gs-min-height="12" data-gs-min-width="8">
+											 data-gs-height="15" data-gs-min-height="15" data-gs-min-width="8">
 											<div class="console-panel grid-stack-item-content">
 												<div class="console-panel-header">
 													<div class="cph-left">
@@ -216,12 +216,12 @@
 												</div>
 											</div>
 										</div>
-										<div class="grid-stack-item" data-gs-x="0" data-gs-y="12" data-gs-width="6"
-											 data-gs-height="12" data-gs-min-height="12" data-gs-min-width="6">
+										<div class="grid-stack-item" data-gs-x="0" data-gs-y="15" data-gs-width="6"
+											 data-gs-height="15" data-gs-min-height="15" data-gs-min-width="6">
 											<div class="console-panel grid-stack-item-content">
 												<div class="console-panel-header">
 													<div class="cph-left">
-														<h5>Current (C)</h5>
+														<h5>Load Current (C)</h5>
 													</div>
 													<div class="cph-right">
 														<ul class="top-header-btns">
@@ -267,12 +267,12 @@
 												</div>
 											</div>
 										</div>
-										<div class="grid-stack-item" data-gs-x="6" data-gs-y="12" data-gs-width="6"
-											 data-gs-height="12" data-gs-min-height="12" data-gs-min-width="6">
+										<div class="grid-stack-item" data-gs-x="6" data-gs-y="15" data-gs-width="6"
+											 data-gs-height="15" data-gs-min-height="15" data-gs-min-width="6">
 											<div class="console-panel grid-stack-item-content">
 												<div class="console-panel-header">
 													<div class="cph-left">
-														<h5>Temperature</h5>
+														<h5>Temperature (Cel.)</h5>
 													</div>
 													<div class="cph-right">
 														<ul class="top-header-btns">
@@ -317,12 +317,12 @@
 												</div>
 											</div>
 										</div>
-										<div class="grid-stack-item" data-gs-x="0" data-gs-y="24" data-gs-width="4"
-											 data-gs-height="15" data-gs-min-height="15" data-gs-min-width="4">
+										<div class="grid-stack-item" data-gs-x="0" data-gs-y="30" data-gs-width="6"
+											 data-gs-height="15" data-gs-min-height="15" data-gs-min-width="6">
 											<div class="console-panel grid-stack-item-content">
 												<div class="console-panel-header">
 													<div class="cph-left">
-														<h5>Battery Status</h5>
+														<h5>Rectifier Current</h5>
 													</div>
 													<div class="cph-right">
 														<ul class="top-header-btns">
@@ -361,145 +361,22 @@
 												</div><!-- Panel Header -->
 												<div class="console-panel-body align-center">
 
-													<div class="container mt-4">
-														<div class="row g-4">
-															<div class="col">
-																<div class="card bg-success">
-																	<h5 class="card-title">1</h5>
-																</div>
-															</div>
-															<div class="col">
-																<div class="card bg-success">
-																	<h5 class="card-title">2</h5>
-																</div>
-															</div>
-
-															<div class="col">
-																<div class="card bg-success">
-																	<h5 class="card-title">3</h5>
-																</div>
-															</div>
-															<div class="col">
-																<div class="card bg-success">
-																	<h5 class="card-title">4</h5>
-																</div>
-															</div>
-															<div class="col">
-																<div class="card bg-success">
-																	<h5 class="card-title">5</h5>
-																</div>
-															</div>
-															<div class="col">
-																<div class="card bg-success">
-																	<h5 class="card-title">6</h5>
-																</div>
-															</div>
-															<div class="col">
-																<div class="card bg-success">
-																	<h5 class="card-title">7</h5>
-																</div>
-															</div>
-															<div class="col">
-																<div class="card bg-success">
-																	<h5 class="card-title">8</h5>
-																</div>
-															</div>
-															<div class="col">
-																<div class="card bg-success">
-																	<h5 class="card-title">9</h5>
-																</div>
-															</div>
-															<div class="col">
-																<div class="card bg-success">
-																	<h5 class="card-title">10</h5>
-																</div>
-															</div>
-															<div class="col">
-																<div class="card bg-success">
-																	<h5 class="card-title">11</h5>
-																</div>
-															</div>
-															<div class="col">
-																<div class="card bg-success">
-																	<h5 class="card-title">12</h5>
-																</div>
-															</div>
-															<div class="col">
-																<div class="card bg-success">
-																	<h5 class="card-title">13</h5>
-																</div>
-															</div>
-															<div class="col">
-																<div class="card bg-success">
-																	<h5 class="card-title">14</h5>
-																</div>
-															</div>
-															<div class="col">
-																<div class="card bg-success">
-																	<h5 class="card-title">15</h5>
-																</div>
-															</div>
-															<div class="col">
-																<div class="card bg-success">
-																	<h5 class="card-title">16</h5>
-																</div>
-															</div>
-															<div class="col">
-																<div class="card bg-success">
-																	<h5 class="card-title">17</h5>
-																</div>
-															</div>
-															<div class="col">
-																<div class="card bg-success">
-																	<h5 class="card-title">18</h5>
-																</div>
-															</div>
-															<div class="col">
-																<div class="card bg-success">
-																	<h5 class="card-title">19</h5>
-																</div>
-															</div>
-															<div class="col">
-																<div class="card bg-success">
-																	<h5 class="card-title">20</h5>
-																</div>
-															</div>
-															<div class="col">
-																<div class="card bg-success">
-																	<h5 class="card-title">21</h5>
-																</div>
-															</div>
-															<div class="col">
-																<div class="card bg-success">
-																	<h5 class="card-title">22</h5>
-																</div>
-															</div>
-															<div class="col">
-																<div class="card bg-success">
-																	<h5 class="card-title">23</h5>
-																</div>
-															</div>
-															<div class="col">
-																<div class="card bg-success">
-																	<h5 class="card-title">24</h5>
-																</div>
-															</div>
-														</div>
+													<div class="chart-container">
+														<div id="RCchartdiv"></div>
 													</div>
 
 												</div>
 											</div>
 										</div>
-										<div class="grid-stack-item" data-gs-x="4" data-gs-y="24" data-gs-width="8"
-											 data-gs-height="15" data-gs-min-height="12" data-gs-min-width="8">
+										<div class="grid-stack-item" data-gs-x="6" data-gs-y="30" data-gs-width="6"
+											 data-gs-height="15" data-gs-min-height="15" data-gs-min-width="6">
 											<div class="console-panel grid-stack-item-content">
 												<div class="console-panel-header">
 													<div class="cph-left">
-														<h5>Recent Alarms</h5>
+														<h5>Solar Current</h5>
 													</div>
 													<div class="cph-right">
 														<ul class="top-header-btns">
-
 															<li>
 																<a class="collapse-panel" href="#" title="Collapse/Uncollapse Panel"
 																   data-rel="tooltip"> <i class="icon dripicons-chevron-up"></i></a>
@@ -532,46 +409,16 @@
 														</ul>
 													</div>
 												</div><!-- Panel Header -->
-												<div class="console-panel-body no-padding">
-													<div class="table-container">
-														<table class="table table-striped console-table table-bordered table-hover mb-0"
-															   id="alarmsstablesDG">
-															<thead class="sorticon-pos">
-																<tr>
-																	<th>Sr No</th>
-																	<th>Alarms</th>
-																	<th>Alarms Date</th>
-																	<th>Severvity</th>
-																</tr>
-															</thead>
-															<tbody></tbody>
-														</table>
-													</div>
-												</div>
-												<div class="console-footer">
-													<div class="dt-bottom-containers"></div>
-												</div>
-												<!-- <div class="console-panel-body no-padding">
+												<div class="console-panel-body align-center">
 
-													<div class="table-container">
-														<table
-															class="table table-striped console-table table-bordered table-hover mb-0"
-															id="alarmsstables">
-															<thead class="sorticon-pos">
-																<tr>
-																	<th>Sr No</th>
-																	<th>Alarms</th>
-																	<th>Alarms Date</th>
-																	<th>Severvity</th>
-																</tr>
-															</thead>
-															<tbody></tbody>
-														</table>
+													<div class="chart-container">
+														<div id="SCchartdiv"></div>
 													</div>
 
-												</div> -->
+												</div>
 											</div>
 										</div>
+										
 										
 									</div>
 
@@ -622,22 +469,24 @@
 											   id="Batterytables">
 											<thead class="sorticon-pos">
 												<tr>
-													<th>Battery No</th>
-													<th>Time</th>
-													<th>Cell 1</th>
-													<th>Cell 2</th>
-													<th>Cell 3</th>
-													<th>Cell 4</th>
-													<th>Cell 5</th>
-													<th>Cell 6</th>
-													<th>Cell 7</th>
-													<th>Cell 8</th>
-													<th>Cell 9</th>
-													<th>Cell 10</th>
-													<th>Cell 11</th>
-													<th>Cell 12</th>
-													<th>Cell Min</th>
-													<th>Cell Max</th>
+													<th rowspan="2">SlNo</th>
+													<th rowspan="2">SiteID</th>
+													<th rowspan="2">DateTime</th>
+													<th colspan="2">Voltage (V)</th>
+													<th colspan ="6">Total Current (C)</th>
+													<th colspan ="2">Temperature (Cel)</th>
+												</tr>
+												<tr>
+													<th>System</th>
+													<th>HVDC</th>
+													<th>Rectifier</th>
+													<th>Solar</th>
+													<th>DCDC</th>
+													<th>HVDC</th>
+													<th>Load</th>
+													<th>Battery</th>
+													<th>Battery</th>
+													<th>Environment</th>
 												</tr>
 											</thead>
 											<tbody></tbody>
@@ -657,7 +506,7 @@
 
 	<aside class="more-opt-panel"></aside>
 </div><!-- Theme Content -->
-<script src="/JsController/SiteBatteryJs.js"></script>
+<script src="/JsController/SiteSystemDetailsJs.js" asp-append-version="true"></script>
 <!-- AM Charts Start -->
 <script src="https://www.amcharts.com/lib/4/core.js"></script>
 <script src="https://www.amcharts.com/lib/4/charts.js"></script>

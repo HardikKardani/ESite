@@ -153,7 +153,7 @@ function FillBCCchartdiv(data) {
         series1.strokeWidth = 2;
 
         var series2 = chart.series.push(new am4charts.LineSeries());
-        series2.dataFields.valueY = "DGCurrent";
+        series2.dataFields.valueY = "Solar";
         series2.dataFields.dateX = "date";
         series2.yAxis = valueAxis2;
         series2.name = "Power Usage";
@@ -165,54 +165,6 @@ function FillBCCchartdiv(data) {
 
         // Add cursor
         chart.cursor = new am4charts.XYCursor();
-    });
-}
-function alarmstbale(data) {
-    alarmsstablesDG = $('#alarmsstablesDG').DataTable({
-        "data": data,
-        "dom": '<"top"<"dt-filters"f>>rFt<"dt-bottom"<"dt-information"li><"dt-pagination"p>>',
-        "columnDefs": [{
-            "targets": 'no-sort',
-            "orderable": false,
-        }],
-        "responsive": true,
-        "colReorder": {
-            realtime: false
-        },
-        "columns": [
-            { "data": "srNo" },
-            { "data": "alarms" },
-            { "data": "alarmsDate" },
-            { "data": "severvity" },
-            // Add more column definitions as needed
-        ],
-        "createdRow": function (row, data, dataIndex) {
-            var lastCellData = data.severvity; // Get data from the last cell
-            var $lastCell = $(row).children('td').last(); // Select the last cell
-            var badgeHTML = ''; // Initialize HTML content
-            if (lastCellData === 'Info') {
-                badgeHTML = '<span class="badge badge-success badge-pill">Success</span>';
-            } else if (lastCellData === 'Minor') {
-                badgeHTML = '<span class="badge badge-warning badge-pill">Warning</span>';
-            } else if (lastCellData === 'Danger') {
-                badgeHTML = '<span class="badge badge-danger badge-pill">Danger</span>';
-            }
-            $lastCell.html(badgeHTML);
-        },
-        "stateSave": false,
-        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]], // Customize the options for records per page
-        initComplete: function () {
-            // Move Search To Panel Header
-            let _container = $(this).parents('.console-panel').find('.get_dt_search');
-            let _bottom_container = $(this).parents('.console-panel').find('.dt-bottom-containers');
-
-            $("#alarmsstablesDG_wrapper .dataTables_filter input").appendTo(_container);
-            $("#alarmsstablesDG_wrapper .dt-filters").css("display", "none");
-            $(_container).find("input").attr('placeholder', 'Search From Table');
-            $("#alarmsstablesDG_wrapper .dt-bottom").appendTo(_bottom_container);
-
-
-        },
     });
 }
 
@@ -230,7 +182,6 @@ $(window).on("load", function () {
                 Fillchartdiv(JSON.stringify(data.Table1) );
                 FillBCchartdiv(JSON.stringify(data.Table2));
                 FillBCCchartdiv(JSON.stringify(data.Table3));
-                alarmstbale(data.Table4);
                 // Manipulate the JSON response data if needed
                 return data.Table5; // Assuming your data is nested under a 'data' key
             }
@@ -238,8 +189,8 @@ $(window).on("load", function () {
         "dom": '<"top"<"dt-filters"f>>rFt<"dt-bottom"<"dt-information"li><"dt-pagination"p>>',
         "columns": [
             { "data": "SlNo" },
+            { "data": "SiteId" },
             { "data": "DateTime" },
-            { "data": "SerialNo" },
             { "data": "IPVoltage" },
             { "data": "IPCurrent" },
             { "data": "IPFrequency" },
@@ -247,6 +198,7 @@ $(window).on("load", function () {
             { "data": "OPCurrent" },
             { "data": "TempRise" },
             { "data": "DCState" },
+            { "data": "Status" },
             { "data": "Status" },
             // Add more column definitions as needed
         ],
