@@ -1,0 +1,937 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Assets";
+}
+<link rel="stylesheet" href="/js/plugins/dropzone/dropzone.css">
+<!-- Dropzone -->
+<link rel="stylesheet" href="/js/plugins/fancy-file-uploader/fancy_fileupload.css">
+<!-- Fancy File Upload -->
+<div class="content-area">
+    <div id="toparea" class="style4"></div>
+    <!-- Content Area -->
+    <div class="card">
+        <div class="console-panel-body">
+            <div class="console-form-body">
+                <div class="mytab theme1">
+                    <ul class="nav nav-tabs">
+                        <li>
+                            <a class="nav-link active" data-toggle="tab" data-target="#Details">
+                                <i class="fa fa-bolt"></i> Details
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link" data-toggle="tab" data-target="#AssetConfig">
+                                <i class="fa fa-battery-full"></i>AssetConfig
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link" data-toggle="tab" data-target="#Images">
+                                <i class="fab fa-codepen"></i>Images
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- Selectors -->
+                    <div class="tab-content">
+                        <div class="tab-pane show active" id="Details">
+                            <form id="rectifierForm" data-toggle="validator" class="no-header">
+                                <div class="mytab theme1">
+                                    <ul class="nav nav-tabs">
+                                        <li>
+                                            <a class="nav-link active" data-toggle="tab" data-target="#SiteDetails">
+                                                Site Details
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <!-- Selectors -->
+                                    <div class="tab-content">
+                                        <div class="tab-pane  show active" id="SiteDetails">
+                                            <div class="row">
+                                                <div class="col-lg-4 col-md-12">
+                                                    <div class="form-group">
+                                                        <label>Site Id</label>
+                                                        <input type="text" class="form-control" placeholder="Site Id" id="SiteId" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-12">
+                                                    <div class="form-group">
+                                                        <label>Site Name</label>
+                                                        <input type="text" class="form-control" placeholder="Site Name" id="SiteName" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-12">
+                                                    <div class="form-group">
+                                                        <label>Region</label>
+                                                        <select class="select2 form-control"  id="region" required>
+                                                            <option value="1">Jakarta</option>
+                                                            <option value="2">Medan</option>
+                                                            <option value="3">Kota Ambon</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-12">
+                                                    <div class="form-group">
+                                                        <label>State</label>
+                                                        <select class="select2 form-control" id="state" required>
+                                                            <option value="2">
+                                                                Bali
+                                                            </option>
+                                                            <option value="1">Banten</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-12">
+                                                    <div class="form-group">
+                                                        <label>Country</label>
+                                                        <select class="select2 form-control" id="country" required>
+                                                            <option value="1">Indonesia</option>
+                                                            <option value="2">India</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-12">
+                                                    <div class="form-group">
+                                                        <label>Site Type</label>
+                                                        <select class="select2 form-control" id="siteType" required>
+                                                            <option value="1">Solar</option>
+                                                            <option value="2">Battery</option>
+                                                            <option value="3">Hybrid</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-12">
+                                                    <div class="form-group">
+                                                        <label>Type of Cooling</label>
+                                                        <select class="select2 form-control" id="typeOfCooling" required>
+                                                            <option value="1">Normal</option>
+                                                            <option value="2">Liquid Cooling</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-12">
+                                                    <div class="form-group">
+                                                        <label>No of DG</label>
+                                                        <input type="text" class="form-control" placeholder="DG" id="noOfDG" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-12">
+                                                    <div class="form-group">
+                                                        <label>No of Tenant</label>
+                                                        <input type="text" class="form-control" id="Nooftenat" placeholder="No of tenant" id="noOfTenant" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-12">
+                                                    <div class="form-group">
+                                                        <label>Latitude</label>
+                                                        <input type="text" class="form-control" placeholder="Latitude" id="lat" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-12">
+                                                    <div class="form-group">
+                                                        <label>Longitude</label>
+                                                        <input type="text" class="form-control" placeholder="Longitude" id="long" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-12">
+                                                    <div class="form-group">
+                                                        <label>Site InCharge</label>
+                                                        <input type="text" class="form-control" placeholder="Site Incharge" id="inCharge" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12 col-md-12">
+                                                    <div class="form-group">
+                                                        <label>Site Address</label>
+                                                        <textarea class="form-control" rows="3" id="address" required></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mytab theme1">
+                                    <ul class="nav nav-tabs">
+                                        <li>
+                                            <a class="nav-link active" data-toggle="tab" data-target="#RMSDetails">
+                                                RMS Details
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <!-- Selectors -->
+                                    <div class="tab-content">
+                                        <div class="tab-pane  show active" id="RMSDetails">
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-12">
+                                                    <div class="form-group">
+                                                        <label>Hardware Version</label>
+                                                        <input type="text" class="form-control" placeholder="Hardware version" id="hardwareVersion" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-12">
+                                                    <div class="form-group">
+                                                        <label>Software Version</label>
+                                                        <input type="text" class="form-control" placeholder="Software version" id="softwareVersion" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-12">
+                                                    <div class="form-group">
+                                                        <label>Installation Date</label>
+                                                        <input type="date" class="form-control" placeholder="Installation Date" id="installationDate" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-12">
+                                                    <div class="form-group">
+                                                        <label>Asset Id</label>
+                                                        <input type="text" class="form-control" placeholder="Asset Id" id="assetId" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-12">
+                                                    <div class="form-group">
+                                                        <label>IP Address</label>
+                                                        <input type="text" class="form-control" placeholder="IP Address" id="ipAddress" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-12"></div>
+                                                <div class="col-lg-6 col-md-12">
+                                                    <div class="form-group">
+                                                        <label>SIM1 Operator</label>
+                                                        <select class="select2 form-control" id="sim1Operator" required>
+                                                            <option value="1">Operator 1</option>
+                                                            <option value="2">Operator 1</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-12">
+                                                    <div class="form-group">
+                                                        <label>SIM2 Number</label>
+                                                        <select class="select2 form-control" id="sim1Number" required>
+                                                            <option value="1">+62 6325412502</option>
+                                                            <option value="2">+62 6325412501</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-12">
+                                                    <div class="form-group">
+                                                        <label>SIM2 Operator</label>
+                                                        <select class="select2 form-control" id="sim2Operator" >
+                                                            <option value="1">Operator 1</option>
+                                                            <option value="2">Operator 1</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-12">
+                                                    <div class="form-group">
+                                                        <label>SIM2 Number</label>
+                                                        <select class="select2 form-control" id="sim2Number">
+                                                            <option value="1">+62 6325412502</option>
+                                                            <option value="2">+62 6325412501</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="footer text-right">
+                                <a href="">
+                                    <button class="btn btn-success ml-auto" id="btnSave" type="submit">
+                                        Save
+                                    </button>
+                                </a>
+                                <a  href="">
+                                    <button class="btn btn-danger ml-auto" type="button" id="btnReload">
+                                        Reload
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="AssetConfig">
+                            
+
+                           
+                            <div class="mytab theme1">
+                                <ul class="nav nav-tabs">
+                                    <li>
+                                        <a class="nav-link active" data-toggle="tab" data-target="#SiteAssets">
+                                            Site Assets
+                                        </a>
+                                    </li>
+                                </ul>
+                                <!-- Selectors -->
+                                <div class="tab-content">
+                                    <div class="tab-pane  show active" id="SiteAssets">
+                                        <div class="row">
+                                            <div class="col-lg-3 col-md-12">
+                                                <div class="form-group">
+                                                    <label>1.Grid</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-12">
+                                                <div class="form-group">
+                                                    <select class="select2 form-control">
+                                                        <option value="Site1">Available</option>
+                                                        <option value="Site1">Not Available</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-12">
+                                                <div class="form-group">
+                                                    <select class="select2 form-control">
+                                                        <option value="Site1">Visible</option>
+                                                        <option value="Site1">Not Visible</option>
+                                                        <option value="Site1">Disabled</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-12">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" placeholder="Remarks">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-12">
+                                                <div class="form-group">
+                                                    <label>2.Generator</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-12">
+                                                <div class="form-group">
+                                                    <select class="select2 form-control">
+                                                        <option value="Site1">Available</option>
+                                                        <option value="Site1">Not Available</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-12">
+                                                <div class="form-group">
+                                                    <select class="select2 form-control">
+                                                        <option value="Site1">Visible</option>
+                                                        <option value="Site1">Not Visible</option>
+                                                        <option value="Site1">Disabled</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-12">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" placeholder="Remarks">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-12">
+                                                <div class="form-group">
+                                                    <label>3.Battery</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-12">
+                                                <div class="form-group">
+                                                    <select class="select2 form-control">
+                                                        <option value="Site1">Available</option>
+                                                        <option value="Site1">Not Available</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-12">
+                                                <div class="form-group">
+                                                    <select class="select2 form-control">
+                                                        <option value="Site1">Visible</option>
+                                                        <option value="Site1">Not Visible</option>
+                                                        <option value="Site1">Disabled</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-12">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" placeholder="Remarks">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-12">
+                                                <div class="form-group">
+                                                    <label>4.Solar</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-12">
+                                                <div class="form-group">
+                                                    <select class="select2 form-control">
+                                                        <option value="Site1">Available</option>
+                                                        <option value="Site1">Not Available</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-12">
+                                                <div class="form-group">
+                                                    <select class="select2 form-control">
+                                                        <option value="Site1">Visible</option>
+                                                        <option value="Site1">Not Visible</option>
+                                                        <option value="Site1">Disabled</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-12">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" placeholder="Remarks">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-12">
+                                                <div class="form-group">
+                                                    <label>5.Rectifier</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-12">
+                                                <div class="form-group">
+                                                    <select class="select2 form-control">
+                                                        <option value="Site1">Available</option>
+                                                        <option value="Site1">Not Available</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-12">
+                                                <div class="form-group">
+                                                    <select class="select2 form-control">
+                                                        <option value="Site1">Visible</option>
+                                                        <option value="Site1">Not Visible</option>
+                                                        <option value="Site1">Disabled</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-12">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" placeholder="Remarks">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-12">
+                                                <div class="form-group">
+                                                    <label>6.Portable Battery</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-12">
+                                                <div class="form-group">
+                                                    <select class="select2 form-control">
+                                                        <option value="Site1">Available</option>
+                                                        <option value="Site1">Not Available</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-12">
+                                                <div class="form-group">
+                                                    <select class="select2 form-control">
+                                                        <option value="Site1">Visible</option>
+                                                        <option value="Site1">Not Visible</option>
+                                                        <option value="Site1">Disabled</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-12">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" placeholder="Remarks">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
+                            <div class="mytab theme1">
+                                <ul class="nav nav-tabs">
+                                    <li>
+                                        <a class="nav-link active" data-toggle="tab" data-target="#RmsAsset">
+                                            RMS Asset
+                                        </a>
+                                    </li>
+                                </ul>
+                                <!-- Selectors -->
+                                <div class="tab-content">
+                                    <div class="tab-pane  show active" id="RmsAsset">
+                                        <div class="cph-left">
+                                            <h5>Controllers</h5>
+                                            <br />
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-3 col-md-12">
+                                                <div class="form-group">
+                                                    <label>1.Aircon Controller1</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-12">
+                                                <div class="form-group">
+                                                    <select class="select2 form-control">
+                                                        <option value="Site1">Available</option>
+                                                        <option value="Site1">Not Available</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-12">
+                                                <div class="form-group">
+                                                    <select class="select2 form-control">
+                                                        <option value="Site1">Visible</option>
+                                                        <option value="Site1">Not Visible</option>
+                                                        <option value="Site1">Disabled</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-12">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" placeholder="Remarks">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-12">
+                                                <div class="form-group">
+                                                    <label>2.Aircon Controller2</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-12">
+                                                <div class="form-group">
+                                                    <select class="select2 form-control">
+                                                        <option value="Site1">Available</option>
+                                                        <option value="Site1">Not Available</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-12">
+                                                <div class="form-group">
+                                                    <select class="select2 form-control">
+                                                        <option value="Site1">Visible</option>
+                                                        <option value="Site1">Not Visible</option>
+                                                        <option value="Site1">Disabled</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-12">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" placeholder="Remarks">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-12">
+                                                <div class="form-group">
+                                                    <label>3.DG Controller</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-12">
+                                                <div class="form-group">
+                                                    <select class="select2 form-control">
+                                                        <option value="Site1">Available</option>
+                                                        <option value="Site1">Not Available</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-12">
+                                                <div class="form-group">
+                                                    <select class="select2 form-control">
+                                                        <option value="Site1">Visible</option>
+                                                        <option value="Site1">Not Visible</option>
+                                                        <option value="Site1">Disabled</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-12">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" placeholder="Remarks">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-12">
+                                                <div class="form-group">
+                                                    <label>4.Enclosure</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-12">
+                                                <div class="form-group">
+                                                    <select class="select2 form-control">
+                                                        <option value="Site1">Available</option>
+                                                        <option value="Site1">Not Available</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-12">
+                                                <div class="form-group">
+                                                    <select class="select2 form-control">
+                                                        <option value="Site1">Visible</option>
+                                                        <option value="Site1">Not Visible</option>
+                                                        <option value="Site1">Disabled</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-12">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" placeholder="Remarks">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="cph-left">
+                                            <h5>Cameras</h5>
+                                            <br />
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-3 col-md-12">
+                                                <div class="form-group">
+                                                    <label>1.Camera</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2 col-md-12">
+                                                <div class="form-group">
+                                                    <select class="select2 form-control">
+                                                        <option value="Site1">Available</option>
+                                                        <option value="Site1">Not Available</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2 col-md-12">
+                                                <div class="form-group">
+                                                    <select class="select2 form-control">
+                                                        <option value="Site1">Visible</option>
+                                                        <option value="Site1">Not Visible</option>
+                                                        <option value="Site1">Disabled</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2 col-md-12">
+                                                <div class="form-group">
+                                                    <select class="select2 form-control">
+                                                        <option value="Site1">Analog</option>
+                                                        <option value="Site1">Digital</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-12">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" placeholder="Ip Address">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-12">
+                                                <div class="form-group">
+                                                    <label>2.Camera</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2 col-md-12">
+                                                <div class="form-group">
+                                                    <select class="select2 form-control">
+                                                        <option value="Site1">Available</option>
+                                                        <option value="Site1">Not Available</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2 col-md-12">
+                                                <div class="form-group">
+                                                    <select class="select2 form-control">
+                                                        <option value="Site1">Visible</option>
+                                                        <option value="Site1">Not Visible</option>
+                                                        <option value="Site1">Disabled</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2 col-md-12">
+                                                <div class="form-group">
+                                                    <select class="select2 form-control">
+                                                        <option value="Site1">Analog</option>
+                                                        <option value="Site1">Digital</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-12">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" placeholder="Ip Address">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-12">
+                                                <div class="form-group">
+                                                    <label>3.Camera</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2 col-md-12">
+                                                <div class="form-group">
+                                                    <select class="select2 form-control">
+                                                        <option value="Site1">Available</option>
+                                                        <option value="Site1">Not Available</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2 col-md-12">
+                                                <div class="form-group">
+                                                    <select class="select2 form-control">
+                                                        <option value="Site1">Visible</option>
+                                                        <option value="Site1">Not Visible</option>
+                                                        <option value="Site1">Disabled</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2 col-md-12">
+                                                <div class="form-group">
+                                                    <select class="select2 form-control">
+                                                        <option value="Site1">Analog</option>
+                                                        <option value="Site1">Digital</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-12">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" placeholder="Ip Address">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-12">
+                                                <div class="form-group">
+                                                    <label>4.Camera</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2 col-md-12">
+                                                <div class="form-group">
+                                                    <select class="select2 form-control">
+                                                        <option value="Site1">Available</option>
+                                                        <option value="Site1">Not Available</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2 col-md-12">
+                                                <div class="form-group">
+                                                    <select class="select2 form-control">
+                                                        <option value="Site1">Visible</option>
+                                                        <option value="Site1">Not Visible</option>
+                                                        <option value="Site1">Disabled</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2 col-md-12">
+                                                <div class="form-group">
+                                                    <select class="select2 form-control">
+                                                        <option value="Site1">Analog</option>
+                                                        <option value="Site1">Digital</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-12">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" placeholder="Ip Address">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="footer text-right">
+                                <a data-title="e@site Setting" class="get_pn p-1" href="">
+                                    <button class="btn btn-success ml-auto" type="submit">
+                                        Save
+                                    </button>
+                                </a>
+                                <a data-title="e@site Setting" class="get_pn p-1" href="">
+                                    <button class="btn btn-danger ml-auto" type="button">
+                                        Reload
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="Images">
+                            <div class="row ">
+                                <div class="col-12 form-group">
+                                    <input id="demo" type="file" name="files" accept=".jpg, .png, image/jpeg, image/png" multiple />
+                                </div>
+                            </div>
+                            <div class="footer text-right">
+                                <a data-title="e@site Setting" class="get_pn p-1" href="">
+                                    <button class="btn btn-success ml-auto" type="submit">
+                                        Save
+                                    </button>
+                                </a>
+                                <a data-title="e@site Setting" class="get_pn p-1" href="">
+                                    <button class="btn btn-danger ml-auto" type="button">
+                                        Reload
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <aside class="more-opt-panel"></aside>
+</div>
+<!-- Theme Content -->
+@* <script>
+    $(document).ready(function () {
+        // Get the value of noofteant
+        var noofteant = 3; // Assuming a default value for demonstration
+
+        // If noofteant is 2, create two tabs and tab contents
+        if (noofteant === 3) {
+            // Loop to create two tabs and tab contents
+            for (var i = 1; i <= noofteant; i++) {
+                // Create tab
+                var tab = $('<li><a class="nav-link" data-toggle="tab" href="#tabContent' + i + '">Tab ' + i + '</a></li>');
+                $('.nav-tabss').append(tab);
+                var tabContent = $('<div class="tab-pane"></div>').attr('id', 'tabContent' + i);
+                tabContent.append('<div class="row">');
+                tabContent.append('    <div class="col-lg-3 col-md-12">');
+                tabContent.append('        <div class="form-group">');
+                tabContent.append('            <label>1.Grid</label>');
+                tabContent.append('        </div>');
+                tabContent.append('    </div>');
+                tabContent.append('    <div class="col-lg-3 col-md-12">');
+                tabContent.append('        <div class="form-group">');
+                tabContent.append('            <select class="select2 form-control">');
+                tabContent.append('                <option value="Site1">Available</option>');
+                tabContent.append('                <option value="Site1">Not Available</option>');
+                tabContent.append('            </select>');
+                tabContent.append('        </div>');
+                tabContent.append('    </div>');
+                tabContent.append('    <div class="col-lg-3 col-md-12">');
+                tabContent.append('        <div class="form-group">');
+                tabContent.append('            <select class="select2 form-control">');
+                tabContent.append('                <option value="Site1">Visible</option>');
+                tabContent.append('                <option value="Site1">Not Visible</option>');
+                tabContent.append('                <option value="Site1">Disabled</option>');
+                tabContent.append('            </select>');
+                tabContent.append('        </div>');
+                tabContent.append('    </div>');
+                tabContent.append('    <div class="col-lg-3 col-md-12">');
+                tabContent.append('        <div class="form-group">');
+                tabContent.append('            <input type="text" class="form-control" placeholder="Remarks">');
+                tabContent.append('        </div>');
+                tabContent.append('    </div>');
+                tabContent.append('    <div class="col-lg-3 col-md-12">');
+                tabContent.append('        <div class="form-group">');
+                tabContent.append('            <label>2.Generator</label>');
+                tabContent.append('        </div>');
+                tabContent.append('    </div>');
+                tabContent.append('    <div class="col-lg-3 col-md-12">');
+                tabContent.append('        <div class="form-group">');
+                tabContent.append('            <select class="select2 form-control">');
+                tabContent.append('                <option value="Site1">Available</option>');
+                tabContent.append('                <option value="Site1">Not Available</option>');
+                tabContent.append('            </select>');
+                tabContent.append('        </div>');
+                tabContent.append('    </div>');
+                tabContent.append('    <div class="col-lg-3 col-md-12">');
+                tabContent.append('        <div class="form-group">');
+                tabContent.append('            <select class="select2 form-control">');
+                tabContent.append('                <option value="Site1">Visible</option>');
+                tabContent.append('                <option value="Site1">Not Visible</option>');
+                tabContent.append('                <option value="Site1">Disabled</option>');
+                tabContent.append('            </select>');
+                tabContent.append('        </div>');
+                tabContent.append('    </div>');
+                tabContent.append('    <div class="col-lg-3 col-md-12">');
+                tabContent.append('        <div class="form-group">');
+                tabContent.append('            <input type="text" class="form-control" placeholder="Remarks">');
+                tabContent.append('        </div>');
+                tabContent.append('    </div>');
+                tabContent.append('    <div class="col-lg-3 col-md-12">'); 
+                tabContent.append('        <div class="form-group">');
+                tabContent.append('            <label>3.Battery</label>');
+                tabContent.append('        </div>');
+                tabContent.append('    </div>');
+                tabContent.append('    <div class="col-lg-3 col-md-12">');
+                tabContent.append('        <div class="form-group">');
+                tabContent.append('            <select class="select2 form-control">');
+                tabContent.append('                <option value="Site1">Available</option>');
+                tabContent.append('                <option value="Site1">Not Available</option>');
+                tabContent.append('            </select>'); 
+                tabContent.append('        </div>'); 
+                tabContent.append('    </div>');
+                tabContent.append('    <div class="col-lg-3 col-md-12">');
+                tabContent.append('        <div class="form-group">');
+                tabContent.append('            <select class="select2 form-control">');
+                tabContent.append('                <option value="Site1">Visible</option>');
+                tabContent.append('                <option value="Site1">Not Visible</option>');
+                tabContent.append('                <option value="Site1">Disabled</option>');
+                tabContent.append('            </select>');
+                tabContent.append('        </div>');
+                tabContent.append('    </div>');
+                tabContent.append('    <div class="col-lg-3 col-md-12">');
+                tabContent.append('        <div class="form-group">');
+                tabContent.append('            <input type="text" class="form-control" placeholder="Remarks">');
+                tabContent.append('        </div>');
+                tabContent.append('    </div>');
+                tabContent.append('    <div class="col-lg-3 col-md-12">'); 
+                tabContent.append('        <div class="form-group">');
+                tabContent.append('            <label>4.Solar</label>');
+                tabContent.append('        </div>');
+                tabContent.append('    </div>');
+                tabContent.append('    <div class="col-lg-3 col-md-12">');
+                tabContent.append('        <div class="form-group">');
+                tabContent.append('            <select class="select2 form-control">');
+                tabContent.append('                <option value="Site1">Available</option>');
+                tabContent.append('                <option value="Site1">Not Available</option>');
+                tabContent.append('            </select>');
+                tabContent.append('        </div>'); 
+                tabContent.append('    </div>');
+                tabContent.append('    <div class="col-lg-3 col-md-12">');
+                tabContent.append('        <div class="form-group">');
+                tabContent.append('            <select class="select2 form-control">');
+                tabContent.append('                <option value="Site1">Visible</option>');
+                tabContent.append('                <option value="Site1">Not Visible</option>');
+                tabContent.append('                <option value="Site1">Disabled</option>');
+                tabContent.append('            </select>');
+                tabContent.append('        </div>');
+                tabContent.append('    </div>');
+                tabContent.append('    <div class="col-lg-3 col-md-12">');
+                tabContent.append('        <div class="form-group">');
+                tabContent.append('            <input type="text" class="form-control" placeholder="Remarks">');
+                tabContent.append('        </div>');
+                tabContent.append('    </div>');
+                tabContent.append('    <div class="col-lg-3 col-md-12">'); 
+                tabContent.append('        <div class="form-group">');
+                tabContent.append('            <label>5.Rectifier</label>');
+                tabContent.append('        </div>');
+                tabContent.append('    </div>');
+                tabContent.append('    <div class="col-lg-3 col-md-12">');
+                tabContent.append('        <div class="form-group">');
+                tabContent.append('            <select class="select2 form-control">');
+                tabContent.append('                <option value="Site1">Available</option>');
+                tabContent.append('                <option value="Site1">Not Available</option>');
+                tabContent.append('            </select>');
+                tabContent.append('        </div>');
+                tabContent.append('    </div>');
+                tabContent.append('    <div class="col-lg-3 col-md-12">');
+                tabContent.append('        <div class="form-group">');
+                tabContent.append('            <select class="select2 form-control">');
+                tabContent.append('                <option value="Site1">Visible</option>');
+                tabContent.append('                <option value="Site1">Not Visible</option>');
+                tabContent.append('                <option value="Site1">Disabled</option>');
+                tabContent.append('            </select>');
+                tabContent.append('        </div>'); 
+                tabContent.append('    </div>');
+                tabContent.append('    <div class="col-lg-3 col-md-12">');
+                tabContent.append('        <div class="form-group">');
+                tabContent.append('            <input type="text" class="form-control" placeholder="Remarks">');
+                tabContent.append('        </div>'); 
+                tabContent.append('    </div>');
+                tabContent.append('    <div class="col-lg-3 col-md-12">');
+                tabContent.append('        <div class="form-group">');
+                tabContent.append('            <label>6.Portable Battery</label>');
+                tabContent.append('        </div>');
+                tabContent.append('    </div>');
+                tabContent.append('    <div class="col-lg-3 col-md-12">');
+                tabContent.append('        <div class="form-group">');
+                tabContent.append('            <select class="select2 form-control">');
+                tabContent.append('                <option value="Site1">Available</option>');
+                tabContent.append('                <option value="Site1">Not Available</option>');
+                tabContent.append('            </select>');
+                tabContent.append('        </div>');
+                tabContent.append('    </div>');
+                tabContent.append('    <div class="col-lg-3 col-md-12">');
+                tabContent.append('        <div class="form-group">');
+                tabContent.append('            <select class="select2 form-control">');
+                tabContent.append('                <option value="Site1">Visible</option>');
+                tabContent.append('                <option value="Site1">Not Visible</option>');
+                tabContent.append('                <option value="Site1">Disabled</option>');
+                tabContent.append('            </select>');
+                tabContent.append('        </div>');
+                tabContent.append('    </div>');
+                tabContent.append('    <div class="col-lg-3 col-md-12">');
+                tabContent.append('        <div class="form-group">');
+                tabContent.append('            <input type="text" class="form-control" placeholder="Remarks">');
+                tabContent.append('        </div>');
+                tabContent.append('    </div>');
+                tabContent.append('</div>');
+                tabContent.append('</div>');
+                // Create tab content
+                
+                // tabContent.append('<div class="row">' + $('.tab-content .tab-pane').html() + '</div>'); // Copy template HTML
+                $('.tab-contents').append(tabContent);
+            }
+        }
+    });
+</script> *@
+<script src="js/plugins/dropzone/dropzone.js"></script><!-- Dropzone -->
+<!-- Fancy File Upload  -->
+<script src="/js/plugins/fancy-file-uploader/jquery.ui.widget.js"></script>
+<script src="/js/plugins/fancy-file-uploader/jquery.fileupload.js"></script>
+<script src="/js/plugins/fancy-file-uploader/jquery.iframe-transport.js"></script>
+<script src="/js/plugins/fancy-file-uploader/jquery.fancy-fileupload.js"></script>
+<!-- Fancy File Upload  -->
+<script src="/js/page-level/fancy-fileuploader.js"></script>

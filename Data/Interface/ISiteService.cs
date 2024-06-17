@@ -10,7 +10,11 @@ namespace ESite.Data.Interface
     public interface ISiteService 
 	{
 		ResponseViewModel GetCardDataList();
-		ResponseViewModel GetLiveData();
+		ResponseViewModel GetSiteList();
+        Task<ResponseViewModel> GetList();
+
+
+        ResponseViewModel GetLiveData();
         ResponseViewModel GetRectifierData();
         ResponseViewModel GetSolarData();
         ResponseViewModel GetGeneratorData();

@@ -192,8 +192,36 @@ $(window).on("load", function(){
             return false;
       });
 
+    $("body").on("click", ".removeWidgets", function () {
+        let _this = this;
+        let parentPanel = $(this).closest('.console-panel'); // Find the closest .console-panel
+        let parentItem = parentPanel.closest('.grid-stack-item'); // Find the closest .grid-stack-item
 
+        $.confirm({
+            theme: 'bootstrap',
+            title: 'Are You Sure?',
+            content: 'You will not be able to see this panel back on this page.',
+            buttons: {
+                confirm: {
+                    text: 'Confirm',
+                    btnClass: 'btn-blue',
+                    keys: ['enter', 'shift'],
+                    action: function () {
+                        var grid = $('.grid-stacks').data('gridstack');
+                        $(_this).closest('.console-panel').slideUp("complete", function () {
+                            grid.removeWidget(parentItem, true); // Remove the widget from gridstack
+                        });
+                        $.alert('Widget Removed!');
+                    }
+                },
+                cancel: function () {
+                    // Optional: Handle cancel button action if needed
+                }
+            }
+        });
 
+        return false; // Prevent default action of the anchor tag
+    });
       /*=== Filter Close ===*/
       $("body").on("click", 'a.filter-close', function(){
             $(this).parents('.console-filters').addClass(`slideOut`);
@@ -466,3 +494,86 @@ $(window).on("load", function(){
 
 
 })
+//function makeTimer() {
+
+//    //		var endTime = new Date("29 April 2018 9:56:00 GMT+01:00");	
+//    var endTime = new Date("29 April 2020 9:56:00 GMT+01:00");
+//    endTime = (Date.parse(endTime) / 1000);
+
+//    var now = new Date();
+//    now = (Date.parse(now) / 1000);
+
+//    var timeLeft = endTime - now;
+
+//    var days = Math.floor(timeLeft / 86400);
+//    var hours = Math.floor((timeLeft - (days * 86400)) / 3600);
+//    var minutes = Math.floor((timeLeft - (days * 86400) - (hours * 3600)) / 60);
+//    var seconds = Math.floor((timeLeft - (days * 86400) - (hours * 3600) - (minutes * 60)));
+
+//    if (hours < "10") { hours = "0" + hours; }
+//    if (minutes < "10") { minutes = "0" + minutes; }
+//    if (seconds < "10") { seconds = "0" + seconds; }
+
+//    $("#hours").html(hours +":");
+//    $("#minutes").html(minutes + ":");
+//    $("#seconds").html(seconds);
+
+//}
+
+//setInterval(function () { makeTimer(); }, 1000);
+var refreshInterval = 10000; // Default refresh interval in milliseconds (100 minutes)
+
+function updateClock() {
+    var now = new Date();
+
+    var year = now.getFullYear();
+    var month = now.getMonth() + 1; // Months are zero indexed, so we add 1
+    var day = now.getDate();
+    var hours = now.getHours();
+    var minutes = now.getMinutes();
+    var seconds = now.getSeconds();
+
+    // Format hours, minutes, and seconds to ensure double digits
+    hours = hours < 10 ? '0' + hours : hours;
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    seconds = seconds < 10 ? '0' + seconds : seconds;
+
+    var currentDateTime = year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds;
+    debugger;
+    $('#hours').html(currentDateTime);
+}
+
+function updateTimer() {
+    var secondsLeft = 60; // Countdown timer set to 60 seconds
+
+    var timerInterval = setInterval(function () {
+        secondsLeft--;
+        $('#seconds').text(secondsLeft);
+
+        if (secondsLeft <= 0) {
+            clearInterval(timerInterval);
+            if (window.location.pathname == "/" || window.location.pathname == "/Site/Dashboard") {
+                location.reload();
+            
+            } 
+            
+        }
+    }, 1000); // Update timer every second
+}
+
+// Initial call to display clock immediately
+$(window).on("load", function () {
+    updateTimer();
+    
+    setTimeout(function () {
+        updateClock();
+    }, 1000);
+});
+// Refresh the page at the set interval (100 minutes)
+setInterval(function () {
+    debugger;
+    if (window.location.pathname == "/" || window.location.pathname == "/Site/Dashboard") {
+        location.reload();
+        updateClock();
+    } 
+}, refreshInterval);

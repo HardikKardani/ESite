@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Azure;
+using Data.EntityModel;
 using Data.EntityModel.Partialclass;
 using ESite.Data.HelperClass;
 using ESite.Data.Interface;
@@ -23,6 +24,43 @@ namespace ESite.Data.Implementation
 		{
 			_mapper = mapper;
 			_context = context;
+		}
+        public async Task<ResponseViewModel> GetList()
+        {
+            ResponseViewModel _Response = new();
+            try
+            {
+                List<TblSite> dataMasters = await _context.TblSites.AsNoTracking()
+                    
+                    .Where(x => x.IsDeleted == false).OrderByDescending(o => o.SlNo).ToListAsync();
+                _Response.Status = true;
+                _Response.Response = _mapper.Map<List<TblSite>, List<SiteViewModel>>(dataMasters);
+
+            }
+            catch (Exception ex)
+            {
+                _Response.Message = DataComman.GetString(ex);
+            }
+            return _Response;
+        }
+        public ResponseViewModel GetSiteList()
+		{
+			ResponseViewModel _Response = new();
+			try
+			{
+				string? constr = _context.Database.GetConnectionString() == null ? "" : _context.Database.GetConnectionString();
+				sqlhelper _sqlhelper = new sqlhelper(constr == null ? "" : constr);
+				DataTable data = _sqlhelper.GetDataTable(System.Data.CommandType.StoredProcedure, "SP_SiteList");
+
+				_Response.Status = true;
+				_Response.Response = Newtonsoft.Json.JsonConvert.SerializeObject(data);
+
+			}
+			catch (Exception ex)
+			{
+				_Response.Message = DataComman.GetString(ex);
+			}
+			return _Response;
 		}
 		public ResponseViewModel GetCardDataList()
 		{

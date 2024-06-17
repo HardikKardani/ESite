@@ -141,11 +141,9 @@ function renderLineChart(data) {
     //    }
     //});
 }
-
 var ticketstable;
 $(window).on("load", function () {
     ticketstable = $('#ticketstable').DataTable({
-        //"ajax": '/js/JSON/data1.json',
         "ajax": {
             "url": '/Company/GetList',
             "dataSrc": function (json) {
@@ -153,7 +151,7 @@ $(window).on("load", function () {
                 return json.response; // Assuming your data is nested under a 'data' key
             }
         },
-        "dom": '<"top"<"dt-filters"f><"get_dt_button"B>>rFt<"dt-bottom"<"dt-information"li><"dt-pagination"p>>',
+        "dom": '<"top"B<"dt-filters"f>>rFt<"dt-bottom"<"dt-information"li><"dt-pagination"p>>',
         "columns": [
             { "data": "companyName" },
             { "data": "address" },
@@ -170,40 +168,43 @@ $(window).on("load", function () {
         },
         "stateSave": false,
         "buttons": [
-            {
-                extend: 'excelHtml5',
+             {
+                 extend: 'excelHtml5',
                 text: 'Export'
-                //title: 'Data export'
-            }
-        ],
+
+                 //title: 'Data export'
+             }
+         ],
         initComplete: function () {
             // Move Search To Panel Header
-            let _bottom_container = $(this).parents('.console-panel').find('.dt-bottom-container');
+            let _container = $(this).parents('.console-panel').find('.get_dt_search')
+            let _bottom_container = $(this).parents('.console-panel').find('.dt-bottom-container')
 
+            /*$("#ticketstable_wrapper .dataTables_filter input").appendTo(_container);*/
             $("#ticketstable_wrapper  .dt-filters").css("display", "none");
+            /*$(_container).find("input").attr('placeholder', 'Search From Table');*/
+            $("#ticketstable_wrapper  .dt-bottom").appendTo(_bottom_container);
+            $("#ticketstable_wrapper  .top").css("display", "none");
             $("#ticketstable_wrapper  .dt-button").removeClass("dt-button buttons-excel buttons-html5");
             $("#ticketstable_wrapper .dt-buttons button")
-                .addClass("btn btn-primary"); // Add the desired Bootstrap class
-                
-                 
-            $("#ticketstable_wrapper .dt-buttons").css({
-                "float": "right"               
-            });
-            $("#ticketstable_wrapper .dt-buttons").addClass("mb-2 mr-4");
+                .addClass("btn").css("background-color: rgb(12, 52, 61)"); // Add the desired Bootstrap class
             
-            
-            $("#ticketstable_wrapper  .dt-bottom").appendTo(_bottom_container);
+            $("#ticketstable_wrapper .dt-buttons").addClass("mr-2");
+            $("#ticketstable_wrapper .dt-buttons").appendTo(_container);
             dashboardFilters();
+            
+            //$(colvis.button()).insertAfter(_container);
 
         }
     });
 
     // ======= Filters Code Start ======= //
     function dashboardFilters() {
-        $(".filterhead").each(function (i) {
+        $(".filterheadsite").each(function (i) {
             var select = $('<select multiple class="multiselect"></select>')
                 .appendTo($(this).empty())
                 .on('change', function () {
+
                     var term = $(this).val() || [];
                     regExSearch = '^(' + term.join('|') + ')';
                     ticketstable.column(i).search(regExSearch, true, false).draw();
@@ -222,22 +223,119 @@ $(window).on("load", function () {
 
     // ======= Filters Code End ======= //
 
-    // Enable Column Show Hide Option
+    //// Enable Column Show Hide Option
     //var colvis = new $.fn.dataTable.ColVis(ticketstable, {
     //    showAll: "Restore Defaults"
     //});
-
     $('#ticketstable').on('click', 'tbody tr', function () {
-        // Get the data of the clicked row
-        let rowData = ticketstable.row(this).data();
+            // Get the data of the clicked row
+            let rowData = ticketstable.row(this).data();
 
-        // Extract the URL from the row data (assuming the URL is stored in a specific column)
-        let url = rowData.urlColumn; // Replace 'urlColumn' with the actual column name or index
+            // Extract the URL from the row data (assuming the URL is stored in a specific column)
+            let url = rowData.urlColumn; // Replace 'urlColumn' with the actual column name or index
 
-        // Navigate to the URL
-        window.location.href = "/Site/Dashboard";
-    });
+            // Navigate to the URL
+            window.location.href = "/Site/Dashboard";
+        });
+
 });
+
+//var ticketstable;
+//$(window).on("load", function () {
+//    ticketstable = $('#ticketstable').DataTable({
+//        //"ajax": '/js/JSON/data1.json',
+//        "ajax": {
+//            "url": '/Company/GetList',
+//            "dataSrc": function (json) {
+//                // Manipulate the JSON response data if needed
+//                return json.response; // Assuming your data is nested under a 'data' key
+//            }
+//        },
+//        "dom": '<"top"<"dt-filters"f><"get_dt_button"B>>rFt<"dt-bottom"<"dt-information"li><"dt-pagination"p>>',
+//        "columns": [
+//            { "data": "companyName" },
+//            { "data": "address" },
+//            { "data": "mobile" },
+//            // Add more column definitions as needed
+//        ],
+//        "columnDefs": [{
+//            "targets": 'no-sort',
+//            "orderable": false,
+//        }],
+//        "responsive": true,
+//        "colReorder": {
+//            realtime: false
+//        },
+//        "stateSave": false,
+//        "buttons": [
+//            {
+//                extend: 'excelHtml5',
+//                text: 'Export'
+//                //title: 'Data export'
+//            }
+//        ],
+//        initComplete: function () {
+//            // Move Search To Panel Header
+//            let _bottom_container = $(this).parents('.console-panel').find('.dt-bottom-container');
+
+//            $("#ticketstable_wrapper  .dt-filters").css("display", "none");
+//            $("#ticketstable_wrapper  .dt-button").removeClass("dt-button buttons-excel buttons-html5");
+//            $("#ticketstable_wrapper .dt-buttons button")
+//                .addClass("btn btn-primary"); // Add the desired Bootstrap class
+                
+                 
+//            $("#ticketstable_wrapper .dt-buttons").css({
+//                "float": "right"               
+//            });
+//            $("#ticketstable_wrapper .dt-buttons").addClass("mb-2 mr-4");
+            
+            
+//            $("#ticketstable_wrapper  .dt-bottom").appendTo(_bottom_container);
+//            dashboardFilters();
+
+//        }
+//    });
+
+//    // ======= Filters Code Start ======= //
+//    function dashboardFilters() {
+//        $(".filterhead").each(function (i) {
+//            var select = $('<select multiple class="multiselect"></select>')
+//                .appendTo($(this).empty())
+//                .on('change', function () {
+//                    var term = $(this).val() || [];
+//                    regExSearch = '^(' + term.join('|') + ')';
+//                    ticketstable.column(i).search(regExSearch, true, false).draw();
+//                });
+//            ticketstable.column(i).data().unique().sort().each(function (d, j) {
+//                d = `<span>` + d + `</span>`;
+//                d = $.parseHTML(d);
+//                d = $(d).text();
+//                if (!$(select).find("option:contains('" + d + "')").length) {
+//                    select.append('<option value="' + d + '">' + d + '</option>')
+//                }
+//            });
+//        });
+//        $(".multiselect").SumoSelect({ search: true, searchText: 'Enter here.' });
+//    }
+
+//    // ======= Filters Code End ======= //
+
+//    // Enable Column Show Hide Option
+//    //var colvis = new $.fn.dataTable.ColVis(ticketstable, {
+//    //    showAll: "Restore Defaults"
+//    //});
+
+//    $('#ticketstable').on('click', 'tbody tr', function () {
+//        // Get the data of the clicked row
+//        let rowData = ticketstable.row(this).data();
+
+//        // Extract the URL from the row data (assuming the URL is stored in a specific column)
+//        let url = rowData.urlColumn; // Replace 'urlColumn' with the actual column name or index
+
+//        // Navigate to the URL
+//        window.location.href = "/Site/Dashboard";
+//    });
+//});
 
 
 var Sitetable;

@@ -10,6 +10,14 @@
 		<!-- AM Charts End -->
 
 <style>
+	@@media screen and (max-width: 1440px) {
+		.table-containers {
+			width: 60%; /* or any other suitable width for small screens */
+			overflow-x: auto; /* or any other suitable overflow setting for small screens */
+		}
+
+		
+	}
 	.col .card {
 		display: flex;
 		flex-wrap: wrap;
@@ -29,12 +37,6 @@
 	}
 
 	#chartdiv {
-		width: 700px;
-		height: 300px;
-		max-width: 100%
-	}
-
-	#BCCCchartdiv {
 		width: 700px;
 		height: 300px;
 		max-width: 100%
@@ -69,20 +71,21 @@
 					</select>
 				</div>
 			</div>
-			<div class="col-4 m-4">
+			
+			<div class="col-4 mt-4">
 				<div class="form-group">
 					<button class="btn btn-accent ">Show</button>
 				</div>
 			</div>
-			<div class="col-8">
-				<h5>DG Details</h5><br />
-			</div>
-			<div class="col-4">
-				<div class="form-group" style="float: right;">
-					<button class="btn btn-accent">Download</button>
-				</div>
-			</div>
 
+				<div class="col-8">
+					<h5>Portable Battery Details</h5><br />
+				</div>
+				<div class="col-4">
+					<div class="form-group" style="float: right;">
+						<button class="btn btn-accent">Download</button>
+					</div>
+				</div>
 			<div class="col-12">
 				<div class="mytab theme1">
 					<ul class="nav nav-tabs">
@@ -101,8 +104,8 @@
 							<div class="card">
 								<div class="card-body">
 									<div class="grid-stack gs-area">
-										<div class="grid-stack-item" data-gs-x="0" data-gs-y="0" data-gs-width="3"
-											 data-gs-height="15" data-gs-min-height="15" data-gs-min-width="3">
+										<div class="grid-stack-item" data-gs-x="0" data-gs-y="0" data-gs-width="4"
+											 data-gs-height="15" data-gs-min-height="15" data-gs-min-width="4">
 											<div class="console-panel grid-stack-item-content">
 												<div class="console-panel-header">
 													<div class="cph-left">
@@ -145,21 +148,58 @@
 												</div><!-- Panel Header -->
 
 												<div class="console-panel-body align-center">
+													@* <table>
+														<tr>
+															<td><label>Battery Type :</label></td>
 
-													<label>R Voltage :</label> <span class="text-warning" id="RVoltage">0 V</span><br />
-													<label>Y Volatge :</label> <span class="text-warning" id="YVoltage">0 V</span><br />
-													<label>B Voltage :</label> <span class="text-warning" id="BVoltage">0 V</span><br />
-													<label>R Current :</label> <span class="text-warning" id="RCurrent">0 A</span><br />
-													<label>Y Current :</label> <span class="text-warning" id="YCurrent">0 A</span><br />
-													<label>B Current :</label> <span class="text-warning" id="BCurrent">0 A</span><br />
-													<label>Fuel Level :</label> <span class="text-warning" id="FuelLevel">682.75 Ltrs</span><br />
-													<label>Frequency :</label> <span class="text-warning" id="Frequency"> KWH</span><br />
-													<label>Data Received On :</label> <span class="text-warning" id="DRO"> Hrs</span><br />
+															<td>
+																<span class="text-warning" id="BatteryType">Lithum</span>
+																<br />
+															</td>
+														</tr>
+														<tr>
+															<td><label>No of Battery :</label></td>
+
+															<td>
+																<span class="text-warning" id="NoofBattery">22 </span>
+																<br />
+															</td>
+														</tr>
+														<tr>
+															<td><label>Current :</label></td>
+
+															<td>
+																<span class="text-warning" id="Current"> -61.00 A</span>
+																<br />
+															</td>
+														</tr>
+														<tr>
+															<td><label>Data Received On:</label></td>
+
+															<td>
+																<span class="text-warning" id="DRO"></span>
+																<br />
+															</td>
+														</tr>
+													</table> *@
+													<label>Battery Type :</label> <span class="text-warning" id="BatteryType">Lithum</span><br />
+													<label>No of Battery :</label> <span class="text-warning" id="NoofBattery">22 </span><br />
+													<label>Current :</label> <span class="text-warning" id="Current"> -61.00 A</span><br />
+													<label>Voltage :</label> <span class="text-warning" id="Voltage ">49.49 V</span><br />
+													<label>Avg Battery Tempature :</label> <span class="text-warning" id="ABT">
+														30.55
+														C
+													</span><br />
+													<label>Avg Enviroment Tempature :</label> <span class="text-warning" id="AET">
+														30.55
+														C
+													</span><br />
+													<label>Data Received On:</label> <span class="text-warning" id="DRO">									</span><br />
 												</div>
 											</div>
 										</div>
-										<div class="grid-stack-item" data-gs-x="3" data-gs-y="0" data-gs-width="6"
-											 data-gs-height="15" data-gs-min-height="15" data-gs-min-width="6">
+										<div class="grid-stack-item" data-gs-x="4" data-gs-y="0" data-gs-width="8"
+											 data-gs-height="15" data-gs-min-height="15" data-gs-min-width="8">
 											<div class="console-panel grid-stack-item-content">
 												<div class="console-panel-header">
 													<div class="cph-left">
@@ -209,12 +249,12 @@
 												</div>
 											</div>
 										</div>
-										<div class="grid-stack-item" data-gs-x="10" data-gs-y="0" data-gs-width="3"
-											 data-gs-height="15" data-gs-min-height="15" data-gs-min-width="3">
+										<div class="grid-stack-item" data-gs-x="0" data-gs-y="15" data-gs-width="6"
+											 data-gs-height="15" data-gs-min-height="15" data-gs-min-width="6">
 											<div class="console-panel grid-stack-item-content">
 												<div class="console-panel-header">
 													<div class="cph-left">
-														<h5>Fuel Level</h5>
+														<h5>Current (C)</h5>
 													</div>
 													<div class="cph-right">
 														<ul class="top-header-btns">
@@ -260,62 +300,12 @@
 												</div>
 											</div>
 										</div>
-										<div class="grid-stack-item" data-gs-x="0" data-gs-y="16" data-gs-width="6"
+										<div class="grid-stack-item" data-gs-x="6" data-gs-y="30" data-gs-width="6"
 											 data-gs-height="15" data-gs-min-height="15" data-gs-min-width="6">
 											<div class="console-panel grid-stack-item-content">
 												<div class="console-panel-header">
 													<div class="cph-left">
-														<h5>Current (C)</h5>
-													</div>
-													<div class="cph-right">
-														<ul class="top-header-btns">
-															<li>
-																<a class="collapse-panel" href="#" title="Collapse/Uncollapse Panel"
-																   data-rel="tooltip"> <i class="icon dripicons-chevron-up"></i></a>
-															</li>
-															<li class="dropdown">
-																<a href="#" data-toggle="dropdown" title="Panel Options" data-rel="tooltip">
-																	<i class="icon dripicons-dots-3"></i>
-																</a>
-																<div class="dropdown-menu  dropdown-menu-right theme-media">
-																	<div class="dropdown-menu-header">
-																		<div class="dmh-inner">
-																			<h4>Panel Options</h4>
-																		</div>
-																	</div>
-																	<a class="dropdown-item cp" href="#" title="">
-																		<span class="color-fill-icon" style="background-color:#fff;"></span>
-																		Header Background Color
-																	</a>
-																	<a class="dropdown-item header-fontcolor" href="#" title="">
-																		<span class="color-fill-icon" style="background-color:#333"></span>
-																		Header Font Color Dark/Light
-																	</a>
-																</div>
-															</li>
-															<li>
-																<a class="removeWidget" href="#" title="Remove Panel" data-rel="tooltip">
-																	<i class="icon dripicons-cross"></i>
-																</a>
-															</li>
-														</ul>
-													</div>
-												</div><!-- Panel Header -->
-												<div class="console-panel-body align-center">
-
-													<div class="chart-container">
-														<div id="BCCCchartdiv"></div>
-													</div>
-
-												</div>
-											</div>
-										</div>
-										<div class="grid-stack-item" data-gs-x="6" data-gs-y="16" data-gs-width="6"
-											 data-gs-height="15" data-gs-min-height="15" data-gs-min-width="6">
-											<div class="console-panel grid-stack-item-content">
-												<div class="console-panel-header">
-													<div class="cph-left">
-														<h5>Frequency</h5>
+														<h5>Temperature</h5>
 													</div>
 													<div class="cph-right">
 														<ul class="top-header-btns">
@@ -361,6 +351,7 @@
 											</div>
 										</div>
 										
+										
 									</div>
 
 								</div>
@@ -405,20 +396,41 @@
 							<div class="card">
 								<div class="card-body">
 
-									<div class="table-container">
+									<div class="table-containers">
 										<table class="table table-striped console-table table-bordered table-hover mb-0"
-											   id="DGtables">
+											   id="Batterytables">
 											<thead class="sorticon-pos">
 												<tr>
-													<th>Sr No</th>
-													<th>Time</th>
-													<th>R volt</th>
-													<th>V volt</th>
-													<th>B volt</th>
-													<th>R current</th>
-													<th>Y Current</th>
-													<th>B Current</th>
-													<th>Frequency</th>
+													<th rowspan="2">SlNo</th>
+													<th rowspan="2">Site ID</th>
+													<th rowspan="2">Time</th>
+													<th rowspan="2">Pack ID</th>
+													<th rowspan="2">BMS Model</th>
+													<th rowspan="2">BMS Version</th>
+													<th rowspan="2">BMS Serial No</th>
+													<th rowspan="2">BMS Volt</th>
+													<th rowspan="2">BMS Current</th>
+													<th colspan="14">Battery Cell Voltage (V)</th>
+													<th colspan="3">Temperature (Cel.)</th>
+												</tr>
+												<tr>
+													<th>Cell 1</th>
+													<th>Cell 2</th>
+													<th>Cell 3</th>
+													<th>Cell 4</th>
+													<th>Cell 5</th>
+													<th>Cell 6</th>
+													<th>Cell 7</th>
+													<th>Cell 8</th>
+													<th>Cell 9</th>
+													<th>Cell 10</th>
+													<th>Cell 11</th>
+													<th>Cell 12</th>
+													<th>Cell Min</th>
+													<th>Cell Max</th>
+													<th>PCB</th>
+													<th>Ambient</th>
+													<th>Max</th>
 												</tr>
 											</thead>
 											<tbody></tbody>
@@ -434,16 +446,13 @@
 				</div>
 			</div>
 		</div>
-
-
 	</div><!-- Content Area -->
 
 	<aside class="more-opt-panel"></aside>
 </div><!-- Theme Content -->
-<script src="https://cdn.amcharts.com/lib/5/index.js"></script>
-<script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
-<script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
-<script src="/JsController/SiteGeneratorJs.js" asp-append-version="true"></script>
+<script src="/JsController/SiteBatteryJs.js" asp-append-version="true"></script>
+<!-- AM Charts Start -->
 <script src="https://www.amcharts.com/lib/4/core.js"></script>
 <script src="https://www.amcharts.com/lib/4/charts.js"></script>
 <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+<!-- AM Charts End -->

@@ -27,7 +27,15 @@
 	<link rel="stylesheet" type="text/css" href="~/css/dripicon.css" />
 	<link rel="stylesheet" type="text/css" href="~/css/style.css" />
 	<link rel="stylesheet" type="text/css" href="~/css/responsive.css" />
+	<style>
+		@@import url(https://fonts.googleapis.com/css?family=Titillium+Web:400,200,200italic,300,300italic,900,700italic,700,600italic,600,400italic);
 
+
+		#DR{
+			color: #fff;
+		}
+
+	</style>
 </head>
 
 <body class="theme-body">
@@ -62,12 +70,13 @@
 	<!-- DataTable End -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.sumoselect/3.0.2/jquery.sumoselect.min.js"></script>
 	<!-- Sumoselect -->
-	<script src="~/js/script.js"></script><!-- Common Scripts -->
+	<script src="/js/script.js"></script><!-- Common Scripts -->
+	@* <script src="/assets/js/Common.js" asp-append-version="true"></script> *@
 	<div class="theme-wrapper">
-		<header></header><!-- Header -->
+		<header style="background-color: rgb(12, 52, 61);"></header><!-- Header -->
 
 		<div class="theme-content">
-			<aside class="console-sidemenu active" id="sidemenu"></aside><!-- Console Sidemenu -->
+			<aside class="console-sidemenu active" id="sidemenu" style="background-color: rgb(12, 52, 61);"></aside><!-- Console Sidemenu -->
 			@RenderBody()
 			<aside class="more-opt-panel"></aside>
 		</div><!-- Theme Content -->

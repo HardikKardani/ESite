@@ -1,12 +1,15 @@
-<nav>
-      <div class="user logged-in">
-            <a class="login-user" href="#" title=""><img src="http://placehold.it/598x598/ff5c75/fff" alt="" /></a>
-            <div class="user-detail">
-                  <strong>Super Admin</strong>
-                  <i>Support@Admin.com</i>
-            </div>
-      </div>
-      <ul class="console-menu">
+<nav style="background-color: rgb(12, 52, 61);">
+    <div class="user logged-in">
+        <a class="login-user" data-toggle="dropdown" href="#" title=""><img src="http://placehold.it/598x598/ff5c75/fff" alt="" /></a>
+        <div class="user-detail">
+            <strong>Super Admin</strong>
+            <i>Support@Admin.com</i>
+        </div>
+        <div class="dropdown-menu  dropdown-menu-right">
+            <a class="dropdown-item" href="/Login/Logout">  <ion-icon ios="ios-log-out" md="md-log-out"></ion-icon> Logout</a>
+        </div>
+    </div>
+      <ul class="console-menu" style="background-color: rgb(12, 52, 61);">
           <li>
               <a href="/" data-title="Dashboard" class="get_pn">
                   <i class="icon dripicons-meter"></i>
@@ -14,7 +17,12 @@
               </a>
           <li>
               <a href="#" title=""> <i class="icon dripicons-list"></i> <span>Masters</span></a>
-              <ul>
+              <ul style="background-color: rgb(12, 52, 61);">
+                  <li>
+                      <a data-title="Site Master" class="get_pn" href="/Site/SiteMasterList" title="">
+                          <i class="icon dripicons-meter"></i> <span>Site</span>
+                      </a>
+                  </li>
                   <li>
                       <a data-title="Company" class="get_pn" href="/Company/CompanyIndex" title="">
                           <i class="fa fa-building"></i> <span>Company</span>
@@ -44,7 +52,7 @@
           </li>
           <li>
               <a href="#" title=""> <i class="fa fa-building"></i> <span>Site</span></a>
-              <ul>
+              <ul style="background-color: rgb(12, 52, 61);">
                   <li>
                       <a data-title="Site Dashboard" class="get_pn" href="/Site/Dashboard" title="">
                           <i class="icon dripicons-meter"></i> <span>Dashboard</span>
@@ -57,7 +65,7 @@
                   </li>
                   <li>
                       <a href="#" title=""> <i class="icon dripicons-list"></i> <span>Energy</span></a>
-                      <ul>
+                      <ul style="background-color: rgb(12, 52, 61);">
                           <li>
                               <a data-title="Grid" class="get_pn" href="/Site/SystemDetails" title="">
                                   <i class="fa fa-cog"></i> <span> System Details</span>
@@ -71,6 +79,11 @@
                           <li>
                               <a data-title="Site Battery" class="get_pn" href="/Site/Battery" title="">
                                   <i class="fa fa-battery-full"></i> <span>Battery</span>
+                              </a>
+                          </li>
+                          <li>
+                              <a data-title="Site Battery" class="get_pn" href="/Site/PortableBattery" title="">
+                                  <i class="fa fa-charging-station"></i> <span>Portable Battery</span>
                               </a>
                           </li>
 
@@ -93,7 +106,7 @@
                   </li>
                   <li>
                       <a href="#" title=""> <i class="icon dripicons-gear"></i> <span>Input</span></a>
-                      <ul>
+                      <ul style="background-color: rgb(12, 52, 61);">
                           <li>
                               <a data-title="Load" class="get_pn" href="/Input/Load" title="">
                                   <i class="fa fa-life-ring"></i> <span>Load</span>
@@ -132,7 +145,7 @@
                       Configuration
                   </span>
               </a>
-              <ul>
+              <ul style="background-color: rgb(12, 52, 61);">
                   <li>
                       <a data-title="Setting" class="get_pn" href="Setting.html" title="">
                           <i class="icon dripicons-meter"></i> <span>Setting</span>
@@ -200,7 +213,7 @@
                       Site Log
                   </span>
               </a>
-              <ul>
+              <ul style="background-color: rgb(12, 52, 61);">
                   <li>
                       <a data-title="Energy Logs" class="get_pn" href="EnergyLogs.html" title="">
                           <i class="fa fa-bolt"></i> <span>Energy Logs</span>
@@ -226,7 +239,7 @@
               </a>
             </li>
           <li>
-              <a href="SiteReport.html" data-title="Report" class="get_pn">
+              <a href="/site/report" data-title="Report" class="get_pn">
                   <i class="icon dripicons-graph-line"></i>
                   <span>Report</span>
               </a>

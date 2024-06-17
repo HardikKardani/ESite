@@ -1,8 +1,10 @@
-﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+﻿
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
 	Layout = "~/Views/Shared/_Layout.cshtml";
 	ViewData["Title"] = "Home";
-}
+
+}<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
 <!-- AM Charts Start -->
 <script src="https://www.amcharts.com/lib/4/core.js"></script>
 <script src="https://www.amcharts.com/lib/4/charts.js"></script>
@@ -18,7 +20,24 @@
 	tr {
 		cursor: pointer;
 	}
+	.small-box {
+	border-radius: .25rem;
+	box-shadow: 0 0 1px rgba(0, 0, 0, .125), 0 1px 3px rgba(0, 0, 0, .2);
+	display: block;
+	margin-bottom: 20px;
+	position: relative;
+		margin: 10px;
+	
 
+}
+.small-box>.small-box-footer {
+	background-color: rgba(0, 0, 0, .1);
+	display: block;
+	position: relative;
+	text-align: center;
+	text-decoration: none;
+	z-index: 10;
+}
 	
 </style>
 <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
@@ -30,25 +49,21 @@
 <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/colvis/1.1.2/css/dataTables.colVis.css" />
 
 <div class="content-area">
 
 	<div class="grid-stack gs-area">
 		<div class="grid-stack-item" data-gs-x="0" data-gs-y="0" data-gs-width="2" data-gs-height="4"
-			 data-gs-min-height="4" data-gs-min-width="3">
-			<div class="console-panel grid-stack-item-content console-no-header"
-				 style="background-color: #fdcf6e;">
-				<div class="console-panel-body align-center">
-
-					<div class="">
+			 data-gs-min-height="4" data-gs-min-width="3" style="padding-bottom:20px;!important">
+					<div class="small-box" style="background-color: #fdcf6e;">
+			<div class="console-panel grid-stack-item-content console-no-header" style="background-color: #fdcf6e;">
+				 <div class="console-panel-body align-center" style="padding:10px!important;">
 						<ul class="top-header-btns">
-
 							<li>
-
-								<img src="/img/automation.png" style="height:50px;width:50px"><br />
-								
-								</li>
-
+							<i class="fas fa-sitemap" style="font-size: 3em;"></i>
+							</li>
+							
 							<li>
 								<span id="IDSite"></span>
 								<h6 class="mb-0">ID Site </h6>
@@ -62,53 +77,57 @@
 								<h6 class="mb-0">ID/OD Site</h6>
 							</li>
 						</ul>
-					</div>
 				</div>
+				</div>
+						<a href="#" class="small-box-footer moreInfo" data-id="2">More info <i class="fas fa-arrow-circle-right"></i></a>
 			</div><!-- Console Panel -->
 		</div>
 
 		<div class="grid-stack-item" data-gs-x="3" data-gs-y="0" data-gs-width="2" data-gs-height="4"
-			 data-gs-min-height="4" data-gs-min-width="3">
-			<div class="console-panel grid-stack-item-content console-no-header"
-				 style="background-color: #81df97;">
-				<div class="console-panel-body align-center">
+			 data-gs-min-height="4" data-gs-min-width="3" style="padding-bottom:20px;!important">
+			<div class="small-box" style="background-color: #81df97;">
+				<div class="console-panel grid-stack-item-content console-no-header" style="background-color: #81df97;">
+					<div class="console-panel-body align-center" style="padding:10px!important;">
 					<ul class="top-header-btns">
-						
-						
-						<li> <img src="/img/Solar1.png" style="height:50px;width:50px"></li>
+						<li> <i class="far fa-sun" style="font-size: 3em;"></i></li>
 						<li>
 							<h4 id="SolarHybridSite">5 sites</h4>
 							<h6>Solar Hybrid Site</h6>
 						</li>
 					</ul>
 				</div>
+			</div>
+				<a href="#" class="small-box-footer moreInfo" data-id="1">More info <i class="fas fa-arrow-circle-right"></i></a>
 			</div><!-- Console Panel -->
 		</div>
 
 
 		<div class="grid-stack-item" data-gs-x="6" data-gs-y="0" data-gs-width="3" data-gs-height="4"
-			 data-gs-min-height="4" data-gs-min-width="3">
-			<div class="console-panel grid-stack-item-content console-no-header"
-				 style="background-color: #90aff1;">
-				<div class="console-panel-body align-center">
+			 data-gs-min-height="4" data-gs-min-width="3" style="padding-bottom:20px;!important">
+			<div class="small-box" style="background-color: #90aff1;">
+				<div class="console-panel grid-stack-item-content console-no-header" style="background-color: #90aff1;">
+					<div class="console-panel-body align-center" style="padding:10px!important;">
+			
 					<ul class="top-header-btns">
-						<li> <i class="fas fa-fire-alt" style="font-size: 3em;"></i></li>
+						<li> <i class="fas fa-solar-panel" style="font-size: 3em;"></i></li>
 						<li>
 							<h4 id="FullSolar">10 sites</h4>
 							<h6>Full Solar</h6>
 						</li>
 					</ul>
 				</div>
-			</div><!-- Console Panel -->
+			</div>
+				<a href="#" class="small-box-footer moreInfo" data-id="2">More info <i class="fas fa-arrow-circle-right"></i></a>
+			</div>
 		</div>
 
 		<div class="grid-stack-item" data-gs-x="9" data-gs-y="0" data-gs-width="3" data-gs-height="4"
-			 data-gs-min-height="4" data-gs-min-width="3">
-			<div class="console-panel grid-stack-item-content console-no-header"
-				 style="background-color: #0ebfffcc;">
-				<div class="console-panel-body align-center">
+			 data-gs-min-height="4" data-gs-min-width="3" style="padding-bottom:20px;!important">
+			<div class="small-box" style="background-color: #0ebfffcc;">
+				<div class="console-panel grid-stack-item-content console-no-header" style="background-color: #0ebfffcc;">
+					<div class="console-panel-body align-center" style="padding:10px!important;">
 					<ul class="top-header-btns">
-						<li> <img src="/img/dg.png" style="height:50px;width:50px"></li>
+						<li> <i class="fas fa-car-battery" style="font-size: 3em;"></i></li>
 						<li>
 							<h4 id="GDC">0 sites</h4>
 							<h6>CDC (Genset + Batt)</h6>
@@ -116,13 +135,15 @@
 					</ul>
 				</div>
 			</div><!-- Console Panel -->
+			<a href="#" class="small-box-footer moreInfo" data-id="1">More info <i class="fas fa-arrow-circle-right"></i></a>
+			</div>
 		</div>
 
 
 		<div class="grid-stack-item" data-gs-x="0" data-gs-y="7" data-gs-width="3" data-gs-height="12"
 			 data-gs-min-height="10" data-gs-min-width="3">
 			<div class="console-panel grid-stack-item-content">
-				<div class="console-panel-header">
+				<div class="console-panel-header light" style="background-color: rgb(12, 52, 61);">
 					<div class="cph-left">
 						<h5>Site Status</h5>
 					</div>
@@ -162,7 +183,7 @@
 				</div><!-- Panel Header -->
 				<div class="console-panel-body ">
 					<div class="chart-container">
-						<canvas id="donutchart1" width="100" height="95"></canvas>
+						<canvas id="donutchart1" width="100" height="65"></canvas>
 					</div>
 				</div>
 			</div><!-- Console Panel -->
@@ -170,7 +191,7 @@
 		<div class="grid-stack-item" data-gs-x="3" data-gs-y="7" data-gs-width="3" data-gs-height="12"
 			 data-gs-min-height="10" data-gs-min-width="3">
 			<div class="console-panel grid-stack-item-content">
-				<div class="console-panel-header">
+				<div class="console-panel-header light" style="background-color: rgb(12, 52, 61);">
 					<div class="cph-left">
 						<h5>Site Running On </h5>
 					</div>
@@ -219,7 +240,7 @@
 		<div class="grid-stack-item" data-gs-x="6" data-gs-y="7" data-gs-width="3" data-gs-height="12"
 			 data-gs-min-height="10" data-gs-min-width="3">
 			<div class="console-panel grid-stack-item-content">
-				<div class="console-panel-header">
+				<div class="console-panel-header light" style="background-color: rgb(12, 52, 61);">
 					<div class="cph-left">
 						<h5>Site Running On </h5>
 					</div>
@@ -288,7 +309,7 @@
 		<div class="grid-stack-item" data-gs-x="9" data-gs-y="7" data-gs-width="3" data-gs-height="12"
 			 data-gs-min-height="10" data-gs-min-width="3">
 			<div class="console-panel grid-stack-item-content">
-				<div class="console-panel-header">
+				<div class="console-panel-header light" style="background-color: rgb(12, 52, 61);">
 					<div class="cph-left">
 						<h5>Green Status</h5>
 					</div>
@@ -372,12 +393,12 @@
 		<div class="grid-stack-item" data-gs-x="0" data-gs-y="29" data-gs-width="6" data-gs-height="17"
 			 data-gs-min-height="10" data-gs-min-width="3">
 			<div class="console-panel grid-stack-item-content">
-				<div class="console-panel-header">
+				<div class="console-panel-header light" style="background-color: rgb(12, 52, 61);">
 					<div class="cph-left">
 						<h5>Sites</h5>
 					</div>
 					<div class="cph-right">
-						<div class="get_dt_button"></div>
+						<div class="get_dt_search"></div>
 						<ul class="top-header-btns">
 							<li>
 								<a class="switch-full" href="#" title="Expand Panel To Full Screen"
@@ -421,13 +442,13 @@
 							   id="ticketstable">
 							<thead class="sorticon-pos">
 								<tr class="filtersRow">
-									<th class="filterhead"></th>
-									<th class="filterhead"></th>
-									<th class="filterhead"></th>
+									<th class="filterhead filterheadsite"></th>
+									<th class="filterhead filterheadsite"></th>
+									<th class="filterhead filterheadsite"></th>
 								</tr>
 								<tr>
 									<th>Site Name</th>
-									<th>Cluster</th>
+									<th>Region</th>
 									<th>Site In charge</th>
 								</tr>
 							</thead>
@@ -443,7 +464,7 @@
 		<div class="grid-stack-item" data-gs-x="6" data-gs-y="29" data-gs-width="6" data-gs-height="17"
 			 data-gs-min-height="10" data-gs-min-width="3">
 			<div class="console-panel grid-stack-item-content">
-				<div class="console-panel-header">
+				<div class="console-panel-header light" style="background-color: rgb(12, 52, 61);">
 					<div class="cph-left">
 						<h5>Maps View</h5>
 					</div>
@@ -496,7 +517,7 @@
 		<div class="grid-stack-item" data-gs-x="0" data-gs-y="46" data-gs-width="12" data-gs-height="12"
 			 data-gs-min-height="10" data-gs-min-width="12">
 			<div class="console-panel grid-stack-item-content">
-				<div class="console-panel-header">
+				<div class="console-panel-header light" style="background-color: rgb(12, 52, 61);">
 					<div class="cph-left">
 						<h5>Live Site Status</h5>
 					</div>
@@ -593,6 +614,102 @@
 	</div>
 
 </div><!-- Content Area -->
+
+<div class="modal fade bd-example-modal-lg siteDirection" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Site Details</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-4"> <label>Site ID</label> :<span class="text-warning">01</span></div>
+					<div class="col-6"> <label>Site Name</label> :<span class="text-warning">Abc</span></div>
+					<div class="col-12"> <label>Site Type</label> :<span class="text-warning">Hybrid</span></div>
+					<div class="col-6"> <label>Lat</label> :<span class="text-warning">11.023</span></div>
+					<div class="col-6"> <label>Lang</label> :<span class="text-warning">89.054</span></div>
+					<div class="col-6"> <label>Cluster</label> :<span class="text-warning">Leeds</span></div>
+					<div class="col-6"> <label>State</label> :<span class="text-warning">U k</span></div>
+					<div class="col-12"> <label>Site In Charge</label> :<span class="text-warning">Jhon</span></div>
+					 <div class="col-lg-2 col-md-12">
+						<a class="" href="/Site/Map" title=""><i class="icon dripicons-location"></i>Site Direction</a>
+
+								</div>
+								<div class="col-lg-3 col-md-12">
+									<a class="" href="/Site/LiveData" title=""><i class="fa fa-building"></i>View Site Data</a>
+								</div>
+								</div>
+					<div class="row p-2" id="Camera">
+						<div class="col-12"><h6>Sites Images</h6></div>
+						<div class="col-6">
+							<img src="/images/Ex.jpg" alt="Image 1">
+						</div>
+						<div class="col-6">
+							<img src="/images/Ex.jpg" alt="Image 1">
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+<div id="myModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog modal-xl">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Site Details</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="table-container">
+					<div class="get_dt_search"></div>
+						<table class="table table-striped console-table table-bordered table-hover mb-0"
+							  id="modalTable">
+								<thead class="sorticon-pos">
+								<tr class="filtersRow">
+				<th class="filterhead filterheads"></th>
+				<th class="filterhead filterheads"></th>
+				<th class="filterhead filterheads"></th>
+				<th class="filterhead filterheads"></th>
+				<th class="filterhead filterheads"></th>
+				<th class="filterhead filterheads"></th>
+				<th class="filterhead filterheads"></th>
+				<th class="filterhead filterheads"></th>
+				<th class="filterhead filterheads"></th>
+</tr>
+								<tr>
+							<th>Sl No</th>
+							<th>Site Type</th>
+							<th>Site ID</th>
+							<th>Site Name</th>
+							<th>Site Region</th>
+							<th>Site State</th>
+							<th>Site InCharge</th>
+							<th>Contact No</th>
+							<th>Type of Cooling</th>
+						</tr>
+							</thead>
+							<tbody></tbody>
+						</table>
+						
+					
+					</div>
+					<div class="dt-bottom-container"></div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+
 <!--Site Details Modal -->
 <div class="modal fade bd-example-modal-lg siteDirection" tabindex="-1" role="dialog" aria-hidden="true">
 	<div class="modal-dialog modal-lg">
@@ -647,9 +764,109 @@
 <script src="https://cdn.amcharts.com/lib/5/geodata/germanyLow.js"></script>
 <script src="https://cdn.amcharts.com/lib/5/fonts/notosans-sc.js"></script>
 <script src="https://cdn.amcharts.com/lib/5/percent.js"></script>
+<script src="https://cdn.datatables.net/colvis/1.1.2/js/dataTables.colVis.min.js"></script>
 
 <script>
+	$(document).ready(function(){
+	var modal = $('#myModal');
+	var btn = $('.moreInfo');
 
+	// Function to initialize DataTable
+	function initializeDataTable() {
+		$('#modalTable').DataTable({
+			"ajax": {
+				"url": '/Site/GetSiteList',
+				"dataSrc": function (json) {
+					 var data = $.parseJSON(json.response);
+					// Manipulate the JSON response data if needed
+					return data; // Assuming your data is nested under a 'response' key
+				}
+			},
+			 "dom": '<"top"<"dt-filters"f>>rFt<"dt-bottom"<"dt-information"li><"dt-pagination"p>>',
+			"columns": [
+				{ "data": "slNo" },
+				{ "data": "siteType" },
+				{ "data": "siteId" },
+				{ "data": "siteName" },
+				{ "data": "siteRegion" },
+				{ "data": "siteState" },
+				{ "data": "siteInCharge" },
+				{ "data": "contactNo" },
+				{ "data": "typeOfCooling" },
+				
+				// Add more column definitions as needed
+			],
+			"columnDefs": [{
+				"targets": 'no-sort',
+				"orderable": false,
+			}],
+			"responsive": true,
+			"colReorder": {
+				realtime: false
+			},
+			"stateSave": false,
+			
+			initComplete: function () {
+				// Move Search To Panel Header
+				debugger;
+				let _container = $(this).parents('#myModal').find('.get_dt_search')
+				let _bottom_container = $(this).parents('#myModal').find('.dt-bottom-container')
+
+				$("#modalTable_wrapper .dataTables_filter input").appendTo(_container);
+				$("#modalTable_wrapper  .dt-filters").css("display", "none");
+				$(_container).find("input").attr('placeholder', 'Search From Table');
+				$(_container).addClass("mb-2 text-right")
+				$("#modalTable_wrapper  .dt-bottom").appendTo(_bottom_container);
+				
+				dashboardFilters();
+			}
+		});
+	}
+
+	// When the user clicks the button, open the modal and initialize DataTable
+	btn.on('click', function() {
+		var id = $(this).data('id');
+		// Fetch data or do other operations based on the ID if needed
+		$('#myModal').modal('show');
+		
+
+		if ($.fn.DataTable.isDataTable('#modalTable')) {
+			$('#modalTable').DataTable().clear().destroy();
+		}
+
+		initializeDataTable();
+	});
+
+	// When the user clicks on <span> (x), close the modal
+	
+
+	// When the user clicks anywhere outside of the modal, close it
+	
+
+	// Function to handle dashboard filters
+	
+});
+function dashboardFilters() {
+	
+		$(".filterheads").each(function (i) {
+			var select = $('<select multiple class="multiselect"></select>')
+				.appendTo($(this).empty())
+				.on('change', function () {
+					var term = $(this).val() || [];
+					regExSearch = '^(' + term.join('|') + ')';
+					$('#modalTable').DataTable().column(i).search(regExSearch, true, false).draw();
+				});
+			$('#modalTable').DataTable().column(i).data().unique().sort().each(function (d, j) {
+				d = `<span>` + d + `</span>`;
+				d = $.parseHTML(d);
+				d = $(d).text();
+				if (!$(select).find("option:contains('" + d + "')").length) {
+					select.append('<option value="' + d + '">' + d + '</option>')
+				}
+			});
+		});
+		$(".multiselect").SumoSelect({ search: true, searchText: 'Enter here.' });
+	}
 	$(document).ready(function () {
 
 		// Initialize the map
@@ -716,7 +933,6 @@
 				renderer: xRenderer,
 				tooltip: am5.Tooltip.new(root, {})
 			}));
-
 			xRenderer.grid.template.setAll({
 				location: 1
 			});
@@ -741,7 +957,8 @@
 					valueYField: fieldName,
 					categoryXField: "year"
 				}));
-
+					
+				
 				series.columns.template.setAll({
 					tooltipText: "{name}, {valueYField}: {valueY}%",
 					tooltipY: am5.percent(10)

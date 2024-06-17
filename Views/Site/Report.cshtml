@@ -1,0 +1,384 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "SiteDashboard";
+}
+
+
+<div class="content-area" id="content-area">
+
+    <div class="card">
+
+        <div class="console-panel console-no-header">
+            <div class="card-body align-center">
+                <div class="cph-left">
+                    <h5>KPI Report Generator</h5><br />
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12">
+                        <div class="row mb-3">
+                            <div class="col-lg-4 col-md-12">
+                                <div class="form-group">
+                                    <label>From Date</label>
+                                <div class="input-group">
+                                    <div class="input-group-append">
+                                        <div class="input-group-text"><i class="far fa-calendar"></i></div>
+                                    </div>
+                                        <input type="text" class="form-control datepicker-here"
+                                           data-language='en' data-date-format="MM dd,yyyy" placeholder="From">
+                                </div>
+                            </div>
+                            </div>
+                            <div class="col-lg-4 col-md-12">
+                                <div class="form-group">
+                                    <label>To Date</label>
+                                    <div class="input-group">
+                                        <div class="input-group-append">
+                                            <div class="input-group-text"><i class="far fa-calendar"></i></div>
+                                        </div>
+                                        <input type="text" class="form-control datepicker-here"
+                                               data-language='en' data-date-format="MM dd,yyyy" placeholder="To">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4"></div>
+                            <div class="col-lg-3 col-md-12">
+                                <div class="form-group">
+                                    <label>State</label>
+                                    <select class="select2 form-control" multiple="multiple">
+                                        <option value="Site1">State 1</option>
+                                        <option value="Site1">State 2</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-12">
+                                <div class="form-group">
+                                    <label>Cluster</label>
+                                    <select class="select2 form-control" multiple="multiple">
+                                        <option value="Site1">All</option>
+                                        <option value="Site1">option 1</option>
+                                    </select>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-3 col-md-12">
+                                <div class="form-group">
+                                    <label>Site</label>
+                                    <select class="select2 form-control" multiple="multiple">
+                                        <option value="Site1">Site 1</option>
+                                        <option value="Site1">Site 2</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-12">
+                                <div class="form-group">
+                                    <label>Site Incharge</label>
+                                    <select class="select2 form-control" multiple="multiple">
+                                        <option value="Site1">Manager</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="cph-left">
+                    <h5>Report Section</h5><br />
+                </div>
+                <div class="mytab theme1">
+                <ul class="nav nav-tabs">
+                    <li>
+                        <a class="nav-link active" data-toggle="tab" data-target="#predefiend">
+                            PreDefiend
+                        </a>
+                    </li>
+                    <li> <a class="nav-link" data-toggle="tab" data-target="#Custom">Custom</a> </li>
+
+                </ul><!-- Selectors -->
+                <div class="tab-content">
+                    <div class="tab-pane  show active" id="predefiend">
+                        <div class="row">
+                            <div class="col-lg-8 col-md-12">
+                                <div class="form-group">
+                                    <label>Report Name</label>
+                                    <select class="select2 form-control">
+                                        <option value="Site1">Report 1</option>
+                                        <option value="Site1">Report 1</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="Custom">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-12">
+                                <div class="form-group">
+                                    <label>Custom Parameter Selection</label>
+                                    <select class="select2 form-control">
+                                        <option value="Site1">Report 1</option>
+                                        <option value="Site1">Report 1</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12">
+                                <div class="form-group">
+                                    <label>ParaMeter List</label>
+                                    <select class="select2 form-control">
+                                        <option value="Site1">Report 1</option>
+                                        <option value="Site1">Report 1</option>
+                                    </select>
+                                </div>
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <br><br>
+                        <div class="col-lg-6 col-md-12">
+                            <div class="console-checkbox-list">
+                                <label class="con-check">
+                                    <input type="checkbox" id="nextService"> Date Wise Summary
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <div class="console-checkbox-list">
+                                <label class="con-check">
+                                    <input type="checkbox" id="nextService"> Raw Data
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <br><br>
+                    <div class="col-6">
+                        <button class="btn btn-sm btn-info">Show</button>
+                        <button class="btn btn-sm btn-secondary">Reset</button>
+                    </div>
+                    <div class="col-6 text-right">
+                        <button class="btn btn-sm btn-success">Send</button>
+                        <button class="btn btn-sm btn-accent">Download</button>
+                    </div>
+                </div>
+                    <br><br>
+                <div class="row">
+                    
+                    <div class="col-lg-8 col-md-12">
+                            <div class="form-group">
+                                <label>Report Name</label>
+                                <input type="text" class="form-control" placeholder="Report Name">
+                            </div>
+                    </div>
+                        <div class="col-lg-2 col-md-12"></div>
+                        <div class="col-2" style="display: flex; justify-content: flex-end">
+                         <br><br>
+                            <div class="console-checkbox-list">
+                                <label class="con-check">
+                                    <input type="checkbox" id="nextService">Exclude
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                     </div>
+                </div>
+                    <div class="row cx">
+                        <div class="col-lg-12 col-md-12">
+                            <div class="get_dt_search text-right"></div>
+                            <div class="table-containers">
+                                <table class="table table-striped datatable console-table " id="simpletable">
+                                    <thead class="sorticon-pos">
+                                        <tr>
+                                            <th>SlNo</th>
+                                            <th>State</th>
+                                            <th>Cluster</th>
+                                            <th>Site Name</th>
+                                            <th>Date Time</th>
+                                            <th colspan="6">Dynamic Columns</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                            
+                                <div class="dt-bottom-container"></div>
+                            </div>
+                            <br>
+                        <div class="col-1"><Label>Summary</Label></div>
+                        <div class="col-4">
+                            <div class="console-checkbox-list">
+                                <label class="con-check">
+                                    <input type="checkbox" id="nextService"> Total Nos
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <div class="console-checkbox-list">
+                                <label class="con-check">
+                                    <input type="checkbox" id="nextService"> Sum
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <div class="console-checkbox-list">
+                                <label class="con-check">
+                                    <input type="checkbox" id="nextService"> Avg
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <div class="console-checkbox-list">
+                                <label class="con-check">
+                                    <input type="checkbox" id="nextService"> Max
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <div class="console-checkbox-list">
+                                <label class="con-check">
+                                    <input type="checkbox" id="nextService"> Min
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                        </div>
+                     </div>
+
+                
+                <br>
+                <div class="cph-left">
+                    <h5>Graphical View</h5><br />
+                </div>
+                    <div class="row">
+
+                        <div class="col-lg-10 col-md-12">
+                        </div>
+                        
+                    </div>
+
+                <div class="row">
+                    <div class="col-lg-3 col-md-12">
+                        <div class="form-group">
+                            <label>Chart Type</label>
+                                <select class="select2 form-control" id="chartTypeSelect" onchange="changeChartType()">
+                                    <option value="column">Column Chart</option>
+                                    <option value="bar">Bar Chart</option>
+                                    <option value="line">Line Chart</option>
+                            </select>
+                        </div>
+                    </div>
+                        <div class="col-lg-7 col-md-12 "></div>
+                        <div class="col-2" style="display: flex; justify-content: flex-end">
+                            <div class="form-group">
+                            <button class="btn btn-sm btn-accent mb-2">Refresh</button>
+                                <div class="console-checkbox-list">
+                                    <label class="con-check">
+                                        <input type="checkbox" id="nextService">Exclude
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        @* <div class="col-2" style="display: flex; justify-content: flex-end">
+                        <div class="console-checkbox-list">
+                            <label class="con-check">
+                                <input type="checkbox" id="nextService">Exclude
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        </div> *@
+                </div>
+                    <div class="chart-container">
+                        <div id="chartdiv"></div>
+                    </div>
+                </div>
+            </div>
+               
+        </div><!-- Console Panel -->
+    </div>
+
+</div>
+<script src="/JsController/ReportJs.js" asp-append-version="true"></script>
+
+<script src="https://www.amcharts.com/lib/4/core.js"></script>
+<script src="https://www.amcharts.com/lib/4/charts.js"></script>
+<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+<script>
+   
+    // Create chart instance
+    var chart = am4core.create("chartdiv", am4charts.XYChart);
+
+    // Set data
+    chart.data = [{
+        "category": "Category 1",
+        "value": 10
+    }, {
+        "category": "Category 2",
+        "value": 20
+    }, {
+        "category": "Category 3",
+        "value": 15
+    }];
+
+    // Create axes
+    var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+    categoryAxis.dataFields.category = "category";
+
+    var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+
+    // Create series
+    var series = chart.series.push(new am4charts.ColumnSeries());
+    series.dataFields.valueY = "value";
+    series.dataFields.categoryX = "category";
+
+    // Function to change chart type
+    function changeChartType() {
+        debugger;
+        var chartType = document.getElementById("chartTypeSelect").value;
+        var chart = am4core.create("chartdiv", am4charts.XYChart);
+        chart.data = [{
+            "category": "Category 1",
+            "value": 10
+        }, {
+            "category": "Category 2",
+            "value": 20
+        }, {
+            "category": "Category 3",
+            "value": 15
+        }];
+        // Set axes and series based on chart type (you might need to customize this part based on your specific chart types)
+        if (chartType === "line") {
+            var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+            categoryAxis.dataFields.category = "category";
+            var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+            var series = chart.series.push(new am4charts.LineSeries());
+            series.dataFields.valueY = "value";
+            series.dataFields.categoryX = "category";
+        } else if (chartType === "bar") {
+            var categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis());
+            categoryAxis.dataFields.category = "category";
+            var valueAxis = chart.xAxes.push(new am4charts.ValueAxis());
+            var series = chart.series.push(new am4charts.ColumnSeries());
+            series.dataFields.valueX = "value";
+            series.dataFields.categoryY = "category";
+        }else {
+            var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+            categoryAxis.dataFields.category = "category";
+            var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+            var series = chart.series.push(new am4charts.ColumnSeries());
+            series.dataFields.valueY = "value";
+            series.dataFields.categoryX = "category";
+        }
+    }
+</script>
+<script>
+
+    $(document).ready(function () {
+        $('#pdfDownload').click(function () {
+            var pdf = new jsPDF();
+            var options = {
+                background: 'white',
+                scale: 3
+            };
+
+            pdf.html($('#content-area')[0], options, function () {
+                pdf.save('html-to-pdf.pdf');
+            });
+        });
+       
+    });
+</script>

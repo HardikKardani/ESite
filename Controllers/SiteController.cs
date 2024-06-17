@@ -63,7 +63,51 @@ namespace Esite.Controllers
         {
             return View();
         }
+        public IActionResult Report()
+        {
+            return View();
+        }
+		public IActionResult SiteMaster()
+		{
+			return View();
+		}
+        public IActionResult PortableBattery()
+        {
+            return View();
+        }
+        public IActionResult SiteMasterList()
+        {
+            return View();
+        }
         [HttpGet]
+        public async Task<IActionResult> GetList()
+        {
+            ResponseViewModel responseViewModel = new ResponseViewModel();
+            try
+            {
+                responseViewModel = await _uow.siteService.GetList();
+            }
+            catch (Exception ex)
+            {
+                responseViewModel.Message = DataComman.GetString(ex);
+            }
+            return Json(responseViewModel);
+        }
+        [HttpGet]
+		public IActionResult GetSiteList()
+		{
+			ResponseViewModel responseViewModel = new ResponseViewModel();
+			try
+			{
+				responseViewModel = _uow.siteService.GetSiteList();
+			}
+			catch (Exception ex)
+			{
+				responseViewModel.Message = DataComman.GetString(ex);
+			}
+			return Json(responseViewModel);
+		}
+		[HttpGet]
         public IActionResult GetCardDataList()
         {
             ResponseViewModel responseViewModel = new ResponseViewModel();
