@@ -20,16 +20,23 @@
 	tr {
 		cursor: pointer;
 	}
-	.small-box {
-	border-radius: .25rem;
-	box-shadow: 0 0 1px rgba(0, 0, 0, .125), 0 1px 3px rgba(0, 0, 0, .2);
-	display: block;
-	margin-bottom: 20px;
-	position: relative;
-		margin: 10px;
-	
 
-}
+	.small-box {
+		background-color: #f4f4f4;
+		border: 1px solid #ccc;
+		border-radius: .25rem;
+		position: relative;
+		box-shadow: 0 0 1px rgba(0, 0, 0, .125), 0 1px 3px rgba(0, 0, 0, .2);
+		/* padding: 20px; */
+		
+		flex: 1 1 18%; /* Allow flexibility and equal width */
+		box-sizing: border-box;
+		display: block;
+		
+		margin-bottom: 20px;
+		margin: 10px;
+	}
+	
 .small-box>.small-box-footer {
 	background-color: rgba(0, 0, 0, .1);
 	display: block;
@@ -37,6 +44,32 @@
 	text-align: center;
 	text-decoration: none;
 	z-index: 10;
+		}
+
+	.card-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 0px;
+    box-sizing: border-box;
+}
+
+	
+
+@@media (max-width: 768px) {
+    .card-row {
+        flex-wrap: wrap;
+    }
+
+		.small-box {
+        flex: 1 1 48%; /* Two cards per row on smaller screens */
+    }
+}
+
+@@media (max-width: 480px) {
+		.small-box {
+        flex: 1 1 100%; /* One card per row on very small screens */
+    }
 }
 	
 </style>
@@ -52,7 +85,79 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/colvis/1.1.2/css/dataTables.colVis.css" />
 
 <div class="content-area">
+	<div class="card-row">
+		
+			<div class="small-box" style="background-color: #fdcf6e;">
+			<ul class="top-header-btns">
+				<li>
+					<i class="fas fa-sitemap" style="font-size: 3em;"></i>
+				</li>
 
+				<li>
+					<span id="IDSite"></span>
+					<h6 class="mb-0">ID Site </h6>
+				</li>
+				<li>
+					<span id="ODSite">30</span>
+					<h6 class="mb-0">OD Site</h6>
+				</li>
+				<li>
+					<span id="IDODSite">60</span>
+					<h6 class="mb-0">ID/OD Site</h6>
+				</li>
+			</ul>
+			<a href="#" class="small-box-footer moreInfo" data-id="2">More info <i class="fas fa-arrow-circle-right"></i></a>
+			</div>
+		
+		
+			<div class="small-box" style="background-color: #81df97;">
+			<ul class="top-header-btns">
+				<li> <i class="far fa-sun" style="font-size: 3em;"></i></li>
+				<li>
+					<h4 id="SolarHybridSite">5 sites</h4>
+					<h6>Solar Hybrid Site</h6>
+				</li>
+			</ul>
+			<a href="#" class="small-box-footer moreInfo" data-id="2">More info <i class="fas fa-arrow-circle-right"></i></a>
+			</div>
+		
+		
+			<div class="small-box" style="background-color: #90aff1;">
+			<ul class="top-header-btns">
+				<li> <i class="fas fa-solar-panel" style="font-size: 3em;"></i></li>
+				<li>
+					<h4 id="FullSolar">10 sites</h4>
+					<h6>Full Solar</h6>
+				</li>
+			</ul>
+			<a href="#" class="small-box-footer moreInfo" data-id="2">More info <i class="fas fa-arrow-circle-right"></i></a>
+			</div>
+		
+		
+			<div class="small-box" style="background-color: #0ebfffcc;">
+			<ul class="top-header-btns">
+				<li> <i class="fas fa-car-battery" style="font-size: 3em;"></i></li>
+				<li>
+					<h4 id="GDC">0 sites</h4>
+					<h6>CDC (Genset + Batt)</h6>
+				</li>
+			</ul>
+			<a href="#" class="small-box-footer moreInfo" data-id="1">More info <i class="fas fa-arrow-circle-right"></i></a>
+			</div>
+		
+		
+			<div class="small-box" style="background-color: #0ef7ffcc">
+			<ul class="top-header-btns">
+				<li> <i class="fas fa-car-battery" style="font-size: 3em;"></i></li>
+				<li>
+					<h4 id="Grid">0 sites</h4>
+					<h6>Grid (Ac)</h6>
+				</li>
+			</ul>
+			<a href="#" class="small-box-footer moreInfo" data-id="1">More info <i class="fas fa-arrow-circle-right"></i></a>
+			</div>
+		
+	</div>
 	<div class="grid-stack gs-area">
 		<div class="grid-stack-item" data-gs-x="0" data-gs-y="0" data-gs-width="2" data-gs-height="4"
 			 data-gs-min-height="4" data-gs-min-width="3" style="padding-bottom:20px;!important">

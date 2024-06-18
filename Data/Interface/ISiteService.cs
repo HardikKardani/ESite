@@ -9,10 +9,10 @@ namespace ESite.Data.Interface
 {
     public interface ISiteService 
 	{
+        Task<ResponseViewModel> SaveSite(SiteViewModel model);
 		ResponseViewModel GetCardDataList();
 		ResponseViewModel GetSiteList();
         Task<ResponseViewModel> GetList();
-
 
         ResponseViewModel GetLiveData();
         ResponseViewModel GetRectifierData();

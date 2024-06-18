@@ -13,6 +13,7 @@ function FillCardDataList() {
         success: function (data) {
             data = $.parseJSON(data.response);
             $("#IDODSite").html(data.Table[0].IDODSite);
+            $("#Grid").html(data.Table[0].Grid);
             $("#ODSite").html(data.Table[0].ODSite);
             $("#IDSite").html(data.Table[0].IDSite);
             $("#GDC").html(data.Table[0].GDC + "Sites");

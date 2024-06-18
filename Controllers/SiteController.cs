@@ -79,6 +79,22 @@ namespace Esite.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public async Task<IActionResult> SaveSite(SiteViewModel _Model)
+        {
+            ResponseViewModel responseViewModel = new ResponseViewModel();
+            int userid = 1;
+            try
+            {
+                _Model.CreatedBy = (long)userid;
+                responseViewModel = await _uow.siteService.SaveSite(_Model);
+            }
+            catch (Exception ex)
+            {
+                responseViewModel.Message = DataComman.GetString(ex);
+            }
+            return Json(responseViewModel);
+        }
         [HttpGet]
         public async Task<IActionResult> GetList()
         {

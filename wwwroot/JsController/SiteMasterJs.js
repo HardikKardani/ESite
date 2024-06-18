@@ -97,42 +97,65 @@ function onclear() {
 function OnSave() {
 
     var form = $("#rectifierForm");
-    form.validator('validate');
-    var elmErr = form.find('.has-error');
-    if (elmErr && elmErr.length > 0) {
-        Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Please fill required feilds",
-        });
-        return false;
-    } else {
-        var dataModel = {
-            Username: $('#txtUserName').val(),
-            Password: $('#password-field').val()
-        }
-        $.ajax({
-            type: "POST",
-            url: '/Site/Save',
-            data: dataModel,
-            success: function (data) {
-                if (data.status) {
-                    Messagealert('s', data.message);
-                    window.location.href = data.response;
-                }
-                else {
-                    Messagealert('w', data.message);
-                }
-            },
-            error: function (req, status, err) {
-                Messagealert('e', 'something went wrong' + status + err);
-            }
-        })
-
-        return false;
+    debugger;
+    //form.validator('validate');
+    //var elmErr = form.find('.has-error');
+    //if (elmErr && elmErr.length > 0) {
+    //    Swal.fire({
+    //        icon: "error",
+    //        title: "Oops...",
+    //        text: "Please fill required feilds",
+    //    });
+    //    return false;
+    //} else {
+    var dataModel = {
+        SimCardNo2: $('#sim2Number').val(),
+        SimOperator2: $('#sim2Operator').val(),
+        SimCardNo1: $('#sim1Number').val(),
+        SimOperator1: $('#sim1Operator').val(),
+        IpAddress: $('#ipAddress').val(),
+        AssetId: $('#assetId').val(),
+        InstallationDate: $('#installationDate').val(),
+        Softwareversion: $('#softwareVersion').val(),
+        HardwareVersion: $('#hardwareVersion').val(),
+        Address: $('#address').val(),
+        //inCharge: $('#inCharge').val(),
+        Long: $('#long').val(),
+        Lat: $('#lat').val(),
+        //noOfTenant: $('#noOfTenant').val(),
+        //noOfDG: $('#noOfDG').val(),
+        CoolingType: $('#typeOfCooling').val(),
+        SiteType: $('#siteType').val(),
+        Country: $('#country').val(),
+        State: $('#state').val(),
+        RegionId: $('#region').val(),
+        SiteName: $('#SiteName').val(),
+        SiteId: $('#SiteId').val()
     }
+    $.ajax({
+        type: "POST",
+        url: '/Site/SaveSite',
+        data: dataModel,
+        success: function (data) {
+            debugger;
+            if (data.status) {
+                Messagealert('s', data.message);
+                window.location.href = data.response;
+            }
+            else {
+                debugger;
+                Messagealert('w', data.message);
+            }
+        },
+        error: function (req, status, err) {
+            Messagealert('e', 'something went wrong' + status + err);
+        }
+    })
 
-    
+    return false;
+    //}
+
+
 }
 function FillData() {
     SiteDataTable = $('#SiteDataTable').DataTable({

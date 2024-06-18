@@ -521,7 +521,7 @@ $(window).on("load", function(){
 //}
 
 //setInterval(function () { makeTimer(); }, 1000);
-var refreshInterval = 10000; // Default refresh interval in milliseconds (100 minutes)
+var refreshInterval = 60000; // Default refresh interval in milliseconds (100 minutes)
 
 function updateClock() {
     var now = new Date();

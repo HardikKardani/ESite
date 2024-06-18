@@ -25,6 +25,52 @@ namespace ESite.Data.Implementation
 			_mapper = mapper;
 			_context = context;
 		}
+        public async Task<ResponseViewModel> SaveSite(SiteViewModel model)
+        {
+            ResponseViewModel _Response = new ResponseViewModel();
+            _Response.Status = false;
+            try
+            {
+                TblSite? tblSites = await _context.TblSites.Where(x => x.SlNo == model.SlNo).FirstOrDefaultAsync();
+                if (tblSites == null)
+                {
+                    tblSites = new TblSite();
+                    tblSites.CreatedBy = model.CreatedBy;
+                    tblSites.CreatedDate = DataComman.GetDateTimeNow();
+                    tblSites.IsDeleted = false;
+                    _context.TblSites.Add(tblSites);
+                }
+                tblSites.SiteId = model.SiteId;
+                tblSites.SiteName = model.SiteName;
+                tblSites.RegionId = model.RegionId;
+                tblSites.State = model.State;
+                tblSites.Country = model.Country;
+                tblSites.SiteType = model.SiteType;
+                tblSites.CoolingType = model.CoolingType;
+                tblSites.LandMark = model.LandMark;
+                tblSites.NoOfGenerator = model.NoOfGenerator;
+                tblSites.TankCapacity = model.TankCapacity;
+                tblSites.Lat = model.Lat;
+                tblSites.Long = model.Long;
+                tblSites.SiteInChargeName = model.SiteInChargeName;
+                tblSites.Address = model.Address;
+                tblSites.SimOperator1 = model.SimOperator1;
+                tblSites.SimCardNo1 = model.SimCardNo1;
+                tblSites.SimOperator2 = model.SimOperator2;
+                tblSites.SimCardNo2 = model.SimCardNo2;
+                tblSites.ContactNo = model.ContactNo;
+                tblSites.Remarks = model.Remarks;
+                await _context.SaveChangesAsync();
+                _Response.Status = true;
+                _Response.Message = MessageType.Saved;
+                _Response.Response = _mapper.Map<TblSite, SiteViewModel>(tblSites);
+            }
+            catch (Exception ex)
+            {
+                _Response.Message = DataComman.GetString(ex);
+            }
+            return _Response;
+        }
         public async Task<ResponseViewModel> GetList()
         {
             ResponseViewModel _Response = new();
