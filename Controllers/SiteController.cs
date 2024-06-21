@@ -80,12 +80,17 @@ namespace Esite.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> SaveSite(SiteViewModel _Model)
+        public async Task<IActionResult> SaveSite([FromBody]SiteViewModel _Model )
         {
             ResponseViewModel responseViewModel = new ResponseViewModel();
             int userid = 1;
             try
             {
+                if (_Model == null)
+                {
+                    _Model = new SiteViewModel();
+                }
+
                 _Model.CreatedBy = (long)userid;
                 responseViewModel = await _uow.siteService.SaveSite(_Model);
             }

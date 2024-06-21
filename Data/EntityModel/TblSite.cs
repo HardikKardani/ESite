@@ -7,11 +7,11 @@ public partial class TblSite
 {
     public long SlNo { get; set; }
 
-    public string SiteName { get; set; } = null!;
+    public string? SiteName { get; set; }
 
-    public string SiteShortName { get; set; } = null!;
+    public string? SiteShortName { get; set; }
 
-    public string SiteId { get; set; } = null!;
+    public string? SiteId { get; set; }
 
     public long RegionId { get; set; }
 
@@ -47,7 +47,7 @@ public partial class TblSite
 
     public string? ContactNo { get; set; }
 
-    public string Remarks { get; set; } = null!;
+    public string Remarks { get; set; }
 
     public long? CreatedBy { get; set; }
 
@@ -60,6 +60,17 @@ public partial class TblSite
     public bool? IsDeleted { get; set; }
 
     public long? CompanyId { get; set; }
+
+    public string? HardwareVersion { get; set; }
+
+    public string? Softwareversion { get; set; }
+
+    public DateOnly? InstallationDate { get; set; }
+
+    public long? AssetId { get; set; }
+
+    public string? IpAddress { get; set; }
+
 
     public virtual ICollection<BatteryGstatus> BatteryGstatuses { get; set; } = new List<BatteryGstatus>();
 

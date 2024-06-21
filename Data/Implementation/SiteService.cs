@@ -53,17 +53,22 @@ namespace ESite.Data.Implementation
                 tblSites.Lat = model.Lat;
                 tblSites.Long = model.Long;
                 tblSites.SiteInChargeName = model.SiteInChargeName;
+                tblSites.SiteShortName = "abc";
                 tblSites.Address = model.Address;
                 tblSites.SimOperator1 = model.SimOperator1;
                 tblSites.SimCardNo1 = model.SimCardNo1;
                 tblSites.SimOperator2 = model.SimOperator2;
                 tblSites.SimCardNo2 = model.SimCardNo2;
                 tblSites.ContactNo = model.ContactNo;
-                tblSites.Remarks = model.Remarks;
+                tblSites.Remarks = "1";
+                tblSites.HardwareVersion = model.HardwareVersion;
+                tblSites.Softwareversion = model.Softwareversion;
+                tblSites.InstallationDate = model.InstallationDate;
+                tblSites.AssetId = model.AssetId;
+                tblSites.IpAddress = model.IpAddress;
                 await _context.SaveChangesAsync();
                 _Response.Status = true;
                 _Response.Message = MessageType.Saved;
-                _Response.Response = _mapper.Map<TblSite, SiteViewModel>(tblSites);
             }
             catch (Exception ex)
             {

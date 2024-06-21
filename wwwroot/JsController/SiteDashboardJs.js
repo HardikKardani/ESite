@@ -2,9 +2,231 @@
     
     FillCardDataList();
     
-    
+    fetchWeather();
 })
+function getWindSpeedIcon(speed) {
+    if (speed < 1.0) {
+        return '<i class="fas fa-wind icon"></i>'; // Calm icon
+    } else if (speed < 5.0) {
+        return '<i class="fas fa-wind icon"></i>'; // Light breeze icon
+    } else if (speed < 10.0) {
+        return '<i class="fas fa-wind icon"></i>'; // Moderate breeze icon
+    } else if (speed < 20.0) {
+        return '<i class="fas fa-wind icon"></i>'; // Strong breeze icon
+    } else {
+        return '<i class="fas fa-wind icon"></i>'; // High wind icon
+    }
+}
+function getPrecipitationIcon(weatherCode) {
+    switch (weatherCode) {
+        case 51:
+        case 53:
+        case 55:
+        case 56:
+        case 57:
+        case 61:
+        case 63:
+        case 65:
+        case 66:
+        case 67:
+        case 80:
+        case 81:
+        case 82:
+            return {
+                name: 'Mostly Rainy',
+                icon: getIcon('fa-cloud-showers-heavy')
+            }; // Rain showers
+        case 71:
+        case 73:
+        case 75:
+        case 77:
+        case 85:
+        case 86:
+            return {
+                name: 'Mostly Snowy',
+                icon: getIcon('fa-snowflake')
+            }; // Snowfall or snow showers
+        default:
+            return {
+                name: '',
+                icon: ''
+            }; // Snowfall or snow showers
+    }
+}
+function getIcon(iconName) {
+    return `<i class="fas ${iconName} icon"></i>`;
+}
+// Function to get descriptive weather condition based on weather code, precipitation, and daytime status
+function getWeatherCondition(weatherCode, precipitation) {
+    // Function to get icon based on weather code and daytime status
+   
 
+    // Check for precipitation
+    if (precipitation > 0) {
+        switch (weatherCode) {
+            case 51:
+            case 53:
+            case 55:
+            case 56:
+            case 57:
+            case 61:
+            case 63:
+            case 65:
+            case 66:
+            case 67:
+            case 80:
+            case 81:
+            case 82:
+                return {
+                    name: 'Mostly Rainy',
+                    icon: getIcon('fa-cloud-showers-heavy')
+                }; // Rain showers
+            case 71:
+            case 73:
+            case 75:
+            case 77:
+            case 85:
+            case 86:
+                return {
+                    name: 'Mostly Snowy',
+                    icon: getIcon('fa-snowflake')
+                }; // Snowfall or snow showers
+            default:
+                return {
+                    name: 'Precipitation',
+                    icon: getIcon('fa-cloud-rain')
+                }; // Default precipitation
+        }
+    } else {
+        // No precipitation, determine based on weather code
+        switch (weatherCode) {
+            case 0:
+                return {
+                    name: 'Clear Sky',
+                    icon: getIcon('fa-sun')
+                };
+            case 1:
+            case 2:
+                return {
+                    name: 'Partly Cloudy',
+                    icon: getIcon('fa-cloud-sun')
+                };
+            case 3:
+                return {
+                    name: 'Overcast',
+                    icon: getIcon('fa-cloud')
+                };
+            case 45:
+            case 48:
+                return {
+                    name: 'Foggy',
+                    icon: getIcon('fa-smog')
+                };
+            case 95:
+            case 96:
+            case 99:
+                return {
+                    name: 'Thunderstorms',
+                    icon: getIcon('fa-bolt')
+                };
+            default:
+                return {
+                    name: 'Unknown Weather',
+                    icon: getIcon('fa-question-circle')
+                };
+        }
+    }
+}
+
+function fetchWeather() {
+    debugger;
+    const apiUrl = "https://api.open-meteo.com/v1/forecast";
+    const params = {
+        latitude: -6.200000,
+        longitude: 106.816666,
+        hourly: 'temperature_2m,precipitation,windspeed_10m,winddirection_10m',
+        'timezone': 'Asia/Jakarta',
+        current_weather: true
+    };
+
+    // Map weather codes to descriptions
+    //const weatherCodeDescriptions = {
+    //    0: 'Clear sky',
+    //    1: 'Mainly clear',
+    //    2: 'Partly cloudy',
+    //    3: 'Overcast',
+    //    45: 'Fog',
+    //    48: 'Depositing rime fog',
+    //    51: 'Drizzle: Light',
+    //    53: 'Drizzle: Moderate',
+    //    55: 'Drizzle: Dense intensity',
+    //    56: 'Freezing Drizzle: Light',
+    //    57: 'Freezing Drizzle: Dense intensity',
+    //    61: 'Rain: Slight',
+    //    63: 'Rain: Moderate',
+    //    65: 'Rain: Heavy intensity',
+    //    66: 'Freezing Rain: Light',
+    //    67: 'Freezing Rain: Heavy intensity',
+    //    71: 'Snow fall: Slight',
+    //    73: 'Snow fall: Moderate',
+    //    75: 'Snow fall: Heavy intensity',
+    //    77: 'Snow grains',
+    //    80: 'Rain showers: Slight',
+    //    81: 'Rain showers: Moderate',
+    //    82: 'Rain showers: Violent',
+    //    85: 'Snow showers: Slight',
+    //    86: 'Snow showers: Heavy',
+    //    95: 'Thunderstorm: Slight or moderate',
+    //    96: 'Thunderstorm with slight hail',
+    //    99: 'Thunderstorm with heavy hail'
+    //};
+
+    $.ajax({
+        url: apiUrl,
+        data: params,
+        success: function (data) {
+            debugger;
+            var currentWeather = data.current_weather;
+            var temperature = currentWeather.temperature;
+            var tempIcon = temperature < 0 ? '<i class="fas fa-snowflake icon"></i>' :
+                temperature < 10 ? '<i class="fas fa-temperature-low icon"></i>' :
+                    temperature < 25 ? '<i class="fas fa-temperature-high icon"></i>' :
+                        '<i class="fas fa-temperature-full icon"></i>';
+
+            var windSpeed = currentWeather.windspeed;
+            var windDirection = currentWeather.winddirection;
+            var windSpeedIcon = getWindSpeedIcon(windSpeed);
+            var windSpeedUnit = data.current_weather_units.windspeed;
+            var weatherCode = currentWeather.weathercode;
+            //var weatherDescription = weatherCodeDescriptions[weatherCode] || 'Unknown weather condition';
+            var isDaytime = currentWeather.is_day;
+            var weatherCondition = getWeatherCondition(weatherCode, precipitation);
+            // Handle precipitation and probability
+            var precipitation = currentWeather.precipitation || 0;
+            var precipitationProbability = currentWeather.precipitation_probability || 0;
+            var dayNightIcon = isDaytime == 1 ? '<i class="fas fa-sun icon"></i>' : '<i class="fas fa-moon icon"></i>';
+                       var precipitations = getPrecipitationIcon(weatherCode);
+            // Assigning icons based on weather code
+         
+
+            var html = '<div class="row">' +
+                '<div class="col-3"><label style="font-weight: bold;">Temperature</label><span>: ' + dayNightIcon + tempIcon + temperature + data.current_weather_units.temperature + '</span></div>' +
+                '<div class="col-3"><label style="font-weight: bold;">Wind Speed</label><span>: ' + windSpeedIcon + windDirection + '° at ' + windSpeed + windSpeedUnit + '</span></div>' +
+                '<div class="col-3"><label style="font-weight: bold;">Weather</label><span>: ' + weatherCondition.icon + ' ' + weatherCondition.name + '</span></div>' +
+                '<div class="col-3"><label style="font-weight: bold;">Precipitation</label><span>: ' +
+                    (precipitation > 0 ? (precipitations.icon + precipitations.name + ' (' + (precipitationProbability * 100) + '%)') : 'No precipitation') +
+                    '</span></div>';
+                '</div>';
+                
+
+            $("#weather-data").html(html);
+        },
+        error: function (error) {
+            console.log("Error fetching weather data:", error);
+            $("#weather-data").html("<p>Failed to fetch weather data.</p>");
+        }
+    });
+}
 function FillCardDataList() {
     $.ajax({
         type: "GET",

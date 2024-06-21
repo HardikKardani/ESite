@@ -184,9 +184,9 @@ header {
       display: flex;
 }
 .logo {
-      font-size: 20px;
-      font-weight: 600;
-      min-width: 150px;
+    font-size: 20px;
+    font-weight: 600;
+    min-width: 176px;
 }
 .header-left > div ~ div{margin-left: 20px}
 h1.brand-text {
@@ -575,12 +575,12 @@ box-shadow: 0 1px 1px 1px rgba(18,106,211,.08);
       color: #667181;
 
 }
-    .console-sidemenu nav li a i, .console-sidemenu nav li a ion-icon {
-        margin-right: 10px;
-        font-size: 15px;
-        width: 20px;
-        color: white;
-    }
+.console-sidemenu nav li a i, .console-sidemenu nav li a ion-icon, .console-sidemenu nav li a svg {
+    margin-right: 10px;
+    font-size: 15px;
+    width: 20px;
+    color: white;
+}
     .console-sidemenu nav li a span {
         font-size: 13px;
         flex: auto;
@@ -636,7 +636,7 @@ box-shadow: 0 1px 1px 1px rgba(18,106,211,.08);
 .user {
       display: flex;
       align-items: center;
-      padding: 29px;
+      padding: 17px;
       border-bottom: 1px solid #d8d8d8;
       background: #f9f9f9;
 }
@@ -952,7 +952,7 @@ aside.more-opt-panel.active{ margin-right:0 }
 /*=============== Content Area ===================*/
 .content-area {
       flex: auto;
-      padding: 10px;
+      padding: 5px;
       order: 2;
 }
 .content-area.fullscreen-active{
@@ -1067,10 +1067,10 @@ aside.more-opt-panel.active{ margin-right:0 }
 .console-panel.visible{overflow:visible!important}
 .console-panel-header {
       display: flex;
-      flex: 0 0 70px;
+      flex: 0 0 5px;
       position: relative;
       background: #FFF;
-      padding: 15px;
+      padding: 6px;
       align-items: center;
       justify-content: space-between;
       border-radius: 5px 5px 0 0;
@@ -1104,7 +1104,7 @@ span.color-fill-icon {
 .console-panel-header.light,
 .console-panel-header.light .cph-left span,
 .console-panel-header.light ul.top-header-btns > li > a{color: #FFF}
-.console-panel-header ul.top-header-btns > li > a{font-size: 13px;width: 32px;height: 32px;}
+.console-panel-header ul.top-header-btns > li > a{font-size: 13px;width: 32px;height: 32px; align-content:center;}
 .console-panel-header ul.top-header-btns > li > a i {
       line-height: 35px;
 }
@@ -1113,7 +1113,7 @@ span.color-fill-icon.active{background:#FFF!important}
       position: fixed;
       left: 0;
       top: 0;
-      z-index: 10000;
+      z-index: 1000;
       height: 100%;
       width: 100%;
       right: auto;
@@ -1142,7 +1142,7 @@ span.color-fill-icon.active{background:#FFF!important}
 .grid-stack>.grid-stack-item:hover{z-index: 10}
 .cph-right {
       display: flex;
-      align-items: center;
+      align-items: center !important;
       white-space: nowrap;
 }
 .cph-right > * ~ *{margin-left:10px!important}
@@ -1287,21 +1287,22 @@ span.color-fill-icon.active{background:#FFF!important}
 }
 .steamline .sl-item {
       border-bottom: 1px solid #e9ecef;
-      padding: 20px 0;
+      
       display: flex;
 }
-.steamline .sl-left {
-      margin-left: -20px;
-      z-index: 1;
-      width: 40px;
-      line-height: 39px;
-      text-align: center;
-      height: 40px;
-      border-radius: 100%;
-      color: #fff;
-      /* box-shadow: 0 0 20px rgba(0,0,0,0.2); */
-      border: 2px solid #FFF;
-}
+    .steamline .sl-left {
+        margin-left: -20px;
+        z-index: 1;
+        width: 40px;
+        line-height: 39px;
+        text-align: center;
+        height: 40px;
+        border-radius: 100%;
+        color: #fff;
+        /* box-shadow: 0 0 20px rgba(0,0,0,0.2); */
+        border: 2px solid #FFF;
+        align-content: center;
+    }
 .steamline .sl-right {
       padding-left: 20px;
       flex: auto;

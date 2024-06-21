@@ -9,17 +9,19 @@ namespace ESite.Data.ViewModel
 {
     public class SiteViewModel
     {
-		public SiteViewModel(TblSite source)
-		{
-		}
-
+        public SiteViewModel(TblSite source)
+        {
+        }
+        public SiteViewModel()
+        {
+        }
         public long SlNo { get; set; }
 
-        public string SiteName { get; set; } = null!;
+        public string? SiteName { get; set; }
 
-        public string SiteShortName { get; set; } = null!;
+        public string? SiteShortName { get; set; }
 
-        public string SiteId { get; set; } = null!;
+        public string? SiteId { get; set; }
 
         public long RegionId { get; set; }
 
@@ -27,7 +29,7 @@ namespace ESite.Data.ViewModel
 
         public long Country { get; set; }
 
-        public string Address { get; set; } = null!;
+        public string Address { get; set; }
 
         public string? LandMark { get; set; }
 
@@ -55,7 +57,7 @@ namespace ESite.Data.ViewModel
 
         public string? ContactNo { get; set; }
 
-        public string Remarks { get; set; } = null!;
+        public string? Remarks { get; set; }
 
         public long? CreatedBy { get; set; }
 
@@ -68,6 +70,15 @@ namespace ESite.Data.ViewModel
         public bool? IsDeleted { get; set; }
 
         public long? CompanyId { get; set; }
+        public string? HardwareVersion { get; set; }
+
+        public string? Softwareversion { get; set; }
+
+        public DateOnly? InstallationDate { get; set; }
+
+        public long? AssetId { get; set; }
+
+        public string? IpAddress { get; set; }
 
         public virtual ICollection<BatteryGstatus> BatteryGstatuses { get; set; } = new List<BatteryGstatus>();
 

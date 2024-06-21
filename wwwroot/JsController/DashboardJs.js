@@ -2,9 +2,12 @@
     
     FillCardDataList();
     
-
+   
     
 })
+
+
+// Fetch weather data on page load
 
 function FillCardDataList() {
     $.ajax({
@@ -188,7 +191,7 @@ $(window).on("load", function () {
             $("#ticketstable_wrapper  .top").css("display", "none");
             $("#ticketstable_wrapper  .dt-button").removeClass("dt-button buttons-excel buttons-html5");
             $("#ticketstable_wrapper .dt-buttons button")
-                .addClass("btn").css("background-color: rgb(12, 52, 61)"); // Add the desired Bootstrap class
+                .addClass("btn btn-sm").css("background-color: rgb(12, 52, 61)"); // Add the desired Bootstrap class
             
             $("#ticketstable_wrapper .dt-buttons").addClass("mr-2");
             $("#ticketstable_wrapper .dt-buttons").appendTo(_container);
@@ -346,13 +349,13 @@ $(window).on("load", function () {
         "ajax": {
             "url": '/Site/GetLiveData',
             "dataSrc": function (json) {
-                debugger;
+                
                 // Manipulate the JSON response data if needed
                 var data = $.parseJSON(json.response);
                 return data.Table; // Assuming your data is nested under a 'data' key
             }
         },
-        "dom": '<"top"<"dt-filters"f><"get_dt_button"B>>rFt<"dt-bottom"<"dt-information"li><"dt-pagination"p>>',
+        "dom": '<"top"B<"dt-filters"f>>rFt<"dt-bottom"<"dt-information"li><"dt-pagination"p>>',
         "sorting":false,
         "columns": [
             { "data": "SNo" },
@@ -399,26 +402,26 @@ $(window).on("load", function () {
         "stateSave": false,
         initComplete: function () {
             // Move Search To Panel Header
-            $("#Sitetable_wrapper  button").removeClass("dt-button buttons-excel buttons-html5");
-            $("#Sitetable_wrapper button")
-                .addClass("btn btn-primary"); // Add the desired Bootstrap class
-
-
-            $("#Sitetable_wrapper .get_dt_button .dt-buttons").css({
-                "float": "right"
-            });
-            $("#Sitetable_wrapper .get_dt_button .dt-buttons").addClass("mb-2 mr-4");
-
+            let _container = $(this).parents('.console-panel').find('.get_dt_search')
             let _bottom_container = $(this).parents('.console-panel').find('.dt-bottom-container')
 
-            
+            /*$("#ticketstable_wrapper .dataTables_filter input").appendTo(_container);*/
             $("#Sitetable_wrapper  .dt-filters").css("display", "none");
+            /*$(_container).find("input").attr('placeholder', 'Search From Table');*/
             $("#Sitetable_wrapper  .dt-bottom").appendTo(_bottom_container);
+            $("#Sitetable_wrapper  .top").css("display", "none");
+            $("#Sitetable_wrapper  .dt-button").removeClass("dt-button buttons-excel buttons-html5");
+            $("#Sitetable_wrapper .dt-buttons button")
+                .addClass("btn").css("background-color: rgb(12, 52, 61)"); // Add the desired Bootstrap class
 
+            $("#Sitetable_wrapper .dt-buttons").addClass("mr-2");
+            $("#Sitetable_wrapper .dt-buttons").appendTo(_container);
             
-            $
+
+            //$(colvis.button()).insertAfter(_container);
 
         }
+        
     });
 
     

@@ -27,14 +27,14 @@
 		border-radius: .25rem;
 		position: relative;
 		box-shadow: 0 0 1px rgba(0, 0, 0, .125), 0 1px 3px rgba(0, 0, 0, .2);
-		/* padding: 20px; */
 		
 		flex: 1 1 18%; /* Allow flexibility and equal width */
 		box-sizing: border-box;
 		display: block;
+		height:70px;
 		
-		margin-bottom: 20px;
-		margin: 10px;
+		margin-bottom: 10px;
+		margin: 5px;
 	}
 	
 .small-box>.small-box-footer {
@@ -44,6 +44,8 @@
 	text-align: center;
 	text-decoration: none;
 	z-index: 10;
+			border-radius: .25rem;
+			box-shadow: 0 0 1px rgba(0, 0, 0, .125), 0 1px 3px rgba(0, 0, 0, .2);
 		}
 
 	.card-row {
@@ -52,9 +54,31 @@
     width: 100%;
     padding: 0 0px;
     box-sizing: border-box;
+		margin-bottom: 23px;
 }
 
-	
+	    .status-box {
+         width: 87px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    /* font-size: 1.5em; */
+    font-weight: bold;
+    margin: 8px;
+    border-radius: 2px;
+        }
+        .total-box {
+            background-color: #00BCD4;
+        }
+        .major-box {
+            background-color: #FFEB3B;
+            color: #333;
+        }
+        .critical-box {
+            background-color: #F44336;
+        }
 
 @@media (max-width: 768px) {
     .card-row {
@@ -87,8 +111,8 @@
 <div class="content-area">
 	<div class="card-row">
 		
-			<div class="small-box" style="background-color: #fdcf6e;">
-			<ul class="top-header-btns">
+			@* <div class="small-box" style="background-color: #fdcf6e;">
+				<div class="p">			<ul class="top-header-btns">
 				<li>
 					<i class="fas fa-sitemap" style="font-size: 3em;"></i>
 				</li>
@@ -106,6 +130,7 @@
 					<h6 class="mb-0">ID/OD Site</h6>
 				</li>
 			</ul>
+			</div>
 			<a href="#" class="small-box-footer moreInfo" data-id="2">More info <i class="fas fa-arrow-circle-right"></i></a>
 			</div>
 		
@@ -155,44 +180,49 @@
 				</li>
 			</ul>
 			<a href="#" class="small-box-footer moreInfo" data-id="1">More info <i class="fas fa-arrow-circle-right"></i></a>
-			</div>
-		
-	</div>
-	<div class="grid-stack gs-area">
-		<div class="grid-stack-item" data-gs-x="0" data-gs-y="0" data-gs-width="2" data-gs-height="4"
-			 data-gs-min-height="4" data-gs-min-width="3" style="padding-bottom:20px;!important">
-					<div class="small-box" style="background-color: #fdcf6e;">
-			<div class="console-panel grid-stack-item-content console-no-header" style="background-color: #fdcf6e;">
-				 <div class="console-panel-body align-center" style="padding:10px!important;">
-						<ul class="top-header-btns">
-							<li>
+			</div> *@
+		<div class="small-box" style="background-color: #fdcf6e;">
+			<div class="console-panel  console-no-header" style="background-color: #fdcf6e;">
+				<div class="console-panel-body align-center" style="padding:10px!important;">
+					<ul class="top-header-btns">
+						<li>
 							<i class="fas fa-sitemap" style="font-size: 3em;"></i>
-							</li>
-							
-							<li>
-								<span id="IDSite"></span>
-								<h6 class="mb-0">ID Site </h6>
-							</li>
-							<li>
-								<span id="ODSite">30</span>
-								<h6 class="mb-0">OD Site</h6>
-							</li>
-							<li>
-								<span id="IDODSite">60</span>
-								<h6 class="mb-0">ID/OD Site</h6>
-							</li>
-						</ul>
-				</div>
-				</div>
-						<a href="#" class="small-box-footer moreInfo" data-id="2">More info <i class="fas fa-arrow-circle-right"></i></a>
-			</div><!-- Console Panel -->
-		</div>
+						</li>
 
-		<div class="grid-stack-item" data-gs-x="3" data-gs-y="0" data-gs-width="2" data-gs-height="4"
-			 data-gs-min-height="4" data-gs-min-width="3" style="padding-bottom:20px;!important">
-			<div class="small-box" style="background-color: #81df97;">
-				<div class="console-panel grid-stack-item-content console-no-header" style="background-color: #81df97;">
-					<div class="console-panel-body align-center" style="padding:10px!important;">
+						<li>
+							<h6 id="IDSite"></h6>
+							<h6 class="mb-0">ID Site </h6>
+						</li>
+						<li>
+							<h6 id="ODSite">30</h6>
+							<h6 class="mb-0">OD Site</h6>
+						</li>
+						<li>
+							<h6 id="IDODSite">60</h6>
+							<h6 class="mb-0">ID/OD Site</h6>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<a href="#" class="small-box-footer moreInfo" data-id="2" style="background-color: rgba(253, 207, 110, 0.5);">More info <i class="fas fa-arrow-circle-right"></i></a>
+		</div><!-- Console Panel -->
+		<div class="small-box" style="background-color: #0ef7ffcc;">
+			<div class="console-panel console-no-header" style="background-color:#6c4eb705">
+				<div class="card-body align-center " style="padding:10px!important;">
+					<ul class="top-header-btns">
+						<li> <i class="fa-solid fa-plug" style="font-size: 3em;"></i></li>
+						<li>
+							<h4 id="Grid">0 sites</h4>
+							<h6>Grid (AC)</h6>
+						</li>
+					</ul>
+				</div>
+			</div><!-- Console Panel -->
+			<a href="#" class="small-box-footer moreInfo" data-id="1" style="background-color: rgba(14, 247, 255, 0.5);">More info <i class="fas fa-arrow-circle-right"></i></a>
+		</div>
+		<div class="small-box" style="background-color: #81df97;">
+			<div class="console-panel console-no-header" style="background-color: #81df97;">
+				<div class="card-body align-center " style="padding:10px!important;">
 					<ul class="top-header-btns">
 						<li> <i class="far fa-sun" style="font-size: 3em;"></i></li>
 						<li>
@@ -202,37 +232,28 @@
 					</ul>
 				</div>
 			</div>
-				<a href="#" class="small-box-footer moreInfo" data-id="1">More info <i class="fas fa-arrow-circle-right"></i></a>
-			</div><!-- Console Panel -->
-		</div>
+			<a href="#" class="small-box-footer moreInfo" data-id="1" style="background-color: rgba(129, 223, 151, 0.5);">More info <i class="fas fa-arrow-circle-right"></i></a>
+		</div><!-- Console Panel -->
+		<div class="small-box" style="background-color: #90aff1;">
+			<div class="console-panel console-no-header" style="background-color: #90aff1;">
+				<div class="card-body align-center " style="padding:10px!important;">
 
-
-		<div class="grid-stack-item" data-gs-x="6" data-gs-y="0" data-gs-width="3" data-gs-height="4"
-			 data-gs-min-height="4" data-gs-min-width="3" style="padding-bottom:20px;!important">
-			<div class="small-box" style="background-color: #90aff1;">
-				<div class="console-panel grid-stack-item-content console-no-header" style="background-color: #90aff1;">
-					<div class="console-panel-body align-center" style="padding:10px!important;">
-			
 					<ul class="top-header-btns">
 						<li> <i class="fas fa-solar-panel" style="font-size: 3em;"></i></li>
 						<li>
 							<h4 id="FullSolar">10 sites</h4>
-							<h6>Full Solar</h6>
+							<h6>Full Solar (Solar + Batt.)</h6>
 						</li>
 					</ul>
 				</div>
 			</div>
-				<a href="#" class="small-box-footer moreInfo" data-id="2">More info <i class="fas fa-arrow-circle-right"></i></a>
-			</div>
+			<a href="#" class="small-box-footer moreInfo" data-id="2" style="background-color: rgba(144, 175, 241, 0.5);">More info <i class="fas fa-arrow-circle-right"></i></a>
 		</div>
-
-		<div class="grid-stack-item" data-gs-x="9" data-gs-y="0" data-gs-width="3" data-gs-height="4"
-			 data-gs-min-height="4" data-gs-min-width="3" style="padding-bottom:20px;!important">
-			<div class="small-box" style="background-color: #0ebfffcc;">
-				<div class="console-panel grid-stack-item-content console-no-header" style="background-color: #0ebfffcc;">
-					<div class="console-panel-body align-center" style="padding:10px!important;">
+		<div class="small-box" style="background-color: #0ebfffcc;">
+			<div class="console-panel console-no-header" style="background-color: #0ebfffcc;">
+				<div class="card-body align-center " style="padding:10px!important;">
 					<ul class="top-header-btns">
-						<li> <i class="fas fa-car-battery" style="font-size: 3em;"></i></li>
+						<li> <i class="fa-brands fa-superpowers" style="font-size: 3em;"></i></li>
 						<li>
 							<h4 id="GDC">0 sites</h4>
 							<h6>CDC (Genset + Batt)</h6>
@@ -240,11 +261,11 @@
 					</ul>
 				</div>
 			</div><!-- Console Panel -->
-			<a href="#" class="small-box-footer moreInfo" data-id="1">More info <i class="fas fa-arrow-circle-right"></i></a>
-			</div>
+			<a href="#" class="small-box-footer moreInfo" data-id="1" style="background-color: rgba(14, 191, 255, 0.5);">More info <i class="fas fa-arrow-circle-right"></i></a>
 		</div>
-
-
+		
+	</div>
+	<div class="grid-stack gs-area">
 		<div class="grid-stack-item" data-gs-x="0" data-gs-y="7" data-gs-width="3" data-gs-height="12"
 			 data-gs-min-height="10" data-gs-min-width="3">
 			<div class="console-panel grid-stack-item-content">
@@ -254,11 +275,11 @@
 					</div>
 					<div class="cph-right">
 						<ul class="top-header-btns">
-							<li>
+							@*<li>
 								<a class="collapse-panel" href="#" title="Collapse/Uncollapse Panel"
 								   data-rel="tooltip"> <i class="icon dripicons-chevron-up"></i></a>
 							</li>
-							<li class="dropdown">
+							 <li class="dropdown">
 								<a href="#" data-toggle="dropdown" title="Panel Options" data-rel="tooltip">
 									<i class="icon dripicons-dots-3"></i>
 								</a>
@@ -282,7 +303,7 @@
 								<a class="removeWidget" href="#" title="Remove Panel" data-rel="tooltip">
 									<i class="icon dripicons-cross"></i>
 								</a>
-							</li>
+							</li> *@
 						</ul>
 					</div>
 				</div><!-- Panel Header -->
@@ -298,9 +319,93 @@
 			<div class="console-panel grid-stack-item-content">
 				<div class="console-panel-header light" style="background-color: rgb(12, 52, 61);">
 					<div class="cph-left">
+						<h5>Green Status</h5>
+					</div>
+					@* <div class="cph-right">
+					<ul class="top-header-btns">
+					<li>
+					<a class="switch-full" href="#" title="Expand Panel To Full Screen"
+					data-rel="tooltip"> <i class="icon dripicons-expand-2"></i></a>
+					</li>
+					<li>
+					<a class="collapse-panel" href="#" title="Collapse/Uncollapse Panel"
+					data-rel="tooltip"> <i class="icon dripicons-chevron-up"></i></a>
+					</li>
+					<li class="dropdown">
+					<a href="#" data-toggle="dropdown" title="Panel Options" data-rel="tooltip">
+					<i class="icon dripicons-dots-3"></i>
+					</a>
+					<div class="dropdown-menu  dropdown-menu-right theme-media">
+					<div class="dropdown-menu-header">
+					<div class="dmh-inner">
+					<h4>Panel Options</h4>
+					</div>
+					</div>
+					<a class="dropdown-item cp" href="#" title="">
+					<span class="color-fill-icon" style="background-color:#fff;"></span>
+					Header Background Color
+					</a>
+					<a class="dropdown-item header-fontcolor" href="#" title="">
+					<span class="color-fill-icon" style="background-color:#333"></span>
+					Header Font Color Dark/Light
+					</a>
+					</div>
+					</li>
+					<li>
+					<a class="removeWidget" href="#" title="Remove Panel" data-rel="tooltip">
+					<i class="icon dripicons-cross"></i>
+					</a>
+					</li>
+					</ul>
+					</div> *@
+				</div><!-- Panel Header -->
+				<div class="console-panel-body">
+					<div id="GreenStatusChart"></div>
+					@* 	<div class="steamline m-t-40">
+					<div class="sl-item">
+					<div class="sl-left bg-warning">
+					<i class="bg-warning icon dripicons-bell"></i>
+					</div>
+					<div class="sl-right">
+					<div class="font-medium flex justify-content-between">
+					<span class="bg-warning">NTSR</span><span class="sl-date"> 03:25 PM</span>
+					</div>
+					<div class="desc">NTSR |<span id="Alret1"></span></div>
+					</div>
+					</div>
+					<div class="sl-item">
+					<div class="sl-left bg-warning">
+					<i class="bg-warning icon dripicons-bell"></i>
+					</div>
+					<div class="sl-right">
+					<div class="font-medium flex justify-content-between">
+					<span class="bg-warning">NTSR</span> <span class="sl-date">11:52 AM</span>
+					</div>
+					<div class="desc">NTSR | <span id="Alret2"></span></div>
+					</div>
+					</div>
+					<div class="sl-item">
+					<div class="sl-left bg-danger "><i class=" icon dripicons-bell"></i></div>
+					<div class="sl-right">
+					<div class="font-medium flex justify-content-between">
+					<span class="bg-danger">NTSR</span> <span class="sl-date">11:52 AM</span>
+					</div>
+					<div class="desc">NTSR | <span id="Alret3"></span></div>
+					</div>
+					</div>
+
+					</div> *@
+				</div>
+			</div><!-- Console Panel -->
+		</div>
+		@* <div class="grid-stack-item" data-gs-x="7" data-gs-y="7" data-gs-width="3" data-gs-height="12"
+			 data-gs-min-height="10" data-gs-min-width="3">
+			<div class="console-panel grid-stack-item-content">
+				<div class="console-panel-header light" style="background-color: rgb(12, 52, 61);">
+					<div class="cph-left">
 						<h5>Site Running On </h5>
 					</div>
-					<div class="cph-right">
+					 <div class="cph-right">
 						<ul class="top-header-btns">
 							<li>
 								<a class="collapse-panel" href="#" title="Collapse/Uncollapse Panel"
@@ -337,11 +442,11 @@
 				<div class="console-panel-body ">
 					<div class="chart-container">
 						<div id="singleStackedBarChart"></div>
-						@* <canvas id="singleStackedBarChart" width="100" height="95"></canvas> *@
+						
 					</div>
 				</div>
 			</div><!-- Console Panel -->
-		</div>
+		</div> *@
 		<div class="grid-stack-item" data-gs-x="6" data-gs-y="7" data-gs-width="3" data-gs-height="12"
 			 data-gs-min-height="10" data-gs-min-width="3">
 			<div class="console-panel grid-stack-item-content">
@@ -349,7 +454,7 @@
 					<div class="cph-left">
 						<h5>Site Running On </h5>
 					</div>
-					<div class="cph-right">
+					@* <div class="cph-right">
 						<ul class="top-header-btns">
 							<li>
 								<a class="collapse-panel" href="#" title="Collapse/Uncollapse Panel"
@@ -381,7 +486,7 @@
 								</a>
 							</li>
 						</ul>
-					</div>
+					</div> *@
 				</div><!-- Panel Header -->
 				<div class="console-panel-body">
 					<div class="progress-item">
@@ -411,19 +516,16 @@
 				</div>
 			</div><!-- Console Panel -->
 		</div>
+		
 		<div class="grid-stack-item" data-gs-x="9" data-gs-y="7" data-gs-width="3" data-gs-height="12"
 			 data-gs-min-height="10" data-gs-min-width="3">
 			<div class="console-panel grid-stack-item-content">
 				<div class="console-panel-header light" style="background-color: rgb(12, 52, 61);">
 					<div class="cph-left">
-						<h5>Green Status</h5>
+						<h5>Alert Status</h5>
 					</div>
-					<div class="cph-right">
+					@* <div class="cph-right">
 						<ul class="top-header-btns">
-							<li>
-								<a class="switch-full" href="#" title="Expand Panel To Full Screen"
-								   data-rel="tooltip"> <i class="icon dripicons-expand-2"></i></a>
-							</li>
 							<li>
 								<a class="collapse-panel" href="#" title="Collapse/Uncollapse Panel"
 								   data-rel="tooltip"> <i class="icon dripicons-chevron-up"></i></a>
@@ -454,11 +556,31 @@
 								</a>
 							</li>
 						</ul>
-					</div>
+					</div> *@
 				</div><!-- Panel Header -->
-				<div class="console-panel-body">
-					<div id="GreenStatusChart"></div>
-				@* 	<div class="steamline m-t-40">
+				<div class="card-body" style="padding: 0.25rem">
+					<div class="row justify-content-center">
+						<div class="status-box total-box">
+						    <div>
+						        <div>7</div>
+						        <div>Total</div>
+						    </div>
+						</div>
+						<div class="status-box major-box">
+						    <div>
+						        <div>4</div>
+						        <div>Major</div>
+						    </div>
+						</div>
+						<div class="status-box critical-box">
+						    <div>
+						        <div>3</div>
+						        <div>Critical</div>
+						    </div>
+						</div>
+			        </div>
+					<div class="steamline m-t-40">
+							<a data-toggle="modal" data-target=".alert" title="" data-rel="tooltip" data-original-title="Click to View Alert">
 						<div class="sl-item">
 							<div class="sl-left bg-warning">
 								<i class="bg-warning icon dripicons-bell"></i>
@@ -467,9 +589,11 @@
 								<div class="font-medium flex justify-content-between">
 									<span class="bg-warning">NTSR</span><span class="sl-date"> 03:25 PM</span>
 								</div>
-								<div class="desc">NTSR |<span id="Alret1"></span></div>
+								<div class="desc">NTSR |S-Chg Fail </div>
 							</div>
 						</div>
+							</a>
+							<a data-toggle="modal" data-target=".alert" title="" data-rel="tooltip" data-original-title="Click to View Alert">
 						<div class="sl-item">
 							<div class="sl-left bg-warning">
 								<i class="bg-warning icon dripicons-bell"></i>
@@ -478,20 +602,46 @@
 								<div class="font-medium flex justify-content-between">
 									<span class="bg-warning">NTSR</span> <span class="sl-date">11:52 AM</span>
 								</div>
-								<div class="desc">NTSR | <span id="Alret2"></span></div>
+								<div class="desc">NTSR | All Rec Comm Fail </div>
 							</div>
 						</div>
+							</a>
+							<a data-toggle="modal" data-target=".alert" title="" data-rel="tooltip" data-original-title="Click to View Alert">
 						<div class="sl-item">
 							<div class="sl-left bg-danger "><i class=" icon dripicons-bell"></i></div>
 							<div class="sl-right">
 								<div class="font-medium flex justify-content-between">
 									<span class="bg-danger">NTSR</span> <span class="sl-date">11:52 AM</span>
 								</div>
-								<div class="desc">NTSR | <span id="Alret3"></span></div>
+								<div class="desc">NTSR | Batt1 Fuse Fail</div>
 							</div>
 						</div>
+							</a>
 
-					</div> *@
+							<a data-toggle="modal" data-target=".alert" title="" data-rel="tooltip" data-original-title="Click to View Alert">
+						<div class="sl-item">
+							<div class="sl-left bg-danger "><i class=" icon dripicons-bell"></i></div>
+							<div class="sl-right">
+								<div class="font-medium flex justify-content-between">
+									<span class="bg-danger">NTSR</span> <span class="sl-date">11:52 AM</span>
+								</div>
+								<div class="desc">NTSR | Batt1 Fuse Fail</div>
+							</div>
+						</div>
+							</a>
+						<a data-toggle="modal" data-target=".alert" title="" data-rel="tooltip" data-original-title="Click to View Alert">
+							<div class="sl-item">
+								<div class="sl-left bg-danger "><i class=" icon dripicons-bell"></i></div>
+								<div class="sl-right">
+									<div class="font-medium flex justify-content-between">
+										<span class="bg-danger">NTSR</span> <span class="sl-date">11:52 AM</span>
+									</div>
+									<div class="desc">NTSR | Batt1 Fuse Fail</div>
+								</div>
+							</div>
+						</a>
+
+					</div>
 				</div>
 			</div><!-- Console Panel -->
 		</div>
@@ -509,7 +659,7 @@
 								<a class="switch-full" href="#" title="Expand Panel To Full Screen"
 								   data-rel="tooltip"> <i class="icon dripicons-expand-2"></i></a>
 							</li>
-							<li>
+							@* <li>
 								<a class="collapse-panel" href="#" title="Collapse/Uncollapse Panel"
 								   data-rel="tooltip"> <i class="icon dripicons-chevron-up"></i></a>
 							</li>
@@ -537,7 +687,7 @@
 								<a class="removeWidget" href="#" title="Remove Panel" data-rel="tooltip">
 									<i class="icon dripicons-cross"></i>
 								</a>
-							</li>
+							</li> *@
 						</ul>
 					</div>
 				</div><!-- Panel Header -->
@@ -579,7 +729,7 @@
 								<a class="switch-full" href="#" title="Expand Panel To Full Screen"
 								   data-rel="tooltip"> <i class="icon dripicons-expand-2"></i></a>
 							</li>
-							<li>
+							@*		<li>
 								<a class="collapse-panel" href="#" title="Collapse/Uncollapse Panel"
 								   data-rel="tooltip"> <i class="icon dripicons-chevron-up"></i></a>
 							</li>
@@ -607,9 +757,9 @@
 								<a class="removeWidget" href="#" title="Remove Panel" data-rel="tooltip">
 									<i class="icon dripicons-cross"></i>
 								</a>
-							</li>
+							</li>*@
 						</ul>
-					</div>
+					</div> 
 				</div><!-- Panel Header -->
 				<div class="console-panel-body no-padding">
 					<div id="map" style="width:100%;height:400;"></div>
@@ -627,9 +777,13 @@
 						<h5>Live Site Status</h5>
 					</div>
 					<div class="cph-right">
-						<div class="get_dt_button"></div>
+						<div class="get_dt_search"></div>
 						<ul class="top-header-btns">
 							<li>
+								<a class="switch-full" href="#" title="Expand Panel To Full Screen"
+								   data-rel="tooltip"> <i class="icon dripicons-expand-2"></i></a>
+							</li>
+							@* <li>
 								<a class="collapse-panel" href="#" title="Collapse/Uncollapse Panel"
 								   data-rel="tooltip"> <i class="icon dripicons-chevron-up"></i></a>
 							</li>
@@ -657,7 +811,7 @@
 								<a class="removeWidget" href="#" title="Remove Panel" data-rel="tooltip">
 									<i class="icon dripicons-cross"></i>
 								</a>
-							</li>
+							</li> *@
 						</ul>
 					</div>
 				</div><!-- Panel Header -->
@@ -774,7 +928,7 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				<div class="table-container">
+<div class="table-container">
 					<div class="get_dt_search"></div>
 						<table class="table table-striped console-table table-bordered table-hover mb-0"
 							  id="modalTable">
@@ -806,7 +960,7 @@
 						</table>
 						
 					
-					</div>
+					</div>				
 					<div class="dt-bottom-container"></div>
 			</div>
 
@@ -853,6 +1007,108 @@
 						</div>
 					</div>
 					
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+<div class="modal fade bd-example-modal-lg alert" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Alert Details</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="table-container">
+					<div class="get_dt_search"></div>
+					<div class="row">
+						<div class="col-4">
+							<div class="form-group">
+								<label>From Date</label>
+								<input type="date" class="form-control" placeholder="From Date" id="fromDate" required>
+							</div>
+						</div>
+						<div class="col-4">
+							<div class="form-group">
+								<label>To Date</label>
+								<input type="date" class="form-control" placeholder="To Date" id="toDate" required>
+							</div>
+						</div>
+						<div class="col-4"></div>
+						<div class="col-4">
+							<div class="form-group">
+								<label>Site ID</label>
+								<select class="select2 form-control" id="Site" required>
+									<option value="1">Site 1</option>
+									<option value="2">Site 2</option>
+									<option value="3">Site 3</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-4">
+							<div class="form-group">
+								<label>Severity</label>
+								<select class="select2 form-control" id="Severity" required>
+									<option value="1">All</option>
+									<option value="2">Major</option>
+									<option value="3">Minor</option>
+									<option value="4">Critical</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-4">
+							<div class="form-group">
+								<label>Status</label>
+								<select class="select2 form-control" id="status" required>
+									<option value="1">All</option>
+									<option value="2">Not Cleared</option>
+									<option value="3">Cleared</option>
+								</select>
+							</div>
+						</div>
+						<div class="card-body text-right">
+								<button class="btn btn-success ml-auto" id="btnShow">
+									Show
+								</button>
+								<button class="btn btn-danger ml-auto" id="btnReset">
+									Reset
+								</button>
+						</div>
+					</div>
+					<table class="table table-striped console-table table-bordered table-hover mb-0"
+						   id="SesnsorTable">
+						<thead>
+							<tr class="filtersRow">
+								<th class="filterhead filterheads"></th>
+								<th class="filterhead filterheads"></th>
+								<th class="filterhead filterheads"></th>
+								<th class="filterhead filterheads"></th>
+								<th class="filterhead filterheads"></th>
+								<th class="filterhead filterheads"></th>
+								<th class="filterhead filterheads"></th>
+								<th class="filterhead filterheads"></th>
+								<th class="filterhead filterheads"></th>
+							</tr>
+							<tr>
+								<th>Sl No</th>
+								<th>Site ID</th>
+								<th>Site Name</th>
+								<th>Region</th>
+								<th>Alert Description</th>
+								<th>Alert Serverity</th>
+								<th>Created On</th>
+								<th>Cleared On</th>
+							</tr>
+						</thead>
+						<tbody></tbody>
+					</table>
+
+
 				</div>
 			</div>
 
@@ -1003,98 +1259,98 @@ function dashboardFilters() {
 <script>
 	$(document).ready(function () {
 
-		am5.ready(function () {
+		// am5.ready(function () {
 
-			// Create root element
-			var root = am5.Root.new("singleStackedBarChart");
+		// 	// Create root element
+		// 	var root = am5.Root.new("singleStackedBarChart");
 
-			// Set themes
-			root.setThemes([
-				am5themes_Animated.new(root)
-			]);
+		// 	// Set themes
+		// 	root.setThemes([
+		// 		am5themes_Animated.new(root)
+		// 	]);
 
-			// Create chart
-			var chart = root.container.children.push(am5xy.XYChart.new(root, {
-				panX: false,
-				panY: false,
-				paddingLeft: 0,
-				layout: root.verticalLayout
-			}));
+		// 	// Create chart
+		// 	var chart = root.container.children.push(am5xy.XYChart.new(root, {
+		// 		panX: false,
+		// 		panY: false,
+		// 		paddingLeft: 0,
+		// 		layout: root.verticalLayout
+		// 	}));
 
-			var data = [{
-				"year": "Site Running On",
-				"EB/Grid": 30,
-				"DG": 20,
-				"Battery": 20,
-				"Solar": 30,
-			}];
+		// 	var data = [{
+		// 		"year": "Site Running On",
+		// 		"EB/Grid": 30,
+		// 		"DG": 20,
+		// 		"Battery": 20,
+		// 		"Solar": 30,
+		// 	}];
 
-			// Create axes
-			var xRenderer = am5xy.AxisRendererX.new(root, {
-				minorGridEnabled: true
-			});
-			var xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(root, {
-				categoryField: "year",
-				renderer: xRenderer,
-				tooltip: am5.Tooltip.new(root, {})
-			}));
-			xRenderer.grid.template.setAll({
-				location: 1
-			});
+		// 	// Create axes
+		// 	var xRenderer = am5xy.AxisRendererX.new(root, {
+		// 		minorGridEnabled: true
+		// 	});
+		// 	var xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(root, {
+		// 		categoryField: "year",
+		// 		renderer: xRenderer,
+		// 		tooltip: am5.Tooltip.new(root, {})
+		// 	}));
+		// 	xRenderer.grid.template.setAll({
+		// 		location: 1
+		// 	});
 
-			xAxis.data.setAll(data);
+		// 	xAxis.data.setAll(data);
 
-			var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
-				min: 0,
-				max: 100, // Limit y-axis to 0-100
-				renderer: am5xy.AxisRendererY.new(root, {
-					strokeOpacity: 0.1
-				})
-			}));
+		// 	var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
+		// 		min: 0,
+		// 		max: 100, // Limit y-axis to 0-100
+		// 		renderer: am5xy.AxisRendererY.new(root, {
+		// 			strokeOpacity: 0.1
+		// 		})
+		// 	}));
 
-			// Add series
-			function makeSeries(name, fieldName) {
-				var series = chart.series.push(am5xy.ColumnSeries.new(root, {
-					name: name,
-					stacked: true,
-					xAxis: xAxis,
-					yAxis: yAxis,
-					valueYField: fieldName,
-					categoryXField: "year"
-				}));
+		// 	// Add series
+		// 	function makeSeries(name, fieldName) {
+		// 		var series = chart.series.push(am5xy.ColumnSeries.new(root, {
+		// 			name: name,
+		// 			stacked: true,
+		// 			xAxis: xAxis,
+		// 			yAxis: yAxis,
+		// 			valueYField: fieldName,
+		// 			categoryXField: "year"
+		// 		}));
 					
 				
-				series.columns.template.setAll({
-					tooltipText: "{name}, {valueYField}: {valueY}%",
-					tooltipY: am5.percent(10)
-				});
-				series.data.setAll(data);
+		// 		series.columns.template.setAll({
+		// 			tooltipText: "{name}, {valueYField}: {valueY}%",
+		// 			tooltipY: am5.percent(10)
+		// 		});
+		// 		series.data.setAll(data);
 
-				// Make stuff animate on load
-				series.appear();
+		// 		// Make stuff animate on load
+		// 		series.appear();
 
-				series.bullets.push(function () {
-					return am5.Bullet.new(root, {
-						sprite: am5.Label.new(root, {
-							text: "{valueYField}:{valueY}%",
-							fill: root.interfaceColors.get("alternativeText"),
-							centerY: am5.p50,
-							centerX: am5.p50,
-							populateText: true
-						})
-					});
-				});
-			}
+		// 		series.bullets.push(function () {
+		// 			return am5.Bullet.new(root, {
+		// 				sprite: am5.Label.new(root, {
+		// 					text: "{valueYField}:{valueY}%",
+		// 					fill: root.interfaceColors.get("alternativeText"),
+		// 					centerY: am5.p50,
+		// 					centerX: am5.p50,
+		// 					populateText: true
+		// 				})
+		// 			});
+		// 		});
+		// 	}
 
-			makeSeries("Site Running On", "EB/Grid");
-			makeSeries("Site Running On", "DG");
-			makeSeries("Site Running On", "Battery");
-			makeSeries("Site Running On", "Solar");
+		// 	makeSeries("Site Running On", "EB/Grid");
+		// 	makeSeries("Site Running On", "DG");
+		// 	makeSeries("Site Running On", "Battery");
+		// 	makeSeries("Site Running On", "Solar");
 
-			// Make stuff animate on load
-			chart.appear(1000, 100);
+		// 	// Make stuff animate on load
+		// 	chart.appear(1000, 100);
 
-		}); // end am5.ready()
+		// }); // end am5.ready()
 
 		am5.ready(function () {
 			// Create root element

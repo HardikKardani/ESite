@@ -1,8 +1,8 @@
 
 $(document).ready(function () {
-    
+
     FillData();
-    $("#btnSave").on("click", function () {
+    $("#btnSaves").on("click", function () {
         OnSave();
     });
 
@@ -10,10 +10,22 @@ $(document).ready(function () {
         onclear();
     });
 
+    $('#noOfTenant').on('input', function () {
+        let numberOfTenants = $(this).val();
+        if (numberOfTenants > 10) {
+            $(this).val(10);
+            numberOfTenants = 10;
+        }
+        if (numberOfTenants < 0) {
+            $(this).val(0);
+            numberOfTenants = 0;
+        }
+        createTextboxes(numberOfTenants);
+    });
 });
 
 function onclear() {
-    
+
     $('#sim2Number').val("");
     $('#sim2Operator').val("");
     $('#sim1Number').val("");
@@ -60,104 +72,65 @@ function onclear() {
     //SiteId
     $("#rectifierForm")[0].reset();
     $("#rectifierForm").validate().resetForm();
-    
+
 }
-
-//$("#rectifierForm").validate({
-//    rules: {
-//        BankName: {
-//            required: true,
-//            CheckName: true,
-//            noEmptySpaces: true
-//        },
-
-//    },
-//    //For custom messages
-//    messages: {
-//        BankName: {
-//            required: "Enter Bank Name",
-//            CheckName: "Bank Name already exists."
-//        },
-//    },
-//    errorElement: 'div',
-//    errorPlacement: function (error, element) {
-//        var placement = $(element).data('errors');
-//        if (element.parent('.input-group').length) {
-//            error.insertAfter(element.parent());      // radio/checkbox?
-//        } else if (element.parent().find('div').hasClass('input-group-append')) {
-//            error.insertAfter(element.parent().find('div.input-group-append').parent());  // select2
-//        } else if (element.hasClass('select2-hidden-accessible')) {
-//            error.insertAfter(element.next('span'));  // select2
-//        } else {
-//            error.insertAfter(element);
-//        }
-//    }
-//});
 
 function OnSave() {
 
-    var form = $("#rectifierForm");
-    debugger;
-    //form.validator('validate');
-    //var elmErr = form.find('.has-error');
-    //if (elmErr && elmErr.length > 0) {
-    //    Swal.fire({
-    //        icon: "error",
-    //        title: "Oops...",
-    //        text: "Please fill required feilds",
-    //    });
-    //    return false;
-    //} else {
-    var dataModel = {
-        SimCardNo2: $('#sim2Number').val(),
-        SimOperator2: $('#sim2Operator').val(),
-        SimCardNo1: $('#sim1Number').val(),
-        SimOperator1: $('#sim1Operator').val(),
-        IpAddress: $('#ipAddress').val(),
-        AssetId: $('#assetId').val(),
-        InstallationDate: $('#installationDate').val(),
-        Softwareversion: $('#softwareVersion').val(),
-        HardwareVersion: $('#hardwareVersion').val(),
-        Address: $('#address').val(),
-        //inCharge: $('#inCharge').val(),
-        Long: $('#long').val(),
-        Lat: $('#lat').val(),
-        //noOfTenant: $('#noOfTenant').val(),
-        //noOfDG: $('#noOfDG').val(),
-        CoolingType: $('#typeOfCooling').val(),
-        SiteType: $('#siteType').val(),
-        Country: $('#country').val(),
-        State: $('#state').val(),
-        RegionId: $('#region').val(),
-        SiteName: $('#SiteName').val(),
-        SiteId: $('#SiteId').val()
-    }
-    $.ajax({
-        type: "POST",
-        url: '/Site/SaveSite',
-        data: dataModel,
-        success: function (data) {
-            debugger;
-            if (data.status) {
-                Messagealert('s', data.message);
-                window.location.href = data.response;
-            }
-            else {
-                debugger;
-                Messagealert('w', data.message);
-            }
-        },
-        error: function (req, status, err) {
-            Messagealert('e', 'something went wrong' + status + err);
-        }
-    })
 
+    $('#rectifierForm').submit(function (event) {
+        event.preventDefault(); // Prevent the default form submission
+
+        // Prepare the data from the form
+        var siteViewModel = {
+            SimCardNo2: $('#sim2Number').val(),
+            SimOperator2: $('#sim2Operator').val(),
+            SimCardNo1: $('#sim1Number').val(),
+            SimOperator1: $('#sim1Operator').val(),
+            IpAddress: $('#ipAddress').val(),
+            AssetId: $('#assetId').val(),
+            InstallationDate: $('#installationDate').val(),
+            Softwareversion: $('#softwareVersion').val(),
+            HardwareVersion: $('#hardwareVersion').val(),
+            Address: $('#address').val(),
+            Long: $('#long').val(),
+            Lat: $('#lat').val(),
+            CoolingType: $('#typeOfCooling').val(),
+            SiteType: $('#siteType').val(),
+            Country: $('#country').val(),
+            State: $('#state').val(),
+            RegionId: $('#region').val(),
+            SiteName: $('#SiteName').val(),
+            SiteId: $('#SiteId').val(),
+            NoOfGenerator: $('#noOfGenerator').val(),
+            TankCapacity: $('#tankCapacity').val(),
+            LandMark: $('#landMark').val(),
+            SiteInChargeName: $('#siteInChargeName').val(),
+            ContactNo: $('#contactNo').val()
+        };
+
+        $.ajax({
+            url: '/Site/SaveSite',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(siteViewModel),
+            dataType: 'json',
+            success: function (response) {
+                console.log('Success:', response);
+                // Handle success - maybe update the UI or show a message
+            },
+            error: function (xhr, status, error) {
+                console.log('Error:', error);
+                // Handle error - maybe show an error message
+            }
+        });
+    });
     return false;
-    //}
-
-
 }
+
+
 function FillData() {
+    debugger;
     SiteDataTable = $('#SiteDataTable').DataTable({
         "ajax": {
             type: "GET",
@@ -205,7 +178,7 @@ function FillData() {
             realtime: false
         },
         "stateSave": false,
-       
+
         initComplete: function () {
             // Move Search To Panel Header
             let _container = $(this).parents('.console-panel').find('.get_dt_search')
@@ -216,78 +189,18 @@ function FillData() {
             $(_container).find("input").attr('placeholder', 'Search From Table');
             $("#SiteDataTable_wrapper  .dt-bottom").appendTo(_bottom_container);
             $("#SiteDataTable_wrapper  .top").css("display", "none");
-            
+
 
         }
     });
 
-    //$.ajax({
-    //    type: "GET",
-    //    url: "/Site/GetList",
-    //    success: function (data) {
-    //        debugger;
-    //        var slNo = 1;
-    //        $('#SiteDataTable').DataTable({
-    //            "order": [],
-    //            destroy: true,
-    //            autoWidth: true,
-    //            scrollX: true,
-    //            "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-    //            dom: 'Bfrtip',
-    //            buttons: [
-    //                'pageLength',
-    //                {
-    //                    extend: 'excel',
-    //                    exportOptions: {
-    //                        columns: 'th:not(:last-child)'
-    //                    }
-    //                }, {
-    //                    extend: 'csv',
-    //                    exportOptions: {
-    //                        columns: 'th:not(:last-child)'
-    //                    }
-    //                }
-    //            ],
-    //            "aaData": data.response,
-    //            "columns": [
-
-    //                {
-    //                    "data": "slNo",
-    //                    render: function (data, type, row, meta) {
-    //                        return meta.row + meta.settings._iDisplayStart + 1;
-    //                    }
-    //                },
-    //                { "data": "siteId" },
-    //                { "data": "siteName" },
-    //                { "data": "siteTypeNavigation" },
-    //                { "data": "countryNavigation" },
-    //                { "data": "region" },
-    //                { "data": "stateNavigation" },
-    //                { "data": "coolingTypeNavigation" },
-    //                {
-    //                    "data": "slNo", "orderable": false, visible:  true , "render": function (data) {
-    //                        var trhtml = '';
-                            
-    //                            trhtml += ' <a class="btn p-0 text-primary btnedit" href="javascript:void(0);" onClick="EditBank(' + data + ')" data-toggle="tooltip" data-placement="top" title="Edit" style="font-size: 1.06rem!important;"><i class="fas fa-edit"></i></a>'
-                            
-    //                            trhtml += '<a class="btn p-0 ml-1 text-danger" href = "javascript:void(0);" onClick="DeleteBank(' + data + ')" data - toggle="tooltip" data - placement="top" title = "Delete" style = "font-size: 1.06rem!important;" > <i class="fas fa-trash"></i></a>';
-                            
-    //                        return trhtml;
-    //                    }
-    //                }
-    //            ]
-
-    //        });
-
-          
-    //    }
-    //});
+    
 
 }
 
 function EditSite(id) {
     onclear();
-    
+
     $.ajax({
         type: 'GET',
         url: "/Site/Getdatabyid/?id=" + id,
@@ -354,3 +267,229 @@ function DeleteSite(id) {
     })
 
 }
+
+
+function createTextboxes(number) {
+    const container = $("#textboxContainer");
+    const numberOfTenants = parseInt(number, 10);
+    const maxTenants = 10;
+
+    container.empty();
+
+    if (isNaN(numberOfTenants) || numberOfTenants <= 0) {
+        return;
+    }
+
+    const limitedTenants = Math.min(numberOfTenants, maxTenants);
+
+    for (let i = 0; i < limitedTenants; i++) {
+        if (i % 3 === 0) {
+            container.append('<div class="row"></div>');
+        }
+
+        const divFormGroup = $('<div>', { class: 'form-group col-lg-4 col-md-12' });
+
+        const label = $('<label>').text(`Tenant ${i + 1}`);
+        const input = $('<input>', {
+            type: 'text',
+            class: 'form-control',
+            placeholder: `Tenant ${i + 1} Name`
+        });
+
+        divFormGroup.append(label, input);
+        container.children('.row').last().append(divFormGroup);
+    }
+}
+
+$(document).ready(function () {
+    $('#noOfTenant').on('input', function () {
+        var noOfTenant = $(this).val();
+        var nooftenanttab = $('.nooftenanttab');
+        var nooftenantcontent = $('.nooftenanttab-content');
+        nooftenanttab.empty();
+        nooftenantcontent.empty();
+        for (var i = 1; i <= noOfTenant; i++) {
+            var tabHtmlt = `
+     
+             <li>
+                 <a class="nav-link ${i === 1 ? 'active' : ''}" data-toggle="tab" href="#SiteAssets${i}">
+                     Site Assets ${i}
+                 </a>
+             </li>`;
+            nooftenanttab.append(tabHtmlt);
+            var tabHtml = `
+                    
+                        <div class="tab-pane  ${i === 1 ? 'show active' : 'fade'}" id="SiteAssets${i}">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-12">
+                                    <div class="form-group">
+                                        <label>1.Grid</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-12">
+                                    <div class="form-group">
+                                        <select class="select2 form-control">
+                                            <option value="Site1">Available</option>
+                                            <option value="Site1">Not Available</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-12">
+                                    <div class="form-group">
+                                        <select class="select2 form-control">
+                                            <option value="Site1">Visible</option>
+                                            <option value="Site1">Not Visible</option>
+                                            <option value="Site1">Disabled</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-12">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Remarks">
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-12">
+                                    <div class="form-group">
+                                        <label>2.Generator</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-12">
+                                    <div class="form-group">
+                                        <select class="select2 form-control">
+                                            <option value="Site1">Available</option>
+                                            <option value="Site1">Not Available</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-12">
+                                    <div class="form-group">
+                                        <select class="select2 form-control">
+                                            <option value="Site1">Visible</option>
+                                            <option value="Site1">Not Visible</option>
+                                            <option value="Site1">Disabled</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-12">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Remarks">
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-12">
+                                    <div class="form-group">
+                                        <label>3.Battery</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-12">
+                                    <div class="form-group">
+                                        <select class="select2 form-control">
+                                            <option value="Site1">Available</option>
+                                            <option value="Site1">Not Available</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-12">
+                                    <div class="form-group">
+                                        <select class="select2 form-control">
+                                            <option value="Site1">Visible</option>
+                                            <option value="Site1">Not Visible</option>
+                                            <option value="Site1">Disabled</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-12">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Remarks">
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-12">
+                                    <div class="form-group">
+                                        <label>4.Solar</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-12">
+                                    <div class="form-group">
+                                        <select class="select2 form-control">
+                                            <option value="Site1">Available</option>
+                                            <option value="Site1">Not Available</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-12">
+                                    <div class="form-group">
+                                        <select class="select2 form-control">
+                                            <option value="Site1">Visible</option>
+                                            <option value="Site1">Not Visible</option>
+                                            <option value="Site1">Disabled</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-12">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Remarks">
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-12">
+                                    <div class="form-group">
+                                        <label>5.Rectifier</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-12">
+                                    <div class="form-group">
+                                        <select class="select2 form-control">
+                                            <option value="Site1">Available</option>
+                                            <option value="Site1">Not Available</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-12">
+                                    <div class="form-group">
+                                        <select class="select2 form-control">
+                                            <option value="Site1">Visible</option>
+                                            <option value="Site1">Not Visible</option>
+                                            <option value="Site1">Disabled</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-12">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Remarks">
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-12">
+                                    <div class="form-group">
+                                        <label>6.Portable Battery</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-12">
+                                    <div class="form-group">
+                                        <select class="select2 form-control">
+                                            <option value="Site1">Available</option>
+                                            <option value="Site1">Not Available</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-12">
+                                    <div class="form-group">
+                                        <select class="select2 form-control">
+                                            <option value="Site1">Visible</option>
+                                            <option value="Site1">Not Visible</option>
+                                            <option value="Site1">Disabled</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-12">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Remarks">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+            `;
+            nooftenantcontent.append(tabHtml);
+        }
+    });
+});
+

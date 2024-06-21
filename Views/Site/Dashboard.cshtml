@@ -30,83 +30,109 @@
     #alink{
         cursor: pointer;
     }
+
+    .card-row {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        padding: 0 0px;
+        box-sizing: border-box;
+        margin-bottom: 23px;
+        font-size: 21px;
+    }
+     
 </style>
 
 
 <div class="content-area" id="content-area">
-    <div class="row p-2">
+    <div class="row">
         <div class="col-4">
             <div class="form-group">
-                <h5>Select Site</h5>
-                <select class="select2 form-control">
-                    <option value="Site1">Site 1</option>
-                    <option value="Site1">Site 2</option>
-                </select>
+                
+                <input type="text" class="form-control" placeholder="Site Name" id="SiteName" required>
             </div>
         </div>
-        <div class="col-4 mt-4">
-            <div class="form-group">
-                <button class="btn btn-accent">Search</button>
-            </div>
-        </div>
-        <div class="col-4 mt-4" >
+        
+        <div class="col-8" >
             <div class="form-group" style="float: right;">
-                <button class="btn btn-accent" id="pdfDownload">Download</button>
+                <button class="btn btn-sm btn-accent" id="pdfDownload">Download</button>
             </div>
         </div>
     </div>
+    <div class="mb-2" id="weather-data">
+        
+    </div>
+    <div class="card mb-2">
 
-    <div class="grid-stack gs-area">
-        <div class="grid-stack-item" data-gs-x="0" data-gs-y="0" data-gs-width="12" data-gs-height="5"
-             data-gs-min-height="5" data-gs-min-width="3" data-gs-no-resize="true">
-            <div class="console-panel grid-stack-item-content console-no-header">
-               
-                <div class="console-panel-body" style="background-color: rgb(147, 196, 125);">
+        <div class="card-body p-1" style="background-color: rgb(12, 52, 61);color:white;">
+            
                     <div class="row">
-                        <div class="col-12 col-md-12">
-                            <div class="row mb-3">
-                                <div class="col-lg-2 col-md-12">
-                                    <label style="font-weight: bold;">Site ID</label> :<span id="siteID"></span><br />
-                                    <label style="font-weight: bold;">Site Type</label> :<span id="siteType"></span>
-                                </div>
-                                <div class="col-lg-2 col-md-12">
-                                    <label style="font-weight: bold;">Site Name</label> :<span id="siteName"></span><br />
-                                    <label style="font-weight: bold;">No of DG</label> :<span id="noOfDg"> </span>
-                                </div>
-                                <div class="col-lg-2 col-md-12">
-                                    <label style="font-weight: bold;">Region</label> :<span id="region"></span><br />
-                                    <label style="font-weight: bold;">Type Of cooling</label> :<span id="typeOfCooling"></span>
-                                </div>
-                                <div class="col-lg-2 col-md-12">
-                                    <label style="font-weight: bold;">State</label> :<span id="state"></span><br />
-                                    <label style="font-weight: bold;">Site Running On</label> :<span class="text-success" id="siteRunningOn"></span>
+                        <div class="col-lg-2 col-md-12">
+                            <label style="font-weight: bold;color:white;">Site ID</label> :<span id="siteID"></span><br />
+                    <label style="font-weight: bold;color:white;">No of DG</label> :<span id="noOfDg"> </span>
+                        </div>
+                        <div class="col-lg-2 col-md-12">
+                            <label style="font-weight: bold;color:white;">Site Name</label> :<span id="siteName"></span><br />
+                    <label style="font-weight: bold;color:white;">Type Of cooling</label> :<span id="typeOfCooling"></span>
+                        </div>
+                        <div class="col-lg-2 col-md-12">
+                            <label style="font-weight: bold;color:white;">Region</label> :<span id="region"></span><br />
+                    <label style="font-weight: bold;color:white;">Site Running On</label> :<span class="text-success" id="siteRunningOn"></span>
+                </div>
+                        <div class="col-lg-2 col-md-12">
+                            <label style="font-weight: bold;color:white;">State</label> :<span id="state"></span><br />
+                    <label style="font-weight: bold;color:white;">No of Tenant :</label>: <span " id="noOfTenant"></span>
 
-                                </div>
-                                <div class="col-lg-2 col-md-12">
-                                    <label style="font-weight: bold;">Country</label> :<span id="country"></span><br />
-                                    <label style="font-weight: bold;">No of Tenant : <span " id="noOfTenant"></span></label>
-                                </div>
-                                <div class="col-lg-2 col-md-12">
-                                    
-                                </div>
-                                <div class="col-lg-2 col-md-12">
-                                    <label style="font-weight: bold;">As on</label>:<span id="searchOn">
-                                    </span>
-                                </div>
-                                <div class="col-lg-2 col-md-12">
-                                    <a class="" href="/Site/Map" title=""><i class="icon dripicons-location"></i>Site Direction</a>
-                                    
-                                </div>
-                                <div class="col-lg-2 col-md-12">
-                                    <a class="" href="/Site/LiveData" data-toggle="modal" data-target=".siteImages" title=""><i class="fa fa-building"></i> Site Photo</a>
-                                </div>
-                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-12">
+                            <label style="font-weight: bold;color:white;">Country</label> :<span id="country"></span><br />
+                    <label style="font-weight: bold;color:white;">As on</label>:<span id="searchOn">
+                    </span>
+                        </div>
+                        <div class="col-lg-2 col-md-12">
+                    <label style="font-weight: bold;color:white;">Site Type</label> :<span id="siteType"></span><br />
+                    <a class="" href="/Site/Map" title="" data-rel="tooltip" data-original-title="Site Location"><i class="icon dripicons-location"></i></a>
+                    <a class="" href="/Site/LiveData" data-toggle="modal" data-target=".siteImages" title="" data-rel="tooltip" data-original-title="Site Image"><i class="fa fa-building"></i> </a>
+                        </div>
+                        
+                    </div>
+                
+
+
+        </div>
+    </div><!-- Console Panel -->
+    <div class="card mb-2" >
+        <div class="card-body p-1" style="background-color: rgb(12, 52, 61);;color:white;">
+            <div class="cph-left">
+                <h5 id="alink" style="font-weight: bold;"><a href="/Site/SystemDetails">Total System Status</a></h5>
+            </div>
+            
+                    <div class="row">
+                        <div class="col-3">
+                            <label style="font-weight: bold;color:white;">System Voltage</label> :<span id="systemVolatge">52.5 V</span><br />
+                            <label style="font-weight: bold;color:white;">Rectifier Power</label> :<span id="rectifierPower">20 W</span>
+                        </div>
+                        <div class="col-3">
+                            <label style="font-weight: bold;color:white;">Load Current</label> :<span id="loadCurrent">0.1 A</span><br />
+                            <label style="font-weight: bold;color:white;">Temperature</label> :<span id="temperature"> 31.4 C</span>
+                        </div>
+                        <div class="col-3">
+                            <label style="font-weight: bold;color:white;">Rectifier Current</label> :<span id="rectifierCurrent">0.4 A</span><br />
+                            <label style="font-weight: bold;color:white;">Ac Voltage</label> :<span id="acVoltage"> 198.1 V</span>
+                        </div>
+                        <div class="col-3">
+                            <label style="font-weight: bold;color:white;">Battery Current</label> :<span id="batteryCurrent">0.7 A</span><br />
+                            <label style="font-weight: bold;color:white;">System Power</label> :<span id="systemPower">5 W</span>
+
                         </div>
                     </div>
-
-
-                </div>
-            </div><!-- Console Panel -->
+            
+        </div>
+    </div><!-- Console Panel -->
+    <div class="grid-stack gs-area">
+        @* <div class="grid-stack-item" data-gs-x="0" data-gs-y="0" data-gs-width="12" data-gs-height="5"
+             data-gs-min-height="5" data-gs-min-width="3" data-gs-no-resize="true">
+            
         </div>
         <div class="grid-stack-item ui-resizable-disabled" data-gs-x="6" data-gs-y="8" data-gs-width="12" data-gs-height="5"
              data-gs-min-height="5" data-gs-min-width="3">
@@ -119,20 +145,20 @@
                         <div class="col-lg-12 col-md-12 col-12">
                             <div class="row mb-3">
                                 <div class="col-3">
-                                    <label style="font-weight: bold;">System Voltage</label> :<span id="systemVolatge">52.5 V</span><br />
-                                    <label style="font-weight: bold;">Rectifier Power</label> :<span id="rectifierPower">20 W</span>
+                                    <label style="font-weight: bold;color:white;">System Voltage</label> :<span id="systemVolatge">52.5 V</span><br />
+                                    <label style="font-weight: bold;color:white;">Rectifier Power</label> :<span id="rectifierPower">20 W</span>
                                 </div>
                                 <div class="col-3">
-                                    <label style="font-weight: bold;">Load Current</label> :<span id="loadCurrent">0.1 A</span><br />
-                                    <label style="font-weight: bold;">Temperature</label> :<span id="temperature"> 31.4 C</span>
+                                    <label style="font-weight: bold;color:white;">Load Current</label> :<span id="loadCurrent">0.1 A</span><br />
+                                    <label style="font-weight: bold;color:white;">Temperature</label> :<span id="temperature"> 31.4 C</span>
                                 </div>
                                 <div class="col-3">
-                                    <label style="font-weight: bold;">Rectifier Current</label> :<span id="rectifierCurrent">0.4 A</span><br />
-                                    <label style="font-weight: bold;">Ac Voltage</label> :<span id="acVoltage"> 198.1 V</span>
+                                    <label style="font-weight: bold;color:white;">Rectifier Current</label> :<span id="rectifierCurrent">0.4 A</span><br />
+                                    <label style="font-weight: bold;color:white;">Ac Voltage</label> :<span id="acVoltage"> 198.1 V</span>
                                 </div>
                                 <div class="col-3">
-                                    <label style="font-weight: bold;">Battery Current</label> :<span id="batteryCurrent">0.7 A</span><br />
-                                    <label style="font-weight: bold;">System Power</label> :<span id="systemPower">5 W</span>
+                                    <label style="font-weight: bold;color:white;">Battery Current</label> :<span id="batteryCurrent">0.7 A</span><br />
+                                    <label style="font-weight: bold;color:white;">System Power</label> :<span id="systemPower">5 W</span>
 
                                 </div>
                             </div>
@@ -140,8 +166,811 @@
                     </div> 
                 </div>
             </div><!-- Console Panel -->
+        </div> *@
+         <div class="grid-stack-item" data-gs-x="0" data-gs-y="15" data-gs-width="12" data-gs-height="28"
+      data-gs-min-height="28" data-gs-min-width="3">
+     <div class="console-panel grid-stack-item-content console-no-header">
+         <div class="console-panel-body">
+             <div class="mytab theme1">
+                 <ul class="nav nav-tabs">
+                     <li>
+                         <a class="nav-link active" data-toggle="tab" data-target="#tab4">
+
+                             Tenant 1
+                         </a>
+                     </li>
+
+                 </ul><!-- Selectors -->
+
+                 <div class="tab-content">
+                     <div class="tab-pane fade show active" id="tab4">
+                         <div class="grid-stack grid-stacks  gs-area">
+                             
+                                    <div class="grid-stack-item" data-gs-x="0" data-gs-y="18"
+                                  data-gs-width="4" data-gs-height="12" data-gs-min-height="12"
+                                  data-gs-min-width="4">
+                                 <div class="console-panel grid-stack-item-content">
+                                     <div class="console-panel-header light" style="background-color: rgb(12, 52, 61);">
+                                         <div class="cph-left">
+                                             <h5>Generator <i class="icon dripicons-bell text-warning" style="font-size: 1em;"></i></h5>
+                                         </div>
+                                         <div class="cph-right">
+                                             <ul class="top-header-btns">
+                                                 <li>
+                                                     <a class="collapse-panel" href="#"
+                                                        title="Collapse/Uncollapse Panel"
+                                                        data-rel="tooltip">
+                                                         <i class="icon dripicons-chevron-up"></i>
+                                                     </a>
+                                                 </li>
+                                                 <li class="dropdown">
+                                                     <a href="#" data-toggle="dropdown"
+                                                        title="Panel Options" data-rel="tooltip">
+                                                         <i class="icon dripicons-dots-3"></i>
+                                                     </a>
+                                                     <div class="dropdown-menu  dropdown-menu-right theme-media">
+                                                         <div class="dropdown-menu-header">
+                                                             <div class="dmh-inner">
+                                                                 <h4>Panel Options</h4>
+                                                             </div>
+                                                         </div>
+                                                         <a class="dropdown-item cp" href="#"
+                                                            title="">
+                                                             <span class="color-fill-icon"
+                                                                   style="background-color:#fff;"></span>
+                                                             Header Background Color
+                                                         </a>
+                                                         <a class="dropdown-item header-fontcolor"
+                                                            href="#" title="">
+                                                             <span class="color-fill-icon"
+                                                                   style="background-color:#333"></span>
+                                                             Header Font Color Dark/Light
+                                                         </a>
+                                                     </div>
+                                                 </li>
+                                                 <li>
+                                                     <a class="removeWidgets" href="#"
+                                                        title="Remove Panel" data-rel="tooltip">
+                                                         <i class="icon dripicons-cross"></i>
+                                                     </a>
+                                                 </li>
+                                             </ul>
+                                         </div>
+                                     </div><!-- Panel Header -->
+                                     <div class="console-panel-body">
+                                         <a href="/Site/Generator" data-rel="tooltip" data-original-title="Click to View full details">
+                                         <div class="row" id="Generator">
+                                             <div class="col-12">
+
+                                                 <div class="row">
+                                                     <<div class="col-12 text-center center-img">
+                                                             <i class="fa fa-solid fa-industry" style="font-size:3em;"></i><br />
+                                                     </div>
+                                                    <div class="col-12 text-center">
+                                                         <label> 1 Nos</label><br />
+                                                         <label class="text-warning">
+                                                             Generator
+                                                         </label><br />
+                                                     </div>
+
+                                                 </div>
+                                                 <div class="row">
+                                                     <div class="col-4 text-center">
+                                                         <Span id="gRVolt">O V</Span> <br />
+                                                         <span class="text-warning ">R VOLT</span>
+                                                     </div>
+                                                     <div class="col-4 text-center">
+                                                         <Span id="gYVlot">O V</Span> <br />
+                                                         <span class="text-warning ">Y VOLT</span>
+                                                     </div>
+                                                     <div class="col-4 text-center">
+                                                         <Span id="gBVlot">O V</Span> <br />
+                                                         <span class="text-warning ">B VOLT</span>
+                                                     </div>
+                                                 </div>
+                                                 <div class="row">
+                                                     <div class="col-4 text-center">
+                                                         <Span id="BRCt">O A</Span> <br />
+                                                         <span class="text-warning ">R CT</span>
+                                                     </div>
+                                                     <div class="col-4 text-center">
+                                                         <Span id="BVCt">O A</Span><br />
+                                                         <span class="text-warning ">Y CT</span>
+                                                     </div>
+                                                     <div class="col-4 text-center">
+                                                         <Span id="BBCt">O A</Span><br />
+                                                         <span class="text-warning ">B CT</span>
+                                                     </div>
+                                                 </div>
+                                                 <div class="row">
+                                                     <div class="col-4 text-center">
+                                                         <Span id="gFreq">O Hz</Span><br />
+                                                         <span class="text-warning ">Freq</span>
+                                                     </div>
+                                                     <div class="col-4 text-center">
+                                                         <Span id="gFuel"></Span><br />
+                                                         <span class="text-warning ">Fuel</span>
+                                                     </div>
+                                                     <div class="col-4 text-center">
+                                                         <Span id="gBat">O V</Span> <br />
+                                                         <span class="text-warning ">Bat VOLT</span>
+                                                     </div>
+                                                 </div>
+                                             </div>
+                                         </div>
+                                         </a>
+                                     </div>
+                                 </div>
+                             </div><!-- Console Panel gen -->
+                                    <div class="grid-stack-item" data-gs-x="4" data-gs-y="18"
+                                  data-gs-width="4" data-gs-height="12" data-gs-min-height="12"
+                                  data-gs-min-width="4">
+                                 <div class="console-panel grid-stack-item-content">
+                                     <div class="console-panel-header light" style="background-color: rgb(12, 52, 61);">
+                                         <div class="cph-left">
+                                             <h5>Battery <i class="icon dripicons-bell text-warning" style="font-size: 1em;"></i></h5>
+                                         </div>
+                                         <div class="cph-right">
+                                             <ul class="top-header-btns">
+                                                 <li>
+                                                     <a class="collapse-panel" href="#"
+                                                        title="Collapse/Uncollapse Panel"
+                                                        data-rel="tooltip">
+                                                         <i class="icon dripicons-chevron-up"></i>
+                                                     </a>
+                                                 </li>
+                                                 <li class="dropdown">
+                                                     <a href="#" data-toggle="dropdown"
+                                                        title="Panel Options" data-rel="tooltip">
+                                                         <i class="icon dripicons-dots-3"></i>
+                                                     </a>
+                                                     <div class="dropdown-menu  dropdown-menu-right theme-media">
+                                                         <div class="dropdown-menu-header">
+                                                             <div class="dmh-inner">
+                                                                 <h4>Panel Options</h4>
+                                                             </div>
+                                                         </div>
+                                                         <a class="dropdown-item cp" href="#"
+                                                            title="">
+                                                             <span class="color-fill-icon"
+                                                                   style="background-color:#fff;"></span>
+                                                             Header Background Color
+                                                         </a>
+                                                         <a class="dropdown-item header-fontcolor"
+                                                            href="#" title="">
+                                                             <span class="color-fill-icon"
+                                                                   style="background-color:#333"></span>
+                                                             Header Font Color Dark/Light
+                                                         </a>
+                                                     </div>
+                                                 </li>
+                                                 <li>
+                                                     <a class="removeWidgets" href="#"
+                                                        title="Remove Panel" data-rel="tooltip">
+                                                         <i class="icon dripicons-cross"></i>
+                                                     </a>
+                                                 </li>
+                                             </ul>
+                                         </div>
+                                     </div><!-- Panel Header -->
+                                     <div class="console-panel-body">
+                                         <a href="/Site/Battery" data-rel="tooltip" data-original-title="Click to View full details">
+                                             <div class="row" id="Battery">
+                                                 <div class="col-12">
+                                                     <div class="row">
+                                                         <<div class="col-12 text-center center-img">
+                                                             <i class="fa fa-car-battery" style="font-size:3em;"></i><br />
+                                                         </div>
+                                                         <div class="col-12 text-center">
+                                                             <label>1 Nos</label><br />
+                                                             <label class="text-warning">
+                                                                 Battery
+                                                             </label><br />
+                                                         </div>
+
+                                                     </div>
+
+                                                     <div class="row">
+                                                         <div class="col-6 text-center">
+                                                             <Span id="BattreyType">Lithium</Span> <br />
+                                                             <span class="text-warning ">
+                                                                 Battery
+                                                                 Type
+                                                             </span>
+                                                         </div>
+                                                         <div class="col-6 text-center">
+                                                             <Span id="NoOfBattery">22 Nos</Span> <br />
+                                                             <span class="text-warning ">
+                                                                 No of
+                                                                 Battery
+                                                             </span>
+                                                         </div>
+                                                     </div>
+                                                     <div class="row">
+                                                         <div class="col-6 text-center">
+                                                             <Span id="Ct">-76.00 A</Span> <br />
+                                                             <span class="text-warning ">CT</span>
+                                                         </div>
+                                                         <div class="col-6 text-center">
+                                                             <Span id="Volt">48.01 V</Span> <br />
+                                                             <span class="text-warning ">VOLT</span>
+                                                         </div>
+                                                     </div>
+                                                     <div class="row">
+                                                         <div class="col-6 text-center">
+                                                             <Span id="AvgBatTemp">26.64 C</Span> <br />
+                                                             <span class="text-warning ">
+                                                                 Avg
+                                                                 Bat.Temp
+                                                             </span>
+                                                         </div>
+                                                         <div class="col-6 text-center">
+                                                             <Span id="AvgEngTemp">26.64 C</Span> <br />
+                                                             <span class="text-warning ">
+                                                                 Avg
+                                                                 Eng.Temp
+                                                             </span>
+                                                         </div>
+                                                     </div>
+                                                 </div>
+                                             </div>
+                                         </a>
+                                     </div>
+                                 </div><!-- Console Panel -->
+                             </div><!-- Console Panel batt -->
+                                    <div class="grid-stack-item" data-gs-x="8" data-gs-y="18"
+                                         data-gs-width="4" data-gs-height="12" data-gs-min-height="12"
+                                         data-gs-min-width="4">
+                                        <div class="console-panel grid-stack-item-content">
+                                            <div class="console-panel-header light" style="background-color: rgb(12, 52, 61);">
+                                                <div class="cph-left">
+                                                    <h5>Portable Battery <i class="icon dripicons-bell text-warning" style="font-size: 1em;"></i></h5>
+                                                </div>
+                                                <div class="cph-right">
+                                                    <ul class="top-header-btns">
+                                                        <li>
+                                                            <a class="collapse-panel" href="#"
+                                                               title="Collapse/Uncollapse Panel"
+                                                               data-rel="tooltip">
+                                                                <i class="icon dripicons-chevron-up"></i>
+                                                            </a>
+                                                        </li>
+                                                        <li class="dropdown">
+                                                            <a href="#" data-toggle="dropdown"
+                                                               title="Panel Options" data-rel="tooltip">
+                                                                <i class="icon dripicons-dots-3"></i>
+                                                            </a>
+                                                            <div class="dropdown-menu  dropdown-menu-right theme-media">
+                                                                <div class="dropdown-menu-header">
+                                                                    <div class="dmh-inner">
+                                                                        <h4>Panel Options</h4>
+                                                                    </div>
+                                                                </div>
+                                                                <a class="dropdown-item cp" href="#"
+                                                                   title="">
+                                                                    <span class="color-fill-icon"
+                                                                          style="background-color:#fff;"></span>
+                                                                    Header Background Color
+                                                                </a>
+                                                                <a class="dropdown-item header-fontcolor"
+                                                                   href="#" title="">
+                                                                    <span class="color-fill-icon"
+                                                                          style="background-color:#333"></span>
+                                                                    Header Font Color Dark/Light
+                                                                </a>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <a class="removeWidgets" href="#"
+                                                               title="Remove Panel" data-rel="tooltip">
+                                                                <i class="icon dripicons-cross"></i>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div><!-- Panel Header -->
+                                            <div class="console-panel-body">
+                                                <a href="/Site/PortableBattery" data-rel="tooltip" data-original-title="Click to View full details">
+                                                    <div class="row" id="Battery">
+                                                        <div class="col-12">
+
+                                                            <div class="row">
+                                                                <<div class="col-12 text-center center-img">
+                                                                    <i class="fa fa-solid fa-charging-station" style="font-size:3em;"></i><br />
+                                                                </div>
+                                                                <div class="col-12 text-center">
+                                                                    <label>1 Nos</label><br />
+                                                                    <label class="text-warning">
+                                                                        Portable Battery
+                                                                    </label><br />
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div class="row">
+                                                                <div class="col-6 text-center">
+                                                                    <Span id="BattreyType">Lithium</Span> <br />
+                                                                    <span class="text-warning ">
+                                                                        Battery
+                                                                        Type
+                                                                    </span>
+                                                                </div>
+                                                                <div class="col-6 text-center">
+                                                                    <Span id="NoOfBattery">22 Nos</Span> <br />
+                                                                    <span class="text-warning ">
+                                                                        No of
+                                                                        Battery
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-6 text-center">
+                                                                    <Span id="Ct">-76.00 A</Span> <br />
+                                                                    <span class="text-warning ">CT</span>
+                                                                </div>
+                                                                <div class="col-6 text-center">
+                                                                    <Span id="Volt">48.01 V</Span> <br />
+                                                                    <span class="text-warning ">VOLT</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-6 text-center">
+                                                                    <Span id="AvgBatTemp">26.64 C</Span> <br />
+                                                                    <span class="text-warning ">
+                                                                        Avg
+                                                                        Bat.Temp
+                                                                    </span>
+                                                                </div>
+                                                                <div class="col-6 text-center">
+                                                                    <Span id="AvgEngTemp">26.64 C</Span> <br />
+                                                                    <span class="text-warning ">
+                                                                        Avg
+                                                                        Eng.Temp
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div><!-- Console Panel pb -->
+                                    </div><!-- Console Panel -->
+                             <div class="grid-stack-item" data-gs-x="0" data-gs-y="30"
+                                  data-gs-width="4" data-gs-height="12" data-gs-min-height="10"
+                                  data-gs-min-width="4">
+                                 <div class="console-panel grid-stack-item-content">
+                                     <div class="console-panel-header light" style="background-color: rgb(12, 52, 61);">
+                                         <div class="cph-left">
+                                             <h5>Solar <i class="icon dripicons-bell text-warning" style="font-size: 1em;"></i></h5>
+                                         </div>
+                                         <div class="cph-right">
+                                             <ul class="top-header-btns">
+                                                 <li>
+                                                     <a class="collapse-panel" href="#"
+                                                        title="Collapse/Uncollapse Panel"
+                                                        data-rel="tooltip">
+                                                         <i class="icon dripicons-chevron-up"></i>
+                                                     </a>
+                                                 </li>
+                                                 <li class="dropdown">
+                                                     <a href="#" data-toggle="dropdown"
+                                                        title="Panel Options" data-rel="tooltip">
+                                                         <i class="icon dripicons-dots-3"></i>
+                                                     </a>
+                                                     <div class="dropdown-menu  dropdown-menu-right theme-media">
+                                                         <div class="dropdown-menu-header">
+                                                             <div class="dmh-inner">
+                                                                 <h4>Panel Options</h4>
+                                                             </div>
+                                                         </div>
+                                                         <a class="dropdown-item cp" href="#"
+                                                            title="">
+                                                             <span class="color-fill-icon"
+                                                                   style="background-color:#fff;"></span>
+                                                             Header Background Color
+                                                         </a>
+                                                         <a class="dropdown-item header-fontcolor"
+                                                            href="#" title="">
+                                                             <span class="color-fill-icon"
+                                                                   style="background-color:#333"></span>
+                                                             Header Font Color Dark/Light
+                                                         </a>
+                                                     </div>
+                                                 </li>
+                                                 <li>
+                                                     <a class="removeWidgets" href="#"
+                                                        title="Remove Panel" data-rel="tooltip">
+                                                         <i class="icon dripicons-cross"></i>
+                                                     </a>
+                                                 </li>
+                                             </ul>
+                                         </div>
+                                     </div><!-- Panel Header -->
+                                     <div class="console-panel-body">
+                                         <a href="/Site/Solar" data-rel="tooltip" data-original-title="Click to View full details">
+                                         <div class="row" id="temp">
+                                             <div class="col-12">
+
+                                                 <div class="row">
+                                                     <div class="col-12 text-center center-img">
+                                                                    <i class="fas fa-solar-panel" style="font-size:3em;"></i><br />
+                                                     </div>
+                                                     <div class="col-12 text-center">
+                                                         <label id="NoofChargers"></label><br />
+                                                         <label class="text-warning">No of Chargers</label><br />
+                                                     </div>
+                                                 </div>
+                                                 <div class="row">
+                                                     <div class="col-6 text-center ">
+                                                         <Span id="IPCt"></Span> <br />
+                                                         <span class="text-warning ">I/P CT</span>
+                                                     </div>
+                                                     <div class="col-6 text-center">
+                                                         <Span id="IPVolt"></Span> :<br />
+                                                         <span class="text-warning ">I/P VOLT</span>
+                                                     </div>
+                                                 </div>
+                                                 <div class="row">
+                                                     <div class="col-6 text-center">
+                                                         <Span id="OPCt"> </Span><br />
+                                                         <span class="text-warning ">O/P CT</span>
+                                                     </div>
+                                                     <div class="col-6 text-center">
+                                                         <Span id="OPVolt"></Span> <br />
+                                                         <span class="text-warning ">O/P VOLT</span>
+                                                     </div>
+                                                 </div>
+                                             </div>
+                                         </div>
+                                         </a>
+                                     </div>
+                                 </div>
+                             </div><!-- Console Panel solar -->
+                             <div class="grid-stack-item" data-gs-x="4" data-gs-y="30"
+                                  data-gs-width="4" data-gs-height="12" data-gs-min-height="10"
+                                  data-gs-min-width="4">
+                                 <div class="console-panel grid-stack-item-content">
+                                     <div class="console-panel-header light" style="background-color: rgb(12, 52, 61);">
+                                         <div class="cph-left">
+                                             <h5>Rectifier <i class="icon dripicons-bell text-warning" style="font-size: 1em;"></i></h5>
+                                         </div>
+                                         <div class="cph-right">
+                                             <ul class="top-header-btns">
+                                                 <li>
+                                                     <a class="collapse-panel" href="#"
+                                                        title="Collapse/Uncollapse Panel"
+                                                        data-rel="tooltip">
+                                                         <i class="icon dripicons-chevron-up"></i>
+                                                     </a>
+                                                 </li>
+                                                 <li class="dropdown">
+                                                     <a href="#" data-toggle="dropdown"
+                                                        title="Panel Options" data-rel="tooltip">
+                                                         <i class="icon dripicons-dots-3"></i>
+                                                     </a>
+                                                     <div class="dropdown-menu  dropdown-menu-right theme-media">
+                                                         <div class="dropdown-menu-header">
+                                                             <div class="dmh-inner">
+                                                                 <h4>Panel Options</h4>
+                                                             </div>
+                                                         </div>
+                                                         <a class="dropdown-item cp" href="#"
+                                                            title="">
+                                                             <span class="color-fill-icon"
+                                                                   style="background-color:#fff;"></span>
+                                                             Header Background Color
+                                                         </a>
+                                                         <a class="dropdown-item header-fontcolor"
+                                                            href="#" title="">
+                                                             <span class="color-fill-icon"
+                                                                   style="background-color:#333"></span>
+                                                             Header Font Color Dark/Light
+                                                         </a>
+                                                     </div>
+                                                 </li>
+                                                 <li>
+                                                     <a class="removeWidgets" href="#"
+                                                        title="Remove Panel" data-rel="tooltip">
+                                                         <i class="icon dripicons-cross"></i>
+                                                     </a>
+                                                 </li>
+                                             </ul>
+                                         </div>
+                                     </div><!-- Panel Header -->
+                                     <div class="console-panel-body">
+                                         <a href="/Site/Rectifier" data-rel="tooltip" data-original-title="Click to View full details">
+                                         <div class="row" id="Solar">
+                                             <div class="col-12">
+
+                                                 <div class="row">
+                                                     <div class="col-12 text-center center-img">
+                                                                    <i class="fa fa-microchip" style="font-size:3em;"></i><br />
+                                                     </div>
+
+                                                     <div class="col-12 text-center">
+                                                         <label id="NoofRectifier"></label><br />
+                                                         <label class="text-warning">
+                                                             No of Rectifier
+                                                         </label><br />
+                                                     </div>
+                                                 </div>
+                                                 <div class="row">
+                                                     <div class="col-6 text-center">
+                                                         <Span id="RIPCt"></Span> <br />
+                                                         <span class="text-warning ">I/P CT</span>
+                                                     </div>
+                                                     <div class="col-6 text-center">
+                                                         <Span id="RIPVolt"></Span> <br />
+                                                         <span class="text-warning ">I/P VOLT</span>
+                                                     </div>
+                                                 </div>
+                                                 <div class="row">
+                                                     <div class="col-6 text-center">
+                                                         <Span id="ROPCt"></Span> <br />
+                                                         <span class="text-warning ">O/P CT</span>
+                                                     </div>
+                                                     <div class="col-6 text-center">
+                                                         <Span id="OPVolt"></Span> <br />
+                                                         <span class="text-warning ">O/P VOLT</span>
+                                                     </div>
+                                                 </div>
+                                             </div>
+                                         </div>
+                                         </a>
+                                     </div>
+                                 </div>
+                             </div><!-- Console Panel rec -->
+                             <div class="grid-stack-item" data-gs-x="8" data-gs-y="30"
+                                  data-gs-width="4" data-gs-height="12" data-gs-min-height="10"
+                                  data-gs-min-width="4">
+                                        <div class="console-panel grid-stack-item-content">
+                                            <div class="console-panel-header light" style="background-color: rgb(12, 52, 61);">
+                                                <div class="cph-left">
+                                                    <h5>Grid <i class="icon dripicons-bell text-warning" style="font-size: 1em;"></i></h5>
+                                                </div>
+                                                <div class="cph-right">
+                                                    <ul class="top-header-btns">
+                                                        <li>
+                                                            <a class="collapse-panel" href="#"
+                                                               title="Collapse/Uncollapse Panel"
+                                                               data-rel="tooltip">
+                                                                <i class="icon dripicons-chevron-up"></i>
+                                                            </a>
+                                                        </li>
+                                                        <li class="dropdown">
+                                                            <a href="#" data-toggle="dropdown"
+                                                               title="Panel Options" data-rel="tooltip">
+                                                                <i class="icon dripicons-dots-3"></i>
+                                                            </a>
+                                                            <div class="dropdown-menu  dropdown-menu-right theme-media">
+                                                                <div class="dropdown-menu-header">
+                                                                    <div class="dmh-inner">
+                                                                        <h4>Panel Options</h4>
+                                                                    </div>
+                                                                </div>
+                                                                <a class="dropdown-item cp" href="#"
+                                                                   title="">
+                                                                    <span class="color-fill-icon"
+                                                                          style="background-color:#fff;"></span>
+                                                                    Header Background Color
+                                                                </a>
+                                                                <a class="dropdown-item header-fontcolor"
+                                                                   href="#" title="">
+                                                                    <span class="color-fill-icon"
+                                                                          style="background-color:#333"></span>
+                                                                    Header Font Color Dark/Light
+                                                                </a>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <a class="removeWidgets" href="#"
+                                                               title="Remove Panel" data-rel="tooltip">
+                                                                <i class="icon dripicons-cross"></i>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div><!-- Panel Header -->
+                                            <div class="console-panel-body ">
+                                                <a href="/Site/Grid" data-rel="tooltip" data-original-title="Click to View full details">
+                                                    <div class="row P-0" id="Grid">
+                                                        <div class="col-12">
+                                                            <div class="row">
+                                                                <div class="col-12 text-center center-img">
+
+                                                                    <i class="fa fa-solid fa-bolt" style="font-size:3em;"></i><br />
+                                                                </div>
+                                                                <div class="col-12 text-center">
+                                                                    <label>3 Phase </label><br />
+                                                                    <label class="text-warning">
+
+                                                                        Grid Type
+                                                                    </label><br />
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-4 text-center">
+                                                                    <Span id="GRVOLT"></Span> <br />
+                                                                    <span class="text-warning ">R VOLT</span>
+                                                                </div>
+                                                                <div class="col-4 text-center">
+                                                                    <Span id="GVVOLT"></Span> <br />
+                                                                    <span class="text-warning ">Y VOLT</span>
+                                                                </div>
+                                                                <div class="col-4 text-center">
+                                                                    <Span id="GBVOLT"></Span> <br />
+                                                                    <span class="text-warning ">B VOLT</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-4 text-center">
+                                                                    <Span id="GRCR"></Span> <br />
+                                                                    <span class="text-warning ">R CR</span>
+                                                                </div>
+                                                                <div class="col-4 text-center">
+                                                                    <Span id="GVCt"></Span> <br />
+                                                                    <span class="text-warning ">Y CT</span>
+                                                                </div>
+                                                                <div class="col-4 text-center">
+                                                                    <Span id="GBCR"></Span> <br />
+                                                                    <span class="text-warning ">B CR</span>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div><!-- Console Panel grid-->
+                                 
+                             </div>
+
+                         </div>
+
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+ </div>
+    </div>
+        <div class="grid-stack gs-area" id="controller">
+            <div class="grid-stack-item" data-gs-x="0" data-gs-y="43"
+                 data-gs-width="12" data-gs-height="8" data-gs-min-height="8"
+             data-gs-min-width="12" data-gs-no-resize="true">
+                <div class="console-panel grid-stack-item-content">
+                    <div class="console-panel-header light" style="background-color: rgb(12, 52, 61);">
+                        <div class="cph-left">
+                            <h5>Sensors</h5>
+                        </div>
+                        <div class="cph-right">
+                            <ul class="top-header-btns">
+                                <li>
+                                    <a class="collapse-panel" href="#"
+                                       title="Collapse/Uncollapse Panel"
+                                       data-rel="tooltip">
+                                        <i class="icon dripicons-chevron-up"></i>
+                                    </a>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" data-toggle="dropdown"
+                                       title="Panel Options" data-rel="tooltip">
+                                        <i class="icon dripicons-dots-3"></i>
+                                    </a>
+                                    <div class="dropdown-menu  dropdown-menu-right theme-media">
+                                        <div class="dropdown-menu-header">
+                                            <div class="dmh-inner">
+                                                <h4>Panel Options</h4>
+                                            </div>
+                                        </div>
+                                        <a class="dropdown-item cp" href="#"
+                                           title="">
+                                            <span class="color-fill-icon"
+                                                  style="background-color:#fff;"></span>
+                                            Header Background Color
+                                        </a>
+                                        <a class="dropdown-item header-fontcolor"
+                                           href="#" title="">
+                                            <span class="color-fill-icon"
+                                                  style="background-color:#333"></span>
+                                            Header Font Color Dark/Light
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a class="removeWidget" href="#"
+                                       title="Remove Panel" data-rel="tooltip">
+                                        <i class="icon dripicons-cross"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div><!-- Panel Header -->
+                    <div class="card-body">
+                        <div class="card-row">
+                            <div class="col text-center">
+                                <a data-toggle="modal" data-target=".Sensor" title="" data-rel="tooltip" data-original-title="Click to View full Details">
+                                    <i class="fa fa-solid fa-person-arrow-down-to-line"></i><br />
+                                <label style="font-size: 16px;">Pressure</label>
+                                </a>
+                            </div>
+                            <div class="col text-center">
+                                <a data-toggle="modal" data-target=".Sensor" title="" data-rel="tooltip" data-original-title="Click to View full Details">
+                                    <i class="fa fa-solid fa-person-running"></i><br />
+                                <label style="font-size: 16px;">Motion</label>
+                                </a>
+
+                            </div>
+                            <div class="col text-center">
+                                <a data-toggle="modal" data-target=".Sensor" title="" data-rel="tooltip" data-original-title="Click to View full Details">
+                                    <i class="fa fa-solid fa-temperature-three-quarters"></i><br />
+                                <label style="font-size: 16px;">Temperature</label>
+                                </a>
+                            </div>
+                            <div class="col text-center">
+                                <a data-toggle="modal" data-target=".Sensor" title="" data-rel="tooltip" data-original-title="Click to View full Details">
+                                    <i class="fa fa-solid fa-droplet"></i><br />
+                                <label style="font-size: 16px;">Humidity</label>
+                                </a>
+                            </div>
+                            <div class="col text-center">
+                                <a data-toggle="modal" data-target=".Sensor" title="" data-rel="tooltip" data-original-title="Click to View full Details">
+                                    <i class="fa fa-solid fa-house-fire"></i><br />
+                                <label style="font-size: 16px;">Smoke</label>
+                                </a>
+                            </div>
+                            <div class="col text-center">
+                                <a data-toggle="modal" data-target=".Sensor" title="" data-rel="tooltip" data-original-title="Click to View full Details">
+                                    <i class="fa fa-solid fa-house-tsunami"></i><br />
+                                <label style="font-size: 16px;">Flood</label>
+                                </a>
+                            </div>
+                            <div class="col text-center">
+                                <a data-toggle="modal" data-target=".Sensor" title="" data-rel="tooltip" data-original-title="Click to View full Details">
+                                    <i class="fa fa-solid fa-smog"></i><br />
+                                <label style="font-size: 16px;">Co2</label>
+                                </a>
+                            </div>
+                            <div class="col text-center">
+                                <a data-toggle="modal" data-target=".Sensor" title="" data-rel="tooltip" data-original-title="Click to View full Details">
+                                    <i class="fa fa-solid fa-door-open"></i><br />
+                                <label style="font-size: 16px;">Door</label>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-row">
+                            <div class="col text-center">
+                                <div class="form-group">
+                                <input type="text" class="form-control" placeholder="WindSpeed" id="WindSpeed">
+                                <label><i class="fa fa-solid fa-wind"></i>WindSpeed</label>
+                                </div>
+                            </div>
+                            <div class="col text-center">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Tower Tilt" id="WindSpeed">
+                                <label><i class="fa fa-solid fa-charging-station"></i>Tower Tilt</label>
+                            </div>
+                            </div>
+                            <br />
+                            <div class="col text-center">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Tower Height" id="WindSpeed">
+                                <label><i class="fa fa-solid fa-text-height"></i>Tower Height</label>
+                            </div>
+                            </div>
+                        <div class="col text-center"></div>
+                        <div class="col text-center"></div>
+                        <div class="col text-center"></div>
+                        <div class="col text-center"></div>
+                        <div class="col text-center"></div>
+                        </div>
+                    </div>
+                </div><!-- Console Panel -->
+            </div>
         </div>
-        <div class="grid-stack-item" data-gs-x="0" data-gs-y="15"
+        <br />
+    <div class="grid-stack gs-area">
+        <div class="grid-stack-item" data-gs-x="0" data-gs-y="51"
              data-gs-width="8" data-gs-height="15" data-gs-min-height="10"
              data-gs-min-width="8">
             <div class="console-panel grid-stack-item-content">
@@ -205,7 +1034,8 @@
 
             </div><!-- Console Panel -->
         </div>
-         <div class="grid-stack-item" data-gs-x="8" data-gs-y="15"
+
+         <div class="grid-stack-item" data-gs-x="8" data-gs-y="51"
              data-gs-width="4" data-gs-height="15" data-gs-min-height="10"
              data-gs-min-width="4">
             <div class="console-panel grid-stack-item-content">
@@ -269,676 +1099,13 @@
 
             </div><!-- Console Panel -->
         </div>
-        <div class="grid-stack-item" data-gs-x="0" data-gs-y="31" data-gs-width="12" data-gs-height="32"
-             data-gs-min-height="32" data-gs-min-width="3">
-            <div class="console-panel grid-stack-item-content console-no-header">
-                <div class="console-panel-body">
-                    <div class="mytab theme1">
-                        <ul class="nav nav-tabs">
-                            <li>
-                                <a class="nav-link active" data-toggle="tab" data-target="#tab4">
-                                    
-                                    Tenant 1
-                                </a>
-                            </li>
-
-                        </ul><!-- Selectors -->
-
-                        <div class="tab-content">
-                            <div class="tab-pane fade show active" id="tab4">
-                                <div class="grid-stack grid-stacks  gs-area">
-                                    <div class="grid-stack-item" data-gs-x="0" data-gs-y="34"
-                                         data-gs-width="4" data-gs-height="14" data-gs-min-height="14"
-                                         data-gs-min-width="4">
-                                        <div class="console-panel grid-stack-item-content">
-                                            <div class="console-panel-header light" style="background-color: rgb(12, 52, 61);">
-                                                <div class="cph-left">
-                                                    <h5>Grid <i class="icon dripicons-bell text-warning" style="font-size: 1em;"></i></h5>
-                                                </div>
-                                                <div class="cph-right">
-                                                    <ul class="top-header-btns">
-                                                        <li>
-                                                            <a class="collapse-panel" href="#"
-                                                               title="Collapse/Uncollapse Panel"
-                                                               data-rel="tooltip">
-                                                                <i class="icon dripicons-chevron-up"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li class="dropdown">
-                                                            <a href="#" data-toggle="dropdown"
-                                                               title="Panel Options" data-rel="tooltip">
-                                                                <i class="icon dripicons-dots-3"></i>
-                                                            </a>
-                                                            <div class="dropdown-menu  dropdown-menu-right theme-media">
-                                                                <div class="dropdown-menu-header">
-                                                                    <div class="dmh-inner">
-                                                                        <h4>Panel Options</h4>
-                                                                    </div>
-                                                                </div>
-                                                                <a class="dropdown-item cp" href="#"
-                                                                   title="">
-                                                                    <span class="color-fill-icon"
-                                                                          style="background-color:#fff;"></span>
-                                                                    Header Background Color
-                                                                </a>
-                                                                <a class="dropdown-item header-fontcolor"
-                                                                   href="#" title="">
-                                                                    <span class="color-fill-icon"
-                                                                          style="background-color:#333"></span>
-                                                                    Header Font Color Dark/Light
-                                                                </a>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <a class="removeWidgets" href="#"
-                                                               title="Remove Panel" data-rel="tooltip">
-                                                                <i class="icon dripicons-cross"></i>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div><!-- Panel Header -->
-                                            <div class="console-panel-body ">
-                                                <a href="/Site/Grid">
-                                                <div class="row P-0" id="Grid">
-                                                    <div class="col-12">
-                                                        <div class="row">
-                                                            <<div class="col-12 text-center center-img">
-                                                                    
-                                                                    <i class="fa fa-solid fa-bolt" style="font-size:3em;"></i><br />
-                                                            </div>
-                                                            <div class="col-12 text-center">
-                                                                <label>3 Phase </label><br />
-                                                                <label class="text-warning">
-                                                                    
-                                                                    Grid Type
-                                                                </label><br />
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-4 text-center">
-                                                                <Span id="GRVOLT"></Span> <br />
-                                                                <span class="text-warning ">R VOLT</span>
-                                                            </div>
-                                                            <div class="col-4 text-center">
-                                                                <Span id="GVVOLT"></Span> <br />
-                                                                <span class="text-warning ">Y VOLT</span>
-                                                            </div>
-                                                            <div class="col-4 text-center">
-                                                                <Span id="GBVOLT"></Span> <br />
-                                                                <span class="text-warning ">B VOLT</span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-4 text-center">
-                                                                <Span id="GRCR"></Span> <br />
-                                                                <span class="text-warning ">R CR</span>
-                                                            </div>
-                                                            <div class="col-4 text-center">
-                                                                <Span id="GVCt"></Span> <br />
-                                                                <span class="text-warning ">Y CT</span>
-                                                            </div>
-                                                            <div class="col-4 text-center">
-                                                                <Span id="GBCR"></Span> <br />
-                                                                <span class="text-warning ">B CR</span>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                                </a>
-                                            </div>
-                                        </div><!-- Console Panel -->
-                                    </div><!-- Console Panel grid -->
-                                    <div class="grid-stack-item" data-gs-x="4" data-gs-y="34"
-                                         data-gs-width="4" data-gs-height="14" data-gs-min-height="14"
-                                         data-gs-min-width="4">
-                                        <div class="console-panel grid-stack-item-content">
-                                            <div class="console-panel-header light" style="background-color: rgb(12, 52, 61);">
-                                                <div class="cph-left">
-                                                    <h5>Generator <i class="icon dripicons-bell text-warning" style="font-size: 1em;"></i></h5>
-                                                </div>
-                                                <div class="cph-right">
-                                                    <ul class="top-header-btns">
-                                                        <li>
-                                                            <a class="collapse-panel" href="#"
-                                                               title="Collapse/Uncollapse Panel"
-                                                               data-rel="tooltip">
-                                                                <i class="icon dripicons-chevron-up"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li class="dropdown">
-                                                            <a href="#" data-toggle="dropdown"
-                                                               title="Panel Options" data-rel="tooltip">
-                                                                <i class="icon dripicons-dots-3"></i>
-                                                            </a>
-                                                            <div class="dropdown-menu  dropdown-menu-right theme-media">
-                                                                <div class="dropdown-menu-header">
-                                                                    <div class="dmh-inner">
-                                                                        <h4>Panel Options</h4>
-                                                                    </div>
-                                                                </div>
-                                                                <a class="dropdown-item cp" href="#"
-                                                                   title="">
-                                                                    <span class="color-fill-icon"
-                                                                          style="background-color:#fff;"></span>
-                                                                    Header Background Color
-                                                                </a>
-                                                                <a class="dropdown-item header-fontcolor"
-                                                                   href="#" title="">
-                                                                    <span class="color-fill-icon"
-                                                                          style="background-color:#333"></span>
-                                                                    Header Font Color Dark/Light
-                                                                </a>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <a class="removeWidgets" href="#"
-                                                               title="Remove Panel" data-rel="tooltip">
-                                                                <i class="icon dripicons-cross"></i>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div><!-- Panel Header -->
-                                            <div class="console-panel-body">
-                                                <a href="/Site/Generator">
-                                                <div class="row" id="Generator">
-                                                    <div class="col-12">
-                                                       
-                                                        <div class="row">
-                                                            <<div class="col-12 text-center center-img">
-                                                                    <i class="fa fa-solid fa-industry" style="font-size:3em;"></i><br />
-                                                            </div>
-                                                           <div class="col-12 text-center">
-                                                                <label> 1 Nos</label><br />
-                                                                <label class="text-warning">
-                                                                    Generator
-                                                                </label><br />
-                                                            </div>
-
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-4 text-center">
-                                                                <Span id="gRVolt">O V</Span> <br />
-                                                                <span class="text-warning ">R VOLT</span>
-                                                            </div>
-                                                            <div class="col-4 text-center">
-                                                                <Span id="gYVlot">O V</Span> <br />
-                                                                <span class="text-warning ">Y VOLT</span>
-                                                            </div>
-                                                            <div class="col-4 text-center">
-                                                                <Span id="gBVlot">O V</Span> <br />
-                                                                <span class="text-warning ">B VOLT</span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-4 text-center">
-                                                                <Span id="BRCt">O A</Span> <br />
-                                                                <span class="text-warning ">R CT</span>
-                                                            </div>
-                                                            <div class="col-4 text-center">
-                                                                <Span id="BVCt">O A</Span><br />
-                                                                <span class="text-warning ">Y CT</span>
-                                                            </div>
-                                                            <div class="col-4 text-center">
-                                                                <Span id="BBCt">O A</Span><br />
-                                                                <span class="text-warning ">B CT</span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-4 text-center">
-                                                                <Span id="gFreq">O Hz</Span><br />
-                                                                <span class="text-warning ">Freq</span>
-                                                            </div>
-                                                            <div class="col-4 text-center">
-                                                                <Span id="gFuel"></Span><br />
-                                                                <span class="text-warning ">Fuel</span>
-                                                            </div>
-                                                            <div class="col-4 text-center">
-                                                                <Span id="gBat">O V</Span> <br />
-                                                                <span class="text-warning ">Bat VOLT</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div><!-- Console Panel gen -->
-                                    <div class="grid-stack-item" data-gs-x="8" data-gs-y="34"
-                                         data-gs-width="4" data-gs-height="14" data-gs-min-height="14"
-                                         data-gs-min-width="4">
-                                        <div class="console-panel grid-stack-item-content">
-                                            <div class="console-panel-header light" style="background-color: rgb(12, 52, 61);">
-                                                <div class="cph-left">
-                                                    <h5>Battery <i class="icon dripicons-bell text-warning" style="font-size: 1em;"></i></h5>
-                                                </div>
-                                                <div class="cph-right">
-                                                    <ul class="top-header-btns">
-                                                        <li>
-                                                            <a class="collapse-panel" href="#"
-                                                               title="Collapse/Uncollapse Panel"
-                                                               data-rel="tooltip">
-                                                                <i class="icon dripicons-chevron-up"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li class="dropdown">
-                                                            <a href="#" data-toggle="dropdown"
-                                                               title="Panel Options" data-rel="tooltip">
-                                                                <i class="icon dripicons-dots-3"></i>
-                                                            </a>
-                                                            <div class="dropdown-menu  dropdown-menu-right theme-media">
-                                                                <div class="dropdown-menu-header">
-                                                                    <div class="dmh-inner">
-                                                                        <h4>Panel Options</h4>
-                                                                    </div>
-                                                                </div>
-                                                                <a class="dropdown-item cp" href="#"
-                                                                   title="">
-                                                                    <span class="color-fill-icon"
-                                                                          style="background-color:#fff;"></span>
-                                                                    Header Background Color
-                                                                </a>
-                                                                <a class="dropdown-item header-fontcolor"
-                                                                   href="#" title="">
-                                                                    <span class="color-fill-icon"
-                                                                          style="background-color:#333"></span>
-                                                                    Header Font Color Dark/Light
-                                                                </a>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <a class="removeWidgets" href="#"
-                                                               title="Remove Panel" data-rel="tooltip">
-                                                                <i class="icon dripicons-cross"></i>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div><!-- Panel Header -->
-                                            <div class="console-panel-body">
-                                                <a href="/Site/Battery">
-                                                    <div class="row" id="Battery">
-                                                        <div class="col-12">
-                                                            <div class="row">
-                                                                <<div class="col-12 text-center center-img">
-                                                                    <i class="fa fa-car-battery" style="font-size:3em;"></i><br />
-                                                                </div>
-                                                                <div class="col-12 text-center">
-                                                                    <label>1 Nos</label><br />
-                                                                    <label class="text-warning">
-                                                                        Battery
-                                                                    </label><br />
-                                                                </div>
-
-                                                            </div>
-
-                                                            <div class="row">
-                                                                <div class="col-6 text-center">
-                                                                    <Span id="BattreyType">Lithium</Span> <br />
-                                                                    <span class="text-warning ">
-                                                                        Battery
-                                                                        Type
-                                                                    </span>
-                                                                </div>
-                                                                <div class="col-6 text-center">
-                                                                    <Span id="NoOfBattery">22 Nos</Span> <br />
-                                                                    <span class="text-warning ">
-                                                                        No of
-                                                                        Battery
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-6 text-center">
-                                                                    <Span id="Ct">-76.00 A</Span> <br />
-                                                                    <span class="text-warning ">CT</span>
-                                                                </div>
-                                                                <div class="col-6 text-center">
-                                                                    <Span id="Volt">48.01 V</Span> <br />
-                                                                    <span class="text-warning ">VOLT</span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-6 text-center">
-                                                                    <Span id="AvgBatTemp">26.64 C</Span> <br />
-                                                                    <span class="text-warning ">
-                                                                        Avg
-                                                                        Bat.Temp
-                                                                    </span>
-                                                                </div>
-                                                                <div class="col-6 text-center">
-                                                                    <Span id="AvgEngTemp">26.64 C</Span> <br />
-                                                                    <span class="text-warning ">
-                                                                        Avg
-                                                                        Eng.Temp
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div><!-- Console Panel -->
-                                    </div><!-- Console Panel batt -->
-                                    <div class="grid-stack-item" data-gs-x="0" data-gs-y="48"
-                                         data-gs-width="4" data-gs-height="14" data-gs-min-height="14"
-                                         data-gs-min-width="4">
-                                        <div class="console-panel grid-stack-item-content">
-                                            <div class="console-panel-header light" style="background-color: rgb(12, 52, 61);">
-                                                <div class="cph-left">
-                                                    <h5>Solar <i class="icon dripicons-bell text-warning" style="font-size: 1em;"></i></h5>
-                                                </div>
-                                                <div class="cph-right">
-                                                    <ul class="top-header-btns">
-                                                        <li>
-                                                            <a class="collapse-panel" href="#"
-                                                               title="Collapse/Uncollapse Panel"
-                                                               data-rel="tooltip">
-                                                                <i class="icon dripicons-chevron-up"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li class="dropdown">
-                                                            <a href="#" data-toggle="dropdown"
-                                                               title="Panel Options" data-rel="tooltip">
-                                                                <i class="icon dripicons-dots-3"></i>
-                                                            </a>
-                                                            <div class="dropdown-menu  dropdown-menu-right theme-media">
-                                                                <div class="dropdown-menu-header">
-                                                                    <div class="dmh-inner">
-                                                                        <h4>Panel Options</h4>
-                                                                    </div>
-                                                                </div>
-                                                                <a class="dropdown-item cp" href="#"
-                                                                   title="">
-                                                                    <span class="color-fill-icon"
-                                                                          style="background-color:#fff;"></span>
-                                                                    Header Background Color
-                                                                </a>
-                                                                <a class="dropdown-item header-fontcolor"
-                                                                   href="#" title="">
-                                                                    <span class="color-fill-icon"
-                                                                          style="background-color:#333"></span>
-                                                                    Header Font Color Dark/Light
-                                                                </a>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <a class="removeWidgets" href="#"
-                                                               title="Remove Panel" data-rel="tooltip">
-                                                                <i class="icon dripicons-cross"></i>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div><!-- Panel Header -->
-                                            <div class="console-panel-body">
-                                                <a href="/Site/Solar">
-                                                <div class="row" id="temp">
-                                                    <div class="col-12">
-                                                       
-                                                        <div class="row">
-                                                            <div class="col-12 text-center center-img">
-                                                                    <i class="fa fa-sharp fa-solid fa-solar-panel" style="font-size:3em;"></i><br />
-                                                            </div>
-                                                            <div class="col-12 text-center">
-                                                                <label id="NoofChargers"></label><br />
-                                                                <label class="text-warning">No of Chargers</label><br />
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-6 text-center ">
-                                                                <Span id="IPCt"></Span> <br />
-                                                                <span class="text-warning ">I/P CT</span>
-                                                            </div>
-                                                            <div class="col-6 text-center">
-                                                                <Span id="IPVolt"></Span> :<br />
-                                                                <span class="text-warning ">I/P VOLT</span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-6 text-center">
-                                                                <Span id="OPCt"> </Span><br />
-                                                                <span class="text-warning ">O/P CT</span>
-                                                            </div>
-                                                            <div class="col-6 text-center">
-                                                                <Span id="OPVolt"></Span> <br />
-                                                                <span class="text-warning ">O/P VOLT</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div><!-- Console Panel solar -->
-                                    <div class="grid-stack-item" data-gs-x="4" data-gs-y="48"
-                                         data-gs-width="4" data-gs-height="14" data-gs-min-height="14"
-                                         data-gs-min-width="4">
-                                        <div class="console-panel grid-stack-item-content">
-                                            <div class="console-panel-header light" style="background-color: rgb(12, 52, 61);">
-                                                <div class="cph-left">
-                                                    <h5>Rectifier <i class="icon dripicons-bell text-warning" style="font-size: 1em;"></i></h5>
-                                                </div>
-                                                <div class="cph-right">
-                                                    <ul class="top-header-btns">
-                                                        <li>
-                                                            <a class="collapse-panel" href="#"
-                                                               title="Collapse/Uncollapse Panel"
-                                                               data-rel="tooltip">
-                                                                <i class="icon dripicons-chevron-up"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li class="dropdown">
-                                                            <a href="#" data-toggle="dropdown"
-                                                               title="Panel Options" data-rel="tooltip">
-                                                                <i class="icon dripicons-dots-3"></i>
-                                                            </a>
-                                                            <div class="dropdown-menu  dropdown-menu-right theme-media">
-                                                                <div class="dropdown-menu-header">
-                                                                    <div class="dmh-inner">
-                                                                        <h4>Panel Options</h4>
-                                                                    </div>
-                                                                </div>
-                                                                <a class="dropdown-item cp" href="#"
-                                                                   title="">
-                                                                    <span class="color-fill-icon"
-                                                                          style="background-color:#fff;"></span>
-                                                                    Header Background Color
-                                                                </a>
-                                                                <a class="dropdown-item header-fontcolor"
-                                                                   href="#" title="">
-                                                                    <span class="color-fill-icon"
-                                                                          style="background-color:#333"></span>
-                                                                    Header Font Color Dark/Light
-                                                                </a>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <a class="removeWidgets" href="#"
-                                                               title="Remove Panel" data-rel="tooltip">
-                                                                <i class="icon dripicons-cross"></i>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div><!-- Panel Header -->
-                                            <div class="console-panel-body">
-                                                <a href="/Site/Rectifier">
-                                                <div class="row" id="Solar">
-                                                    <div class="col-12">
-                                                        
-                                                        <div class="row">
-                                                            <div class="col-12 text-center center-img">
-                                                                    <i class="fa fa-microchip" style="font-size:3em;"></i><br />
-                                                            </div>
-                                                                
-                                                            <div class="col-12 text-center">
-                                                                <label id="NoofRectifier"></label><br />
-                                                                <label class="text-warning">
-                                                                    No of Rectifier
-                                                                </label><br />
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-6 text-center">
-                                                                <Span id="RIPCt"></Span> <br />
-                                                                <span class="text-warning ">I/P CT</span>
-                                                            </div>
-                                                            <div class="col-6 text-center">
-                                                                <Span id="RIPVolt"></Span> <br />
-                                                                <span class="text-warning ">I/P VOLT</span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-6 text-center">
-                                                                <Span id="ROPCt"></Span> <br />
-                                                                <span class="text-warning ">O/P CT</span>
-                                                            </div>
-                                                            <div class="col-6 text-center">
-                                                                <Span id="OPVolt"></Span> <br />
-                                                                <span class="text-warning ">O/P VOLT</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div><!-- Console Panel rec -->
-                                    <div class="grid-stack-item" data-gs-x="8" data-gs-y="48"
-                                         data-gs-width="4" data-gs-height="14" data-gs-min-height="14"
-                                         data-gs-min-width="4">
-                                        <div class="console-panel grid-stack-item-content">
-                                            <div class="console-panel-header light" style="background-color: rgb(12, 52, 61);">
-                                                <div class="cph-left">
-                                                    <h5>Portable Battery <i class="icon dripicons-bell text-warning" style="font-size: 1em;"></i></h5>
-                                                </div>
-                                                <div class="cph-right">
-                                                    <ul class="top-header-btns">
-                                                        <li>
-                                                            <a class="collapse-panel" href="#"
-                                                               title="Collapse/Uncollapse Panel"
-                                                               data-rel="tooltip">
-                                                                <i class="icon dripicons-chevron-up"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li class="dropdown">
-                                                            <a href="#" data-toggle="dropdown"
-                                                               title="Panel Options" data-rel="tooltip">
-                                                                <i class="icon dripicons-dots-3"></i>
-                                                            </a>
-                                                            <div class="dropdown-menu  dropdown-menu-right theme-media">
-                                                                <div class="dropdown-menu-header">
-                                                                    <div class="dmh-inner">
-                                                                        <h4>Panel Options</h4>
-                                                                    </div>
-                                                                </div>
-                                                                <a class="dropdown-item cp" href="#"
-                                                                   title="">
-                                                                    <span class="color-fill-icon"
-                                                                          style="background-color:#fff;"></span>
-                                                                    Header Background Color
-                                                                </a>
-                                                                <a class="dropdown-item header-fontcolor"
-                                                                   href="#" title="">
-                                                                    <span class="color-fill-icon"
-                                                                          style="background-color:#333"></span>
-                                                                    Header Font Color Dark/Light
-                                                                </a>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <a class="removeWidgets" href="#"
-                                                               title="Remove Panel" data-rel="tooltip">
-                                                                <i class="icon dripicons-cross"></i>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div><!-- Panel Header -->
-                                            <div class="console-panel-body">
-                                                <a href="/Site/PortableBattery">
-                                                    <div class="row" id="Battery">
-                                                        <div class="col-12">
-                                                           
-                                                            <div class="row">
-                                                                <<div class="col-12 text-center center-img">
-                                                                    <i class="fa fa-solid fa-charging-station" style="font-size:3em;"></i><br />
-                                                                </div>
-                                                                <div class="col-12 text-center">
-                                                                    <label>1 Nos</label><br />
-                                                                    <label class="text-warning">
-                                                                        Portable Battery
-                                                                    </label><br />
-                                                                </div>
-
-                                                            </div>
-
-                                                            <div class="row">
-                                                                <div class="col-6 text-center">
-                                                                    <Span id="BattreyType">Lithium</Span> <br />
-                                                                    <span class="text-warning ">
-                                                                        Battery
-                                                                        Type
-                                                                    </span>
-                                                                </div>
-                                                                <div class="col-6 text-center">
-                                                                    <Span id="NoOfBattery">22 Nos</Span> <br />
-                                                                    <span class="text-warning ">
-                                                                        No of
-                                                                        Battery
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-6 text-center">
-                                                                    <Span id="Ct">-76.00 A</Span> <br />
-                                                                    <span class="text-warning ">CT</span>
-                                                                </div>
-                                                                <div class="col-6 text-center">
-                                                                    <Span id="Volt">48.01 V</Span> <br />
-                                                                    <span class="text-warning ">VOLT</span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-6 text-center">
-                                                                    <Span id="AvgBatTemp">26.64 C</Span> <br />
-                                                                    <span class="text-warning ">
-                                                                        Avg
-                                                                        Bat.Temp
-                                                                    </span>
-                                                                </div>
-                                                                <div class="col-6 text-center">
-                                                                    <Span id="AvgEngTemp">26.64 C</Span> <br />
-                                                                    <span class="text-warning ">
-                                                                        Avg
-                                                                        Eng.Temp
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div><!-- Console Panel -->
-                                    </div>
-
-                                </div>
-                               
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+       
     </div>
     <br/>
     <div class="grid-stack gs-area" id="controller">
-        <div class="grid-stack-item" data-gs-x="0" data-gs-y="57"
-             data-gs-width="12" data-gs-height="8" data-gs-min-height="8"
-             data-gs-min-width="12">
+        <div class="grid-stack-item" data-gs-x="0" data-gs-y="61"
+             data-gs-width="12" data-gs-height="6" data-gs-min-height="6"
+             data-gs-min-width="12" data-gs-no-resize="true">
             <div class="console-panel grid-stack-item-content">
                 <div class="console-panel-header light" style="background-color: rgb(12, 52, 61);">
                     <div class="cph-left">
@@ -987,7 +1154,7 @@
                         </ul>
                     </div>
                 </div><!-- Panel Header -->
-                <div class="console-panel-body">
+                <div class="card-body">
                     <div class="row">
                         <div class="col-2">
                             <label class="col-form-label">Aircon 1</label><br />
@@ -1041,10 +1208,11 @@
         </div>
     </div>
     <br />
+
     <div class="grid-stack gs-area" id="cameraDiv">
-        <div class="grid-stack-item" data-gs-x="0" data-gs-y="65"
-             data-gs-width="12" data-gs-height="12" data-gs-min-height="12"
-             data-gs-min-width="6">
+        <div class="grid-stack-item" data-gs-x="0" data-gs-y="69"
+             data-gs-width="12" data-gs-height="11" data-gs-min-height="11"
+             data-gs-min-width="6" data-gs-no-resize="true">
             <div class="console-panel grid-stack-item-content">
                 <div class="console-panel-header light" style="background-color: rgb(12, 52, 61);">
                     <div class="cph-left">
@@ -1113,7 +1281,7 @@
     </div>
     <br/>
     <div class="grid-stack gs-area">
-        <div class="grid-stack-item" data-gs-x="0" data-gs-y="77"
+        <div class="grid-stack-item" data-gs-x="0" data-gs-y="79"
              data-gs-width="12" data-gs-height="17" data-gs-min-height="10"
              data-gs-min-width="3">
             <div class="console-panel grid-stack-item-content">
@@ -1255,6 +1423,92 @@
                 </div>
             </div>
             
+        </div>
+    </div>
+</div>
+<div class="modal fade bd-example-modal-lg Sensor" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Sensor Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label>From Date</label>
+                            <input type="date" class="form-control" placeholder="From Date" id="fromDate" required>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label>To Date</label>
+                            <input type="date" class="form-control" placeholder="To Date" id="toDate" required>
+                        </div>
+                    </div>
+                    <div class="col-4"></div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label>Sensor</label>
+                            <select class="select2 form-control" id="Sensor" required>
+                                <option value="1">Pressure</option>
+                                <option value="2">Motion</option>
+                                <option value="3">Temperature</option>
+                                <option value="3">Humidity</option>
+                                <option value="3">Smoke</option>
+                                <option value="3">Flood</option>
+                                <option value="3">Door</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                    </div>
+                    <div class="col-4">
+                    </div>
+                    <div class="card-body text-right">
+                            <button class="btn btn-success ml-auto" id="btnShow">
+                                Show
+                            </button>
+                            <button class="btn btn-danger ml-auto" id="btnReset">
+                                Reset
+                            </button>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <div class="get_dt_search"></div>
+                    <table class="table table-striped console-table table-bordered table-hover mb-0"
+                           id="SesnsorTable">
+                        <thead class="sorticon-pos">
+                            <tr class="filtersRow">
+                                <th class="filterhead filterheads"></th>
+                                <th class="filterhead filterheads"></th>
+                                <th class="filterhead filterheads"></th>
+                                <th class="filterhead filterheads"></th>
+                                <th class="filterhead filterheads"></th>
+                                <th class="filterhead filterheads"></th>
+                                <th class="filterhead filterheads"></th>
+                                <th class="filterhead filterheads"></th>
+                                <th class="filterhead filterheads"></th>
+                            </tr>
+                            <tr>
+                                <th>Sl No</th>
+                                <th>Site ID</th>
+                                <th>Name Sensor</th>
+                                <th>Status</th>
+                                <th>Status As on </th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+
+
+                </div>
+            </div>
+
         </div>
     </div>
 </div>

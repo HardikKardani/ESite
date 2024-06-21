@@ -62,7 +62,7 @@
                                                 <div class="col-lg-4 col-md-12">
                                                     <div class="form-group">
                                                         <label>Region</label>
-                                                        <select class="select2 form-control"  id="region" required>
+                                                        <select class="select2 form-control" id="region" required>
                                                             <option value="1">Jakarta</option>
                                                             <option value="2">Medan</option>
                                                             <option value="3">Kota Ambon</option>
@@ -117,8 +117,11 @@
                                                 <div class="col-lg-4 col-md-12">
                                                     <div class="form-group">
                                                         <label>No of Tenant</label>
-                                                        <input type="text" class="form-control" id="Nooftenat" placeholder="No of tenant" id="noOfTenant" required>
+                                                        <input type="number" class="form-control" id="noOfTenant" placeholder="No of tenant" required max="10" min="0">
                                                     </div>
+                                                </div>
+                                                <div id="textboxContainer" class="col-lg-12 col-md-12">
+                                                    <!-- New textboxes will be appended here -->
                                                 </div>
                                                 <div class="col-lg-4 col-md-12">
                                                     <div class="form-group">
@@ -212,7 +215,7 @@
                                                 <div class="col-lg-6 col-md-12">
                                                     <div class="form-group">
                                                         <label>SIM2 Operator</label>
-                                                        <select class="select2 form-control" id="sim2Operator" >
+                                                        <select class="select2 form-control" id="sim2Operator">
                                                             <option value="1">Operator 1</option>
                                                             <option value="2">Operator 1</option>
                                                         </select>
@@ -231,26 +234,27 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="footer text-right">
+                                    <a href="">
+                                        <button class="btn btn-success ml-auto" id="btnSaves" type="submit">
+                                            Save
+                                        </button>
+                                    </a>
+                                    <a href="">
+                                        <button class="btn btn-danger ml-auto" type="button" id="btnReload">
+                                            Reload
+                                        </button>
+                                    </a>
+                                </div>
                             </form>
-                            <div class="footer text-right">
-                                <a href="">
-                                    <button class="btn btn-success ml-auto" id="btnSave" type="button">
-                                        Save
-                                    </button>
-                                </a>
-                                <a  href="">
-                                    <button class="btn btn-danger ml-auto" type="button" id="btnReload">
-                                        Reload
-                                    </button>
-                                </a>
-                            </div>
+
                         </div>
                         <div class="tab-pane fade" id="AssetConfig">
-                            
 
-                           
+
+
                             <div class="mytab theme1">
-                                <ul class="nav nav-tabs">
+                                <ul class="nav nav-tabs  nooftenanttab">
                                     <li>
                                         <a class="nav-link active" data-toggle="tab" data-target="#SiteAssets">
                                             Site Assets
@@ -258,7 +262,7 @@
                                     </li>
                                 </ul>
                                 <!-- Selectors -->
-                                <div class="tab-content">
+                                <div class="tab-content  nooftenanttab-content">
                                     <div class="tab-pane  show active" id="SiteAssets">
                                         <div class="row">
                                             <div class="col-lg-3 col-md-12">
@@ -426,7 +430,10 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div> 
+                            </div>
+                            <div id="tabsContainer">
+                                <!-- Dynamic tabs will be added here -->
+                            </div>
                             <div class="mytab theme1">
                                 <ul class="nav nav-tabs">
                                     <li>
@@ -741,197 +748,16 @@
     <aside class="more-opt-panel"></aside>
 </div>
 <!-- Theme Content -->
-@* <script>
-    $(document).ready(function () {
-        // Get the value of noofteant
-        var noofteant = 3; // Assuming a default value for demonstration
 
-        // If noofteant is 2, create two tabs and tab contents
-        if (noofteant === 3) {
-            // Loop to create two tabs and tab contents
-            for (var i = 1; i <= noofteant; i++) {
-                // Create tab
-                var tab = $('<li><a class="nav-link" data-toggle="tab" href="#tabContent' + i + '">Tab ' + i + '</a></li>');
-                $('.nav-tabss').append(tab);
-                var tabContent = $('<div class="tab-pane"></div>').attr('id', 'tabContent' + i);
-                tabContent.append('<div class="row">');
-                tabContent.append('    <div class="col-lg-3 col-md-12">');
-                tabContent.append('        <div class="form-group">');
-                tabContent.append('            <label>1.Grid</label>');
-                tabContent.append('        </div>');
-                tabContent.append('    </div>');
-                tabContent.append('    <div class="col-lg-3 col-md-12">');
-                tabContent.append('        <div class="form-group">');
-                tabContent.append('            <select class="select2 form-control">');
-                tabContent.append('                <option value="Site1">Available</option>');
-                tabContent.append('                <option value="Site1">Not Available</option>');
-                tabContent.append('            </select>');
-                tabContent.append('        </div>');
-                tabContent.append('    </div>');
-                tabContent.append('    <div class="col-lg-3 col-md-12">');
-                tabContent.append('        <div class="form-group">');
-                tabContent.append('            <select class="select2 form-control">');
-                tabContent.append('                <option value="Site1">Visible</option>');
-                tabContent.append('                <option value="Site1">Not Visible</option>');
-                tabContent.append('                <option value="Site1">Disabled</option>');
-                tabContent.append('            </select>');
-                tabContent.append('        </div>');
-                tabContent.append('    </div>');
-                tabContent.append('    <div class="col-lg-3 col-md-12">');
-                tabContent.append('        <div class="form-group">');
-                tabContent.append('            <input type="text" class="form-control" placeholder="Remarks">');
-                tabContent.append('        </div>');
-                tabContent.append('    </div>');
-                tabContent.append('    <div class="col-lg-3 col-md-12">');
-                tabContent.append('        <div class="form-group">');
-                tabContent.append('            <label>2.Generator</label>');
-                tabContent.append('        </div>');
-                tabContent.append('    </div>');
-                tabContent.append('    <div class="col-lg-3 col-md-12">');
-                tabContent.append('        <div class="form-group">');
-                tabContent.append('            <select class="select2 form-control">');
-                tabContent.append('                <option value="Site1">Available</option>');
-                tabContent.append('                <option value="Site1">Not Available</option>');
-                tabContent.append('            </select>');
-                tabContent.append('        </div>');
-                tabContent.append('    </div>');
-                tabContent.append('    <div class="col-lg-3 col-md-12">');
-                tabContent.append('        <div class="form-group">');
-                tabContent.append('            <select class="select2 form-control">');
-                tabContent.append('                <option value="Site1">Visible</option>');
-                tabContent.append('                <option value="Site1">Not Visible</option>');
-                tabContent.append('                <option value="Site1">Disabled</option>');
-                tabContent.append('            </select>');
-                tabContent.append('        </div>');
-                tabContent.append('    </div>');
-                tabContent.append('    <div class="col-lg-3 col-md-12">');
-                tabContent.append('        <div class="form-group">');
-                tabContent.append('            <input type="text" class="form-control" placeholder="Remarks">');
-                tabContent.append('        </div>');
-                tabContent.append('    </div>');
-                tabContent.append('    <div class="col-lg-3 col-md-12">'); 
-                tabContent.append('        <div class="form-group">');
-                tabContent.append('            <label>3.Battery</label>');
-                tabContent.append('        </div>');
-                tabContent.append('    </div>');
-                tabContent.append('    <div class="col-lg-3 col-md-12">');
-                tabContent.append('        <div class="form-group">');
-                tabContent.append('            <select class="select2 form-control">');
-                tabContent.append('                <option value="Site1">Available</option>');
-                tabContent.append('                <option value="Site1">Not Available</option>');
-                tabContent.append('            </select>'); 
-                tabContent.append('        </div>'); 
-                tabContent.append('    </div>');
-                tabContent.append('    <div class="col-lg-3 col-md-12">');
-                tabContent.append('        <div class="form-group">');
-                tabContent.append('            <select class="select2 form-control">');
-                tabContent.append('                <option value="Site1">Visible</option>');
-                tabContent.append('                <option value="Site1">Not Visible</option>');
-                tabContent.append('                <option value="Site1">Disabled</option>');
-                tabContent.append('            </select>');
-                tabContent.append('        </div>');
-                tabContent.append('    </div>');
-                tabContent.append('    <div class="col-lg-3 col-md-12">');
-                tabContent.append('        <div class="form-group">');
-                tabContent.append('            <input type="text" class="form-control" placeholder="Remarks">');
-                tabContent.append('        </div>');
-                tabContent.append('    </div>');
-                tabContent.append('    <div class="col-lg-3 col-md-12">'); 
-                tabContent.append('        <div class="form-group">');
-                tabContent.append('            <label>4.Solar</label>');
-                tabContent.append('        </div>');
-                tabContent.append('    </div>');
-                tabContent.append('    <div class="col-lg-3 col-md-12">');
-                tabContent.append('        <div class="form-group">');
-                tabContent.append('            <select class="select2 form-control">');
-                tabContent.append('                <option value="Site1">Available</option>');
-                tabContent.append('                <option value="Site1">Not Available</option>');
-                tabContent.append('            </select>');
-                tabContent.append('        </div>'); 
-                tabContent.append('    </div>');
-                tabContent.append('    <div class="col-lg-3 col-md-12">');
-                tabContent.append('        <div class="form-group">');
-                tabContent.append('            <select class="select2 form-control">');
-                tabContent.append('                <option value="Site1">Visible</option>');
-                tabContent.append('                <option value="Site1">Not Visible</option>');
-                tabContent.append('                <option value="Site1">Disabled</option>');
-                tabContent.append('            </select>');
-                tabContent.append('        </div>');
-                tabContent.append('    </div>');
-                tabContent.append('    <div class="col-lg-3 col-md-12">');
-                tabContent.append('        <div class="form-group">');
-                tabContent.append('            <input type="text" class="form-control" placeholder="Remarks">');
-                tabContent.append('        </div>');
-                tabContent.append('    </div>');
-                tabContent.append('    <div class="col-lg-3 col-md-12">'); 
-                tabContent.append('        <div class="form-group">');
-                tabContent.append('            <label>5.Rectifier</label>');
-                tabContent.append('        </div>');
-                tabContent.append('    </div>');
-                tabContent.append('    <div class="col-lg-3 col-md-12">');
-                tabContent.append('        <div class="form-group">');
-                tabContent.append('            <select class="select2 form-control">');
-                tabContent.append('                <option value="Site1">Available</option>');
-                tabContent.append('                <option value="Site1">Not Available</option>');
-                tabContent.append('            </select>');
-                tabContent.append('        </div>');
-                tabContent.append('    </div>');
-                tabContent.append('    <div class="col-lg-3 col-md-12">');
-                tabContent.append('        <div class="form-group">');
-                tabContent.append('            <select class="select2 form-control">');
-                tabContent.append('                <option value="Site1">Visible</option>');
-                tabContent.append('                <option value="Site1">Not Visible</option>');
-                tabContent.append('                <option value="Site1">Disabled</option>');
-                tabContent.append('            </select>');
-                tabContent.append('        </div>'); 
-                tabContent.append('    </div>');
-                tabContent.append('    <div class="col-lg-3 col-md-12">');
-                tabContent.append('        <div class="form-group">');
-                tabContent.append('            <input type="text" class="form-control" placeholder="Remarks">');
-                tabContent.append('        </div>'); 
-                tabContent.append('    </div>');
-                tabContent.append('    <div class="col-lg-3 col-md-12">');
-                tabContent.append('        <div class="form-group">');
-                tabContent.append('            <label>6.Portable Battery</label>');
-                tabContent.append('        </div>');
-                tabContent.append('    </div>');
-                tabContent.append('    <div class="col-lg-3 col-md-12">');
-                tabContent.append('        <div class="form-group">');
-                tabContent.append('            <select class="select2 form-control">');
-                tabContent.append('                <option value="Site1">Available</option>');
-                tabContent.append('                <option value="Site1">Not Available</option>');
-                tabContent.append('            </select>');
-                tabContent.append('        </div>');
-                tabContent.append('    </div>');
-                tabContent.append('    <div class="col-lg-3 col-md-12">');
-                tabContent.append('        <div class="form-group">');
-                tabContent.append('            <select class="select2 form-control">');
-                tabContent.append('                <option value="Site1">Visible</option>');
-                tabContent.append('                <option value="Site1">Not Visible</option>');
-                tabContent.append('                <option value="Site1">Disabled</option>');
-                tabContent.append('            </select>');
-                tabContent.append('        </div>');
-                tabContent.append('    </div>');
-                tabContent.append('    <div class="col-lg-3 col-md-12">');
-                tabContent.append('        <div class="form-group">');
-                tabContent.append('            <input type="text" class="form-control" placeholder="Remarks">');
-                tabContent.append('        </div>');
-                tabContent.append('    </div>');
-                tabContent.append('</div>');
-                tabContent.append('</div>');
-                // Create tab content
-                
-                // tabContent.append('<div class="row">' + $('.tab-content .tab-pane').html() + '</div>'); // Copy template HTML
-                $('.tab-contents').append(tabContent);
-            }
-        }
-    });
-</script> *@
-<script src="js/plugins/dropzone/dropzone.js"></script><!-- Dropzone -->
+<script src="/js/plugins/dropzone/dropzone.js"></script><!-- Dropzone -->
 <!-- Fancy File Upload  -->
 <script src="/js/plugins/fancy-file-uploader/jquery.ui.widget.js"></script>
 <script src="/js/plugins/fancy-file-uploader/jquery.fileupload.js"></script>
 <script src="/js/plugins/fancy-file-uploader/jquery.iframe-transport.js"></script>
 <script src="/js/plugins/fancy-file-uploader/jquery.fancy-fileupload.js"></script>
+
+
+
 <!-- Fancy File Upload  -->
 <script src="/js/page-level/fancy-fileuploader.js"></script>
+<script src="~/jscontroller/sitemasterjs.js" asp-append-version="true"></script>

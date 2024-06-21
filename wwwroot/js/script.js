@@ -539,14 +539,19 @@ function updateClock() {
     seconds = seconds < 10 ? '0' + seconds : seconds;
 
     var currentDateTime = year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds;
-    debugger;
+
     $('#hours').html(currentDateTime);
 }
 
-function updateTimer() {
-    var secondsLeft = 60; // Countdown timer set to 60 seconds
+var autoRefreshTimer;
+var timerInterval;
+var secondsLeft = 60; // Countdown timer set to 60 seconds by default
 
-    var timerInterval = setInterval(function () {
+// Function to update the countdown timer
+function updateTimer() {
+    clearInterval(timerInterval); // Clear existing interval if any
+
+    timerInterval = setInterval(function () {
         secondsLeft--;
         $('#seconds').text(secondsLeft);
 
@@ -554,26 +559,91 @@ function updateTimer() {
             clearInterval(timerInterval);
             if (window.location.pathname == "/" || window.location.pathname == "/Site/Dashboard") {
                 location.reload();
-            
-            } 
-            
+                updateClock();
+            }
         }
     }, 1000); // Update timer every second
 }
 
+// Function to start auto refresh
+function startAutoRefresh() {
+    autoRefreshTimer = setInterval(function () {
+        if (window.location.pathname == "/" || window.location.pathname == "/Site/Dashboard") {
+            location.reload();
+            updateClock();
+        }
+    }, refreshInterval);
+
+    // Start or resume the countdown timer
+    updateTimer();
+}
+
+// Function to stop auto refresh
+function stopAutoRefresh() {
+    clearInterval(autoRefreshTimer);
+    clearInterval(timerInterval); // Stop the countdown timer
+}
+
 // Initial call to display clock immediately
 $(window).on("load", function () {
-    updateTimer();
-    
+    if (window.location.pathname == "/") {
+        $("#hours").show();
+        $("#DR").show();
+    } else {
+        setTimeout(function () {
+            $("#DR").hide();
+            $("#hours").hide();
+        }, 1000);
+    }
+
     setTimeout(function () {
         updateClock();
     }, 1000);
+
+    updateTimer(); // Start the countdown timer initially
+    startAutoRefresh(); // Start auto refresh by default
 });
-// Refresh the page at the set interval (100 minutes)
-setInterval(function () {
-    debugger;
-    if (window.location.pathname == "/" || window.location.pathname == "/Site/Dashboard") {
-        location.reload();
-        updateClock();
-    } 
-}, refreshInterval);
+
+$(document).ready(function () {
+    $(document).on("click", "#pause-refresh", function () {
+        stopAutoRefresh();
+    });
+
+    $(document).on("click", "#start-refresh", function () {
+        startAutoRefresh();
+    });
+});
+//function updateTimer() {
+//    var secondsLeft = 60; // Countdown timer set to 60 seconds
+
+//    var timerInterval = setInterval(function () {
+//        secondsLeft--;
+//        $('#seconds').text(secondsLeft);
+
+//        if (secondsLeft <= 0) {
+//            clearInterval(timerInterval);
+//            if (window.location.pathname == "/" || window.location.pathname == "/Site/Dashboard") {
+//                location.reload();
+            
+//            } 
+            
+//        }
+//    }, 1000); // Update timer every second
+//}
+
+//// Initial call to display clock immediately
+//$(window).on("load", function () {
+//    updateTimer();
+    
+//    setTimeout(function () {
+//        updateClock();
+//    }, 1000);
+//});
+//// Refresh the page at the set interval (100 minutes)
+//setInterval(function () {
+//    debugger;
+//    if (window.location.pathname == "/" || window.location.pathname == "/Site/Dashboard") {
+//        location.reload();
+//        updateClock();
+//    } 
+//}, refreshInterval);
