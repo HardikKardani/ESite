@@ -35,6 +35,28 @@
 			color: #fff;
 		}
 
+		.theme-content {
+			padding-left: 250px;
+			transition: padding-left 0.3s ease;
+		}
+
+			.theme-content.no-padding {
+				padding-left: 0;
+			}
+
+		.console-sidemenu {
+			background-color: rgb(12, 52, 61);
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 250px;
+			height: 100%;
+			transition: transform 0.3s ease;
+		}
+
+			.console-sidemenu.inactive {
+				transform: translateX(-250px);
+			}
 	</style>
 </head>
 
@@ -75,17 +97,32 @@
 	@* <script src="/assets/js/Common.js" asp-append-version="true"></script> *@
 	<div class="theme-wrapper">
 		<header style="background-color: rgb(12, 52, 61);"></header><!-- Header -->
-
-		<div class="theme-content" style="">
-			<aside class="console-sidemenu active" id="sidemenu" style="background-color: rgb(12, 52, 61);"></aside><!-- Console Sidemenu -->
+		<div class="theme-content" id="themeContent">
+			<!-- Adjust padding to account for the side menu width -->
+			<aside class="console-sidemenu active" id="sidemenu" style="background-color: rgb(12, 52, 61); position: fixed; top: 0; left: 0; width: 250px; height: 100%; transition: transform 0.3s ease;overflow-y: scroll; scrollbar-width: none; -ms-overflow-style: none;"></aside>
 			@RenderBody()
 			<aside class="more-opt-panel"></aside>
-		</div><!-- Theme Content -->
+		</div>
+		
 
 	</div><!-- Theme Wrapper -->
 	
 	<script src="https://code.highcharts.com/highcharts.js"></script>
 	@await RenderSectionAsync("Scripts", required: false)
 </body>
+<script>
+	function toggleSideMenu() {
+		var sidemenu = document.getElementById('sidemenu');
+		var themeContent = document.getElementById('themeContent');
+
+		if (sidemenu.classList.contains('inactive')) {
+			sidemenu.classList.remove('inactive');
+			themeContent.classList.remove('no-padding');
+		} else {
+			sidemenu.classList.add('inactive');
+			themeContent.classList.add('no-padding');
+		}
+	}
+</script>
 
 </html>

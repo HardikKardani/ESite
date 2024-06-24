@@ -151,9 +151,10 @@ header {
       display: flex;
       align-items: center;
       height: 55px;
+      width:100%;
       z-index: 101;
       padding: 0 20px;
-      position: relative;
+      position: fixed;
       background: #FFF;
       justify-content: space-between;
       -webkit-box-shadow: 0 1px 1px 1px rgba(18,106,211,.08);
@@ -233,17 +234,18 @@ h1.brand-text {
 }
 ul.top-header-btns{list-style: none;white-space: nowrap;display: flex;}
 ul.top-header-btns > li {/* float: left */display: inline-block;}
-ul.top-header-btns > li > a {
-      float: left;
-      width: 40px;
-      height: 40px;
-      text-align: center;
-      color: #617182;
-      font-size: 20px;
-      -webkit-border-radius: 50%;
-      -moz-border-radius: 50%;
-      border-radius: 50%;
-}
+    ul.top-header-btns > li > a {
+        float: left;
+        width: 40px;
+        height: 40px;
+        align-content: center;
+        text-align: center;
+        color: #617182;
+        font-size: 20px;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        border-radius: 50%;
+    }
 ul.top-header-btns > li > a > i{line-height: 46px} /* For DripIcons */
 ul.top-header-btns > li > a i.fa,
 ul.top-header-btns > li > a i.far,
@@ -519,24 +521,28 @@ header.style4 .custom-header-links li.show a.nav-link{
 }
 /*=============== Sidemenu ===================*/
 aside.console-sidemenu {
-      flex: 0 0 250px;
-      margin-left: -250px;
-      background: #fff;
-      order: 1;
-      -webkit-box-shadow: 0 1px 1px 1px rgba(18,106,211,.08);
-      -moz-box-shadow: 0 1px 1px 1px rgba(18,106,211,.08);
-      box-shadow: 0 1px 1px 1px rgba(18,106,211,.08);
-      -webkit-transition: all 500ms cubic-bezier(0.215, 0.610, 0.355, 1.000);
-      -moz-transition: all 500ms cubic-bezier(0.215, 0.610, 0.355, 1.000);
-      -o-transition: all 500ms cubic-bezier(0.215, 0.610, 0.355, 1.000);
-      transition: all 500ms cubic-bezier(0.215, 0.610, 0.355, 1.000); /* easeOutCubic */
+    flex: 0 0 250px;
+    margin-left: -250px;
+    background: #fff;
+    margin-top: 55px;
+    order: 1;
+    -webkit-box-shadow: 0 1px 1px 1px rgba(18,106,211,.08);
+    -moz-box-shadow: 0 1px 1px 1px rgba(18,106,211,.08);
+    box-shadow: 0 1px 1px 1px rgba(18,106,211,.08);
+    -webkit-transition: all 500ms cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    -moz-transition: all 500ms cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    -o-transition: all 500ms cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    transition: all 500ms cubic-bezier(0.215, 0.610, 0.355, 1.000); /* easeOutCubic */
 
-      -webkit-transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
-      -moz-transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
-      -o-transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
-      transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000); /* easeOutCubic */
+    -webkit-transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    -moz-transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    -o-transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000); /* easeOutCubic */
 }
-aside.console-sidemenu.active{ margin-left:0 }
+    aside.console-sidemenu.active {
+        margin-left: 0;
+        position: fixed;
+    }
 ul.console-menu {
       list-style: none;
       margin-top: 20px;
@@ -951,14 +957,17 @@ aside.more-opt-panel {
 aside.more-opt-panel.active{ margin-right:0 }
 /*=============== Content Area ===================*/
 .content-area {
-      flex: auto;
-      padding: 5px;
-      order: 2;
+    flex: auto;
+    padding: 5px;
+    order: 2;
+    margin-top: 55px;
 }
-.content-area.fullscreen-active{
-      position:relative;
-      z-index:102;
-}
+
+    .content-area.fullscreen-active {
+        position: relative;
+        z-index: 102;
+        margin-top: 55px;
+    }
 /* === Dashboard Title === */
 .console-dashboard-title {
       display: flex;

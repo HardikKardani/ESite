@@ -36,59 +36,122 @@ function FillCardDataList() {
 
 
 function renderLineChart(data) {
-    var ctx = document.getElementById("donutchart1").getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'pie',
-        data: {
-            labels: data.Table1.map(d => d.title),
-            datasets: [{
-                data: data.Table1.map(d => d.value),
-                backgroundColor: [
-                    '#afd6fa',
-                    '#82b1dd'
-                ]
-            }]
-        },
-        options: {
-            title: {
-                display: false,
-            },
-            tooltips: {
-                mode: 'nearest',
-                intersect: false,
-                position: 'nearest',
-                xPadding: 10,
-                yPadding: 10,
-                caretPadding: 10
-            },
-            legend: {
-                display: false
-            },
-            responsive: true,
-            maintainAspectRatio: true,
-            scales: {
-                xAxes: [{
-                    display: false,
-                    gridLines: false,
-                    scaleLabel: {
-                        display: true,
-                        labelString: 'Month'
-                    }
-                }],
-                yAxes: [{
-                    display: false,
-                    gridLines: false,
-                    scaleLabel: {
-                        display: true,
-                        labelString: 'Value'
-                    },
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
-            }
-        }
-    });
+    am5.ready(function () {
+
+        // Create root element
+        // https://www.amcharts.com/docs/v5/getting-started/#Root_element
+        var root = am5.Root.new("donutchart1");
+        root._logo.dispose();
+
+        // Set themes
+        // https://www.amcharts.com/docs/v5/concepts/themes/
+        root.setThemes([
+            am5themes_Animated.new(root)
+        ]);
+
+
+        // Create chart
+        // https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/
+        var chart = root.container.children.push(am5percent.PieChart.new(root, {
+            layout: root.verticalLayout,
+            innerRadius: am5.percent(50)
+        }));
+
+
+        // Create series
+        // https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/#Series
+        var series = chart.series.push(am5percent.PieSeries.new(root, {
+            valueField: "value",
+            categoryField: "category",
+            alignLabels: false
+        }));
+
+        series.labels.template.setAll({
+            textType: "circular",
+            centerX: 0,
+            centerY: 0
+        });
+
+
+        // Set data
+        // https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/#Setting_data
+        series.data.setAll([
+            { value: 10, category: "Connected" },
+            { value: 4, category: "Disconnected" },
+           
+        ]);
+
+
+        // Create legend
+        // https://www.amcharts.com/docs/v5/charts/percent-charts/legend-percent-series/
+        var legend = chart.children.push(am5.Legend.new(root, {
+            centerX: am5.percent(50),
+            x: am5.percent(50),
+            marginTop: 15,
+            marginBottom: 15,
+        }));
+
+        legend.data.setAll(series.dataItems);
+
+
+        // Play initial series animation
+        // https://www.amcharts.com/docs/v5/concepts/animations/#Animation_of_series
+        series.appear(1000, 100);
+
+    }); // end am5.ready()
+    //var ctx = document.getElementById("donutchart1").getContext('2d');
+    //var myChart = new Chart(ctx, {
+    //    type: 'pie',
+    //    data: {
+    //        labels: data.Table1.map(d => d.title),
+    //        datasets: [{
+    //            data: data.Table1.map(d => d.value),
+    //            backgroundColor: [
+    //                '#afd6fa',
+    //                '#82b1dd'
+    //            ]
+    //        }]
+    //    },
+    //    options: {
+    //        title: {
+    //            display: false,
+    //        },
+    //        tooltips: {
+    //            mode: 'nearest',
+    //            intersect: false,
+    //            position: 'nearest',
+    //            xPadding: 10,
+    //            yPadding: 10,
+    //            caretPadding: 10
+    //        },
+    //        legend: {
+    //            display: false
+    //        },
+    //        responsive: true,
+    //        maintainAspectRatio: true,
+    //        scales: {
+    //            xAxes: [{
+    //                display: false,
+    //                gridLines: false,
+    //                scaleLabel: {
+    //                    display: true,
+    //                    labelString: 'Month'
+    //                }
+    //            }],
+    //            yAxes: [{
+    //                display: false,
+    //                gridLines: false,
+    //                scaleLabel: {
+    //                    display: true,
+    //                    labelString: 'Value'
+    //                },
+    //                ticks: {
+    //                    beginAtZero: true
+    //                }
+    //            }]
+    //        }
+    //    }
+    //});
     //var ctx = document.getElementById("donutchart2").getContext('2d');
     //var myChart = new Chart(ctx, {
     //    type: 'doughnut',

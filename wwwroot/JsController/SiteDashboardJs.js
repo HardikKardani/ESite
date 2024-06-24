@@ -131,8 +131,8 @@ function getWeatherCondition(weatherCode, precipitation) {
                 };
             default:
                 return {
-                    name: 'Unknown Weather',
-                    icon: getIcon('fa-question-circle')
+                    name: 'Pleasant ',
+                    icon: getIcon('fa-cloud')
                 };
         }
     }
@@ -210,13 +210,14 @@ function fetchWeather() {
          
 
             var html = '<div class="row">' +
-                '<div class="col-3"><label style="font-weight: bold;">Temperature</label><span>: ' + dayNightIcon + tempIcon + temperature + data.current_weather_units.temperature + '</span></div>' +
-                '<div class="col-3"><label style="font-weight: bold;">Wind Speed</label><span>: ' + windSpeedIcon + windDirection + '° at ' + windSpeed + windSpeedUnit + '</span></div>' +
+                '<div class="col-3"><label style="font-weight: bold;">Temperature</label><span>: ' + dayNightIcon + ' ' + tempIcon + ' ' + temperature + data.current_weather_units.temperature + '</span></div>' +
+                '<div class="col-3"><label style="font-weight: bold;">Wind Speed</label><span>: ' + windSpeedIcon + ' ' + windDirection + '° at ' + windSpeed + windSpeedUnit + '</span></div>' +
                 '<div class="col-3"><label style="font-weight: bold;">Weather</label><span>: ' + weatherCondition.icon + ' ' + weatherCondition.name + '</span></div>' +
                 '<div class="col-3"><label style="font-weight: bold;">Precipitation</label><span>: ' +
-                    (precipitation > 0 ? (precipitations.icon + precipitations.name + ' (' + (precipitationProbability * 100) + '%)') : 'No precipitation') +
-                    '</span></div>';
-                '</div>';
+                (precipitation > 0 ? (precipitations.icon + ' ' + precipitations.name + ' (' + (precipitationProbability * 100) + '%)') : 'No precipitation') +
+                '</span></div>';
+            '</div>';
+
                 
 
             $("#weather-data").html(html);

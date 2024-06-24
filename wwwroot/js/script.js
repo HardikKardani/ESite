@@ -607,9 +607,11 @@ $(window).on("load", function () {
 $(document).ready(function () {
     $(document).on("click", "#pause-refresh", function () {
         stopAutoRefresh();
+        $('#seconds').html('<i class="fas fa-pause" style="color: white;text-align: center;"></i>'); // Add pause icon in white color and remove text
     });
 
     $(document).on("click", "#start-refresh", function () {
+        $('#seconds').text(secondsLeft); // Remove icon and add countdown text
         startAutoRefresh();
     });
 });

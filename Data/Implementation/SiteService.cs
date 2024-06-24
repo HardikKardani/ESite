@@ -2,6 +2,7 @@
 using Azure;
 using Data.EntityModel;
 using Data.EntityModel.Partialclass;
+using DocumentFormat.OpenXml.InkML;
 using ESite.Data.HelperClass;
 using ESite.Data.Interface;
 using ESite.Data.ViewModel;
@@ -308,6 +309,24 @@ namespace ESite.Data.Implementation
             }
             return _Response;
         }
-        
+        public ResponseViewModel GetAlertList()
+        {
+            ResponseViewModel _Response = new();
+            try
+            {
+                string? constr = _context.Database.GetConnectionString() == null ? "" : _context.Database.GetConnectionString();
+                sqlhelper _sqlhelper = new sqlhelper(constr == null ? "" : constr);
+                DataTable data = _sqlhelper.GetDataTable(System.Data.CommandType.StoredProcedure, "SP_AlertList");
+
+                _Response.Status = true;
+                _Response.Response = Newtonsoft.Json.JsonConvert.SerializeObject(data);
+
+            }
+            catch (Exception ex)
+            {
+                _Response.Message = DataComman.GetString(ex);
+            }
+            return _Response;
+        }
     }
 }

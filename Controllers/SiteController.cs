@@ -247,7 +247,20 @@ namespace Esite.Controllers
             }
             return Json(responseViewModel);
         }
-        
+        [HttpGet]
+        public IActionResult GetAlertList()
+        {
+            ResponseViewModel responseViewModel = new ResponseViewModel();
+            try
+            {
+                responseViewModel = _uow.siteService.GetAlertList();
+            }
+            catch (Exception ex)
+            {
+                responseViewModel.Message = DataComman.GetString(ex);
+            }
+            return Json(responseViewModel);
+        }
 
     }
 }

@@ -80,6 +80,10 @@
             background-color: #F44336;
         }
 
+	.status-box div {
+		text-align: center;
+	}
+
 @@media (max-width: 768px) {
     .card-row {
         flex-wrap: wrap;
@@ -267,7 +271,7 @@
 	</div>
 	<div class="grid-stack gs-area">
 		<div class="grid-stack-item" data-gs-x="0" data-gs-y="7" data-gs-width="3" data-gs-height="12"
-			 data-gs-min-height="10" data-gs-min-width="3">
+			 data-gs-min-height="10" data-gs-min-width="3" data-gs-no-resize="true">
 			<div class="console-panel grid-stack-item-content">
 				<div class="console-panel-header light" style="background-color: rgb(12, 52, 61);">
 					<div class="cph-left">
@@ -309,13 +313,13 @@
 				</div><!-- Panel Header -->
 				<div class="console-panel-body ">
 					<div class="chart-container">
-						<canvas id="donutchart1" width="100" height="65"></canvas>
+						<div id="donutchart1"></div>
 					</div>
 				</div>
 			</div><!-- Console Panel -->
 		</div>
 		<div class="grid-stack-item" data-gs-x="3" data-gs-y="7" data-gs-width="3" data-gs-height="12"
-			 data-gs-min-height="10" data-gs-min-width="3">
+			 data-gs-min-height="10" data-gs-min-width="3" data-gs-no-resize="true">
 			<div class="console-panel grid-stack-item-content">
 				<div class="console-panel-header light" style="background-color: rgb(12, 52, 61);">
 					<div class="cph-left">
@@ -448,7 +452,7 @@
 			</div><!-- Console Panel -->
 		</div> *@
 		<div class="grid-stack-item" data-gs-x="6" data-gs-y="7" data-gs-width="3" data-gs-height="12"
-			 data-gs-min-height="10" data-gs-min-width="3">
+			 data-gs-min-height="10" data-gs-min-width="3" data-gs-no-resize="true">
 			<div class="console-panel grid-stack-item-content">
 				<div class="console-panel-header light" style="background-color: rgb(12, 52, 61);">
 					<div class="cph-left">
@@ -518,7 +522,7 @@
 		</div>
 		
 		<div class="grid-stack-item" data-gs-x="9" data-gs-y="7" data-gs-width="3" data-gs-height="12"
-			 data-gs-min-height="10" data-gs-min-width="3">
+			 data-gs-min-height="10" data-gs-min-width="3" data-gs-no-resize="true">
 			<div class="console-panel grid-stack-item-content">
 				<div class="console-panel-header light" style="background-color: rgb(12, 52, 61);">
 					<div class="cph-left">
@@ -580,61 +584,61 @@
 						</div>
 			        </div>
 					<div class="steamline m-t-40">
-							<a data-toggle="modal" data-target=".alert" title="" data-rel="tooltip" data-original-title="Click to View Alert">
+							<a class="alertModal" title="" data-rel="tooltip" data-original-title="Click to View Alert">
 						<div class="sl-item">
 							<div class="sl-left bg-warning">
 								<i class="bg-warning icon dripicons-bell"></i>
 							</div>
 							<div class="sl-right">
 								<div class="font-medium flex justify-content-between">
-									<span class="bg-warning">NTSR</span><span class="sl-date"> 03:25 PM</span>
+									<span>NTSR</span><span class="sl-date"> 03:25 PM</span>
 								</div>
 								<div class="desc">NTSR |S-Chg Fail </div>
 							</div>
 						</div>
 							</a>
-							<a data-toggle="modal" data-target=".alert" title="" data-rel="tooltip" data-original-title="Click to View Alert">
+							<a class="alertModal" title="" data-rel="tooltip" data-original-title="Click to View Alert">
 						<div class="sl-item">
 							<div class="sl-left bg-warning">
 								<i class="bg-warning icon dripicons-bell"></i>
 							</div>
 							<div class="sl-right">
 								<div class="font-medium flex justify-content-between">
-									<span class="bg-warning">NTSR</span> <span class="sl-date">11:52 AM</span>
+									<span>NTSR</span> <span class="sl-date">11:52 AM</span>
 								</div>
 								<div class="desc">NTSR | All Rec Comm Fail </div>
 							</div>
 						</div>
 							</a>
-							<a data-toggle="modal" data-target=".alert" title="" data-rel="tooltip" data-original-title="Click to View Alert">
+						<a class="alertModal" title="" data-rel="tooltip" data-original-title="Click to View Alert">
 						<div class="sl-item">
 							<div class="sl-left bg-danger "><i class=" icon dripicons-bell"></i></div>
 							<div class="sl-right">
 								<div class="font-medium flex justify-content-between">
-									<span class="bg-danger">NTSR</span> <span class="sl-date">11:52 AM</span>
+									<span >NTSR</span> <span class="sl-date">11:52 AM</span>
 								</div>
 								<div class="desc">NTSR | Batt1 Fuse Fail</div>
 							</div>
 						</div>
 							</a>
 
-							<a data-toggle="modal" data-target=".alert" title="" data-rel="tooltip" data-original-title="Click to View Alert">
+						<a class="alertModal" title="" data-rel="tooltip" data-original-title="Click to View Alert">
 						<div class="sl-item">
 							<div class="sl-left bg-danger "><i class=" icon dripicons-bell"></i></div>
 							<div class="sl-right">
 								<div class="font-medium flex justify-content-between">
-									<span class="bg-danger">NTSR</span> <span class="sl-date">11:52 AM</span>
+									<span>NTSR</span> <span class="sl-date">11:52 AM</span>
 								</div>
 								<div class="desc">NTSR | Batt1 Fuse Fail</div>
 							</div>
 						</div>
 							</a>
-						<a data-toggle="modal" data-target=".alert" title="" data-rel="tooltip" data-original-title="Click to View Alert">
+						<a class="alertModal" title="" data-rel="tooltip" data-original-title="Click to View Alert">
 							<div class="sl-item">
 								<div class="sl-left bg-danger "><i class=" icon dripicons-bell"></i></div>
 								<div class="sl-right">
 									<div class="font-medium flex justify-content-between">
-										<span class="bg-danger">NTSR</span> <span class="sl-date">11:52 AM</span>
+										<span>NTSR</span> <span class="sl-date">11:52 AM</span>
 									</div>
 									<div class="desc">NTSR | Batt1 Fuse Fail</div>
 								</div>
@@ -1197,7 +1201,69 @@
 
 		initializeDataTable();
 	});
+	$('.alertModal').on('click', function() {
+		var id = $(this).data('id');
+		// Fetch data or do other operations based on the ID if needed
+		$('.alert').modal('show');
+		
 
+		if ($.fn.DataTable.isDataTable('#SesnsorTable')) {
+			$('#SesnsorTable').DataTable().clear().destroy();
+		}
+
+		ntsrinitializeDataTable();
+	});
+	
+		function ntsrinitializeDataTable() {
+			$('#SesnsorTable').DataTable({
+				"ajax": {
+					"url": '/Site/GetAlertList',
+					"dataSrc": function (json) {
+						debugger;
+						var data = $.parseJSON(json.response);
+						// Manipulate the JSON response data if needed
+						return data; // Assuming your data is nested under a 'response' key
+					}
+				},
+				"dom": '<"top"<"dt-filters"f>>rFt<"dt-bottom"<"dt-information"li><"dt-pagination"p>>',
+				"columns": [
+					{ "data": "slNo" },
+					{ "data": "siteId" },
+					{ "data": "siteName" },
+					{ "data": "siteRegion" },
+					{ "data": "alertDescription" },
+					{ "data": "alertServerity" },
+					{ "data": "createdOn" },
+					{ "data": "clearedOn" },
+
+					// Add more column definitions as needed
+				],
+				"columnDefs": [{
+					"targets": 'no-sort',
+					"orderable": false,
+				}],
+				"responsive": true,
+				"colReorder": {
+					realtime: false
+				},
+				"stateSave": false,
+
+				initComplete: function () {
+					// Move Search To Panel Header
+					debugger;
+					let _container = $(this).parents('#ntsrModel').find('.get_dt_search')
+					let _bottom_container = $(this).parents('#ntsrModel').find('.dt-bottom-container')
+
+					$("#modalTable_wrapper .dataTables_filter input").appendTo(_container);
+					$("#modalTable_wrapper  .dt-filters").css("display", "none");
+					$(_container).find("input").attr('placeholder', 'Search From Table');
+					$(_container).addClass("mb-2 text-right")
+					$("#modalTable_wrapper  .dt-bottom").appendTo(_bottom_container);
+
+					dashboardFilters();
+				}
+			});
+		}
 	// When the user clicks on <span> (x), close the modal
 	
 
@@ -1355,7 +1421,7 @@ function dashboardFilters() {
 		am5.ready(function () {
 			// Create root element
 			var root = am5.Root.new("GreenStatusChart");
-
+			root._logo.dispose();
 			// Set themes
 			root.setThemes([
 				am5themes_Animated.new(root)

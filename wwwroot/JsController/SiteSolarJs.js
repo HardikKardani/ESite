@@ -18,7 +18,7 @@ function Fillchartdiv(data) {
         // Themes begin
         am4core.useTheme(am4themes_animated);
         // Themes end
-
+        am4core.addLicense("ch-custom-attribution");
         // Create chart instance
         var chart = am4core.create("chartdiv", am4charts.XYChart);
 
@@ -75,7 +75,7 @@ function FillBCchartdiv(data) {
         // Themes begin
         am4core.useTheme(am4themes_animated);
         // Themes end
-
+        am4core.addLicense("ch-custom-attribution");
         // Create chart instance
         var chart = am4core.create("BCchartdiv", am4charts.XYChart);
 

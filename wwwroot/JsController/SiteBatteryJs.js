@@ -18,6 +18,7 @@ function FillCardDataList(data) {
 function Fillchartdiv(data) {
     // Create chart instance
     am4core.ready(function () {
+        am4core.addLicense("ch-custom-attribution");
         // Themes begin
         am4core.useTheme(am4themes_animated);
         // Themes end
@@ -62,6 +63,7 @@ function Fillchartdiv(data) {
 function FillBCchartdiv(data) {
     // Create chart instance
     am4core.ready(function () {
+        am4core.addLicense("ch-custom-attribution");
         // Themes begin
         am4core.useTheme(am4themes_animated);
         // Themes end
@@ -104,6 +106,7 @@ function FillBCchartdiv(data) {
 function FillBCCchartdiv(data) {
     am4core.ready(function () {
         // Themes begin
+        am4core.addLicense("ch-custom-attribution");
         am4core.useTheme(am4themes_animated);
         // Themes end
 

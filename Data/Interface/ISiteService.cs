@@ -22,6 +22,7 @@ namespace ESite.Data.Interface
         ResponseViewModel GetGridData();
         ResponseViewModel GetNotificationsData();
         ResponseViewModel GetSysytemData();
-        
+        ResponseViewModel GetAlertList();
+
     }
 }

@@ -20,6 +20,7 @@ function Fillchartdiv(data) {
     // Create chart instance
     am4core.ready(function () {
         // Themes begin
+        am4core.addLicense("ch-custom-attribution");
         am4core.useTheme(am4themes_animated);
         // Themes end
 
@@ -81,7 +82,7 @@ function FillBCCCchartdiv(data) {
         // Themes begin
         am4core.useTheme(am4themes_animated);
         // Themes end
-
+        am4core.addLicense("ch-custom-attribution");
         // Create chart instance
         var chart = am4core.create("BCCCchartdiv", am4charts.XYChart);
 
@@ -143,7 +144,7 @@ function FillBCchartdiv(data) {
         // Create root element
         // https://www.amcharts.com/docs/v5/getting-started/#Root_element
         var root = am5.Root.new("BCchartdiv");
-
+        root._logo.dispose();
         // Set themes
         // https://www.amcharts.com/docs/v5/concepts/themes/
         root.setThemes([
@@ -289,7 +290,7 @@ function FillBCCchartdiv(data) {
         // Themes begin
         am4core.useTheme(am4themes_animated);
         // Themes end
-
+        am4core.addLicense("ch-custom-attribution");
         // Create chart instance
         var chart = am4core.create("BCCchartdiv", am4charts.XYChart);
 
