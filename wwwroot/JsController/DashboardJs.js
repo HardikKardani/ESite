@@ -14,6 +14,11 @@ function FillCardDataList() {
         type: "GET",
         url: "/Home/GetCardDataList",
         success: function (data) {
+
+
+
+
+
             data = $.parseJSON(data.response);
             $("#IDODSite").html(data.Table[0].IDODSite);
             $("#Grid").html(data.Table[0].Grid);
@@ -39,27 +44,21 @@ function renderLineChart(data) {
     am5.ready(function () {
 
         // Create root element
-        // https://www.amcharts.com/docs/v5/getting-started/#Root_element
         var root = am5.Root.new("donutchart1");
         root._logo.dispose();
 
         // Set themes
-        // https://www.amcharts.com/docs/v5/concepts/themes/
         root.setThemes([
             am5themes_Animated.new(root)
         ]);
 
-
         // Create chart
-        // https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/
         var chart = root.container.children.push(am5percent.PieChart.new(root, {
             layout: root.verticalLayout,
             innerRadius: am5.percent(50)
         }));
 
-
         // Create series
-        // https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/#Series
         var series = chart.series.push(am5percent.PieSeries.new(root, {
             valueField: "value",
             categoryField: "category",
@@ -72,33 +71,35 @@ function renderLineChart(data) {
             centerY: 0
         });
 
-
         // Set data
-        // https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/#Setting_data
         series.data.setAll([
             { value: 10, category: "Connected" },
             { value: 4, category: "Disconnected" },
-           
         ]);
 
+        // Apply colors based on category
+        series.events.on("datavalidated", function () {
+            series.slices.each(function (slice) {
+                var category = slice.dataItem.dataContext.category;
+                if (category === "Connected") {
+                    slice.set("fill", am5.color(0x68dc76)); // Green color
+                } else if (category === "Disconnected") {
+                    slice.set("fill", am5.color(0x808080)); // Grey color
+                }
+            });
+        });
 
-        // Create legend
-        // https://www.amcharts.com/docs/v5/charts/percent-charts/legend-percent-series/
-        var legend = chart.children.push(am5.Legend.new(root, {
-            centerX: am5.percent(50),
-            x: am5.percent(50),
-            marginTop: 15,
-            marginBottom: 15,
-        }));
+        // Set colors for slices
+        series.slices.template.setAll({
+            stroke: am5.color(0xFFFFFF),
+            strokeWidth: 2
+        });
 
-        legend.data.setAll(series.dataItems);
-
+        
 
         // Play initial series animation
-        // https://www.amcharts.com/docs/v5/concepts/animations/#Animation_of_series
         series.appear(1000, 100);
-
-    }); // end am5.ready()
+    });
     //var ctx = document.getElementById("donutchart1").getContext('2d');
     //var myChart = new Chart(ctx, {
     //    type: 'pie',

@@ -23,6 +23,7 @@ namespace ESite.Data.Interface
         ResponseViewModel GetNotificationsData();
         ResponseViewModel GetSysytemData();
         ResponseViewModel GetAlertList();
-
+        Task<ResponseViewModel> Getbyid(RequestViewModel model);
+        Task<ResponseViewModel> Delete(RequestViewModel model);
     }
 }

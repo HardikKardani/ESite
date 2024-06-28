@@ -13,7 +13,10 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
+using System.Text.Json;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Options;
 
 namespace ESite.Data.Implementation
 {
@@ -67,7 +70,7 @@ namespace ESite.Data.Implementation
                 tblSites.InstallationDate = model.InstallationDate;
                 tblSites.AssetId = model.AssetId;
                 tblSites.IpAddress = model.IpAddress;
-                await _context.SaveChangesAsync();
+                 await _context.SaveChangesAsync();
                 _Response.Status = true;
                 _Response.Message = MessageType.Saved;
             }
@@ -84,9 +87,14 @@ namespace ESite.Data.Implementation
             {
                 List<TblSite> dataMasters = await _context.TblSites.AsNoTracking()
                     
-                    .Where(x => x.IsDeleted == false).OrderByDescending(o => o.SlNo).ToListAsync();
+                    .Where(x => x.IsDeleted != true).Include(x => x.Region).Include(x => x.CountryNavigation).Include(x => x.StateNavigation).Include(x => x.CoolingTypeNavigation).OrderByDescending(o => o.SlNo).ToListAsync();
                 _Response.Status = true;
-                _Response.Response = _mapper.Map<List<TblSite>, List<SiteViewModel>>(dataMasters);
+                var options = new JsonSerializerOptions
+                {
+                    ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve
+                };
+                //_mapper.Map<List<TblSite>, List<SiteViewModel>>(dataMasters);
+                _Response.Response = JsonSerializer.Serialize(dataMasters, options);
 
             }
             catch (Exception ex)
@@ -320,6 +328,71 @@ namespace ESite.Data.Implementation
 
                 _Response.Status = true;
                 _Response.Response = Newtonsoft.Json.JsonConvert.SerializeObject(data);
+
+            }
+            catch (Exception ex)
+            {
+                _Response.Message = DataComman.GetString(ex);
+            }
+            return _Response;
+        }
+        public async Task<ResponseViewModel> Getbyid(RequestViewModel model)
+        {
+            ResponseViewModel _Response = new ResponseViewModel();
+            try
+            {
+                //if (_context.TblSites.Any(w => w.SlNo == model.Id && w.IsDeleted == null))
+                //{
+                //    _Response.Message = "You cannot edit this record because it is already used with Destination.";
+                //}
+                //else
+                //{
+                TblSite? _master = await _context.TblSites.AsNoTracking().Where(x => x.SlNo == model.Id && x.IsDeleted == false).FirstOrDefaultAsync();
+                if (_master != null)
+                {
+                    SiteViewModel Model = _mapper.Map<TblSite, SiteViewModel>(_master);
+                    _Response.Status = true;
+                    _Response.Response = Model;
+                }
+                else
+                {
+                    _Response.Message = MessageType.Nodata;
+                }
+                //    }
+            }
+            catch (Exception ex)
+            {
+                _Response.Message = DataComman.GetString(ex);
+            }
+            return _Response;
+        }
+        public async Task<ResponseViewModel> Delete(RequestViewModel model)
+        {
+            ResponseViewModel _Response = new ResponseViewModel();
+            try
+            {
+                if (_context.TblSites.Any(w => w.SlNo == model.Id && w.IsDeleted == false))
+                {
+                    _Response.Message = "You cannot delete this record because it is already used with Destination.";
+                }
+                else
+                {
+                    TblSite? _master = await _context.TblSites.Where(x => x.SlNo == model.Id && x.IsDeleted == false).FirstOrDefaultAsync();
+                    if (_master != null)
+                    {
+                        _master.IsDeleted = true;
+                        _master.ModifiedBy = model.CreatedBy;
+                        _master.ModifiedDate = DataComman.GetDateTimeNow();
+                        await _context.SaveChangesAsync();
+
+                        _Response.Status = true;
+                        _Response.Message = MessageType.Delete;
+                    }
+                    else
+                    {
+                        _Response.Message = MessageType.Nodata;
+                    }
+                }
 
             }
             catch (Exception ex)

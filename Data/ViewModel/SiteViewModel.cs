@@ -29,7 +29,7 @@ namespace ESite.Data.ViewModel
 
         public long Country { get; set; }
 
-        public string Address { get; set; }
+        public string Address { get; set; } = null!;
 
         public string? LandMark { get; set; }
 
@@ -57,7 +57,7 @@ namespace ESite.Data.ViewModel
 
         public string? ContactNo { get; set; }
 
-        public string? Remarks { get; set; }
+        public string Remarks { get; set; }
 
         public long? CreatedBy { get; set; }
 
@@ -70,6 +70,7 @@ namespace ESite.Data.ViewModel
         public bool? IsDeleted { get; set; }
 
         public long? CompanyId { get; set; }
+
         public string? HardwareVersion { get; set; }
 
         public string? Softwareversion { get; set; }
@@ -79,6 +80,10 @@ namespace ESite.Data.ViewModel
         public long? AssetId { get; set; }
 
         public string? IpAddress { get; set; }
+        public string CountryName { get; set; }
+        public string CoolingTypeName { get; set; }
+        public string StateName { get; set; }
+        public string RegionName { get; set; }
 
         public virtual ICollection<BatteryGstatus> BatteryGstatuses { get; set; } = new List<BatteryGstatus>();
 
@@ -155,6 +160,7 @@ namespace ESite.Data.ViewModel
         public virtual ICollection<TblSolar1> TblSolar1s { get; set; } = new List<TblSolar1>();
 
         public virtual ICollection<TblSolar> TblSolars { get; set; } = new List<TblSolar>();
+        public List<string> Tenants { get; set; }
     }
 }
 

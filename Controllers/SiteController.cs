@@ -80,7 +80,7 @@ namespace Esite.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> SaveSite([FromBody]SiteViewModel _Model )
+        public async Task<IActionResult> SaveSite(SiteViewModel _Model)
         {
             ResponseViewModel responseViewModel = new ResponseViewModel();
             int userid = 1;
@@ -261,6 +261,39 @@ namespace Esite.Controllers
             }
             return Json(responseViewModel);
         }
-
+        [HttpGet]
+        public async Task<IActionResult> Getdatabyid(long id)
+        {
+            ResponseViewModel responseViewModel = new ResponseViewModel();
+            try
+            {
+                RequestViewModel requestModel = new RequestViewModel();
+                requestModel.Id = id;
+                responseViewModel = await _uow.siteService.Getbyid(requestModel);
+            }
+            catch (Exception ex)
+            {
+                responseViewModel.Message = DataComman.GetString(ex);
+            }
+            return Json(responseViewModel);
+        }
+        [HttpGet]
+        public async Task<IActionResult> Deletedatabyid(long id)
+        {
+            ResponseViewModel responseViewModel = new ResponseViewModel();
+            int userid = 1;
+            try
+            {
+                RequestViewModel requestModel = new RequestViewModel();
+                requestModel.Id = id;
+                requestModel.CreatedBy = userid;
+                responseViewModel = await _uow.siteService.Delete(requestModel);
+            }
+            catch (Exception ex)
+            {
+                responseViewModel.Message = DataComman.GetString(ex);
+            }
+            return Json(responseViewModel);
+        }
     }
 }

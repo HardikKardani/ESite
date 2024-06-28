@@ -1,7 +1,7 @@
 
 $(document).ready(function () {
 
-    FillData();
+    FillData(); EditSiteID();
     $("#btnSaves").on("click", function () {
         OnSave();
     });
@@ -23,6 +23,7 @@ $(document).ready(function () {
         createTextboxes(numberOfTenants);
     });
 });
+
 
 function onclear() {
 
@@ -48,6 +49,7 @@ function onclear() {
     $('#region').val("");
     $('#SiteName').val("");
     $('#SiteId').val("");
+    $('#hslNo').val(0);
     //sim2Number
     //sim2Operator
     //sim1Number
@@ -70,8 +72,8 @@ function onclear() {
     //region
     //SiteName
     //SiteId
-    $("#rectifierForm")[0].reset();
-    $("#rectifierForm").validate().resetForm();
+    /*$("#rectifierForm")[0].reset();*/
+    /*$("#rectifierForm").validate().resetForm();*/
 
 }
 
@@ -83,6 +85,7 @@ function OnSave() {
 
         // Prepare the data from the form
         var siteViewModel = {
+            SlNo: $('#hslNo').val(),
             SimCardNo2: $('#sim2Number').val(),
             SimOperator2: $('#sim2Operator').val(),
             SimCardNo1: $('#sim1Number').val(),
@@ -108,15 +111,19 @@ function OnSave() {
             SiteInChargeName: $('#siteInChargeName').val(),
             ContactNo: $('#contactNo').val()
         };
-
+        var tenants = [];
+        $('#textboxContainer input').each(function () {
+            tenants.push($(this).val());
+        });
+        siteViewModel.Tenants = tenants;
         $.ajax({
             url: '/Site/SaveSite',
             type: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify(siteViewModel),
-            dataType: 'json',
+            data: { _Model: siteViewModel },
             success: function (response) {
                 console.log('Success:', response);
+                onclear();
+                window.location.href = "/Site/SiteMasterList/";
                 // Handle success - maybe update the UI or show a message
             },
             error: function (xhr, status, error) {
@@ -130,41 +137,67 @@ function OnSave() {
 
 
 function FillData() {
+   
     debugger;
     SiteDataTable = $('#SiteDataTable').DataTable({
         "ajax": {
-            type: "GET",
-            url: "/Site/GetList",
+           url: "/Site/GetList",
             "dataSrc": function (json) {
-                debugger
+                debugger;
+                var data = $.parseJSON(json.response);
+
                 // Manipulate the JSON response data if needed
-                return json.response; // Assuming your data is nested under a 'data' key
+                return data.$values ; // Assuming your data is nested under a 'data' key
             }
         },
         "dom": '<"top"<"dt-filters"f>>rFt<"dt-bottom"<"dt-information"li><"dt-pagination"p>>',
         "columns": [
 
             {
-                "data": "slNo",
+                "data": "SlNo",
                 render: function (data, type, row, meta) {
                     return meta.row + meta.settings._iDisplayStart + 1;
                 }
             },
-            { "data": "siteId" },
-            { "data": "siteName" },
-            { "data": "siteTypeNavigation" },
-            { "data": "countryNavigation" },
-            { "data": "region" },
-            { "data": "stateNavigation" },
-            { "data": "coolingTypeNavigation" },
+            { "data": "SiteId" },
+            { "data": "SiteName" },
             {
-                "data": "slNo", "orderable": false, visible: true, "render": function (data) {
+                "data": "SiteTypeNavigation",
+                "render": function (data, type, row) {
+                    return data ? data.SiteType : 'N/A';
+                }
+            },
+            {
+                "data": "CountryNavigation",
+                "render": function (data, type, row) {
+                    return data ? data.CountryName : 'N/A';
+                }
+            },
+            {
+                "data": "Region",
+                "render": function (data, type, row) {
+                    return data ? data.RegionName : 'N/A';
+                }
+            },
+            {
+                "data": "StateNavigation",
+                "render": function (data, type, row) {
+                    return data ? data.StateName : 'N/A';
+                }
+            },
+            {
+                "data": "CoolingTypeNavigation",
+                "render": function (data, type, row) {
+                    return data ? data.CoolingType : 'N/A';
+                }
+            },
+            {
+                "data": "SlNo", "orderable": false, visible: true, "render": function (data) {
                     var trhtml = '';
 
-                    trhtml += ' <a class="btn p-0 text-primary btnedit" href="javascript:void(0);" onClick="EditBank(' + data + ')" data-toggle="tooltip" data-placement="top" title="Edit" style="font-size: 1.06rem!important;"><i class="fas fa-edit"></i></a>'
+                    trhtml += ' <a class="btn p-0 text-primary btnedit" href="javascript:void(0);" onClick="EditSite(' + data + ')" data-toggle="tooltip" data-placement="top" title="Edit" style="font-size: 1.06rem!important;"><i class="fas fa-edit"></i></a>'
 
-                    trhtml += '<a class="btn p-0 ml-1 text-danger" href = "javascript:void(0);" onClick="DeleteBank(' + data + ')" data - toggle="tooltip" data - placement="top" title = "Delete" style = "font-size: 1.06rem!important;" > <i class="fas fa-trash"></i></a>';
-
+                    trhtml += '<a class="btn p-0 ml-1 text-danger" href="javascript:void(0);" onClick="DeleteSite(' + data + ')" data - toggle="tooltip" data - placement="top" title = "Delete" style = "font-size: 1.06rem!important;" > <i class="fas fa-trash"></i></a>';
                     return trhtml;
                 }
             }
@@ -197,44 +230,63 @@ function FillData() {
     
 
 }
-
+function getParameterByName(name) {
+    debugger
+    var url = window.location.href;
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
 function EditSite(id) {
-    onclear();
+    debugger
+    window.location.href = "/Site/SiteMaster?id=" + id;
+}
+function EditSiteID() {
+    
+    var id = getParameterByName('id');;
+    if (id != "") {
+        onclear();
 
-    $.ajax({
-        type: 'GET',
-        url: "/Site/Getdatabyid/?id=" + id,
-        success: function (data) {
-            if (data.status) {
-                $('#sim2Number').val(data.response.sim2Number);
-                $('#sim2Operator').val(data.response.sim2Operator);
-                $('#sim1Number').val(data.response.sim1Number);
-                $('#sim1Operator').val(data.response.sim1Operator);
-                $('#ipAddress').val(data.response.ipAddress);
-                $('#assetId').val(data.response.assetId);
-                $('#installationDate').val(data.response.installationDate);
-                $('#softwareVersion').val(data.response.softwareVersion);
-                $('#hardwareVersion').val(data.response.hardwareVersion);
-                $('#address').val(data.response.address);
-                $('#inCharge').val(data.response.inCharge);
-                $('#long').val(data.response.long);
-                $('#lat').val(data.response.lat);
-                $('#noOfTenant').val(data.response.noOfTenant);
-                $('#noOfDG').val(data.response.noOfDG);
-                $('#typeOfCooling').val(data.response.typeOfCooling);
-                $('#siteType').val(data.response.siteType);
-                $('#country').val(data.response.country);
-                $('#state').val(data.response.state);
-                $('#region').val(data.response.region);
-                $('#SiteName').val(data.response.SiteName);
-                $('#SiteId').val(data.response.SiteId);
+        $.ajax({
+            type: 'GET',
+            url: "/Site/Getdatabyid/?id=" + id,
+            success: function (data) {
+                if (data.status) {
+                    $('#hslNo').val(data.response.slNo);
+                    $('#sim2Number').val(data.response.simCardNo2);
+                    $('#sim2Operator').val(data.response.simOperator2);
+                    $('#sim1Number').val(data.response.simCardNo1);
+                    $('#sim1Operator').val(data.response.simOperator1);
+                    $('#ipAddress').val(data.response.ipAddress);
+                    $('#assetId').val(data.response.assetId);
+                    $('#installationDate').val(data.response.installationDate);
+                    $('#softwareVersion').val(data.response.softwareversion);
+                    $('#hardwareVersion').val(data.response.hardwareVersion);
+                    $('#address').val(data.response.address);
+                    $('#inCharge').val(data.response.siteInChargeName);
+                    $('#long').val(data.response.long);
+                    $('#lat').val(data.response.lat);
+                    //$('#noOfTenant').val(data.response.noOfTenant);
+                    $('#noOfDG').val(data.response.noOfGenerator);
+                    $('#typeOfCooling').val(data.response.coolingType);
+                    $('#siteType').val(data.response.siteType);
+                    $('#country').val(data.response.country);
+                    $('#state').val(data.response.state);
+                    $('#region').val(data.response.regionId);
+                    $('#SiteName').val(data.response.siteName);
+                    $('#SiteId').val(data.response.siteId);
+                }
+                else {
+                    /* Messagealert('w', data.message);*/
+                }
+                /* loader(0);*/
             }
-            else {
-                Messagealert('w', data.message);
-            }
-            loader(0);
-        }
-    });
+        });
+    }
+
 }
 
 function DeleteSite(id) {
@@ -249,17 +301,17 @@ function DeleteSite(id) {
         confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
         if (result.isConfirmed) {
-            loader(1);
+            /*loader(1);*/
             $.ajax({
                 type: 'GET',
                 url: "/Site/Deletedatabyid/?id=" + id,
                 success: function (data) {
                     if (data.status) {
-                        Messagealert('s', data.message);
+                        /*Messagealert('s', data.message);*/
                         FillData();
                     }
                     else {
-                        Messagealert('w', data.message);
+                        /*Messagealert('w', data.message);*/
                     }
                 }
             });
@@ -267,8 +319,6 @@ function DeleteSite(id) {
     })
 
 }
-
-
 function createTextboxes(number) {
     const container = $("#textboxContainer");
     const numberOfTenants = parseInt(number, 10);
