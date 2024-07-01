@@ -50,20 +50,20 @@
                                                 <div class="col-lg-4 col-md-12">
                                                     <div class="form-group">
                                                         <label>Site Id</label>
-                                                        <input type="text" class="form-control" placeholder="Site Id" id="SiteId" required>
+                                                        <input type="text" class="form-control" name="SiteId" placeholder="Site Id" id="SiteId" required>
                                                          <input type="hidden" id="hslNo">
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4 col-md-12">
                                                     <div class="form-group">
                                                         <label>Site Name</label>
-                                                        <input type="text" class="form-control" placeholder="Site Name" id="SiteName" required>
+                                                        <input type="text" class="form-control" name="SiteName" placeholder="Site Name" id="SiteName" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4 col-md-12">
                                                     <div class="form-group">
                                                         <label>Region</label>
-                                                        <select class="select2 form-control" id="region" required>
+                                                        <select class="select2 form-control" id="region" name="Region" required>
                                                             <option value="1">Jakarta</option>
                                                             <option value="2">Medan</option>
                                                             <option value="3">Kota Ambon</option>
@@ -73,7 +73,7 @@
                                                 <div class="col-lg-4 col-md-12">
                                                     <div class="form-group">
                                                         <label>State</label>
-                                                        <select class="select2 form-control" id="state" required>
+                                                        <select class="select2 form-control" id="state" name="State" required>
                                                             <option value="2">
                                                                 Bali
                                                             </option>
@@ -84,7 +84,7 @@
                                                 <div class="col-lg-4 col-md-12">
                                                     <div class="form-group">
                                                         <label>Country</label>
-                                                        <select class="select2 form-control" id="country" required>
+                                                        <select class="select2 form-control" id="country" name="Country" required>
                                                             <option value="1">Indonesia</option>
                                                             <option value="2">India</option>
                                                         </select>
@@ -93,7 +93,7 @@
                                                 <div class="col-lg-4 col-md-12">
                                                     <div class="form-group">
                                                         <label>Site Type</label>
-                                                        <select class="select2 form-control" id="siteType" required>
+                                                        <select class="select2 form-control" id="siteType" name="SiteType" required>
                                                             <option value="1">Solar</option>
                                                             <option value="2">Battery</option>
                                                             <option value="3">Hybrid</option>
@@ -103,7 +103,7 @@
                                                 <div class="col-lg-4 col-md-12">
                                                     <div class="form-group">
                                                         <label>Type of Cooling</label>
-                                                        <select class="select2 form-control" id="typeOfCooling" required>
+                                                        <select class="select2 form-control" id="typeOfCooling" name="TypeOfCooling" required>
                                                             <option value="1">Normal</option>
                                                             <option value="2">Liquid Cooling</option>
                                                         </select>
@@ -112,13 +112,13 @@
                                                 <div class="col-lg-4 col-md-12">
                                                     <div class="form-group">
                                                         <label>No of DG</label>
-                                                        <input type="text" class="form-control" placeholder="DG" id="noOfDG" required>
+                                                        <input type="text" class="form-control" placeholder="DG" name="NoOfDG" id="noOfGenerator" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4 col-md-12">
                                                     <div class="form-group">
                                                         <label>No of Tenant</label>
-                                                        <input type="number" class="form-control" id="noOfTenant" placeholder="No of tenant" required max="10" min="0">
+                                                        <input type="number" class="form-control" id="noOfTenant" name="NoOfTenant" placeholder="No of tenant" required max="10" min="0">
                                                     </div>
                                                 </div>
                                                 <div id="textboxContainer" class="col-lg-12 col-md-12">
@@ -127,25 +127,25 @@
                                                 <div class="col-lg-4 col-md-12">
                                                     <div class="form-group">
                                                         <label>Latitude</label>
-                                                        <input type="text" class="form-control" placeholder="Latitude" id="lat" required>
+                                                        <input type="text" class="form-control" placeholder="Latitude" id="lat" name="Lat" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4 col-md-12">
                                                     <div class="form-group">
                                                         <label>Longitude</label>
-                                                        <input type="text" class="form-control" placeholder="Longitude" id="long" required>
+                                                        <input type="text" class="form-control" placeholder="Longitude" id="long" name="Long" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4 col-md-12">
                                                     <div class="form-group">
                                                         <label>Site InCharge</label>
-                                                        <input type="text" class="form-control" placeholder="Site Incharge" id="inCharge" required>
+                                                        <input type="text" class="form-control" placeholder="Site Incharge" id="inCharge" name="InCharge" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12 col-md-12">
                                                     <div class="form-group">
                                                         <label>Site Address</label>
-                                                        <textarea class="form-control" rows="3" id="address" required></textarea>
+                                                        <textarea class="form-control" rows="3" id="address" name="Address" required></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -155,7 +155,7 @@
                                 <div class="mytab theme1">
                                     <ul class="nav nav-tabs">
                                         <li>
-                                            <a class="nav-link active" data-toggle="tab" data-target="#RMSDetails">
+                                            <a class="nav-link active" data-toggle="tab" data-target="#RMSDetails" >
                                                 RMS Details
                                             </a>
                                         </li>
@@ -167,38 +167,38 @@
                                                 <div class="col-lg-6 col-md-12">
                                                     <div class="form-group">
                                                         <label>Hardware Version</label>
-                                                        <input type="text" class="form-control" placeholder="Hardware version" id="hardwareVersion" required>
+                                                        <input type="text" class="form-control" placeholder="Hardware version" name="HardwareVersion" id="hardwareVersion" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6 col-md-12">
                                                     <div class="form-group">
                                                         <label>Software Version</label>
-                                                        <input type="text" class="form-control" placeholder="Software version" id="softwareVersion" required>
+                                                        <input type="text" class="form-control" placeholder="Software version" name="SoftwareVersion" id="softwareVersion" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6 col-md-12">
                                                     <div class="form-group">
                                                         <label>Installation Date</label>
-                                                        <input type="date" class="form-control" placeholder="Installation Date" id="installationDate" required>
+                                                        <input type="date" class="form-control" placeholder="Installation Date" name="InstallationDate" id="installationDate" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6 col-md-12">
                                                     <div class="form-group">
                                                         <label>Asset Id</label>
-                                                        <input type="text" class="form-control" placeholder="Asset Id" id="assetId" required>
+                                                        <input type="text" class="form-control" placeholder="Asset Id" id="assetId" name="AssetId" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6 col-md-12">
                                                     <div class="form-group">
                                                         <label>IP Address</label>
-                                                        <input type="text" class="form-control" placeholder="IP Address" id="ipAddress" required>
+                                                        <input type="text" class="form-control" placeholder="IP Address" id="ipAddress" name="IpAddress" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6 col-md-12"></div>
                                                 <div class="col-lg-6 col-md-12">
                                                     <div class="form-group">
                                                         <label>SIM1 Operator</label>
-                                                        <select class="select2 form-control" id="sim1Operator" required>
+                                                        <select class="select2 form-control" id="sim1Operator" required name="Sim1Operator">
                                                             <option value="1">Operator 1</option>
                                                             <option value="2">Operator 1</option>
                                                         </select>
@@ -207,7 +207,7 @@
                                                 <div class="col-lg-6 col-md-12">
                                                     <div class="form-group">
                                                         <label>SIM2 Number</label>
-                                                        <select class="select2 form-control" id="sim1Number" required>
+                                                        <select class="select2 form-control" id="sim1Number" required name="Sim1Number">
                                                             <option value="1">+62 6325412502</option>
                                                             <option value="2">+62 6325412501</option>
                                                         </select>
@@ -216,7 +216,7 @@
                                                 <div class="col-lg-6 col-md-12">
                                                     <div class="form-group">
                                                         <label>SIM2 Operator</label>
-                                                        <select class="select2 form-control" id="sim2Operator">
+                                                        <select class="select2 form-control" id="sim2Operator" name="Sim2Operator">
                                                             <option value="1">Operator 1</option>
                                                             <option value="2">Operator 1</option>
                                                         </select>
@@ -225,7 +225,7 @@
                                                 <div class="col-lg-6 col-md-12">
                                                     <div class="form-group">
                                                         <label>SIM2 Number</label>
-                                                        <select class="select2 form-control" id="sim2Number">
+                                                        <select class="select2 form-control" id="sim2Number" name="Sim2Number">
                                                             <option value="1">+62 6325412502</option>
                                                             <option value="2">+62 6325412501</option>
                                                         </select>
@@ -236,16 +236,16 @@
                                     </div>
                                 </div>
                                 <div class="footer text-right">
-                                    <a href="">
-                                        <button class="btn btn-success ml-auto" id="btnSaves" type="submit">
+
+                                    <button class="btn btn-success ml-auto" id="btnSaves" onclick="OnSaveSite()" type="button">
                                             Save
                                         </button>
-                                    </a>
-                                    <a href="">
+                                    
+                                    
                                         <button class="btn btn-danger ml-auto" type="button" id="btnReload">
                                             Reload
                                         </button>
-                                    </a>
+                                    
                                 </div>
                             </form>
 
@@ -486,8 +486,8 @@
                                             <div class="col-lg-3 col-md-12">
                                                 <div class="form-group">
                                                     <select class="select2 form-control">
-                                                        <option value="Site1">Available</option>
-                                                        <option value="Site1">Not Available</option>
+                                                        <option value="true">Available</option>
+                                                        <option value="false">Not Available</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -513,8 +513,8 @@
                                             <div class="col-lg-3 col-md-12">
                                                 <div class="form-group">
                                                     <select class="select2 form-control">
-                                                        <option value="Site1">Available</option>
-                                                        <option value="Site1">Not Available</option>
+                                                        <option value="true">Available</option>
+                                                        <option value="false">Not Available</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -540,8 +540,8 @@
                                             <div class="col-lg-3 col-md-12">
                                                 <div class="form-group">
                                                     <select class="select2 form-control">
-                                                        <option value="Site1">Available</option>
-                                                        <option value="Site1">Not Available</option>
+                                                        <option value="true">Available</option>
+                                                        <option value="false">Not Available</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -710,16 +710,14 @@
                                 </div>
                             </div>
                             <div class="footer text-right">
-                                <a data-title="e@site Setting" class="get_pn p-1" href="">
-                                    <button class="btn btn-success ml-auto" type="submit">
+                                
+                                    <button class="btn btn-success ml-auto" onclick="OnSaveSiteAsset()" type="button">
                                         Save
                                     </button>
-                                </a>
-                                <a data-title="e@site Setting" class="get_pn p-1" href="">
+                                
                                     <button class="btn btn-danger ml-auto" type="button">
                                         Reload
                                     </button>
-                                </a>
                             </div>
                         </div>
                         <div class="tab-pane fade" id="Images">
@@ -729,16 +727,12 @@
                                 </div>
                             </div>
                             <div class="footer text-right">
-                                <a data-title="e@site Setting" class="get_pn p-1" href="">
-                                    <button class="btn btn-success ml-auto" type="submit">
+                                    <button class="btn btn-success ml-auto" onclick="OnSaveSiteImages()" type="button">
                                         Save
                                     </button>
-                                </a>
-                                <a data-title="e@site Setting" class="get_pn p-1" href="">
                                     <button class="btn btn-danger ml-auto" type="button">
                                         Reload
                                     </button>
-                                </a>
                             </div>
                         </div>
                     </div>

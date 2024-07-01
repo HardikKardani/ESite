@@ -17,6 +17,8 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
+using static ESite.Data.ViewModel.SiteViewModel;
+using DocumentFormat.OpenXml.EMMA;
 
 namespace ESite.Data.Implementation
 {
@@ -44,7 +46,7 @@ namespace ESite.Data.Implementation
                     tblSites.IsDeleted = false;
                     _context.TblSites.Add(tblSites);
                 }
-                tblSites.SiteId = model.SiteId;
+               tblSites.SiteId = model.SiteId;
                 tblSites.SiteName = model.SiteName;
                 tblSites.RegionId = model.RegionId;
                 tblSites.State = model.State;
@@ -52,6 +54,7 @@ namespace ESite.Data.Implementation
                 tblSites.SiteType = model.SiteType;
                 tblSites.CoolingType = model.CoolingType;
                 tblSites.LandMark = model.LandMark;
+                tblSites.NoOfTenant = model.NoOfTenant;
                 tblSites.NoOfGenerator = model.NoOfGenerator;
                 tblSites.TankCapacity = model.TankCapacity;
                 tblSites.Lat = model.Lat;
@@ -70,7 +73,87 @@ namespace ESite.Data.Implementation
                 tblSites.InstallationDate = model.InstallationDate;
                 tblSites.AssetId = model.AssetId;
                 tblSites.IpAddress = model.IpAddress;
-                 await _context.SaveChangesAsync();
+                tblSites.ModifiedBy = model.CreatedBy;
+                tblSites.ModifiedDate = DataComman.GetDateTimeNow();
+                await _context.SaveChangesAsync();
+                _Response.Status = true;
+                _Response.Response = tblSites.SlNo;
+                _Response.Message = MessageType.Saved;
+            }
+            catch (Exception ex)
+            {
+                _Response.Message = DataComman.GetString(ex);
+            }
+            return _Response;
+        }
+        public async Task<ResponseViewModel> SaveSiteAsset(TblTenantSiteAsset model)
+        {
+            ResponseViewModel _Response = new ResponseViewModel();
+            _Response.Status = false;
+            try
+            {
+                TblTenantSiteAsset? tblTenantSiteAsset = await _context.TblTenantSiteAssets.Where(x => x.SlNo == model.SlNo).FirstOrDefaultAsync();
+                if (tblTenantSiteAsset == null)
+                {
+                    tblTenantSiteAsset = new TblTenantSiteAsset();
+                    tblTenantSiteAsset.CreatedBy = model.CreatedBy;
+                    tblTenantSiteAsset.CreatedDate = DataComman.GetDateTimeNow();
+                    tblTenantSiteAsset.IsDeleted = false;
+                    _context.TblTenantSiteAssets.Add(tblTenantSiteAsset);
+                }
+
+                tblTenantSiteAsset.SiteId = model.SiteId;
+                tblTenantSiteAsset.TenantId = model.TenantId;
+                tblTenantSiteAsset.IsGridAvailable = model.IsGridAvailable;
+                tblTenantSiteAsset.IsGridVisible = model.IsGridVisible;
+                tblTenantSiteAsset.GridRemarks = model.GridRemarks;
+                tblTenantSiteAsset.IsGeneratorAvailable = model.IsGeneratorAvailable;
+                tblTenantSiteAsset.IsGeneratorVisible = model.IsGeneratorVisible;
+                tblTenantSiteAsset.GeneratorRemarks = model.GeneratorRemarks;
+                tblTenantSiteAsset.IsBatteryAvailable = model.IsBatteryAvailable;
+                tblTenantSiteAsset.IsBatteryVisible = model.IsBatteryVisible;
+                tblTenantSiteAsset.BatteryRemarks = model.BatteryRemarks;
+                tblTenantSiteAsset.IsSolarAvailable = model.IsSolarAvailable;
+                tblTenantSiteAsset.IsSolarVisible = model.IsSolarVisible;
+                tblTenantSiteAsset.SolarRermarks = model.SolarRermarks;
+                tblTenantSiteAsset.IsRectifierAvailable = model.IsRectifierAvailable;
+                tblTenantSiteAsset.IsRectifierVisible = model.IsRectifierVisible;
+                tblTenantSiteAsset.RectifierRemarks = model.RectifierRemarks;
+                tblTenantSiteAsset.IsPortableBatteryAvailable = model.IsPortableBatteryAvailable;
+                tblTenantSiteAsset.IsPortableBatteryVisible = model.IsPortableBatteryVisible;
+                tblTenantSiteAsset.PortableBatteryRemarks = model.PortableBatteryRemarks;
+                tblTenantSiteAsset.ModifiedBy = model.CreatedBy;
+                tblTenantSiteAsset.ModifiedDate = DataComman.GetDateTimeNow();
+                await _context.SaveChangesAsync();
+                _Response.Status = true;
+                _Response.Message = MessageType.Saved;
+            }
+            catch (Exception ex)
+            {
+                _Response.Message = DataComman.GetString(ex);
+            }
+            return _Response;
+        }
+        public async Task<ResponseViewModel> SaveTenant(TblTenant model)
+        {
+            ResponseViewModel _Response = new ResponseViewModel();
+            _Response.Status = false;
+            try
+            {
+                TblTenant? tblTenant = await _context.TblTenants.Where(x => x.SlNo == model.SlNo).FirstOrDefaultAsync();
+                if (tblTenant == null)
+                {
+                    tblTenant = new TblTenant();
+                    tblTenant.CreatedBy = model.CreatedBy;
+                    tblTenant.CreatedDate = DataComman.GetDateTimeNow();
+                    tblTenant.IsDeleted = false;
+                    _context.TblTenants.Add(tblTenant);
+                }
+                tblTenant.SiteId = model.SiteId;
+                tblTenant.TenantName = model.TenantName;
+                tblTenant.ModifiedBy = model.CreatedBy;
+                tblTenant.ModifiedDate = DataComman.GetDateTimeNow();
+                await _context.SaveChangesAsync();
                 _Response.Status = true;
                 _Response.Message = MessageType.Saved;
             }
@@ -87,7 +170,7 @@ namespace ESite.Data.Implementation
             {
                 List<TblSite> dataMasters = await _context.TblSites.AsNoTracking()
                     
-                    .Where(x => x.IsDeleted != true).Include(x => x.Region).Include(x => x.CountryNavigation).Include(x => x.StateNavigation).Include(x => x.CoolingTypeNavigation).OrderByDescending(o => o.SlNo).ToListAsync();
+                    .Where(x => x.IsDeleted != true).Include(x => x.Region).Include(x => x.CountryNavigation).Include(x => x.StateNavigation).Include(x => x.CoolingTypeNavigation).Include(x => x.SiteTypeNavigation).OrderByDescending(o => o.SlNo).ToListAsync();
                 _Response.Status = true;
                 var options = new JsonSerializerOptions
                 {
@@ -351,6 +434,14 @@ namespace ESite.Data.Implementation
                 if (_master != null)
                 {
                     SiteViewModel Model = _mapper.Map<TblSite, SiteViewModel>(_master);
+
+                    Model.Tenants = await _context.TblTenants.AsNoTracking().Where(x => x.SiteId == Model.SlNo && x.IsDeleted == false).Select(x => new Tenant
+                    {
+                        Id = x.SlNo,
+                        TenantName = x.TenantName
+                    }).ToListAsync(); ;
+
+                    Model.TenantSiteAsset = await _context.TblTenantSiteAssets.AsNoTracking().Where(x => x.SiteId == Model.SlNo && x.IsDeleted == false).ToListAsync(); ;
                     _Response.Status = true;
                     _Response.Response = Model;
                 }
@@ -371,7 +462,7 @@ namespace ESite.Data.Implementation
             ResponseViewModel _Response = new ResponseViewModel();
             try
             {
-                if (_context.TblSites.Any(w => w.SlNo == model.Id && w.IsDeleted == false))
+                if (_context.TblSites.Any(w => w.SlNo == model.Id && w.IsDeleted == null))
                 {
                     _Response.Message = "You cannot delete this record because it is already used with Destination.";
                 }
@@ -401,5 +492,11 @@ namespace ESite.Data.Implementation
             }
             return _Response;
         }
-    }
+		public async Task<bool> CheckDuplicateName(RequestViewModel model)
+		{
+            return await _context.TblSites.Where(x => x.IsDeleted == false &&( x.SiteName != null && x.SiteName.ToLower() == model.Search.ToLower() ||  x.SiteId != null && x.SiteId.ToLower() == model.Search.ToLower() )&& x.SlNo != model.Id).AnyAsync();
+            
+
+		}
+	}
 }

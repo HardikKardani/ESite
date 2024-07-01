@@ -1,0 +1,127 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "SiteDashboard";
+}
+
+
+    <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+    
+<div class="content-area">
+    <div id="toparea" class="style4"></div>
+    <div>
+        <label for="chartType">Chart Type:</label>
+        <select id="chartType">
+            <option value="LineSeries">Line</option>
+            <option value="ColumnSeries">Column</option>
+            <option value="StepLineSeries">Step Line</option>
+            <option value="SplineSeries">Spline</option>
+        </select>
+        <label for="seriesSelect">Select Series:</label>
+        <select id="seriesSelect" multiple>
+            <option value="Current" selected>Current</option>
+            <option value="DGCurrent" selected>DGCurrent</option>
+            <option value="Vo" selected>Vo</option>
+        </select>
+    </div>
+    <div id="chartdiv" style="width: 100%; height: 500px;"></div>
+    </div>
+    <script>
+        // Parse the JSON data
+        var data = JSON.parse(JSON.stringify([
+            {
+                "date": "2023-01-01",
+                "Current": 100,
+                "DGCurrent": 200,
+                "Vo": 150
+            },
+            {
+                "date": "2023-01-02",
+                "Current": 120,
+                "DGCurrent": 210,
+                "Vo": 160
+            },
+            {
+                "date": "2023-01-03",
+                "Current": 130,
+                "DGCurrent": 220,
+                "Vo": 170
+            },
+            {
+                "date": "2023-01-04",
+                "Current": 140,
+                "DGCurrent": 230,
+                "Vo": 180
+            },
+            {
+                "date": "2023-01-05",
+                "Current": 150,
+                "DGCurrent": 240,
+                "Vo": 190
+            }
+        ]));
+
+        // Create chart instance
+        var root = am5.Root.new("chartdiv");
+        var chart = root.container.children.push(am5xy.XYChart.new(root, {}));
+
+        // Create X-axis
+        var xAxis = chart.xAxes.push(am5xy.DateAxis.new(root, {
+            baseInterval: { timeUnit: "day", count: 1 },
+            renderer: am5xy.AxisRendererX.new(root, {})
+        }));
+
+        // Create Y-axis
+        var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
+            renderer: am5xy.AxisRendererY.new(root, {})
+        }));
+
+        // Function to create series
+        function createSeries(name, type) {
+            var series = chart.series.push(am5xy[type].new(root, {
+                name: name,
+                xAxis: xAxis,
+                yAxis: yAxis,
+                valueYField: name,
+                valueXField: "date",
+                tooltip: am5.Tooltip.new(root, {
+                    labelText: "{name}: {valueY}"
+                })
+            }));
+            series.data.setAll(data.map(item => {
+                return { date: new Date(item.date).getTime(), [name]: item[name] };
+            }));
+            return series;
+        }
+
+        // Initialize series
+        var seriesArray = ["Current", "DGCurrent", "Vo"];
+        var seriesObjects = {};
+
+        seriesArray.forEach(series => {
+            seriesObjects[series] = createSeries(series, "LineSeries");
+        });
+
+        // Update chart when options are changed
+        document.getElementById('chartType').addEventListener('change', function () {
+            var type = this.value;
+            seriesArray.forEach(series => {
+                chart.series.removeIndex(chart.series.indexOf(seriesObjects[series]));
+                seriesObjects[series] = createSeries(series, type);
+            });
+        });
+
+        document.getElementById('seriesSelect').addEventListener('change', function () {
+            var selectedOptions = Array.from(this.selectedOptions).map(option => option.value);
+            seriesArray.forEach(series => {
+                if (selectedOptions.includes(series)) {
+                    chart.series.removeIndex(chart.series.indexOf(seriesObjects[series]));
+                    seriesObjects[series] = createSeries(series, "LineSeries");
+                } else {
+                    chart.series.removeIndex(chart.series.indexOf(seriesObjects[series]));
+                }
+            });
+        });
+    </script>

@@ -6,6 +6,9 @@ using System.Security.Claims;
 using ESite.Data.UOW;
 using System.Configuration;
 using ESite.Data.HelperClass;
+using DocumentFormat.OpenXml.Spreadsheet;
+using Data.EntityModel;
+using Newtonsoft.Json;
 
 namespace Esite.Controllers
 {
@@ -31,7 +34,11 @@ namespace Esite.Controllers
 		{
 			return View();
 		}
-		public IActionResult Battery()
+        public IActionResult GridCopy()
+        {
+            return View();
+        }
+        public IActionResult Battery()
 		{
 			return View();
 		}
@@ -92,7 +99,56 @@ namespace Esite.Controllers
                 }
 
                 _Model.CreatedBy = (long)userid;
+                
                 responseViewModel = await _uow.siteService.SaveSite(_Model);
+                if(responseViewModel.Response != null)
+                {
+                    long SlNo = (long)responseViewModel.Response;
+                    if (_Model.Tenants != null && _Model.Tenants.Count > 0)
+                    {
+                        foreach (var tenant in _Model.Tenants)
+                            {
+                            TblTenant Tenants = new TblTenant();
+                            Tenants.CreatedBy = 1;
+                            if (tenant.Id >0 )
+                            {
+                                Tenants.SlNo = tenant.Id;
+                            }
+                            Tenants.TenantName = tenant.TenantName;
+                            Tenants.SiteId = SlNo;
+                            responseViewModel = await _uow.siteService.SaveTenant(Tenants);
+                            
+                        }
+                    }
+                    responseViewModel.Response = SlNo;
+                }
+            }
+            catch (Exception ex)
+            {
+                responseViewModel.Message = DataComman.GetString(ex);
+            }
+            return Json(responseViewModel);
+        }
+        [HttpPost]
+        public async Task<IActionResult> SaveSiteAsset(List<TblTenantSiteAsset> model)
+        {
+            ResponseViewModel responseViewModel = new ResponseViewModel();
+            int userid = 1;
+            try
+            {
+
+                if (model == null)
+                {
+                    model = new List<TblTenantSiteAsset>();
+                }
+                foreach (var _Model in model)
+                {
+
+                    _Model.CreatedBy = (long)userid;
+
+                    responseViewModel = await _uow.siteService.SaveSiteAsset(_Model);
+                }
+
             }
             catch (Exception ex)
             {
@@ -277,6 +333,7 @@ namespace Esite.Controllers
             }
             return Json(responseViewModel);
         }
+        
         [HttpGet]
         public async Task<IActionResult> Deletedatabyid(long id)
         {
@@ -295,5 +352,24 @@ namespace Esite.Controllers
             }
             return Json(responseViewModel);
         }
-    }
+		[HttpGet]
+		public async Task<IActionResult> CheckName(string name, int id)
+		{
+			ResponseViewModel responseViewModel = new ResponseViewModel();
+			try
+			{
+				RequestViewModel requestModel = new RequestViewModel();
+				requestModel.Id = id;
+				requestModel.Search = name;
+				bool isDuplicate = await _uow.siteService.CheckDuplicateName(requestModel);
+				responseViewModel.Status = true;
+				responseViewModel.Response = isDuplicate;
+			}
+			catch (Exception ex)
+			{
+				responseViewModel.Message = DataComman.GetString(ex);
+			}
+			return Json(responseViewModel);
+		}
+	}
 }

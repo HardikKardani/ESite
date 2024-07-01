@@ -15,7 +15,9 @@ namespace ESite
             .ForMember(dest => dest.RegionName, opt => opt.MapFrom(src => src.Region.RegionName))
             .ForMember(dest => dest.CountryName, opt => opt.MapFrom(src => src.CountryNavigation.CountryName))
             .ForMember(dest => dest.StateName, opt => opt.MapFrom(src => src.StateNavigation.StateName))
-            .ForMember(dest => dest.CoolingTypeName, opt => opt.MapFrom(src => src.CoolingTypeNavigation.CoolingType));
+            .ForMember(dest => dest.CoolingTypeName, opt => opt.MapFrom(src => src.CoolingTypeNavigation.CoolingType))
+            .ForMember(dest => dest.SiteTypeName, opt => opt.MapFrom(src => src.SiteTypeNavigation.SiteType));
+            
 
         }
     }

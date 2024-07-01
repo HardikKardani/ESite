@@ -7,11 +7,11 @@ public partial class TblSite
 {
     public long SlNo { get; set; }
 
-    public string? SiteName { get; set; }
+    public string SiteName { get; set; } = null!;
 
-    public string? SiteShortName { get; set; }
+    public string SiteShortName { get; set; } = null!;
 
-    public string? SiteId { get; set; }
+    public string SiteId { get; set; } = null!;
 
     public long RegionId { get; set; }
 
@@ -24,6 +24,8 @@ public partial class TblSite
     public string? LandMark { get; set; }
 
     public long SiteType { get; set; }
+
+    public byte? NoOfTenant { get; set; }
 
     public int? NoOfGenerator { get; set; }
 
@@ -43,21 +45,11 @@ public partial class TblSite
 
     public string? SimCardNo2 { get; set; }
 
-    public long? SiteInChargeName { get; set; }
+    public string? SiteInChargeName { get; set; }
 
     public string? ContactNo { get; set; }
 
-    public string Remarks { get; set; }
-
-    public long? CreatedBy { get; set; }
-
-    public DateTime? CreatedDate { get; set; }
-
-    public long? ModifiedBy { get; set; }
-
-    public DateTime? ModifiedDate { get; set; }
-
-    public bool? IsDeleted { get; set; }
+    public string Remarks { get; set; } = null!;
 
     public long? CompanyId { get; set; }
 
@@ -71,6 +63,15 @@ public partial class TblSite
 
     public string? IpAddress { get; set; }
 
+    public long? CreatedBy { get; set; }
+
+    public DateTime? CreatedDate { get; set; }
+
+    public long? ModifiedBy { get; set; }
+
+    public DateTime? ModifiedDate { get; set; }
+
+    public bool? IsDeleted { get; set; }
 
     public virtual ICollection<BatteryGstatus> BatteryGstatuses { get; set; } = new List<BatteryGstatus>();
 
@@ -122,6 +123,8 @@ public partial class TblSite
 
     public virtual ICollection<TblGrid> TblGrids { get; set; } = new List<TblGrid>();
 
+    public virtual ICollection<TblImage> TblImages { get; set; } = new List<TblImage>();
+
     public virtual ICollection<TblLoad> TblLoads { get; set; } = new List<TblLoad>();
 
     public virtual ICollection<TblOther> TblOthers { get; set; } = new List<TblOther>();
@@ -136,6 +139,8 @@ public partial class TblSite
 
     public virtual ICollection<TblRecitifier> TblRecitifiers { get; set; } = new List<TblRecitifier>();
 
+    public virtual ICollection<TblRmsasset> TblRmsassets { get; set; } = new List<TblRmsasset>();
+
     public virtual ICollection<TblRunHrsLogsAc> TblRunHrsLogsAcs { get; set; } = new List<TblRunHrsLogsAc>();
 
     public virtual ICollection<TblRunHrsLogsBattery> TblRunHrsLogsBatteries { get; set; } = new List<TblRunHrsLogsBattery>();
@@ -147,4 +152,8 @@ public partial class TblSite
     public virtual ICollection<TblSolar1> TblSolar1s { get; set; } = new List<TblSolar1>();
 
     public virtual ICollection<TblSolar> TblSolars { get; set; } = new List<TblSolar>();
+
+    public virtual ICollection<TblTenantSiteAsset> TblTenantSiteAssets { get; set; } = new List<TblTenantSiteAsset>();
+
+    public virtual ICollection<TblTenant> TblTenants { get; set; } = new List<TblTenant>();
 }

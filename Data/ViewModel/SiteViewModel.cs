@@ -17,11 +17,11 @@ namespace ESite.Data.ViewModel
         }
         public long SlNo { get; set; }
 
-        public string? SiteName { get; set; }
+        public string SiteName { get; set; } = null!;
 
-        public string? SiteShortName { get; set; }
+        public string SiteShortName { get; set; } = null!;
 
-        public string? SiteId { get; set; }
+        public string SiteId { get; set; } = null!;
 
         public long RegionId { get; set; }
 
@@ -34,6 +34,8 @@ namespace ESite.Data.ViewModel
         public string? LandMark { get; set; }
 
         public long SiteType { get; set; }
+
+        public byte? NoOfTenant { get; set; }
 
         public int? NoOfGenerator { get; set; }
 
@@ -53,21 +55,11 @@ namespace ESite.Data.ViewModel
 
         public string? SimCardNo2 { get; set; }
 
-        public long? SiteInChargeName { get; set; }
+        public string? SiteInChargeName { get; set; }
 
         public string? ContactNo { get; set; }
 
-        public string Remarks { get; set; }
-
-        public long? CreatedBy { get; set; }
-
-        public DateTime? CreatedDate { get; set; }
-
-        public long? ModifiedBy { get; set; }
-
-        public DateTime? ModifiedDate { get; set; }
-
-        public bool? IsDeleted { get; set; }
+        public string Remarks { get; set; } = null!;
 
         public long? CompanyId { get; set; }
 
@@ -80,9 +72,22 @@ namespace ESite.Data.ViewModel
         public long? AssetId { get; set; }
 
         public string? IpAddress { get; set; }
+
+        public long? CreatedBy { get; set; }
+
+        public DateTime? CreatedDate { get; set; }
+
+        public long? ModifiedBy { get; set; }
+
+        public DateTime? ModifiedDate { get; set; }
+
+        public bool? IsDeleted { get; set; }
+
+     
         public string CountryName { get; set; }
         public string CoolingTypeName { get; set; }
         public string StateName { get; set; }
+        public string SiteTypeName { get; set; }
         public string RegionName { get; set; }
 
         public virtual ICollection<BatteryGstatus> BatteryGstatuses { get; set; } = new List<BatteryGstatus>();
@@ -160,7 +165,13 @@ namespace ESite.Data.ViewModel
         public virtual ICollection<TblSolar1> TblSolar1s { get; set; } = new List<TblSolar1>();
 
         public virtual ICollection<TblSolar> TblSolars { get; set; } = new List<TblSolar>();
-        public List<string> Tenants { get; set; }
+        public class Tenant
+        {
+            public long Id { get; set; }
+            public string TenantName { get; set; }
+        }
+        public List<Tenant> Tenants { get; set; }
+        public List<TblTenantSiteAsset> TenantSiteAsset { get; set; }
     }
 }
 

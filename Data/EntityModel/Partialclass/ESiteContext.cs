@@ -61,6 +61,8 @@ public partial class ESiteContext : DbContext
 
     public virtual DbSet<TblGrid> TblGrids { get; set; }
 
+    public virtual DbSet<TblImage> TblImages { get; set; }
+
     public virtual DbSet<TblLoad> TblLoads { get; set; }
 
     public virtual DbSet<TblManufacturer> TblManufacturers { get; set; }
@@ -82,6 +84,8 @@ public partial class ESiteContext : DbContext
     public virtual DbSet<TblRecitifier1> TblRecitifiers1 { get; set; }
 
     public virtual DbSet<TblRegion> TblRegions { get; set; }
+
+    public virtual DbSet<TblRmsasset> TblRmsassets { get; set; }
 
     public virtual DbSet<TblRole> TblRoles { get; set; }
 
@@ -105,11 +109,13 @@ public partial class ESiteContext : DbContext
 
     public virtual DbSet<TblState> TblStates { get; set; }
 
+    public virtual DbSet<TblTenant> TblTenants { get; set; }
+
+    public virtual DbSet<TblTenantSiteAsset> TblTenantSiteAssets { get; set; }
+
     public virtual DbSet<TblUser> TblUsers { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-    }
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) { }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<BatteryGstatus>(entity =>
@@ -754,6 +760,19 @@ public partial class ESiteContext : DbContext
                 .HasConstraintName("FK_tblGrid_tblSite");
         });
 
+        modelBuilder.Entity<TblImage>(entity =>
+        {
+            entity.HasKey(e => e.SlNo);
+
+            entity.ToTable("tblImages", "Site");
+
+            entity.Property(e => e.SiteId).HasColumnName("SiteID");
+
+            entity.HasOne(d => d.Site).WithMany(p => p.TblImages)
+                .HasForeignKey(d => d.SiteId)
+                .HasConstraintName("FK_tblImages_tblSite");
+        });
+
         modelBuilder.Entity<TblLoad>(entity =>
         {
             entity.HasKey(e => e.SlNo);
@@ -1048,6 +1067,42 @@ public partial class ESiteContext : DbContext
                 .HasConstraintName("FK_tblRegion_CompanyId");
         });
 
+        modelBuilder.Entity<TblRmsasset>(entity =>
+        {
+            entity.HasKey(e => e.SlNo).HasName("PK_RMSAsset");
+
+            entity.ToTable("tblRMSAsset", "Site");
+
+            entity.Property(e => e.SlNo).ValueGeneratedNever();
+            entity.Property(e => e.AirconController1Remarks).HasMaxLength(50);
+            entity.Property(e => e.AirconController2Remarks).HasMaxLength(50);
+            entity.Property(e => e.CameraIpaddress)
+                .HasMaxLength(50)
+                .HasColumnName("CameraIPAddress");
+            entity.Property(e => e.CameraIpaddress1)
+                .HasMaxLength(50)
+                .HasColumnName("CameraIPAddress1");
+            entity.Property(e => e.CameraIpaddress2)
+                .HasMaxLength(50)
+                .HasColumnName("CameraIPAddress2");
+            entity.Property(e => e.CameraIpaddress3)
+                .HasMaxLength(50)
+                .HasColumnName("CameraIPAddress3");
+            entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+            entity.Property(e => e.DgcontrolllerRemarks)
+                .HasMaxLength(50)
+                .HasColumnName("DGControlllerRemarks");
+            entity.Property(e => e.DgcontrolllerVisible).HasColumnName("DGControlllerVisible");
+            entity.Property(e => e.EnclosureRemarks).HasMaxLength(50);
+            entity.Property(e => e.IsDgcontrolllerAvailable).HasColumnName("IsDGControlllerAvailable");
+            entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
+            entity.Property(e => e.SiteId).HasColumnName("SiteID");
+
+            entity.HasOne(d => d.Site).WithMany(p => p.TblRmsassets)
+                .HasForeignKey(d => d.SiteId)
+                .HasConstraintName("FK_RMSAsset_tblSite");
+        });
+
         modelBuilder.Entity<TblRole>(entity =>
         {
             entity.HasKey(e => e.SlNo);
@@ -1199,11 +1254,14 @@ public partial class ESiteContext : DbContext
             entity.ToTable("tblSite", "Master");
 
             entity.Property(e => e.Address).HasMaxLength(500);
+            entity.Property(e => e.AssetId).HasColumnName("AssetID");
             entity.Property(e => e.ContactNo).HasMaxLength(50);
             entity.Property(e => e.CreatedBy).HasDefaultValue(0L);
             entity.Property(e => e.CreatedDate)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
+            entity.Property(e => e.HardwareVersion).HasMaxLength(50);
+            entity.Property(e => e.IpAddress).HasMaxLength(50);
             entity.Property(e => e.IsDeleted).HasDefaultValue(false);
             entity.Property(e => e.LandMark).HasMaxLength(250);
             entity.Property(e => e.Lat).HasMaxLength(250);
@@ -1219,6 +1277,7 @@ public partial class ESiteContext : DbContext
             entity.Property(e => e.SiteInChargeName).HasColumnName("Site_InChargeName");
             entity.Property(e => e.SiteName).HasMaxLength(200);
             entity.Property(e => e.SiteShortName).HasMaxLength(10);
+            entity.Property(e => e.Softwareversion).HasMaxLength(50);
 
             entity.HasOne(d => d.Company).WithMany(p => p.TblSites)
                 .HasForeignKey(d => d.CompanyId)
@@ -1372,6 +1431,44 @@ public partial class ESiteContext : DbContext
             entity.HasOne(d => d.Company).WithMany(p => p.TblStates)
                 .HasForeignKey(d => d.CompanyId)
                 .HasConstraintName("FK_tblState_CompanyId");
+        });
+
+        modelBuilder.Entity<TblTenant>(entity =>
+        {
+            entity.HasKey(e => e.SlNo).HasName("PK_Tenant");
+
+            entity.ToTable("tblTenant", "Site");
+
+            entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+            entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
+            entity.Property(e => e.SiteId).HasColumnName("SiteID");
+            entity.Property(e => e.TenantName).HasMaxLength(50);
+
+            entity.HasOne(d => d.Site).WithMany(p => p.TblTenants)
+                .HasForeignKey(d => d.SiteId)
+                .HasConstraintName("FK_Tenant_tblSite");
+        });
+
+        modelBuilder.Entity<TblTenantSiteAsset>(entity =>
+        {
+            entity.HasKey(e => e.SlNo);
+
+            entity.ToTable("tblTenantSiteAsset", "Site");
+
+            entity.Property(e => e.BatteryRemarks).HasMaxLength(50);
+            entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+            entity.Property(e => e.GeneratorRemarks).HasMaxLength(50);
+            entity.Property(e => e.GridRemarks).HasMaxLength(50);
+            entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
+            entity.Property(e => e.PortableBatteryRemarks).HasMaxLength(50);
+            entity.Property(e => e.RectifierRemarks).HasMaxLength(50);
+            entity.Property(e => e.SiteId).HasColumnName("SiteID");
+            entity.Property(e => e.SolarRermarks).HasMaxLength(50);
+            entity.Property(e => e.TenantId).HasColumnName("TenantID");
+
+            entity.HasOne(d => d.Site).WithMany(p => p.TblTenantSiteAssets)
+                .HasForeignKey(d => d.SiteId)
+                .HasConstraintName("FK_tblTenantSiteAsset_tblSite");
         });
 
         modelBuilder.Entity<TblUser>(entity =>
