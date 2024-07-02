@@ -21,12 +21,12 @@ function FillCardDataList() {
 
             data = $.parseJSON(data.response);
             $("#IDODSite").html(data.Table[0].IDODSite);
-            $("#Grid").html(data.Table[0].Grid);
+            $("#Grid").html(data.Table[0].Grid + " Sites");
             $("#ODSite").html(data.Table[0].ODSite);
             $("#IDSite").html(data.Table[0].IDSite);
-            $("#GDC").html(data.Table[0].GDC + "Sites");
-            $("#FullSolar").html(data.Table[0].FullSolar + "Sites");
-            $("#SolarHybridSite").html(data.Table[0].SolarHybridSite + "Sites");
+            $("#GDC").html(data.Table[0].GDC + " Sites");
+            $("#FullSolar").html(data.Table[0].FullSolar + " Sites");
+            $("#SolarHybridSite").html(data.Table[0].SolarHybridSite + " Sites");
             $("#EB").html(data.Table3[0].EB);
             $("#Genset").html(data.Table3[0].Genset);
             $("#Solar").html(data.Table3[0].Solar);
@@ -213,17 +213,24 @@ var ticketstable;
 $(window).on("load", function () {
     ticketstable = $('#ticketstable').DataTable({
         "ajax": {
-            "url": '/Company/GetList',
+            "url": '/Site/GetList',
             "dataSrc": function (json) {
+                debugger
+                var data = $.parseJSON(json.response)
                 // Manipulate the JSON response data if needed
-                return json.response; // Assuming your data is nested under a 'data' key
+                return data.$values; // Assuming your data is nested under a 'data' key
             }
         },
         "dom": '<"top"B<"dt-filters"f>>rFt<"dt-bottom"<"dt-information"li><"dt-pagination"p>>',
         "columns": [
-            { "data": "companyName" },
-            { "data": "address" },
-            { "data": "mobile" },
+            { "data": "SiteName" },
+            {
+                "data": "Region",
+                "render": function (data, type, row) {
+                    return data ? data.RegionName : 'N/A';
+                }
+            },
+            { "data": "SiteInChargeName" }
             // Add more column definitions as needed
         ],
         "columnDefs": [{

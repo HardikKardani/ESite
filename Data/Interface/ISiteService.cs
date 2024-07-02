@@ -12,6 +12,7 @@ namespace ESite.Data.Interface
 	{
         Task<ResponseViewModel> SaveSite(SiteViewModel model);
         Task<ResponseViewModel> SaveSiteAsset(TblTenantSiteAsset model);
+        Task<ResponseViewModel> SaveSiteRMSAsset(TblRmsasset model);
         Task<ResponseViewModel> SaveTenant(TblTenant model);
 
         ResponseViewModel GetCardDataList();
@@ -30,5 +31,6 @@ namespace ESite.Data.Interface
         Task<ResponseViewModel> Getbyid(RequestViewModel model);
         Task<ResponseViewModel> Delete(RequestViewModel model);
 		Task<bool> CheckDuplicateName(RequestViewModel model);
-	}
+        ResponseViewModel GetSimCard();
+    }
 }

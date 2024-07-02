@@ -178,6 +178,14 @@ function onclear() {
     $('#SiteName').val("");
     $('#SiteId').val("");
     $('#hslNo').val(0);
+    $('#GridRemarks').val("");
+    $('#GeneratorRemarks').val("");
+    $('#BatteryRemarks').val("");
+    $('#SolarRermarks').val("");
+    $('#RectifierRemarks').val("");
+    $('#PortableBatteryRemarks').val("");
+    $('#hRmsSlno').val(0);
+    
     //sim2Number
     //sim2Operator
     //sim1Number
@@ -242,12 +250,10 @@ function OnSaveSite() {
         var tenants = [];
         $('#textboxContainer input').each(function (index) {
             var dataId = $(this).attr('data-id');
-
             var tenant = {
                 id: dataId ? parseInt(dataId, 10) : 0,  // Use dataId if it's not null, otherwise default to 0
                 tenantName: $(this).val()
             };
-
             tenants.push(tenant);
         });
 
@@ -334,14 +340,49 @@ function OnSaveSiteAsset() {
                     IsPortableBatteryAvailable: section.querySelector('[name="IsPortableBatteryAvailable"]').value,
                     IsPortableBatteryVisible: section.querySelector('[name="IsPortableBatteryVisible"]').value,
                     PortableBatteryRemarks: section.querySelector('[name="PortableBatteryRemarks"]').value,
-                
-
             };
             dataArray.push(sectionData);
         });
         
     }
-
+    
+    var RMSAssets = [];
+    var record = {
+        Slno: $('#hRmsSlno').val(),
+        SiteId: $("#hslNo").val(),
+        IsAirconController1Available: $("#IsAirconController1Available").val(),
+        AirconController1Visible: $("#AirconController1Visible").val(),
+        AirconController1Remarks: $("#AirconController1Remarks").val(),
+        IsAirconController2Available: $("#IsAirconController2Available").val(),
+        AirconController2Visible: $("#AirconController2Visible").val(),
+        AirconController2Remarks: $("#AirconController2Remarks").val(),
+        IsDGControlllerAvailable: $("#IsDGControlllerAvailable").val(),
+        DGControlllerVisible: $("#DGControlllerVisible").val(),
+        DGControlllerRemarks: $("#DGControlllerRemarks").val(),
+        IsEnclosureAvailable: $("#IsEnclosureAvailable").val(),
+        EnclosureVisible: $("#EnclosureVisible").val(),
+        EnclosureRemarks: $("#EnclosureRemarks").val(),
+        IsCameraAvailable: $("#IsCameraAvailable").val(),
+        CameraVisible: $("#CameraVisible").val(),
+        CameraType: $("#CameraType").val(),
+        CameraIPAddress: $("#CameraIPAddress").val(),
+        IsCameraAvailable1: $("#IsCameraAvailable1").val(),
+        CameraVisible1: $("#CameraVisible1").val(),
+        CameraType1: $("#CameraType1").val(),
+        CameraIPAddress1: $("#CameraIPAddress1").val(),
+        IsCameraAvailable2: $("#IsCameraAvailable2").val(),
+        CameraVisible2: $("#CameraVisible2").val(),
+        CameraType2: $("#CameraType2").val(),
+        CameraIPAddress2: $("#CameraIPAddress2").val(),
+        IsCameraAvailable3: $("#IsCameraAvailable3").val(),
+        CameraVisible3: $("#CameraVisible3").val(),
+        CameraType3: $("#CameraType3").val(),
+        CameraIPAddress3: $("#CameraIPAddress3").val(),
+    };
+    debugger;
+    RMSAssets.push(record);
+    dataArray[0].RMSAssets = RMSAssets;
+    
     // Convert formData array to JSON
  /*   let jsonData = JSON.stringify(dataArray, null, 2);*/
     debugger;
@@ -495,10 +536,10 @@ function EditSiteID() {
                 debugger;
                 if (data.status) {
                     $('#hslNo').val(data.response.slNo);
-                    $('#sim2Number').val(data.response.simCardNo2);
-                    $('#sim2Operator').val(data.response.simOperator2);
-                    $('#sim1Number').val(data.response.simCardNo1);
-                    $('#sim1Operator').val(data.response.simOperator1);
+                    $('#sim2Number').val(data.response.simCardNo2).trigger('change');
+                    $('#sim2Operator').val(data.response.simOperator2).trigger('change');
+                    $('#sim1Number').val(data.response.simCardNo1).trigger('change');
+                    $('#sim1Operator').val(data.response.simOperator1).trigger('change');
                     $('#ipAddress').val(data.response.ipAddress);
                     $('#assetId').val(data.response.assetId);
                     $('#installationDate').val(data.response.installationDate);
@@ -509,11 +550,11 @@ function EditSiteID() {
                     $('#long').val(data.response.long);
                     $('#lat').val(data.response.lat);
                     $('#noOfGenerator').val(data.response.noOfGenerator);
-                    $('#typeOfCooling').val(data.response.coolingType);
-                    $('#siteType').val(data.response.siteType);
-                    $('#country').val(data.response.country);
-                    $('#state').val(data.response.state);
-                    $('#region').val(data.response.regionId);
+                    $('#typeOfCooling').val(data.response.coolingType).trigger('change');
+                    $('#siteType').val(data.response.siteType).trigger('change');
+                    $('#country').val(data.response.country).trigger('change');
+                    $('#state').val(data.response.state).trigger('change');
+                    $('#region').val(data.response.regionId).trigger('change');
                     $('#SiteName').val(data.response.siteName);
                     $('#SiteId').val(data.response.siteId);
                     $('#noOfTenant').val(data.response.noOfTenant);
@@ -529,28 +570,59 @@ function EditSiteID() {
                         // Select the container where tenant data should be populated
                         let container = $(`#SiteAssets${tenantId} .row`);
 
+                     
+
                         // Set values based on sectionData object
                         container.find('[name="hTenantSiteAssetSlno"]').val(sectionData.slNo);
-                        container.find('[name="IsGridAvailable"]').val(sectionData.isGridAvailable).trigger('change');
+                        container.find('[name="IsGridAvailable"]').val(String(sectionData.isGridAvailable)).trigger('change');
                         container.find('[name="IsGridVisible"]').val(sectionData.isGridVisible).trigger('change');
                         container.find('[name="GridRemarks"]').val(sectionData.gridRemarks);
-                        container.find('[name="IsGeneratorAvailable"]').val(sectionData.isGeneratorAvailable).trigger('change');
+                        container.find('[name="IsGeneratorAvailable"]').val(String(sectionData.isGeneratorAvailable)).trigger('change');
                         container.find('[name="IsGeneratorVisible"]').val(sectionData.isGeneratorVisible).trigger('change');
                         container.find('[name="GeneratorRemarks"]').val(sectionData.generatorRemarks);
-                        container.find('[name="IsBatteryAvailable"]').val(sectionData.isBatteryAvailable).trigger('change');
+                        container.find('[name="IsBatteryAvailable"]').val(String(sectionData.isBatteryAvailable)).trigger('change');
                         container.find('[name="IsBatteryVisible"]').val(sectionData.isBatteryVisible).trigger('change');
                         container.find('[name="BatteryRemarks"]').val(sectionData.batteryRemarks);
-                        container.find('[name="IsSolarAvailable"]').val(sectionData.isSolarAvailable).trigger('change');
+                        container.find('[name="IsSolarAvailable"]').val(String(sectionData.isSolarAvailable)).trigger('change');
                         container.find('[name="IsSolarVisible"]').val(sectionData.isSolarVisible).trigger('change');
-                        container.find('[name="SolarRermarks"]').val(sectionData.solarRermarks);
-                        container.find('[name="IsRectifierAvailable"]').val(sectionData.isRectifierAvailable).trigger('change');
+                        container.find('[name="SolarRermarks"]').val(sectionData.solarRermarks); // Typo: 'solarRermarks' should be 'solarRemarks'
+                        container.find('[name="IsRectifierAvailable"]').val(String(sectionData.isRectifierAvailable)).trigger('change');
                         container.find('[name="IsRectifierVisible"]').val(sectionData.isRectifierVisible).trigger('change');
                         container.find('[name="RectifierRemarks"]').val(sectionData.rectifierRemarks);
-                        container.find('[name="IsPortableBatteryAvailable"]').val(sectionData.isPortableBatteryAvailable).trigger('change');
+                        container.find('[name="IsPortableBatteryAvailable"]').val(String(sectionData.isPortableBatteryAvailable)).trigger('change');
                         container.find('[name="IsPortableBatteryVisible"]').val(sectionData.isPortableBatteryVisible).trigger('change');
                         container.find('[name="PortableBatteryRemarks"]').val(sectionData.portableBatteryRemarks);
                     }
-                   
+                    
+                    $("#hRmsSlno").val(data.response.rmsasset.slNo);
+                    $("#IsAirconController1Available").val(String(data.response.rmsasset.isAirconController1Available)).trigger('change');
+                    $("#AirconController1Visible").val(data.response.rmsasset.airconController1Visible).trigger('change');
+                    $("#AirconController1Remarks").val(data.response.rmsasset.airconController1Remarks);
+                    $("#IsAirconController2Available").val(String(data.response.rmsasset.isAirconController2Available)).trigger('change');
+                    $("#AirconController2Visible").val(data.response.rmsasset.airconController2Visible).trigger('change');
+                    $("#AirconController2Remarks").val(data.response.rmsasset.airconController2Remarks);
+                    $("#IsDGControlllerAvailable").val(String(data.response.rmsasset.isDgcontrolllerAvailable)).trigger('change');
+                    $("#DGControlllerVisible").val(data.response.rmsasset.dgcontrolllerVisible).trigger('change');
+                    $("#DGControlllerRemarks").val(data.response.rmsasset.dgcontrolllerRemarks);
+                    $("#IsEnclosureAvailable").val(String(data.response.rmsasset.isEnclosureAvailable)).trigger('change');
+                    $("#EnclosureVisible").val(data.response.rmsasset.enclosureVisible).trigger('change');
+                    $("#EnclosureRemarks").val(data.response.rmsasset.enclosureRemarks);
+                    $("#IsCameraAvailable").val(String(data.response.rmsasset.isCameraAvailable)).trigger('change');
+                    $("#CameraVisible").val(data.response.rmsasset.cameraVisible).trigger('change');
+                    $("#CameraType").val(data.response.rmsasset.cameraType).trigger('change');
+                    $("#CameraIPAddress").val(data.response.rmsasset.cameraIpaddress);
+                    $("#IsCameraAvailable1").val(String(data.response.rmsasset.isCameraAvailable1)).trigger('change');
+                    $("#CameraVisible1").val(data.response.rmsasset.cameraVisible1).trigger('change');
+                    $("#CameraType1").val(data.response.rmsasset.cameraType1).trigger('change');
+                    $("#CameraIPAddress1").val(data.response.rmsasset.cameraIpaddress1);
+                    $("#IsCameraAvailable2").val(String(data.response.rmsasset.isCameraAvailable2)).trigger('change');
+                    $("#CameraVisible2").val(data.response.rmsasset.cameraVisible2).trigger('change');
+                    $("#CameraType2").val(data.response.rmsasset.cameraType2);
+                    $("#CameraIPAddress2").val(data.response.rmsasset.cameraIpaddress2);
+                    $("#IsCameraAvailable3").val(String(data.response.rmsasset.isCameraAvailable3)).trigger('change');
+                    $("#CameraVisible3").val(data.response.rmsasset.cameraVisible3).trigger('change');
+                    $("#CameraType3").val(data.response.rmsasset.cameraType3).trigger('change');
+                    $("#CameraIPAddress3").val(data.response.rmsasset.cameraIpaddress3);
                 }
                 else {
                     /* Messagealert('w', data.message);*/

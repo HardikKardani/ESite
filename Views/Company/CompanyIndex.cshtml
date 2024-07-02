@@ -3,7 +3,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Add Company";
 }
-
+<style>
+    .card {
+        display: flex;
+        flex-wrap: wrap;
+    }
+</style>
 
 <div class="content-area">
     <div id="toparea" class="style4"></div>
@@ -18,8 +23,6 @@
                 </a>
             </div>
         </div>
-        <div class="console-panel no-header">
-            <div class="console-panel-body no-padding">
                 <div class="table-container">
                     <table class="table table-striped console-table table-bordered table-hover mb-0"
                            id="CompanyDataTable">
@@ -34,11 +37,9 @@
                         <tbody></tbody>
                     </table>
                 </div>
-            </div>
             <div class="console-footer">
                 <div class="dt-bottom-container"></div>
             </div>
-        </div>
     </div>
 
 

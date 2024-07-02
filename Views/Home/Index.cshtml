@@ -84,6 +84,7 @@
 		text-align: center;
 	}
 
+
 @@media (max-width: 768px) {
     .card-row {
         flex-wrap: wrap;
@@ -99,6 +100,60 @@
         flex: 1 1 100%; /* One card per row on very small screens */
     }
 }
+
+	.card-body {
+		padding: 0.25rem;
+		overflow-x: hidden;
+	}
+
+	.row {
+		display: flex;
+		flex-wrap: nowrap;
+		justify-content: center;
+	}
+
+	.status-box {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		margin: 5px;
+		padding: 10px;
+		border: 1px solid #ccc;
+		/ Added border / border-radius: 10px;
+		text-align: center;
+		min-width: 80px;
+		flex: 1 1 auto;
+		/ Allows the boxes to grow and shrink / box-sizing: border-box;
+	}
+
+	.total-box, .critical-box {
+		margin: 5px 15px;
+		/ Adding more margin to the sides of the first and last boxes /
+	}
+
+	.total-box {
+		border-color: #5cb85c;
+		/ Add your desired color here /
+	}
+
+	.major-box {
+		border-color: #f0ad4e;
+		/ Add your desired color here /
+	}
+
+	.critical-box {
+		border-color: #d9534f;
+		/ Add your desired color here /
+	}
+
+	@@media (max-width: 768px) {
+		.status-box {
+			min-width: 80px;
+			max-width: 100px;
+		}
+	}
+
 	
 </style>
 <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
@@ -194,15 +249,15 @@
 						</li>
 
 						<li>
-							<h6 id="IDSite"></h6>
+							<h6  style="font-weight:bold" id="IDSite"></h6>
 							<h6 class="mb-0">ID Site </h6>
 						</li>
 						<li>
-							<h6 id="ODSite">30</h6>
+							<h6  style="font-weight:bold" id="ODSite">30</h6>
 							<h6 class="mb-0">OD Site</h6>
 						</li>
 						<li>
-							<h6 id="IDODSite">60</h6>
+							<h6  style="font-weight:bold" id="IDODSite">60</h6>
 							<h6 class="mb-0">ID/OD Site</h6>
 						</li>
 					</ul>
@@ -216,7 +271,7 @@
 					<ul class="top-header-btns">
 						<li> <i class="fa-solid fa-plug" style="font-size: 3em;"></i></li>
 						<li>
-							<h4 id="Grid">0 sites</h4>
+							<h6  style="font-weight:bold" id="Grid">0 sites</h6>
 							<h6>Grid (AC)</h6>
 						</li>
 					</ul>
@@ -230,7 +285,7 @@
 					<ul class="top-header-btns">
 						<li> <i class="far fa-sun" style="font-size: 3em;"></i></li>
 						<li>
-							<h4 id="SolarHybridSite">5 sites</h4>
+							<h6 style="font-weight:bold" id="SolarHybridSite">5 sites</h6>
 							<h6>Solar Hybrid Site</h6>
 						</li>
 					</ul>
@@ -245,7 +300,7 @@
 					<ul class="top-header-btns">
 						<li> <i class="fas fa-solar-panel" style="font-size: 3em;"></i></li>
 						<li>
-							<h4 id="FullSolar">10 sites</h4>
+							<h6 style="font-weight:bold" id="FullSolar">10 sites</h6>
 							<h6>Full Solar (Solar + Batt.)</h6>
 						</li>
 					</ul>
@@ -259,7 +314,7 @@
 					<ul class="top-header-btns">
 						<li> <i class="fa-brands fa-superpowers" style="font-size: 3em;"></i></li>
 						<li>
-							<h4 id="GDC">0 sites</h4>
+							<h6 style="font-weight:bold" id="GDC">0 sites</h6>
 							<h6>CDC (Genset + Batt)</h6>
 						</li>
 					</ul>

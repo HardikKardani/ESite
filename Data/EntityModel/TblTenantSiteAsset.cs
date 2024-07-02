@@ -58,4 +58,5 @@ public partial class TblTenantSiteAsset
     public bool? IsDeleted { get; set; }
 
     public virtual TblSite? Site { get; set; }
+    
 }

@@ -172,6 +172,7 @@ namespace ESite.Data.ViewModel
         }
         public List<Tenant> Tenants { get; set; }
         public List<TblTenantSiteAsset> TenantSiteAsset { get; set; }
+        public TblRmsasset Rmsasset { get; set; }
     }
 }
 

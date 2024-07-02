@@ -17,7 +17,8 @@ namespace ESite
             .ForMember(dest => dest.StateName, opt => opt.MapFrom(src => src.StateNavigation.StateName))
             .ForMember(dest => dest.CoolingTypeName, opt => opt.MapFrom(src => src.CoolingTypeNavigation.CoolingType))
             .ForMember(dest => dest.SiteTypeName, opt => opt.MapFrom(src => src.SiteTypeNavigation.SiteType));
-            
+
+
 
         }
     }

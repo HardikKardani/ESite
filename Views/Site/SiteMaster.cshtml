@@ -458,24 +458,25 @@
                                             </div>
                                             <div class="col-lg-3 col-md-12">
                                                 <div class="form-group">
-                                                    <select class="select2 form-control">
-                                                        <option value="Site1">Available</option>
-                                                        <option value="Site1">Not Available</option>
+                                                    <select class="select2 form-control" id="IsAirconController1Available">
+                                                        <option value="true">Available</option>
+                                                        <option value="false">Not Available</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-lg-3 col-md-12">
                                                 <div class="form-group">
-                                                    <select class="select2 form-control">
-                                                        <option value="Site1">Visible</option>
-                                                        <option value="Site1">Not Visible</option>
-                                                        <option value="Site1">Disabled</option>
+                                                    <select class="select2 form-control" id="AirconController1Visible">
+                                                        <option value="1">Visible</option>
+                                                        <option value="2">Not Visible</option>
+                                                        <option value="3">Disabled</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-lg-3 col-md-12">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" placeholder="Remarks">
+                                                    <input type="text" class="form-control" placeholder="Remarks" id="AirconController1Remarks">
+                                                    <input type="hidden" class="form-control"  id="hRmsSlno">
                                                 </div>
                                             </div>
                                             <div class="col-lg-3 col-md-12">
@@ -485,7 +486,7 @@
                                             </div>
                                             <div class="col-lg-3 col-md-12">
                                                 <div class="form-group">
-                                                    <select class="select2 form-control">
+                                                    <select class="select2 form-control" id="IsAirconController2Available">
                                                         <option value="true">Available</option>
                                                         <option value="false">Not Available</option>
                                                     </select>
@@ -493,16 +494,16 @@
                                             </div>
                                             <div class="col-lg-3 col-md-12">
                                                 <div class="form-group">
-                                                    <select class="select2 form-control">
-                                                        <option value="Site1">Visible</option>
-                                                        <option value="Site1">Not Visible</option>
-                                                        <option value="Site1">Disabled</option>
+                                                    <select class="select2 form-control" id="AirconController2Visible">
+                                                        <option value="1">Visible</option>
+                                                        <option value="2">Not Visible</option>
+                                                        <option value="3">Disabled</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-lg-3 col-md-12">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" placeholder="Remarks">
+                                                    <input type="text" class="form-control" placeholder="Remarks" id="AirconController2Remarks">
                                                 </div>
                                             </div>
                                             <div class="col-lg-3 col-md-12">
@@ -512,7 +513,7 @@
                                             </div>
                                             <div class="col-lg-3 col-md-12">
                                                 <div class="form-group">
-                                                    <select class="select2 form-control">
+                                                    <select class="select2 form-control" id="IsDGControlllerAvailable">
                                                         <option value="true">Available</option>
                                                         <option value="false">Not Available</option>
                                                     </select>
@@ -520,16 +521,16 @@
                                             </div>
                                             <div class="col-lg-3 col-md-12">
                                                 <div class="form-group">
-                                                    <select class="select2 form-control">
-                                                        <option value="Site1">Visible</option>
-                                                        <option value="Site1">Not Visible</option>
-                                                        <option value="Site1">Disabled</option>
+                                                    <select class="select2 form-control" id="DGControlllerVisible">
+                                                        <option value="1">Visible</option>
+                                                        <option value="2">Not Visible</option>
+                                                        <option value="3">Disabled</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-lg-3 col-md-12">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" placeholder="Remarks">
+                                                    <input type="text" class="form-control" placeholder="Remarks" id="DGControlllerRemarks">
                                                 </div>
                                             </div>
                                             <div class="col-lg-3 col-md-12">
@@ -539,7 +540,7 @@
                                             </div>
                                             <div class="col-lg-3 col-md-12">
                                                 <div class="form-group">
-                                                    <select class="select2 form-control">
+                                                    <select class="select2 form-control" id="IsEnclosureAvailable">
                                                         <option value="true">Available</option>
                                                         <option value="false">Not Available</option>
                                                     </select>
@@ -547,16 +548,16 @@
                                             </div>
                                             <div class="col-lg-3 col-md-12">
                                                 <div class="form-group">
-                                                    <select class="select2 form-control">
-                                                        <option value="Site1">Visible</option>
-                                                        <option value="Site1">Not Visible</option>
-                                                        <option value="Site1">Disabled</option>
+                                                    <select class="select2 form-control" id="EnclosureVisible">
+                                                        <option value="1">Visible</option>
+                                                        <option value="2">Not Visible</option>
+                                                        <option value="3">Disabled</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-lg-3 col-md-12">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" placeholder="Remarks">
+                                                    <input type="text" class="form-control" placeholder="Remarks" id="EnclosureRemarks">
                                                 </div>
                                             </div>
                                         </div>
@@ -572,32 +573,32 @@
                                             </div>
                                             <div class="col-lg-2 col-md-12">
                                                 <div class="form-group">
-                                                    <select class="select2 form-control">
-                                                        <option value="Site1">Available</option>
-                                                        <option value="Site1">Not Available</option>
+                                                    <select class="select2 form-control" id="IsCameraAvailable">
+                                                        <option value="true">Available</option>
+                                                        <option value="false">Not Available</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-lg-2 col-md-12">
                                                 <div class="form-group">
-                                                    <select class="select2 form-control">
-                                                        <option value="Site1">Visible</option>
-                                                        <option value="Site1">Not Visible</option>
-                                                        <option value="Site1">Disabled</option>
+                                                    <select class="select2 form-control" id="CameraVisible">
+                                                        <option value="1">Visible</option>
+                                                        <option value="2">Not Visible</option>
+                                                        <option value="3">Disabled</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-lg-2 col-md-12">
                                                 <div class="form-group">
-                                                    <select class="select2 form-control">
-                                                        <option value="Site1">Analog</option>
-                                                        <option value="Site1">Digital</option>
+                                                    <select class="select2 form-control" id="CameraType">
+                                                        <option value="1">Analog</option>
+                                                        <option value="2">Digital</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-lg-3 col-md-12">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" placeholder="Ip Address">
+                                                    <input type="text" class="form-control" placeholder="Ip Address" id="CameraIPAddress">
                                                 </div>
                                             </div>
                                             <div class="col-lg-3 col-md-12">
@@ -607,32 +608,32 @@
                                             </div>
                                             <div class="col-lg-2 col-md-12">
                                                 <div class="form-group">
-                                                    <select class="select2 form-control">
-                                                        <option value="Site1">Available</option>
-                                                        <option value="Site1">Not Available</option>
+                                                    <select class="select2 form-control" id="IsCameraAvailable1">
+                                                        <option value="true">Available</option>
+                                                        <option value="false">Not Available</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-lg-2 col-md-12">
                                                 <div class="form-group">
-                                                    <select class="select2 form-control">
-                                                        <option value="Site1">Visible</option>
-                                                        <option value="Site1">Not Visible</option>
-                                                        <option value="Site1">Disabled</option>
+                                                    <select class="select2 form-control" id="CameraVisible1">
+                                                        <option value="1">Visible</option>
+                                                        <option value="2">Not Visible</option>
+                                                        <option value="3">Disabled</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-lg-2 col-md-12">
                                                 <div class="form-group">
-                                                    <select class="select2 form-control">
-                                                        <option value="Site1">Analog</option>
-                                                        <option value="Site1">Digital</option>
+                                                    <select class="select2 form-control" id="CameraType1">
+                                                        <option value="1">Analog</option>
+                                                        <option value="2">Digital</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-lg-3 col-md-12">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" placeholder="Ip Address">
+                                                    <input type="text" class="form-control" placeholder="Ip Address" id="CameraIPAddress1">
                                                 </div>
                                             </div>
                                             <div class="col-lg-3 col-md-12">
@@ -642,32 +643,32 @@
                                             </div>
                                             <div class="col-lg-2 col-md-12">
                                                 <div class="form-group">
-                                                    <select class="select2 form-control">
-                                                        <option value="Site1">Available</option>
-                                                        <option value="Site1">Not Available</option>
+                                                    <select class="select2 form-control" id="IsCameraAvailable2">
+                                                        <option value="true">Available</option>
+                                                        <option value="false">Not Available</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-lg-2 col-md-12">
                                                 <div class="form-group">
-                                                    <select class="select2 form-control">
-                                                        <option value="Site1">Visible</option>
-                                                        <option value="Site1">Not Visible</option>
-                                                        <option value="Site1">Disabled</option>
+                                                    <select class="select2 form-control" id="CameraVisible2">
+                                                        <option value="1">Visible</option>
+                                                        <option value="2">Not Visible</option>
+                                                        <option value="3">Disabled</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-lg-2 col-md-12">
                                                 <div class="form-group">
-                                                    <select class="select2 form-control">
-                                                        <option value="Site1">Analog</option>
-                                                        <option value="Site1">Digital</option>
+                                                    <select class="select2 form-control" id="CameraType2">
+                                                        <option value="1">Analog</option>
+                                                        <option value="2">Digital</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-lg-3 col-md-12">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" placeholder="Ip Address">
+                                                    <input type="text" class="form-control" placeholder="Ip Address" id="CameraIPAddress2">
                                                 </div>
                                             </div>
                                             <div class="col-lg-3 col-md-12">
@@ -677,32 +678,32 @@
                                             </div>
                                             <div class="col-lg-2 col-md-12">
                                                 <div class="form-group">
-                                                    <select class="select2 form-control">
-                                                        <option value="Site1">Available</option>
-                                                        <option value="Site1">Not Available</option>
+                                                    <select class="select2 form-control" id="IsCameraAvailable3">
+                                                        <option value="true">Available</option>
+                                                        <option value="false">Not Available</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-lg-2 col-md-12">
                                                 <div class="form-group">
-                                                    <select class="select2 form-control">
-                                                        <option value="Site1">Visible</option>
-                                                        <option value="Site1">Not Visible</option>
-                                                        <option value="Site1">Disabled</option>
+                                                    <select class="select2 form-control" id="CameraVisible3">
+                                                        <option value="1">Visible</option>
+                                                        <option value="2">Not Visible</option>
+                                                        <option value="3">Disabled</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-lg-2 col-md-12">
                                                 <div class="form-group">
-                                                    <select class="select2 form-control">
-                                                        <option value="Site1">Analog</option>
-                                                        <option value="Site1">Digital</option>
+                                                    <select class="select2 form-control" id="CameraType3">
+                                                        <option value="1">Analog</option>
+                                                        <option value="2">Digital</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-lg-3 col-md-12">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" placeholder="Ip Address">
+                                                    <input type="text" class="form-control" placeholder="Ip Address" id="CameraIPAddress3">
                                                 </div>
                                             </div>
                                         </div>

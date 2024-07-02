@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using DocumentFormat.OpenXml.Vml.Office;
 using Microsoft.EntityFrameworkCore;
 
 namespace Data.EntityModel.Partialclass;
@@ -1066,6 +1067,7 @@ public partial class ESiteContext : DbContext
                 .HasForeignKey(d => d.CompanyId)
                 .HasConstraintName("FK_tblRegion_CompanyId");
         });
+        
 
         modelBuilder.Entity<TblRmsasset>(entity =>
         {
@@ -1073,7 +1075,7 @@ public partial class ESiteContext : DbContext
 
             entity.ToTable("tblRMSAsset", "Site");
 
-            entity.Property(e => e.SlNo).ValueGeneratedNever();
+            entity.Property(e => e.SlNo);
             entity.Property(e => e.AirconController1Remarks).HasMaxLength(50);
             entity.Property(e => e.AirconController2Remarks).HasMaxLength(50);
             entity.Property(e => e.CameraIpaddress)

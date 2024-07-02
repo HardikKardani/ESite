@@ -86,6 +86,24 @@ namespace Esite.Controllers
         {
             return View();
         }
+        public IActionResult SimCard()
+        {
+            return View();
+        }
+        [HttpGet]
+        public IActionResult GetSimCard()
+        {
+            ResponseViewModel responseViewModel = new ResponseViewModel();
+            try
+            {
+                responseViewModel = _uow.siteService.GetSimCard();
+            }
+            catch (Exception ex)
+            {
+                responseViewModel.Message = DataComman.GetString(ex);
+            }
+            return Json(responseViewModel);
+        }
         [HttpPost]
         public async Task<IActionResult> SaveSite(SiteViewModel _Model)
         {
@@ -130,7 +148,7 @@ namespace Esite.Controllers
             return Json(responseViewModel);
         }
         [HttpPost]
-        public async Task<IActionResult> SaveSiteAsset(List<TblTenantSiteAsset> model)
+        public async Task<IActionResult> SaveSiteAsset(List<ViewTenantSiteAsset> model)
         {
             ResponseViewModel responseViewModel = new ResponseViewModel();
             int userid = 1;
@@ -139,16 +157,38 @@ namespace Esite.Controllers
 
                 if (model == null)
                 {
-                    model = new List<TblTenantSiteAsset>();
+                    model = new List<ViewTenantSiteAsset>();
                 }
+                // Create an instance of RMSAssetManager
                 foreach (var _Model in model)
                 {
-
-                    _Model.CreatedBy = (long)userid;
-
-                    responseViewModel = await _uow.siteService.SaveSiteAsset(_Model);
+                    TblTenantSiteAsset tblTenantSiteAsset =  new TblTenantSiteAsset();
+                    tblTenantSiteAsset.CreatedBy = (long)userid;
+                    tblTenantSiteAsset.SiteId = _Model.SiteId;
+                    tblTenantSiteAsset.TenantId = _Model.TenantId;
+                    tblTenantSiteAsset.IsGridAvailable = _Model.IsGridAvailable;
+                    tblTenantSiteAsset.IsGridVisible = _Model.IsGridVisible;
+                    tblTenantSiteAsset.GridRemarks = _Model.GridRemarks;
+                    tblTenantSiteAsset.IsGeneratorAvailable = _Model.IsGeneratorAvailable;
+                    tblTenantSiteAsset.IsGeneratorVisible = _Model.IsGeneratorVisible;
+                    tblTenantSiteAsset.GeneratorRemarks = _Model.GeneratorRemarks;
+                    tblTenantSiteAsset.IsBatteryAvailable = _Model.IsBatteryAvailable;
+                    tblTenantSiteAsset.IsBatteryVisible = _Model.IsBatteryVisible;
+                    tblTenantSiteAsset.BatteryRemarks = _Model.BatteryRemarks;
+                    tblTenantSiteAsset.IsSolarAvailable = _Model.IsSolarAvailable;
+                    tblTenantSiteAsset.IsSolarVisible = _Model.IsSolarVisible;
+                    tblTenantSiteAsset.SolarRermarks = _Model.SolarRermarks;
+                    tblTenantSiteAsset.IsRectifierAvailable = _Model.IsRectifierAvailable;
+                    tblTenantSiteAsset.IsRectifierVisible = _Model.IsRectifierVisible;
+                    tblTenantSiteAsset.RectifierRemarks = _Model.RectifierRemarks;
+                    tblTenantSiteAsset.IsPortableBatteryAvailable = _Model.IsPortableBatteryAvailable;
+                    tblTenantSiteAsset.IsPortableBatteryVisible = _Model.IsPortableBatteryVisible;
+                    tblTenantSiteAsset.PortableBatteryRemarks = _Model.PortableBatteryRemarks;
+                    
+                    responseViewModel = await _uow.siteService.SaveSiteAsset(tblTenantSiteAsset);
                 }
-
+                model[0].RMSAssets[0].CreatedBy = (long)userid;
+                responseViewModel = await _uow.siteService.SaveSiteRMSAsset(model[0].RMSAssets[0]);
             }
             catch (Exception ex)
             {

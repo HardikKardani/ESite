@@ -134,6 +134,63 @@ namespace ESite.Data.Implementation
             }
             return _Response;
         }
+        public async Task<ResponseViewModel> SaveSiteRMSAsset(TblRmsasset model)
+        {
+            ResponseViewModel _Response = new ResponseViewModel();
+            _Response.Status = false;
+            try
+            {
+                TblRmsasset? TblRmsasset = await _context.TblRmsassets.Where(x => x.SlNo == model.SlNo).FirstOrDefaultAsync();
+                if (TblRmsasset == null)
+                {
+                    TblRmsasset = new TblRmsasset();
+                    TblRmsasset.CreatedBy = model.CreatedBy;
+                    TblRmsasset.CreatedDate = DataComman.GetDateTimeNow();
+                    TblRmsasset.IsDeleted = false;
+                    _context.TblRmsassets.Add(TblRmsasset);
+                }
+
+                TblRmsasset.SiteId = model.SiteId;
+                TblRmsasset.IsAirconController1Available = model.IsAirconController1Available;
+                TblRmsasset.AirconController1Visible = model.AirconController1Visible;
+                TblRmsasset.AirconController1Remarks = model.AirconController1Remarks;
+                TblRmsasset.IsAirconController2Available = model.IsAirconController2Available;
+                TblRmsasset.AirconController2Visible = model.AirconController2Visible;
+                TblRmsasset.AirconController2Remarks = model.AirconController2Remarks;
+                TblRmsasset.IsDgcontrolllerAvailable = model.IsDgcontrolllerAvailable;
+                TblRmsasset.DgcontrolllerVisible = model.DgcontrolllerVisible;
+                TblRmsasset.DgcontrolllerRemarks= model.DgcontrolllerRemarks;
+                TblRmsasset.IsEnclosureAvailable = model.IsEnclosureAvailable;
+                TblRmsasset.EnclosureVisible = model.EnclosureVisible;
+                TblRmsasset.EnclosureRemarks= model.EnclosureRemarks;
+                TblRmsasset.IsCameraAvailable = model.IsCameraAvailable;
+                TblRmsasset.CameraVisible = model.CameraVisible;
+                TblRmsasset.CameraType = model.CameraType;
+                TblRmsasset.CameraIpaddress = model.CameraIpaddress;
+                TblRmsasset.IsCameraAvailable1 = model.IsCameraAvailable1;
+                TblRmsasset.CameraVisible1 = model.CameraVisible1;
+                TblRmsasset.CameraType1 = model.CameraType1;
+                TblRmsasset.CameraIpaddress1 = model.CameraIpaddress1;
+                TblRmsasset.IsCameraAvailable2 = model.IsCameraAvailable2;
+                TblRmsasset.CameraVisible2 = model.CameraVisible2;
+                TblRmsasset.CameraType2 = model.CameraType1;
+                TblRmsasset.CameraIpaddress2 = model.CameraIpaddress2;
+                TblRmsasset.IsCameraAvailable3 = model.IsCameraAvailable3;
+                TblRmsasset.CameraVisible3 = model.CameraVisible3;
+                TblRmsasset.CameraType3 = model.CameraType3;
+                TblRmsasset.CameraIpaddress3 = model.CameraIpaddress3;
+                TblRmsasset.ModifiedBy = model.CreatedBy;
+                TblRmsasset.ModifiedDate = DataComman.GetDateTimeNow();
+                await _context.SaveChangesAsync();
+                _Response.Status = true;
+                _Response.Message = MessageType.Saved;
+            }
+            catch (Exception ex)
+            {
+                _Response.Message = DataComman.GetString(ex);
+            }
+            return _Response;
+        }
         public async Task<ResponseViewModel> SaveTenant(TblTenant model)
         {
             ResponseViewModel _Response = new ResponseViewModel();
@@ -442,6 +499,8 @@ namespace ESite.Data.Implementation
                     }).ToListAsync(); ;
 
                     Model.TenantSiteAsset = await _context.TblTenantSiteAssets.AsNoTracking().Where(x => x.SiteId == Model.SlNo && x.IsDeleted == false).ToListAsync(); ;
+
+                    Model.Rmsasset = await _context.TblRmsassets.AsNoTracking().Where(x => x.SiteId == Model.SlNo && x.IsDeleted == false).FirstOrDefaultAsync(); ;
                     _Response.Status = true;
                     _Response.Response = Model;
                 }
@@ -498,5 +557,27 @@ namespace ESite.Data.Implementation
             
 
 		}
-	}
+        public ResponseViewModel GetSimCard()
+        {
+            ResponseViewModel _Response = new ResponseViewModel();
+            _Response.Status = false;
+            try
+            {
+
+                string? constr = _context.Database.GetConnectionString() == null ? "" : _context.Database.GetConnectionString();
+                sqlhelper _sqlhelper = new sqlhelper(constr == null ? "" : constr);
+                DataSet data = _sqlhelper.GetDataSet(System.Data.CommandType.StoredProcedure, "SP_SiteSimCardList");
+
+                _Response.Status = true;
+                _Response.Response = Newtonsoft.Json.JsonConvert.SerializeObject(data);
+
+
+            }
+            catch (Exception ex)
+            {
+                _Response.Message = DataComman.GetString(ex);
+            }
+            return _Response;
+        }
+    }
 }
