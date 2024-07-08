@@ -90,6 +90,10 @@ namespace Esite.Controllers
         {
             return View();
         }
+        public IActionResult Weather()
+        {
+            return View();
+        }
         [HttpGet]
         public IActionResult GetSimCard()
         {
@@ -163,7 +167,8 @@ namespace Esite.Controllers
                 foreach (var _Model in model)
                 {
                     TblTenantSiteAsset tblTenantSiteAsset =  new TblTenantSiteAsset();
-                    tblTenantSiteAsset.CreatedBy = (long)userid;
+					tblTenantSiteAsset.SlNo = _Model.SlNo;
+					tblTenantSiteAsset.CreatedBy = (long)userid;
                     tblTenantSiteAsset.SiteId = _Model.SiteId;
                     tblTenantSiteAsset.TenantId = _Model.TenantId;
                     tblTenantSiteAsset.IsGridAvailable = _Model.IsGridAvailable;
@@ -225,12 +230,12 @@ namespace Esite.Controllers
 			return Json(responseViewModel);
 		}
 		[HttpGet]
-        public IActionResult GetCardDataList()
+        public IActionResult GetCardDataList(long id)
         {
             ResponseViewModel responseViewModel = new ResponseViewModel();
             try
             {
-                responseViewModel = _uow.siteService.GetCardDataList();
+                responseViewModel = _uow.siteService.GetCardDataList(id);
             }
             catch (Exception ex)
             {
@@ -392,7 +397,21 @@ namespace Esite.Controllers
             }
             return Json(responseViewModel);
         }
-		[HttpGet]
+        [HttpGet]
+        public IActionResult GetWeather()
+        {
+            ResponseViewModel responseViewModel = new ResponseViewModel();
+            try
+            {
+                responseViewModel = _uow.siteService.GetWeather();
+            }
+            catch (Exception ex)
+            {
+                responseViewModel.Message = DataComman.GetString(ex);
+            }
+            return Json(responseViewModel);
+        }
+        [HttpGet]
 		public async Task<IActionResult> CheckName(string name, int id)
 		{
 			ResponseViewModel responseViewModel = new ResponseViewModel();

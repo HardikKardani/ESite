@@ -262,14 +262,19 @@ namespace ESite.Data.Implementation
 			}
 			return _Response;
 		}
-		public ResponseViewModel GetCardDataList()
+		public ResponseViewModel GetCardDataList(long id)
 		{
 			ResponseViewModel _Response = new();
 			try
 			{
+				SqlParameter[] param =
+                {
+                	 new SqlParameter("@Id",id),
+                	 
+                };
 				string? constr = _context.Database.GetConnectionString() == null ? "" : _context.Database.GetConnectionString();
 				sqlhelper _sqlhelper = new sqlhelper(constr == null ? "" : constr);
-				DataSet data = _sqlhelper.GetDataSet(System.Data.CommandType.StoredProcedure, "SP_SiteDashboard");
+				DataSet data = _sqlhelper.GetDataSet(System.Data.CommandType.StoredProcedure, "SP_SiteDashboard", param);
 
 				_Response.Status = true;
 				_Response.Response = Newtonsoft.Json.JsonConvert.SerializeObject(data);
@@ -567,6 +572,28 @@ namespace ESite.Data.Implementation
                 string? constr = _context.Database.GetConnectionString() == null ? "" : _context.Database.GetConnectionString();
                 sqlhelper _sqlhelper = new sqlhelper(constr == null ? "" : constr);
                 DataSet data = _sqlhelper.GetDataSet(System.Data.CommandType.StoredProcedure, "SP_SiteSimCardList");
+
+                _Response.Status = true;
+                _Response.Response = Newtonsoft.Json.JsonConvert.SerializeObject(data);
+
+
+            }
+            catch (Exception ex)
+            {
+                _Response.Message = DataComman.GetString(ex);
+            }
+            return _Response;
+        }
+        public ResponseViewModel GetWeather()
+        {
+            ResponseViewModel _Response = new ResponseViewModel();
+            _Response.Status = false;
+            try
+            {
+
+                string? constr = _context.Database.GetConnectionString() == null ? "" : _context.Database.GetConnectionString();
+                sqlhelper _sqlhelper = new sqlhelper(constr == null ? "" : constr);
+                DataSet data = _sqlhelper.GetDataSet(System.Data.CommandType.StoredProcedure, "SP_WeatherDataList");
 
                 _Response.Status = true;
                 _Response.Response = Newtonsoft.Json.JsonConvert.SerializeObject(data);

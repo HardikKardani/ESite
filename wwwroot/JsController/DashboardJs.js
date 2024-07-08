@@ -1,9 +1,9 @@
 ﻿$(document).ready(function () {
-    
+
     FillCardDataList();
-    
-   
-    
+
+
+
 })
 
 
@@ -95,7 +95,7 @@ function renderLineChart(data) {
             strokeWidth: 2
         });
 
-        
+
 
         // Play initial series animation
         series.appear(1000, 100);
@@ -243,13 +243,13 @@ $(window).on("load", function () {
         },
         "stateSave": false,
         "buttons": [
-             {
-                 extend: 'excelHtml5',
+            {
+                extend: 'excelHtml5',
                 text: 'Export'
 
-                 //title: 'Data export'
-             }
-         ],
+                //title: 'Data export'
+            }
+        ],
         initComplete: function () {
             // Move Search To Panel Header
             let _container = $(this).parents('.console-panel').find('.get_dt_search')
@@ -263,11 +263,11 @@ $(window).on("load", function () {
             $("#ticketstable_wrapper  .dt-button").removeClass("dt-button buttons-excel buttons-html5");
             $("#ticketstable_wrapper .dt-buttons button")
                 .addClass("btn btn-sm").css("background-color: rgb(12, 52, 61)"); // Add the desired Bootstrap class
-            
+
             $("#ticketstable_wrapper .dt-buttons").addClass("mr-2");
             $("#ticketstable_wrapper .dt-buttons").appendTo(_container);
             dashboardFilters();
-            
+
             //$(colvis.button()).insertAfter(_container);
 
         }
@@ -303,15 +303,15 @@ $(window).on("load", function () {
     //    showAll: "Restore Defaults"
     //});
     $('#ticketstable').on('click', 'tbody tr', function () {
-            // Get the data of the clicked row
-            let rowData = ticketstable.row(this).data();
+        // Get the data of the clicked row
+        let rowData = ticketstable.row(this).data();
 
-            // Extract the URL from the row data (assuming the URL is stored in a specific column)
-            let url = rowData.urlColumn; // Replace 'urlColumn' with the actual column name or index
+        // Extract the URL from the row data (assuming the URL is stored in a specific column)
+        let url = rowData.urlColumn; // Replace 'urlColumn' with the actual column name or index
 
-            // Navigate to the URL
-            window.location.href = "/Site/Dashboard";
-        });
+        // Navigate to the URL
+        window.location.href = "/Site/Dashboard";
+    });
 
 });
 
@@ -357,14 +357,14 @@ $(window).on("load", function () {
 //            $("#ticketstable_wrapper  .dt-button").removeClass("dt-button buttons-excel buttons-html5");
 //            $("#ticketstable_wrapper .dt-buttons button")
 //                .addClass("btn btn-primary"); // Add the desired Bootstrap class
-                
-                 
+
+
 //            $("#ticketstable_wrapper .dt-buttons").css({
 //                "float": "right"               
 //            });
 //            $("#ticketstable_wrapper .dt-buttons").addClass("mb-2 mr-4");
-            
-            
+
+
 //            $("#ticketstable_wrapper  .dt-bottom").appendTo(_bottom_container);
 //            dashboardFilters();
 
@@ -412,88 +412,153 @@ $(window).on("load", function () {
 //    });
 //});
 
+$(document).ready(function () {
 
-var Sitetable;
-$(window).on("load", function () {
-    Sitetable = $('#Sitetable').DataTable({
-        //"ajax": '/js/JSON/data1.json',
-        "ajax": {
-            "url": '/Site/GetLiveData',
-            "dataSrc": function (json) {
-                
-                // Manipulate the JSON response data if needed
-                var data = $.parseJSON(json.response);
-                return data.Table; // Assuming your data is nested under a 'data' key
-            }
+    // AJAX call to fetch data
+    $.ajax({
+        url: '/Site/GetLiveData',  // Replace with your actual API endpoint
+        method: 'GET',                  // Adjust the method as per your API
+        success: function (json) {
+            debugger;
+            var data = $.parseJSON(json.response);
+            // Extract columns and data from the response
+            var columns = data.Table1;
+            var data = data.Table;
+
+            // Dynamically create table headers based on columns
+            var headerRow = $('#table-headers');
+            columns.forEach(function (column) {
+                headerRow.append('<th>' + column.title + '</th>');
+            });
+
+            // Initialize the DataTable with dynamic columns and data
+            Sitetable = $('#Sitetable').DataTable({
+                "dom": '<"top"B<"dt-filters"f>>rFt<"dt-bottom"<"dt-information"li><"dt-pagination"p>>',
+                "sorting": false,
+                data: data,
+                columns: columns,
+                "columnDefs": [{
+                    "targets": 'no-sort',
+                    "orderable": false,
+                }],
+                "responsive": true,
+                "colReorder": {
+                    realtime: false
+                },
+                "buttons": [
+                    {
+                        extend: 'excelHtml5',
+                        text: 'Export'
+                    }
+                ],
+                "stateSave": false,
+                initComplete: function () {
+                    // Move Search To Panel Header
+                    let _container = $(this).parents('.console-panel').find('.get_dt_search')
+                    let _bottom_container = $(this).parents('.console-panel').find('.dt-bottom-container')
+
+                    /*$("#ticketstable_wrapper .dataTables_filter input").appendTo(_container);*/
+                    $("#Sitetable_wrapper  .dt-filters").css("display", "none");
+                    /*$(_container).find("input").attr('placeholder', 'Search From Table');*/
+                    $("#Sitetable_wrapper  .dt-bottom").appendTo(_bottom_container);
+                    $("#Sitetable_wrapper  .top").css("display", "none");
+                    $("#Sitetable_wrapper  .dt-button").removeClass("dt-button buttons-excel buttons-html5");
+                    $("#Sitetable_wrapper .dt-buttons button")
+                        .addClass("btn").css("background-color: rgb(12, 52, 61)"); // Add the desired Bootstrap class
+
+                    $("#Sitetable_wrapper .dt-buttons").addClass("mr-2");
+                    $("#Sitetable_wrapper .dt-buttons").appendTo(_container);
+
+
+                    //$(colvis.button()).insertAfter(_container);
+
+                }
+
+            });
         },
-        "dom": '<"top"B<"dt-filters"f>>rFt<"dt-bottom"<"dt-information"li><"dt-pagination"p>>',
-        "sorting":false,
-        "columns": [
-            { "data": "SNo" },
-            { "data": "SiteID" },
-            { "data": "SiteName" },
-            { "data": "DataReceivedOn" },
-            { "data": "SiteRunningON" },
-            { "data": "vvoltage"},
-            { "data": "loadCurrent"},
-            { "data": "power"},
-            { "data": "Soc" },
-            { "data": "rR" },
-            { "data": "yY" },
-            { "data": "bB" },
-            { "data": "R" },
-            { "data": "Y" },
-            { "data": "B" },
-            { "data": "Freq" },
-            { "data": "Status" },
-            { "data": "TotalCurrent" },
-            { "data": "Voltage" },
-            { "data": "Qty" },
-            { "data": "TotalPower" },
-            { "data": "IPVoltage" },
-            { "data": "OPCurrent" },
-            { "data": "IPVoltage" },
-            { "data": "OPCurrent" },
-            // Add more column definitions as needed
-        ],
-        "columnDefs": [{
-            "targets": 'no-sort',
-            "orderable": false,
-        }],
-        "responsive": true,
-        "colReorder": {
-            realtime: false
-        },
-        "buttons": [
-            {
-                extend: 'excelHtml5',
-                text: 'Export'
-            }
-        ],
-        "stateSave": false,
-        initComplete: function () {
-            // Move Search To Panel Header
-            let _container = $(this).parents('.console-panel').find('.get_dt_search')
-            let _bottom_container = $(this).parents('.console-panel').find('.dt-bottom-container')
-
-            /*$("#ticketstable_wrapper .dataTables_filter input").appendTo(_container);*/
-            $("#Sitetable_wrapper  .dt-filters").css("display", "none");
-            /*$(_container).find("input").attr('placeholder', 'Search From Table');*/
-            $("#Sitetable_wrapper  .dt-bottom").appendTo(_bottom_container);
-            $("#Sitetable_wrapper  .top").css("display", "none");
-            $("#Sitetable_wrapper  .dt-button").removeClass("dt-button buttons-excel buttons-html5");
-            $("#Sitetable_wrapper .dt-buttons button")
-                .addClass("btn").css("background-color: rgb(12, 52, 61)"); // Add the desired Bootstrap class
-
-            $("#Sitetable_wrapper .dt-buttons").addClass("mr-2");
-            $("#Sitetable_wrapper .dt-buttons").appendTo(_container);
-            
-
-            //$(colvis.button()).insertAfter(_container);
-
+        error: function (xhr, status, error) {
+            console.error('Error fetching data:', error);
+            // Handle error scenario
         }
-        
     });
-
-    
 });
+//var Sitetable;
+//var columns = [];
+//$(window).on("load", function () {
+//    Sitetable = $('#Sitetable').DataTable({
+//        //"ajax": '/js/JSON/data1.json',
+//        "ajax": {
+//            "url": '/Site/GetLiveData',
+//            "dataSrc": function (json) {
+
+//                // Manipulate the JSON response data if needed
+//                var data = $.parseJSON(json.response);
+//                debugger
+//                var headingHTML = '';
+//                var valuesArray = [];
+//                columns = JSON.stringify(data.Table1);
+//                // Collect unique keys from the objects in data.Table1
+//                $.each(data.Table2, function (index, obj) {
+//                    $.each(obj, function (key, value) {
+//                        if (valuesArray.indexOf(key) === -1) {
+//                            valuesArray.push(value);  // Add unique keys to the valuesArray
+//                        }
+//                    });
+//                });
+
+//                // Create table header HTML
+//                for (var i = 0; i < valuesArray.length; i++) {
+//                    headingHTML += '<th>' + valuesArray[i] + '</th>';  // Create <th> elements for each key
+//                }
+
+//                // Assuming #Columns is a <tr> element where headers will be inserted
+//                $('#Columns').html('<tr>' + headingHTML + '</tr>');  // Set the HTML of the #Columns element
+
+
+//                return data.Table; // Assuming your data is nested under a 'data' key
+//            }
+//        },
+//        "dom": '<"top"B<"dt-filters"f>>rFt<"dt-bottom"<"dt-information"li><"dt-pagination"p>>',
+//        "sorting": false,
+//        "columns": columns,
+//        "columnDefs": [{
+//            "targets": 'no-sort',
+//            "orderable": false,
+//        }],
+//        "responsive": true,
+//        "colReorder": {
+//            realtime: false
+//        },
+//        "buttons": [
+//            {
+//                extend: 'excelHtml5',
+//                text: 'Export'
+//            }
+//        ],
+//        "stateSave": false,
+//        initComplete: function () {
+//            // Move Search To Panel Header
+//            let _container = $(this).parents('.console-panel').find('.get_dt_search')
+//            let _bottom_container = $(this).parents('.console-panel').find('.dt-bottom-container')
+
+//            /*$("#ticketstable_wrapper .dataTables_filter input").appendTo(_container);*/
+//            $("#Sitetable_wrapper  .dt-filters").css("display", "none");
+//            /*$(_container).find("input").attr('placeholder', 'Search From Table');*/
+//            $("#Sitetable_wrapper  .dt-bottom").appendTo(_bottom_container);
+//            $("#Sitetable_wrapper  .top").css("display", "none");
+//            $("#Sitetable_wrapper  .dt-button").removeClass("dt-button buttons-excel buttons-html5");
+//            $("#Sitetable_wrapper .dt-buttons button")
+//                .addClass("btn").css("background-color: rgb(12, 52, 61)"); // Add the desired Bootstrap class
+
+//            $("#Sitetable_wrapper .dt-buttons").addClass("mr-2");
+//            $("#Sitetable_wrapper .dt-buttons").appendTo(_container);
+
+
+//            //$(colvis.button()).insertAfter(_container);
+
+//        }
+
+//    });
+
+
+//});

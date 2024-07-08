@@ -23,9 +23,11 @@ function Fillchartdiv(data) {
         am4core.useTheme(am4themes_animated);
         // Themes end
         am4core.addLicense("ch-custom-attribution");
+
         // Create chart instance
         var chart = am4core.create("chartdiv", am4charts.XYChart);
 
+        // Add data
         chart.data = $.parseJSON(data);
 
         // Create axes
@@ -34,36 +36,134 @@ function Fillchartdiv(data) {
         var valueAxis2 = chart.yAxes.push(new am4charts.ValueAxis());
 
         // Adjust value axis
-        valueAxis1.min = -60;
-        valueAxis1.max = 60;
+        valueAxis1.min = 0;
+        valueAxis1.max = 120;
         valueAxis1.renderer.opposite = true;
 
-        valueAxis2.min = -60;
-        valueAxis2.max = 60;
+        valueAxis2.min = 0;
+        valueAxis2.max = 120;
         valueAxis2.renderer.opposite = false;
 
-        // Create series
-        var series1 = chart.series.push(new am4charts.LineSeries());
-        series1.dataFields.valueY = "Solar";
-        series1.dataFields.dateX = "date";
-        series1.yAxis = valueAxis1;
-        series1.name = "Input Voltage";
-        series1.tooltipText = "{name}: [bold]{valueY}[/]";
-        series1.strokeWidth = 2;
+        // Function to change chart type
+        function changeChartType(type) {
+            // Remove all previous series
+            chart.series.clear();
+            chart.legend = undefined;
 
-        var series2 = chart.series.push(new am4charts.LineSeries());
-        series2.dataFields.valueY = "Current";
-        series2.dataFields.dateX = "date";
-        series2.yAxis = valueAxis2;
-        series2.name = "Output Voltage";
-        series2.tooltipText = "{name}: [bold]{valueY}[/]";
-        series2.strokeWidth = 2;
+            // Create series based on selected type
+            if (type === "line") {
+                var series1 = chart.series.push(new am4charts.LineSeries());
+                series1.dataFields.valueY = "InputVoltage";
+                series1.dataFields.dateX = "date";
+                series1.yAxis = valueAxis1;
+                series1.name = "Input Voltage";
+                series1.tooltipText = "{name}: [bold]{valueY}[/]";
+                series1.strokeWidth = 2;
 
-        // Add legend
-        chart.legend = new am4charts.Legend();
+                var series2 = chart.series.push(new am4charts.LineSeries());
+                series2.dataFields.valueY = "OutputVoltage";
+                series2.dataFields.dateX = "date";
+                series2.yAxis = valueAxis2;
+                series2.name = "Output Voltage";
+                series2.tooltipText = "{name}: [bold]{valueY}[/]";
+                series2.strokeWidth = 2;
 
-        // Add cursor
-        chart.cursor = new am4charts.XYCursor();
+                var series3 = chart.series.push(new am4charts.LineSeries());
+                series3.dataFields.valueY = "InputCurrent";
+                series3.dataFields.dateX = "date";
+                series3.yAxis = valueAxis2;
+                series3.name = "Input Current";
+                series3.tooltipText = "{name}: [bold]{valueY}[/]";
+                series3.strokeWidth = 2;
+                var series4 = chart.series.push(new am4charts.LineSeries());
+                series4.dataFields.valueY = "Output Current";
+                series4.dataFields.dateX = "date";
+                series4.yAxis = valueAxis1;
+                series4.name = "Output Current";
+                series4.tooltipText = "{name}: [bold]{valueY}[/]";
+                series4.strokeWidth = 2;
+
+                var series5 = chart.series.push(new am4charts.LineSeries());
+                series5.dataFields.valueY = "MaxPower";
+                series5.dataFields.dateX = "date";
+                series5.yAxis = valueAxis2;
+                series5.name = "Max Power";
+                series5.tooltipText = "{name}: [bold]{valueY}[/]";
+                series5.strokeWidth = 2;
+
+                var series6 = chart.series.push(new am4charts.LineSeries());
+                series6.dataFields.valueY = "PowerUsage";
+                series6.dataFields.dateX = "date";
+                series6.yAxis = valueAxis2;
+                series6.name = "Power Usage";
+                series6.tooltipText = "{name}: [bold]{valueY}[/]";
+                series6.strokeWidth = 2;
+                
+            } else if (type === "column") {
+                var series1 = chart.series.push(new am4charts.ColumnSeries());
+                series1.dataFields.valueY = "InputVoltage";
+                series1.dataFields.dateX = "date";
+                series1.yAxis = valueAxis1;
+                series1.name = "Input Voltage";
+                series1.tooltipText = "{name}: [bold]{valueY}[/]";
+                series1.strokeWidth = 2;
+
+                var series2 = chart.series.push(new am4charts.ColumnSeries());
+                series2.dataFields.valueY = "OutputVoltage";
+                series2.dataFields.dateX = "date";
+                series2.yAxis = valueAxis2;
+                series2.name = "Output Voltage";
+                series2.tooltipText = "{name}: [bold]{valueY}[/]";
+                series2.strokeWidth = 2;
+
+                var series3 = chart.series.push(new am4charts.ColumnSeries());
+                series3.dataFields.valueY = "InputCurrent";
+                series3.dataFields.dateX = "date";
+                series3.yAxis = valueAxis2;
+                series3.name = "Input Current";
+                series3.tooltipText = "{name}: [bold]{valueY}[/]";
+                series3.strokeWidth = 2;
+                var series4 = chart.series.push(new am4charts.ColumnSeries());
+                series4.dataFields.valueY = "Output Current";
+                series4.dataFields.dateX = "date";
+                series4.yAxis = valueAxis1;
+                series4.name = "Output Current";
+                series4.tooltipText = "{name}: [bold]{valueY}[/]";
+                series4.strokeWidth = 2;
+
+                var series5 = chart.series.push(new am4charts.ColumnSeries());
+                series5.dataFields.valueY = "MaxPower";
+                series5.dataFields.dateX = "date";
+                series5.yAxis = valueAxis2;
+                series5.name = "Max Power";
+                series5.tooltipText = "{name}: [bold]{valueY}[/]";
+                series5.strokeWidth = 2;
+
+                var series6 = chart.series.push(new am4charts.ColumnSeries());
+                series6.dataFields.valueY = "PowerUsage";
+                series6.dataFields.dateX = "date";
+                series6.yAxis = valueAxis2;
+                series6.name = "Power Usage";
+                series6.tooltipText = "{name}: [bold]{valueY}[/]";
+                series6.strokeWidth = 2;
+            }
+
+            // Add legend
+            chart.legend = new am4charts.Legend();
+
+            // Add cursor
+            chart.cursor = new am4charts.XYCursor();
+        }
+
+        // Dropdown menu setup
+        var chartTypeDropdown = document.getElementById("chartTypeDropdown");
+        chartTypeDropdown.addEventListener("change", function () {
+            var selectedType = this.value;
+            changeChartType(selectedType);
+        });
+
+        // Initial chart type setup
+        changeChartType("line"); // Default to line chart
     });
 }
 function FillBCchartdiv(data) {
@@ -180,8 +280,8 @@ $(window).on("load", function () {
                 var data = $.parseJSON(json.response);
                 FillCardDataList(data.Table);
                 Fillchartdiv(JSON.stringify(data.Table1) );
-                FillBCchartdiv(JSON.stringify(data.Table2));
-                FillBCCchartdiv(JSON.stringify(data.Table3));
+                //FillBCchartdiv(JSON.stringify(data.Table2));
+                //FillBCCchartdiv(JSON.stringify(data.Table3));
                 // Manipulate the JSON response data if needed
                 return data.Table5; // Assuming your data is nested under a 'data' key
             }

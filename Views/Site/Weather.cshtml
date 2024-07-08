@@ -1,0 +1,276 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = "Weather";
+}
+<!-- AM Charts Start -->
+<script src="https://www.amcharts.com/lib/4/core.js"></script>
+<script src="https://www.amcharts.com/lib/4/charts.js"></script>
+<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+<!-- AM Charts End -->
+<style>
+	.col .card {
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	.col .card {
+		width: calc(50% - 10px);
+		/* Adjust the width based on your preference */
+		margin: 1px;
+		/* Add some margin between images */
+		height: 30px;
+		width: 30px;
+		/* Maintain aspect ratio */
+		object-fit: cover;
+		text-align: center;
+		/* Ensure images cover the entire space */
+	}
+
+	#chartdiv {
+		width: 700px;
+		height: 300px;
+		max-width: 100%
+	}
+
+	#BCCCchartdiv {
+		width: 700px;
+		height: 300px;
+		max-width: 100%
+	}
+
+	#BCCchartdiv {
+		width: 700px;
+		height: 300px;
+		max-width: 100%
+	}
+
+	#BCchartdiv {
+		width: 700px;
+		height: 300px;
+		max-width: 100%
+	}
+
+	.card {
+		border: none;
+	}
+
+	.horizontal-group {
+		display: flex;
+		align-items: center;
+	}
+
+		.horizontal-group label {
+			flex: 0 0 auto;
+			margin-right: 10px; /* Add spacing between the label and input */
+			white-space: nowrap; /* Prevent label text from wrapping */
+		}
+
+		.horizontal-group input {
+			flex: 1;
+		}
+</style>
+<div class="content-area">
+	<div id="toparea" class="style4"></div>
+	<div class="card p-4">
+		<div class="row">
+			<div class="col-4">
+				<div class="form-group">
+					<label>Region</label>
+					<input type="text" class="form-control" placeholder="Region" id="Region">
+				</div>
+			</div>
+			<div class="col-4">
+				<div class="form-group">
+					<label>SiteName/Site Id</label>
+					<input type="text" class="form-control" placeholder="SiteName/Site Id" id="SiteId">
+				</div>
+			</div>
+		</div>
+		<div class="row p-3">
+			<div class="form-group">
+				<button class="btn btn-accent ">Reset</button>
+				<button class="btn btn-accent ">Show</button>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-10 "></div>
+			<div class="col-1">
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="Search" id="Search" required>
+				</div>
+			</div>
+			<div class="col-1">
+				<div class="form-group" style="float: right;">
+					<button class="btn btn-sm btn-accent" id="pdfDownload">Download</button>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12">
+				<div class="card mt-4">
+					<div class="card-body">
+
+						<div class="table-container">
+							<table class="table table-striped console-table table-bordered table-hover mb-0"
+								   id="Wtables">
+								<thead class="sorticon-pos">
+									<tr>
+										<th>Sl No</th>
+										<th>Region</th>
+										<th>SiteId</th>
+										<th>SiteName</th>
+										<th>DateTime</th>
+										<th>Temperature</th>
+										<th>Wind Speed</th>
+										<th>Weather</th>
+										<th>Precipitation</th>
+										<th>Action</th>
+									</tr>
+								</thead>
+								<tbody></tbody>
+							</table>
+						</div>
+					</div>
+					<div class="console-footer">
+						<div class="dt-bottom-container"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div><!-- Content Area -->
+<div class="modal fade bd-example-modal-lg WeatherModel" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog modal-xl">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Weather Forecast Details</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="container">
+					<h1>Weather Forecast Detail</h1>
+
+					<!-- Overview Section -->
+					<div class="overview">
+						<h2>Overview</h2>
+						<div><strong>Location:</strong> Latitude: <span id="latitude"></span>, Longitude: <span id="longitude"></span></div>
+						<div><strong>Date:</strong> <span id="date"></span></div>
+						<div><strong>General Weather:</strong> <span id="general-weather"></span></div>
+						<div><strong>Temperature Range:</strong> <span id="temp-range"></span></div>
+						<div><strong>Wind Speed:</strong> <span id="wind-speed"></span></div>
+						<div><strong>Precipitation:</strong> <span id="precipitation"></span></div>
+					</div>
+
+					<!-- Weather Data Table -->
+					<h2>Detailed Weather Data</h2>
+					<table class="table table-striped console-table table-bordered table-hover mb-0"
+						   id="Wtables">
+						<thead class="sorticon-pos">
+							<tr>
+								<th>Sl No</th>
+								<th>Region</th>
+								<th>SiteId</th>
+								<th>SiteName</th>
+								<th>DateTime</th>
+								<th>Temperature</th>
+								<th>Wind Speed</th>
+								<th>Weather</th>
+								<th>Precipitation</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody id="weather-data">
+							<!-- Dynamic rows will be added here -->
+						</tbody>
+					</table>
+
+					<!-- Chart Section -->
+					<h2>Temperature Chart</h2>
+					<div class="chart-container">
+						<canvas id="temperatureChart"></canvas>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<aside class="more-opt-panel"></aside>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+	// Sample data for demonstration purposes
+	const weatherData = [
+		{ slNo: 1, region: 'Region 1', siteId: 'ID001', siteName: 'Site 1', dateTime: '10:00', temperature: 30, windSpeed: 15, weather: 'Sunny', precipitation: 0 },
+		{ slNo: 2, region: 'Region 1', siteId: 'ID002', siteName: 'Site 2', dateTime: '11:00', temperature: 28, windSpeed: 10, weather: 'Partly Cloudy', precipitation: 0 },
+		{ slNo: 3, region: 'Region 1', siteId: 'ID003', siteName: 'Site 3', dateTime: '12:00', temperature: 32, windSpeed: 20, weather: 'Cloudy', precipitation: 0 },
+		{ slNo: 4, region: 'Region 1', siteId: 'ID004', siteName: 'Site 4', dateTime: '13:00', temperature: 27, windSpeed: 12, weather: 'Rainy', precipitation: 5 },
+		{ slNo: 5, region: 'Region 1', siteId: 'ID005', siteName: 'Site 5', dateTime: '14:00', temperature: 29, windSpeed: 8, weather: 'Windy', precipitation: 0 },
+		{ slNo: 6, region: 'Region 1', siteId: 'ID006', siteName: 'Site 6', dateTime: '15:00', temperature: 26, windSpeed: 18, weather: 'Stormy', precipitation: 10 }
+	];
+
+	// Set location and overview data
+	document.getElementById('latitude').textContent = '37.7749'; // Replace with actual latitude
+	document.getElementById('longitude').textContent = '-122.4194'; // Replace with actual longitude
+	document.getElementById('date').textContent = 'July 2, 2024';
+	document.getElementById('general-weather').textContent = 'Mixed conditions throughout the day';
+	document.getElementById('temp-range').textContent = '26°C to 32°C';
+	document.getElementById('wind-speed').textContent = '8 km/h to 20 km/h';
+	document.getElementById('precipitation').textContent = '0 mm to 10 mm';
+
+	// Populate the table with weather data
+	const tableBody = document.getElementById('weather-data');
+	weatherData.forEach(data => {
+		const row = document.createElement('tr');
+		row.innerHTML = `
+						  <td>${data.region}</td>
+					<td>${data.siteId}</td>
+					<td>${data.siteName}</td>
+					<td>${data.dateTime}</td>
+					<td>${data.temperature}°C</td>
+					<td>${data.windSpeed} km/h</td>
+					<td>${data.weather}</td>
+					<td>${data.precipitation} mm</td>
+				`;
+		tableBody.appendChild(row);
+	});
+
+	// Create temperature chart using Chart.js
+	const ctx = document.getElementById('temperatureChart').getContext('2d');
+	const temperatureChart = new Chart(ctx, {
+		type: 'line',
+		data: {
+			labels: weatherData.map(data => data.dateTime),
+			datasets: [{
+				label: 'Temperature (°C)',
+				data: weatherData.map(data => data.temperature),
+				backgroundColor: 'rgba(92, 61, 195, 0.2)',
+				borderColor: 'rgba(92, 61, 195, 1)',
+				borderWidth: 1
+			}]
+		},
+		options: {
+			scales: {
+				x: {
+					title: {
+						display: true,
+						text: 'Time'
+					}
+				},
+				y: {
+					title: {
+						display: true,
+						text: 'Temperature (°C)'
+					}
+				}
+			}
+		}
+	});
+</script>
+<script src="https://www.amcharts.com/lib/4/core.js"></script>
+<script src="https://www.amcharts.com/lib/4/charts.js"></script>
+<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+<script src="/JsController/WeatherJs.js" asp-append-version="true"></script>
+
+

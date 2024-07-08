@@ -37,8 +37,8 @@
 	}
 
 	#chartdiv {
-		width: 700px;
-		height: 300px;
+		width: 100%;
+		height: 500px;
 		max-width: 100%
 	}
 
@@ -80,20 +80,54 @@
 					</select>
 				</div>
 			</div>
-			<div class="col-4 mt-4">
+			<div class="col-4"></div>
+			<div class="col-3">
+				<div class="form-group">
+					<h6>Select Chart Type:</h6>
+					<select class="form-control" id="chartTypeDropdown">
+						<option value="line">Line Chart</option>
+						<option value="column">Column Chart</option>
+					</select>
+				</div>
+			</div>
+			<div class="col-3">
+				<div class="form-group">
+					<h6>From Date:</h6>
+					<div class="input-group">
+						<div class="input-group-append">
+							<div class="input-group-text"><i class="far fa-calendar"></i></div>
+						</div>
+						<input type="text" class="form-control datepicker-here"
+							   data-language='en' data-date-format="MM dd,yyyy" placeholder="From">
+					</div>
+				</div>
+			</div>
+			<div class="col-3">
+				<div class="form-group">
+					<h6>To Date:</h6>
+					<div class="input-group">
+						<div class="input-group-append">
+							<div class="input-group-text"><i class="far fa-calendar"></i></div>
+						</div>
+						<input type="text" class="form-control datepicker-here"
+							   data-language='en' data-date-format="MM dd,yyyy" placeholder="To">
+					</div>
+				</div>
+			</div>
+			<div class="col-1 mt-4">
 				<div class="form-group">
 					<button class="btn btn-accent ">Show</button>
 				</div>
 			</div>
-
-				<div class="col-8">
+			<div class="col-1 mt-4">
+				<div class="form-group" style="float: right;">
+					<button class="btn btn-accent">Download</button>
+				</div>
+			</div>
+				<div class="col-12">
 					<h5>Battery Details</h5><br />
 				</div>
-				<div class="col-4">
-					<div class="form-group" style="float: right;">
-						<button class="btn btn-accent">Download</button>
-					</div>
-				</div>
+			
 			<div class="col-12">
 				<div class="mytab theme1">
 					<ul class="nav nav-tabs">
@@ -107,13 +141,13 @@
 					</ul><!-- Selectors -->
 
 
-					<div class="tab-content">
+					<div class="tab-content p-0 pt-1">
 						<div class="tab-pane  show active" id="Summary">
 							<div class="card">
-								<div class="card-body">
+								<div class="card-body p-0">
 									<div class="grid-stack gs-area">
-										<div class="grid-stack-item" data-gs-x="0" data-gs-y="0" data-gs-width="4"
-											 data-gs-height="15" data-gs-min-height="15" data-gs-min-width="4">
+										<div class="grid-stack-item" data-gs-x="0" data-gs-y="0" data-gs-width="12"
+											 data-gs-height="6" data-gs-min-height="6" data-gs-min-width="4">
 											<div class="console-panel grid-stack-item-content">
 												<div class="console-panel-header">
 													<div class="cph-left">
@@ -155,56 +189,46 @@
 													</div>
 												</div><!-- Panel Header -->
 
-												<div class="console-panel-body align-center">
-													@* <table>
-														<tr>
-															<td><label>Battery Type :</label></td>
-
-															<td>
-																<span class="text-warning" id="BatteryType">Lithum</span>
-																<br />
-															</td>
-														</tr>
-														<tr>
-															<td><label>No of Battery :</label></td>
-
-															<td>
-																<span class="text-warning" id="NoofBattery">22 </span>
-																<br />
-															</td>
-														</tr>
-														<tr>
-															<td><label>Current :</label></td>
-
-															<td>
-																<span class="text-warning" id="Current"> -61.00 A</span>
-																<br />
-															</td>
-														</tr>
-														
-													</table> *@
-													<label>Battery Type :</label> <span class="text-warning" id="BatteryType">Lithum</span><br />
-													<label>No of Battery :</label> <span class="text-warning" id="NoofBattery">22 </span><br />
-													<label>Current :</label> <span class="text-warning" id="Current"> -61.00 A</span><br />
-													<label>Voltage :</label> <span class="text-warning" id="Voltage ">49.49 V</span><br />
-													<label>Avg Battery Tempature :</label> <span class="text-warning" id="ABT">
-														30.55
-														C
-													</span><br />
-													<label>Avg Enviroment Tempature :</label> <span class="text-warning" id="AET">
-														30.55
-														C
-													</span><br />
-													<label>Data Received On:</label> <span class="text-warning" id="DRO">									</span><br />
+												<div class="card-body align-center">
+													<div class="row">
+														<div class="col-lg-2 col-md-12">
+															<label>Battery Type :</label> <span class="text-warning" id="BatteryType">Lithum</span>
+														</div>
+														<div class="col-lg-2 col-md-12">
+															<label>No of Battery :</label> <span class="text-warning" id="NoofBattery">22 </span>
+														</div>
+														<div class="col-lg-2 col-md-12">
+															<label>Current :</label> <span class="text-warning" id="Current"> -61.00 A</span>
+														</div>
+														<div class="col-lg-2 col-md-12">
+															<label>Voltage :</label> <span class="text-warning" id="Voltage ">49.49 V</span>
+														</div>
+														<div class="col-lg-2 col-md-12">
+															<label>Avg Battery Tempature :</label> <span class="text-warning" id="ABT">
+																30.55
+																C
+															</span>
+														</div>
+														<div class="col-lg-2 col-md-12">
+															<label>Avg Enviroment Tempature :</label> <span class="text-warning" id="AET">
+																30.55
+																C
+															</span>
+														</div>
+														<div class="col-lg-3 col-md-12">
+															<label>Data Received On:</label> <span class="text-warning" id="DRO"></span>
+														</div>
+													</div>
 												</div>
 											</div>
 										</div>
-										<div class="grid-stack-item" data-gs-x="4" data-gs-y="0" data-gs-width="8"
-											 data-gs-height="15" data-gs-min-height="15" data-gs-min-width="8">
+										
+										<div class="grid-stack-item" data-gs-x="0" data-gs-y="7" data-gs-width="12"
+											 data-gs-height="20" data-gs-min-height="20" data-gs-min-width="6">
 											<div class="console-panel grid-stack-item-content">
 												<div class="console-panel-header">
 													<div class="cph-left">
-														<h5>Voltage (V)</h5>
+														<h5>Chart </h5>
 													</div>
 													<div class="cph-right">
 														<ul class="top-header-btns">
@@ -241,8 +265,7 @@
 														</ul>
 													</div>
 												</div><!-- Panel Header -->
-												<div class="console-panel-body align-center">
-
+												<div class="card-body align-center">
 													<div class="chart-container">
 														<div id="chartdiv"></div>
 													</div>
@@ -250,107 +273,7 @@
 												</div>
 											</div>
 										</div>
-										<div class="grid-stack-item" data-gs-x="0" data-gs-y="15" data-gs-width="6"
-											 data-gs-height="15" data-gs-min-height="15" data-gs-min-width="6">
-											<div class="console-panel grid-stack-item-content">
-												<div class="console-panel-header">
-													<div class="cph-left">
-														<h5>Current (C)</h5>
-													</div>
-													<div class="cph-right">
-														<ul class="top-header-btns">
-
-															<li>
-																<a class="collapse-panel" href="#" title="Collapse/Uncollapse Panel"
-																   data-rel="tooltip"> <i class="icon dripicons-chevron-up"></i></a>
-															</li>
-															<li class="dropdown">
-																<a href="#" data-toggle="dropdown" title="Panel Options" data-rel="tooltip">
-																	<i class="icon dripicons-dots-3"></i>
-																</a>
-																<div class="dropdown-menu  dropdown-menu-right theme-media">
-																	<div class="dropdown-menu-header">
-																		<div class="dmh-inner">
-																			<h4>Panel Options</h4>
-																		</div>
-																	</div>
-																	<a class="dropdown-item cp" href="#" title="">
-																		<span class="color-fill-icon" style="background-color:#fff;"></span>
-																		Header Background Color
-																	</a>
-																	<a class="dropdown-item header-fontcolor" href="#" title="">
-																		<span class="color-fill-icon" style="background-color:#333"></span>
-																		Header Font Color Dark/Light
-																	</a>
-																</div>
-															</li>
-															<li>
-																<a class="removeWidget" href="#" title="Remove Panel" data-rel="tooltip">
-																	<i class="icon dripicons-cross"></i>
-																</a>
-															</li>
-														</ul>
-													</div>
-												</div><!-- Panel Header -->
-												<div class="console-panel-body align-center">
-
-													<div class="chart-container">
-														<div id="BCchartdiv"></div>
-													</div>
-
-												</div>
-											</div>
-										</div>
-										<div class="grid-stack-item" data-gs-x="6" data-gs-y="30" data-gs-width="6"
-											 data-gs-height="15" data-gs-min-height="15" data-gs-min-width="6">
-											<div class="console-panel grid-stack-item-content">
-												<div class="console-panel-header">
-													<div class="cph-left">
-														<h5>Temperature</h5>
-													</div>
-													<div class="cph-right">
-														<ul class="top-header-btns">
-															<li>
-																<a class="collapse-panel" href="#" title="Collapse/Uncollapse Panel"
-																   data-rel="tooltip"> <i class="icon dripicons-chevron-up"></i></a>
-															</li>
-															<li class="dropdown">
-																<a href="#" data-toggle="dropdown" title="Panel Options" data-rel="tooltip">
-																	<i class="icon dripicons-dots-3"></i>
-																</a>
-																<div class="dropdown-menu  dropdown-menu-right theme-media">
-																	<div class="dropdown-menu-header">
-																		<div class="dmh-inner">
-																			<h4>Panel Options</h4>
-																		</div>
-																	</div>
-																	<a class="dropdown-item cp" href="#" title="">
-																		<span class="color-fill-icon" style="background-color:#fff;"></span>
-																		Header Background Color
-																	</a>
-																	<a class="dropdown-item header-fontcolor" href="#" title="">
-																		<span class="color-fill-icon" style="background-color:#333"></span>
-																		Header Font Color Dark/Light
-																	</a>
-																</div>
-															</li>
-															<li>
-																<a class="removeWidget" href="#" title="Remove Panel" data-rel="tooltip">
-																	<i class="icon dripicons-cross"></i>
-																</a>
-															</li>
-														</ul>
-													</div>
-												</div><!-- Panel Header -->
-												<div class="console-panel-body align-center">
-
-													<div class="chart-container">
-														<div id="BCCchartdiv"></div>
-													</div>
-
-												</div>
-											</div>
-										</div>
+									
 										
 										
 									</div>

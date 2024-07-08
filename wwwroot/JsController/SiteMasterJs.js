@@ -185,7 +185,7 @@ function onclear() {
     $('#RectifierRemarks').val("");
     $('#PortableBatteryRemarks').val("");
     $('#hRmsSlno').val(0);
-    
+    $('#hTenantSiteAssetSlno').val(0);
     //sim2Number
     //sim2Operator
     //sim1Number
@@ -509,16 +509,7 @@ function FillData() {
     
 
 }
-function getParameterByName(name) {
-    debugger
-    var url = window.location.href;
-    name = name.replace(/[\[\]]/g, '\\$&');
-    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-        results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, ' '));
-}
+
 function EditSite(id) {
     debugger
     window.location.href = "/Site/SiteMaster?id=" + id;
@@ -758,9 +749,9 @@ function CreateNavTab() {
         nooftenanttab.append(tabHtmlt);
         var tabHtml = `
              
-                 <div class="tab-pane  ${i === 0 ? 'show active' : 'fade'}" id="SiteAssets${i}">
+                 <div class="tab-pane  ${i === 0 ? 'show active' : 'fade'}" id="SiteAssets${i+1}">
                      <div class="row">
-                        <input type="hidden" class="form-control" name="hTenantSiteAssetSlno" value="0">
+                        <input type="hidden" class="form-control" name="hTenantSiteAssetSlno">
                          <div class="col-lg-3 col-md-12">
                              <div class="form-group">
                                  <label>1.Grid</label>
@@ -950,4 +941,15 @@ function myValidator(Name) {
         }
     });
     return isSuccess;
+}
+
+function getParameterByName(name) {
+    debugger
+    var url = window.location.href;
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }

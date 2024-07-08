@@ -71,11 +71,11 @@
 					<input type="text" class="form-control" placeholder="SiteName/Site Id" id="SiteId">
 				</div>
 			</div>
-		</div>
-		<div class="row p-3">
-			<div class="form-group">
-				<button class="btn btn-accent ">Reset</button>
-				<button class="btn btn-accent ">Show</button>
+			<div class="col-4 p-3">
+				<div class="form-group">
+					<button class="btn btn-accent ">Reset</button>
+					<button class="btn btn-accent ">Show</button>
+				</div>
 			</div>
 		</div>
 		<div class="row">
@@ -116,7 +116,7 @@
 	</div>
 </div><!-- Content Area -->
 <div class="modal fade bd-example-modal-lg SimcardModel" tabindex="-1" role="dialog" aria-hidden="true">
-	<div class="modal-dialog modal-lg">
+	<div class="modal-dialog modal-xl">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title">Site Details</h5>
@@ -126,13 +126,146 @@
 			</div>
 			<div class="modal-body">
 				<div class="row">
-				
-
+					<div class="col-4">
+						<div class="form-group horizontal-group">
+							<label for="Region">Region</label>
+							<input type="text" class="form-control" placeholder="Region" id="Region" readonly>
+						</div>
+					</div>
+					<div class="col-4">
+						<div class="form-group horizontal-group">
+							<label for="SiteId">Site Id</label>
+							<input type="text" class="form-control" placeholder="SiteId" id="SiteId" readonly>
+						</div>
+					</div>
+					<div class="col-4">
+						<div class="form-group horizontal-group">
+							<label for="SiteName">Site Name</label>
+							<input type="text" class="form-control" placeholder="SiteName" id="SiteName" readonly>
+						</div>
+					</div>
+				</div>
+				<hr />
+				<div class="col-8">
+					<h5>Site Details</h5><br />
+				</div>
+				<div class="row">
+					<div class="col-3">
+						<div class="form-group horizontal-group">
+							<label for="Sim1 No">Sim 1 No</label>
+							<input type="text" class="form-control" placeholder="Sim 1 No" id="Sim1 No" readonly>
+						</div>
+					</div>
+					<div class="col-3">
+						<div class="form-group horizontal-group">
+							<label for="Sim2 No">Sim 2 No</label>
+							<input type="text" class="form-control" placeholder="Sim 2 No" id="Sim2 No" readonly>
+						</div>
+					</div>
+					<div class="col-3">
+						<div class="form-group horizontal-group">
+							<label for="Sim1Operator">Sim 1 Operator</label>
+							<input type="text" class="form-control" placeholder="Sim 1 Operator" id="Sim1Operator" readonly>
+						</div>
+					</div>
+					<div class="col-3">
+						<div class="form-group horizontal-group">
+							<label for="Sim2Operator">Sim 2 Operator</label>
+							<input type="text" class="form-control" placeholder="Sim 2 Operator" id="Sim2Operator" readonly>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-3">
+						<div class="form-group horizontal-group">
+							<label for="RechargeDate">Recharge Date</label>
+							<input type="date" class="form-control" name="RechargeDate" id="RechargeDate">
+						</div>
+					</div>
+					<div class="col-3">
+						<div class="form-group horizontal-group">
+							<label for="RechargeDate">Recharge Date</label>
+							<input type="date" class="form-control" name="RechargeDate" id="RechargeDate">
+						</div>
+					</div>
+					<div class="col-3">
+						<div class="form-group horizontal-group">
+							<label for="NextRecharge">Next Recharge</label>
+							<input type="date" class="form-control" name="NextRecharge" id="NextRecharge">
+						</div>
+					</div>
+					<div class="col-3">
+						<div class="form-group horizontal-group">
+							<label for="NextRecharge">Next Recharge</label>
+							<input type="date" class="form-control" name="NextRecharge" id="NextRecharge">
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-6">
+						<div class="form-group horizontal-group">
+							<label for="Remarks">Remarks</label>
+							<textarea class="form-control" rows="2" id="Remarks" name="Remarks"></textarea>
+						</div>
+					</div>
+					<div class="col-6">
+						<div class="form-group horizontal-group">
+							<label for="Remarks">Remarks</label>
+							<textarea class="form-control" rows="2" id="Remarks" name="Remarks"></textarea>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-3">
+						<div class="form-group horizontal-group">
+							<input type="checkbox" id="nextRechargeAlert">
+							<label for="nextRechargeAlert">Alert for Next Recharge</label>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group">
+						<button class="btn btn-accent">Reset</button>
+						<button class="btn btn-accent">Save</button>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12">
+						<div class="card">
+							<div class="card-body">
+								<div class="table-container">
+									<table class="table table-striped console-table table-bordered table-hover mb-0"
+										   id="SCtables">
+										<thead class="sorticon-pos">
+											<tr>
+												<th>Sl No</th>
+												<th>Region</th>
+												<th>SiteId</th>
+												<th>SiteName</th>
+												<th>Sim1 No</th>
+												<th>Sim1 Operator</th>
+												<th>Last Recharged On</th>
+												<th>Next Recharge</th>
+												<th>Sim2 No</th>
+												<th>Sim2 Operator</th>
+												<th>Last Recharged On</th>
+												<th>Next Recharge</th>
+												<th>Action</th>
+											</tr>
+										</thead>
+										<tbody></tbody>
+									</table>
+								</div>
+							</div>
+							@* <div class="console-footer">
+							<div class="dt-bottom-container"></div>
+							</div> *@
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
-
 	</div>
-</div>
 </div>
 
 <aside class="more-opt-panel"></aside>

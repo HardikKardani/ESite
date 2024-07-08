@@ -626,9 +626,9 @@ $(document).ready(function () {
 //            clearInterval(timerInterval);
 //            if (window.location.pathname == "/" || window.location.pathname == "/Site/Dashboard") {
 //                location.reload();
-            
-//            } 
-            
+
+//            }
+
 //        }
 //    }, 1000); // Update timer every second
 //}
@@ -636,7 +636,7 @@ $(document).ready(function () {
 //// Initial call to display clock immediately
 //$(window).on("load", function () {
 //    updateTimer();
-    
+
 //    setTimeout(function () {
 //        updateClock();
 //    }, 1000);
@@ -647,5 +647,5 @@ $(document).ready(function () {
 //    if (window.location.pathname == "/" || window.location.pathname == "/Site/Dashboard") {
 //        location.reload();
 //        updateClock();
-//    } 
+//    }
 //}, refreshInterval);

@@ -15,7 +15,7 @@ namespace ESite.Data.Interface
         Task<ResponseViewModel> SaveSiteRMSAsset(TblRmsasset model);
         Task<ResponseViewModel> SaveTenant(TblTenant model);
 
-        ResponseViewModel GetCardDataList();
+        ResponseViewModel GetCardDataList(long id);
 		ResponseViewModel GetSiteList();
         Task<ResponseViewModel> GetList();
 
@@ -32,5 +32,6 @@ namespace ESite.Data.Interface
         Task<ResponseViewModel> Delete(RequestViewModel model);
 		Task<bool> CheckDuplicateName(RequestViewModel model);
         ResponseViewModel GetSimCard();
+        ResponseViewModel GetWeather();
     }
 }

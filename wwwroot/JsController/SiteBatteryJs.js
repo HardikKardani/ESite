@@ -18,10 +18,10 @@ function FillCardDataList(data) {
 function Fillchartdiv(data) {
     // Create chart instance
     am4core.ready(function () {
-        am4core.addLicense("ch-custom-attribution");
         // Themes begin
         am4core.useTheme(am4themes_animated);
         // Themes end
+        am4core.addLicense("ch-custom-attribution");
 
         // Create chart instance
         var chart = am4core.create("chartdiv", am4charts.XYChart);
@@ -35,30 +35,90 @@ function Fillchartdiv(data) {
         var valueAxis2 = chart.yAxes.push(new am4charts.ValueAxis());
 
         // Adjust value axis
-        valueAxis1.min = -60;
-        valueAxis1.max = 60;
+        valueAxis1.min = 0;
+        valueAxis1.max = 100;
         valueAxis1.renderer.opposite = true;
 
-        valueAxis2.min = -60;
-        valueAxis2.max = 60;
+        valueAxis2.min = 0;
+        valueAxis2.max = 100;
         valueAxis2.renderer.opposite = false;
 
-        // Create series
-        var series1 = chart.series.push(new am4charts.LineSeries());
-        series1.dataFields.valueY = "batteryConsumption";
-        series1.dataFields.dateX = "date";
-        series1.yAxis = valueAxis1;
-        series1.name = "Volatge";
-        series1.tooltipText = "{name}: [bold]{valueY}[/]";
-        series1.strokeWidth = 2;
+        // Function to change chart type
+        function changeChartType(type) {
+            // Remove all previous series
+            chart.series.clear();
+            chart.legend = undefined;
+            // Create series based on selected type
+            if (type === "line") {
+                var series1 = chart.series.push(new am4charts.LineSeries());
+                series1.dataFields.valueY = "Volatge";
+                series1.dataFields.dateX = "date";
+                series1.yAxis = valueAxis1;
+                series1.name = "Volatge";
+                series1.tooltipText = "{name}: [bold]{valueY}[/]";
+                series1.strokeWidth = 2;
+                
+                var series2 = chart.series.push(new am4charts.LineSeries());
+                series2.dataFields.valueY = "Current";
+                series2.dataFields.dateX = "date";
+                series2.yAxis = valueAxis1;
+                series2.name = "Current";
+                series2.tooltipText = "{name}: [bold]{valueY}[/]";
+                series2.strokeWidth = 2;
 
+                var series3 = chart.series.push(new am4charts.LineSeries());
+                series3.dataFields.valueY = "Temperature";
+                series3.dataFields.dateX = "date";
+                series3.yAxis = valueAxis1;
+                series3.name = "Temperature";
+                series3.tooltipText = "{name}: [bold]{valueY}[/]";
+                series3.strokeWidth = 2;
+            } else if (type === "column") {
+                var series1 = chart.series.push(new am4charts.ColumnSeries());
+                series1.dataFields.valueY = "Volatge";
+                series1.dataFields.dateX = "date";
+                series1.yAxis = valueAxis1;
+                series1.name = "Volatge";
+                series1.tooltipText = "{name}: [bold]{valueY}[/]";
+                series1.strokeWidth = 2;
 
-        // Add legend
-        chart.legend = new am4charts.Legend();
+                var series2 = chart.series.push(new am4charts.ColumnSeries());
+                series2.dataFields.valueY = "Current";
+                series2.dataFields.dateX = "date";
+                series2.yAxis = valueAxis1;
+                series2.name = "Current";
+                series2.tooltipText = "{name}: [bold]{valueY}[/]";
+                series2.strokeWidth = 2;
 
-        // Add cursor
-        chart.cursor = new am4charts.XYCursor();
+                var series3 = chart.series.push(new am4charts.ColumnSeries());
+                series3.dataFields.valueY = "Temperature";
+                series3.dataFields.dateX = "date";
+                series3.yAxis = valueAxis1;
+                series3.name = "Temperature";
+                series3.tooltipText = "{name}: [bold]{valueY}[/]";
+                series3.strokeWidth = 2;
+            }
+
+            // Add legend
+            chart.legend = new am4charts.Legend();
+
+            // Add cursor
+            chart.cursor = new am4charts.XYCursor();
+        }
+
+        // Dropdown menu setup
+        var chartTypeDropdown = document.getElementById("chartTypeDropdown");
+        chartTypeDropdown.addEventListener("change", function () {
+            var selectedType = this.value;
+            changeChartType(selectedType);
+        });
+
+        // Initial chart type setup
+        changeChartType("line"); // Default to line chart
     });
+
+    // Create chart instance
+  
 }
 function FillBCchartdiv(data) {
     // Create chart instance
@@ -88,13 +148,7 @@ function FillBCchartdiv(data) {
         valueAxis2.renderer.opposite = false;
 
         // Create series
-        var series1 = chart.series.push(new am4charts.LineSeries());
-        series1.dataFields.valueY = "batteryConsumption";
-        series1.dataFields.dateX = "date";
-        series1.yAxis = valueAxis1;
-        series1.name = "Current";
-        series1.tooltipText = "{name}: [bold]{valueY}[/]";
-        series1.strokeWidth = 2;
+     
 
         // Add legend
         chart.legend = new am4charts.Legend();
@@ -129,13 +183,7 @@ function FillBCCchartdiv(data) {
         valueAxis2.renderer.opposite = false;
 
         // Create series
-        var series1 = chart.series.push(new am4charts.LineSeries());
-        series1.dataFields.valueY = "batteryConsumption";
-        series1.dataFields.dateX = "date";
-        series1.yAxis = valueAxis1;
-        series1.name = "Temperature";
-        series1.tooltipText = "{name}: [bold]{valueY}[/]";
-        series1.strokeWidth = 2;
+      
 
 
         // Add legend
@@ -158,8 +206,8 @@ $(window).on("load", function () {
                 var data = $.parseJSON(json.response);
                 FillCardDataList(data.Table);
                 Fillchartdiv(JSON.stringify(data.Table1) );
-                FillBCchartdiv(JSON.stringify(data.Table2));
-                FillBCCchartdiv(JSON.stringify(data.Table3));
+                //FillBCchartdiv(JSON.stringify(data.Table2));
+                //FillBCCchartdiv(JSON.stringify(data.Table3));
                 // Manipulate the JSON response data if needed
                 return data.Table5; // Assuming your data is nested under a 'data' key
             }

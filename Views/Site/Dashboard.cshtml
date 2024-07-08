@@ -40,6 +40,17 @@
         margin-bottom: 23px;
         font-size: 21px;
     }
+
+    .disable {
+        pointer-events: none;
+        opacity: 0.5; /* Optional: makes the block look disabled */
+    }
+
+    .notvisible {
+        filter: blur(5px);
+        opacity: 0.5; /* Optional: makes the block look disabled */
+    }
+
      
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.css" integrity="sha512-Woz+DqWYJ51bpVk5Fv0yES/edIMXjj3Ynda+KWTIkGoynAMHrqTcDUQltbipuiaD5ymEo9520lyoVOo9jCQOCA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -93,6 +104,11 @@
                     <label style="color:white;">Site Type</label> :<span id="siteType" class="text-warning"></span><br />
                     <a class="" href="/Site/Map" title="" data-rel="tooltip" data-original-title="Site Location"><i class="icon dripicons-location"></i></a>
                     <a class="" href="/Site/LiveData" data-toggle="modal" data-target=".siteImages" title="" data-rel="tooltip" data-original-title="Site Image"><i class="fa fa-building"></i> </a>
+                    <a class="" href="#" data-toggle="modal" data-target=".siteImages" title="" data-rel="tooltip" data-original-title="GSM Signal Strength at Site">
+                        <i class="fa fa-signal"></i>
+                       
+                    </a>
+                    <a class="" href="#" data-toggle="modal" data-target=".siteImages" title="" data-rel="tooltip" data-original-title="RMS Battery Status"><i class="fa fa-battery-full"></i> </a>
                 </div>
 
             </div>
@@ -172,7 +188,7 @@
      <div class="console-panel grid-stack-item-content console-no-header">
          <div class="console-panel-body">
              <div class="mytab theme1">
-                 <ul class="nav nav-tabs">
+                        <ul class="nav nav-tabs nooftenanttab">
                      <li>
                          <a class="nav-link active" data-toggle="tab" data-target="#tab4">
 
@@ -864,7 +880,7 @@
             <div class="grid-stack-item" data-gs-x="0" data-gs-y="43"
                  data-gs-width="12" data-gs-height="8" data-gs-min-height="8"
              data-gs-min-width="12" data-gs-no-resize="true">
-                <div class="console-panel grid-stack-item-content">
+                <div class="console-panel grid-stack-item-content" >
                     <div class="console-panel-header light" style="background-color: rgb(12, 52, 61);">
                         <div class="cph-left">
                             <h5>Sensors</h5>

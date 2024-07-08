@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () {
-    
+
     FillCardDataList();
-    
+
     fetchWeather();
 })
 function getWindSpeedIcon(speed) {
@@ -59,7 +59,7 @@ function getIcon(iconName) {
 // Function to get descriptive weather condition based on weather code, precipitation, and daytime status
 function getWeatherCondition(weatherCode, precipitation) {
     // Function to get icon based on weather code and daytime status
-   
+
 
     // Check for precipitation
     if (precipitation > 0) {
@@ -139,7 +139,6 @@ function getWeatherCondition(weatherCode, precipitation) {
 }
 
 function fetchWeather() {
-    debugger;
     const apiUrl = "https://api.open-meteo.com/v1/forecast";
     const params = {
         latitude: -6.200000,
@@ -185,7 +184,6 @@ function fetchWeather() {
         url: apiUrl,
         data: params,
         success: function (data) {
-            debugger;
             var currentWeather = data.current_weather;
             var temperature = currentWeather.temperature;
             var tempIcon = temperature < 0 ? '<i class="fas fa-snowflake icon"></i>' :
@@ -205,9 +203,9 @@ function fetchWeather() {
             var precipitation = currentWeather.precipitation || 0;
             var precipitationProbability = currentWeather.precipitation_probability || 0;
             var dayNightIcon = isDaytime == 1 ? '<i class="fas fa-sun icon"></i>' : '<i class="fas fa-moon icon"></i>';
-                       var precipitations = getPrecipitationIcon(weatherCode);
+            var precipitations = getPrecipitationIcon(weatherCode);
             // Assigning icons based on weather code
-         
+
 
             var html = '<div class="row">' +
                 '<div class="col-3"><label style="font-weight: bold;">Temperature</label><span>: ' + dayNightIcon + ' ' + tempIcon + ' ' + temperature + data.current_weather_units.temperature + '</span></div>' +
@@ -218,7 +216,7 @@ function fetchWeather() {
                 '</span></div>';
             '</div>';
 
-                
+
 
             $("#weather-data").html(html);
         },
@@ -229,23 +227,26 @@ function fetchWeather() {
     });
 }
 function FillCardDataList() {
+
+
+    var id = getParameterByName('id');;
     $.ajax({
         type: "GET",
-        url: "/Site/GetCardDataList",
+        url: "/Site/GetCardDataList/?id=" + id,
         success: function (data) {
             data = $.parseJSON(data.response);
-            $("#siteID").html(data.Table[0].siteID);
-            $("#siteName").html(data.Table[0].siteName);
-            $("#siteType").html(data.Table[0].siteType);
-            $("#noOfDg").html(data.Table[0].noOfDg);
-            $("#region").html(data.Table[0].region);
-            $("#typeOfCooling").html(data.Table[0].typeOfCooling);
+            $("#siteID").html(data.Table2[0].SiteId);
+            $("#siteName").html(data.Table2[0].SiteName);
+            $("#siteType").html(data.Table2[0].siteType);
+            $("#noOfDg").html(data.Table[0].NoOfGenerator);
+            $("#region").html(data.Table2[0].RegionName);
+            $("#typeOfCooling").html(data.Table2[0].CoolingType);
             $("#state").html(data.Table[0].state);
-            $("#country").html(data.Table[0].country);
-            $("#siteRunningOn").html(data.Table[0].siteRunningOn);
-            $("#searchOn").html(data.Table[0].searchOn);
-            $("#noOfTenant").html(data.Table[0].noOfTenant);
-            $("#NoofChargers").html(data.Table[0].NoofChargers);
+            $("#country").html(data.Table2[0].CountryName);
+            $("#siteRunningOn").html(data.Table2[0].siteRunningOn);
+            $("#searchOn").html(data.Table2[0].searchOn);
+            $("#noOfTenant").html(data.Table2[0].NoOfTenant);
+            $("#NoofChargers").html(data.Table2[0].NoOfGenerator);
             $("#IPCt").html(data.Table[0].IPCt);
             $("#IPVolt").html(data.Table[0].IPVolt);
             $("#OPCt").html(data.Table[0].OPCt);
@@ -298,10 +299,737 @@ function FillCardDataList() {
             $("#rectifierCurrent").html(data.Table[0].rectifierCurrent);
             $("#temperature").html(data.Table[0].temperature);
             $("#loadCurrent").html(data.Table[0].loadCurrent);
+            CreateNavTab(data);
         }
     });
 }
 
+function CreateNavTab(data) {
+    var noOfTenant = data.Table2[0].NoOfTenant;
+    var nooftenanttab = $('.nooftenanttab');
+    var nooftenantcontent = $('.nooftenanttab-content');
+    nooftenanttab.empty();
+    $(".nooftenanttab").html('');
+    /*nooftenantcontent.empty();*/
+
+    var textBoxData = [];
+
+
+
+    debugger
+    var tabHtmlt = '';
+    for (var i = 0; i < noOfTenant; i++) {
+        tabHtmlt += `
+                <li>
+                    <a class="nav-link ${i === 0 ? 'active' : ''}" data-toggle="tab" data-target="#tenant${data.Table3[i].SlNo}">
+                        ${data.Table3[i].TenantName}
+                    </a>
+                </li>`;
+    }
+    $(".nooftenanttab").html(tabHtmlt);
+    debugger;
+    var tabcontentHtml = '';
+    for (var y = 0; y < noOfTenant; y++) {
+        tabcontentHtml += `
+
+        <div class="tab-pane ${y === 0 ? 'show active' : 'fade'}" id="tenant${data.Table3[y].SlNo}">
+        <div class="grid-stack grid-stacks  gs-area">`;
+        var tempTenantData = data.Table4.filter(record => record.TenantID === data.Table3[y].SlNo);
+        debugger;
+        for (var i = 0; i < tempTenantData.length; i++) {
+            if (tempTenantData[i].IsGridAvailable == true) {
+                tabcontentHtml += `
+                    <div class="grid-stack-item ${tempTenantData[i].IsGridVisible == 1 ? '' : tempTenantData[i].IsGridVisible == 2 ? 'notvisible ' : 'disable '}" data-gs-auto-position="true"
+                    data-gs-width="4" data-gs-height="12" data-gs-min-height="10"
+                    data-gs-min-width="4">
+                    <div class="console-panel grid-stack-item-content">
+                        <div class="console-panel-header light" style="background-color: rgb(12, 52, 61);">
+                            <div class="cph-left">
+                                <h5>Grid <i class="icon dripicons-bell text-warning" style="font-size: 1em;"></i></h5>
+                            </div>
+                            <div class="cph-right">
+                                <ul class="top-header-btns">
+                                    <li>
+                                        <a class="collapse-panel" href="#"
+                                            title="Collapse/Uncollapse Panel"
+                                            data-rel="tooltip">
+                                            <i class="icon dripicons-chevron-up"></i>
+                                        </a>
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="#" data-toggle="dropdown"
+                                            title="Panel Options" data-rel="tooltip">
+                                            <i class="icon dripicons-dots-3"></i>
+                                        </a>
+                                        <div class="dropdown-menu  dropdown-menu-right theme-media">
+                                            <div class="dropdown-menu-header">
+                                                <div class="dmh-inner">
+                                                    <h4>Panel Options</h4>
+                                                </div>
+                                            </div>
+                                            <a class="dropdown-item cp" href="#"
+                                                title="">
+                                                <span class="color-fill-icon"
+                                                    style="background-color:#fff;"></span>
+                                                Header Background Color
+                                            </a>
+                                            <a class="dropdown-item header-fontcolor"
+                                                href="#" title="">
+                                                <span class="color-fill-icon"
+                                                    style="background-color:#333"></span>
+                                                Header Font Color Dark/Light
+                                            </a>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <a class="removeWidgets" href="#"
+                                            title="Remove Panel" data-rel="tooltip">
+                                            <i class="icon dripicons-cross"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="console-panel-body " style="border: 1px solid #ccc;border-radius: .25rem;position: relative;box-shadow: 0 0 1px rgba(0, 0, 0, .125), 0 1px 3px rgba(0, 0, 0, .2);flex: 1 1 18%;">
+                            <a href="/Site/Grid" data-rel="tooltip" data-original-title="Click to View full details">
+                                <div class="row" id="Grid">
+                                    <div class="col-12">
+                                        <div class="row">
+                                            <div class="col-12 text-center center-img">
+                                                <i class="fa fa-solid fa-bolt" style="font-size:3em;"></i><br />
+                                            </div>
+                                            <div class="col-12 text-center">
+                                                <label>3 Phase </label><br />
+                                                <label class="text-warning">
+                                                    Grid Type
+                                                </label><br />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-4 text-center">
+                                                <Span id="GRVOLT"></Span> <br />
+                                                <span class="text-warning ">R VOLT</span>
+                                            </div>
+                                            <div class="col-4 text-center">
+                                                <Span id="GVVOLT"></Span> <br />
+                                                <span class="text-warning ">Y VOLT</span>
+                                            </div>
+                                            <div class="col-4 text-center">
+                                                <Span id="GBVOLT"></Span> <br />
+                                                <span class="text-warning ">B VOLT</span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-4 text-center">
+                                                <Span id="GRCR"></Span> <br />
+                                                <span class="text-warning ">R CR</span>
+                                            </div>
+                                            <div class="col-4 text-center">
+                                                <Span id="GVCt"></Span> <br />
+                                                <span class="text-warning ">Y CT</span>
+                                            </div>
+                                            <div class="col-4 text-center">
+                                                <Span id="GBCR"></Span> <br />
+                                                <span class="text-warning ">B CR</span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-4 text-center">
+                                                <Span id="">O Hz</Span> <br />
+                                                <span class="text-warning ">Freq</span>
+                                            </div>
+                                            <div class="col-4 text-center">
+                                            </div>
+                                            <div class="col-4 text-center">
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>`;
+            }
+
+            if (tempTenantData[i].IsGeneratorAvailable == true) {
+                tabcontentHtml += `  <div class="grid-stack-item ${tempTenantData[i].IsGeneratorVisible == 1 ? '' : tempTenantData[i].IsGeneratorVisible == 2 ? 'notvisible ' : 'disable '}" data-gs-auto-position="true"
+             data-gs-width="4" data-gs-height="12" data-gs-min-height="12"
+             data-gs-min-width="4">
+            <div class="console-panel grid-stack-item-content">
+                <div class="console-panel-header light" style="background-color: rgb(12, 52, 61);">
+                    <div class="cph-left">
+                        <h5>Generator <i class="icon dripicons-bell text-warning" style="font-size: 1em;"></i></h5>
+                    </div>
+                    <div class="cph-right">
+                        <ul class="top-header-btns">
+                            <li>
+                                <a class="collapse-panel" href="#"
+                                   title="Collapse/Uncollapse Panel"
+                                   data-rel="tooltip">
+                                    <i class="icon dripicons-chevron-up"></i>
+                                </a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" data-toggle="dropdown"
+                                   title="Panel Options" data-rel="tooltip">
+                                    <i class="icon dripicons-dots-3"></i>
+                                </a>
+                                <div class="dropdown-menu  dropdown-menu-right theme-media">
+                                    <div class="dropdown-menu-header">
+                                        <div class="dmh-inner">
+                                            <h4>Panel Options</h4>
+                                        </div>
+                                    </div>
+                                    <a class="dropdown-item cp" href="#"
+                                       title="">
+                                        <span class="color-fill-icon"
+                                              style="background-color:#fff;"></span>
+                                        Header Background Color
+                                    </a>
+                                    <a class="dropdown-item header-fontcolor"
+                                       href="#" title="">
+                                        <span class="color-fill-icon"
+                                              style="background-color:#333"></span>
+                                        Header Font Color Dark/Light
+                                    </a>
+                                </div>
+                            </li>
+                            <li>
+                                <a class="removeWidgets" href="#"
+                                   title="Remove Panel" data-rel="tooltip">
+                                    <i class="icon dripicons-cross"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="console-panel-body" style="border: 1px solid #ccc;border-radius: .25rem;position: relative;box-shadow: 0 0 1px rgba(0, 0, 0, .125), 0 1px 3px rgba(0, 0, 0, .2);flex: 1 1 18%;">
+                    <a href="/Site/Generator" data-rel="tooltip" data-original-title="Click to View full details">
+                        <div class="row" id="Generator">
+                            <div class="col-12">
+
+                                <div class="row">
+                                    <div class="col-12 text-center center-img">
+                                        <i class="fa fa-solid fa-industry" style="font-size:3em;"></i><br />
+                                    </div>
+                                    <div class="col-12 text-center">
+                                        <label> 1 Nos</label><br />
+                                        <label class="text-warning">
+                                            Generator
+                                        </label><br />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4 text-center">
+                                        <Span id="gRVolt">O V</Span> <br />
+                                        <span class="text-warning ">R VOLT</span>
+                                    </div>
+                                    <div class="col-4 text-center">
+                                        <Span id="gYVlot">O V</Span> <br />
+                                        <span class="text-warning ">Y VOLT</span>
+                                    </div>
+                                    <div class="col-4 text-center">
+                                        <Span id="gBVlot">O V</Span> <br />
+                                        <span class="text-warning ">B VOLT</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4 text-center">
+                                        <Span id="BRCt">O A</Span> <br />
+                                        <span class="text-warning ">R CT</span>
+                                    </div>
+                                    <div class="col-4 text-center">
+                                        <Span id="BVCt">O A</Span><br />
+                                        <span class="text-warning ">Y CT</span>
+                                    </div>
+                                    <div class="col-4 text-center">
+                                        <Span id="BBCt">O A</Span><br />
+                                        <span class="text-warning ">B CT</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4 text-center">
+                                        <Span id="gFreq">O Hz</Span><br />
+                                        <span class="text-warning ">Freq</span>
+                                    </div>
+                                    <div class="col-4 text-center">
+                                        <Span id="gFuel"></Span><br />
+                                        <span class="text-warning ">Fuel</span>
+                                    </div>
+                                    <div class="col-4 text-center">
+                                        <Span id="gBat">O V</Span> <br />
+                                        <span class="text-warning ">Bat VOLT</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>`;
+            }
+            if (tempTenantData[i].IsBatteryAvailable == true) {
+                tabcontentHtml += `
+        <div class="grid-stack-item ${tempTenantData[i].IsBatteryVisible == 1 ? '' : tempTenantData[i].IsBatteryVisible == 2 ? 'notvisible ' : 'disable '}" data-gs-auto-position="true"
+             data-gs-width="4" data-gs-height="12" data-gs-min-height="12"
+             data-gs-min-width="4">
+            <div class="console-panel grid-stack-item-content">
+                <div class="console-panel-header light" style="background-color: rgb(12, 52, 61);">
+                    <div class="cph-left">
+                        <h5>Battery <i class="icon dripicons-bell text-warning" style="font-size: 1em;"></i></h5>
+                    </div>
+                    <div class="cph-right">
+                        <ul class="top-header-btns">
+                            <li>
+                                <a class="collapse-panel" href="#"
+                                   title="Collapse/Uncollapse Panel"
+                                   data-rel="tooltip">
+                                    <i class="icon dripicons-chevron-up"></i>
+                                </a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" data-toggle="dropdown"
+                                   title="Panel Options" data-rel="tooltip">
+                                    <i class="icon dripicons-dots-3"></i>
+                                </a>
+                                <div class="dropdown-menu  dropdown-menu-right theme-media">
+                                    <div class="dropdown-menu-header">
+                                        <div class="dmh-inner">
+                                            <h4>Panel Options</h4>
+                                        </div>
+                                    </div>
+                                    <a class="dropdown-item cp" href="#"
+                                       title="">
+                                        <span class="color-fill-icon"
+                                              style="background-color:#fff;"></span>
+                                        Header Background Color
+                                    </a>
+                                    <a class="dropdown-item header-fontcolor"
+                                       href="#" title="">
+                                        <span class="color-fill-icon"
+                                              style="background-color:#333"></span>
+                                        Header Font Color Dark/Light
+                                    </a>
+                                </div>
+                            </li>
+                            <li>
+                                <a class="removeWidgets" href="#"
+                                   title="Remove Panel" data-rel="tooltip">
+                                    <i class="icon dripicons-cross"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="console-panel-body" style="border: 1px solid #ccc;border-radius: .25rem;position: relative;box-shadow: 0 0 1px rgba(0, 0, 0, .125), 0 1px 3px rgba(0, 0, 0, .2);flex: 1 1 18%;">
+                    <a href="/Site/Battery" data-rel="tooltip" data-original-title="Click to View full details">
+                        <div class="row" id="Battery">
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-12 text-center center-img">
+                                        <i class="fa fa-car-battery" style="font-size:3em;"></i><br />
+                                    </div>
+                                    <div class="col-12 text-center">
+                                        <label>1 Nos</label><br />
+                                        <label class="text-warning">
+                                            Battery
+                                        </label><br />
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-6 text-center">
+                                        <Span id="BattreyType">Lithium</Span> <br />
+                                        <span class="text-warning ">
+                                            Battery
+                                            Type
+                                        </span>
+                                    </div>
+                                    <div class="col-6 text-center">
+                                        <Span id="NoOfBattery">22 Nos</Span> <br />
+                                        <span class="text-warning ">
+                                            No of
+                                            Battery
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6 text-center">
+                                        <Span id="Ct">-76.00 A</Span> <br />
+                                        <span class="text-warning ">CT</span>
+                                    </div>
+                                    <div class="col-6 text-center">
+                                        <Span id="Volt">48.01 V</Span> <br />
+                                        <span class="text-warning ">VOLT</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6 text-center">
+                                        <Span id="AvgBatTemp">26.64 C</Span> <br />
+                                        <span class="text-warning ">
+                                            Avg
+                                            Bat.Temp
+                                        </span>
+                                    </div>
+                                    <div class="col-6 text-center">
+                                        <Span id="AvgEngTemp">26.64 C</Span> <br />
+                                        <span class="text-warning ">
+                                            Avg
+                                            Eng.Temp
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        `;
+            }
+            if (tempTenantData[i].IsSolarAvailable == true) {
+                tabcontentHtml += `
+        <div class="grid-stack-item ${tempTenantData[i].IsSolarVisible == 1 ? '' : tempTenantData[i].IsSolarVisible == 2 ? 'notvisible ' : 'disable '}" data-gs-auto-position="true"
+             data-gs-width="4" data-gs-height="12" data-gs-min-height="10"
+             data-gs-min-width="4">
+            <div class="console-panel grid-stack-item-content">
+                <div class="console-panel-header light" style="background-color: rgb(12, 52, 61);">
+                    <div class="cph-left">
+                        <h5>Solar <i class="icon dripicons-bell text-warning" style="font-size: 1em;"></i></h5>
+                    </div>
+                    <div class="cph-right">
+                        <ul class="top-header-btns">
+                            <li>
+                                <a class="collapse-panel" href="#"
+                                   title="Collapse/Uncollapse Panel"
+                                   data-rel="tooltip">
+                                    <i class="icon dripicons-chevron-up"></i>
+                                </a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" data-toggle="dropdown"
+                                   title="Panel Options" data-rel="tooltip">
+                                    <i class="icon dripicons-dots-3"></i>
+                                </a>
+                                <div class="dropdown-menu  dropdown-menu-right theme-media">
+                                    <div class="dropdown-menu-header">
+                                        <div class="dmh-inner">
+                                            <h4>Panel Options</h4>
+                                        </div>
+                                    </div>
+                                    <a class="dropdown-item cp" href="#"
+                                       title="">
+                                        <span class="color-fill-icon"
+                                              style="background-color:#fff;"></span>
+                                        Header Background Color
+                                    </a>
+                                    <a class="dropdown-item header-fontcolor"
+                                       href="#" title="">
+                                        <span class="color-fill-icon"
+                                              style="background-color:#333"></span>
+                                        Header Font Color Dark/Light
+                                    </a>
+                                </div>
+                            </li>
+                            <li>
+                                <a class="removeWidgets" href="#"
+                                   title="Remove Panel" data-rel="tooltip">
+                                    <i class="icon dripicons-cross"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="console-panel-body" style="border: 1px solid #ccc;border-radius: .25rem;position: relative;box-shadow: 0 0 1px rgba(0, 0, 0, .125), 0 1px 3px rgba(0, 0, 0, .2);flex: 1 1 18%;">
+                    <a href="/Site/Solar" data-rel="tooltip" data-original-title="Click to View full details">
+                        <div class="row" id="temp">
+                            <div class="col-12">
+
+                                <div class="row">
+                                    <div class="col-12 text-center center-img">
+                                        <i class="fas fa-solar-panel" style="font-size:3em;"></i><br />
+                                    </div>
+                                    <div class="col-12 text-center">
+                                        <label id="NoofChargers"></label><br />
+                                        <label class="text-warning">No of Chargers</label><br />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6 text-center ">
+                                        <Span id="IPCt"></Span> <br />
+                                        <span class="text-warning ">I/P CT</span>
+                                    </div>
+                                    <div class="col-6 text-center">
+                                        <Span id="IPVolt"></Span> :<br />
+                                        <span class="text-warning ">I/P VOLT</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6 text-center">
+                                        <Span id="OPCt"> </Span><br />
+                                        <span class="text-warning ">O/P CT</span>
+                                    </div>
+                                    <div class="col-6 text-center">
+                                        <Span id="OPVolt"></Span> <br />
+                                        <span class="text-warning ">O/P VOLT</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6 text-center">
+                                        <Span id="">O Hz</Span> <br />
+                                        <span class="text-warning ">Freq</span>
+                                    </div>
+                                    <div class="col-6 text-center">
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        `;
+            }
+            if (tempTenantData[i].IsRectifierAvailable == true) {
+                tabcontentHtml += `<div class="grid-stack-item ${tempTenantData[i].IsRectifierVisible == 1 ? '' : tempTenantData[i].IsRectifierVisible == 2 ? 'notvisible ' : 'disable '}" data-gs-auto-position="true"
+             data-gs-width="4" data-gs-height="12" data-gs-min-height="10"
+             data-gs-min-width="4">
+            <div class="console-panel grid-stack-item-content">
+                <div class="console-panel-header light" style="background-color: rgb(12, 52, 61);">
+                    <div class="cph-left">
+                        <h5>Rectifier <i class="icon dripicons-bell text-warning" style="font-size: 1em;"></i></h5>
+                    </div>
+                    <div class="cph-right">
+                        <ul class="top-header-btns">
+                            <li>
+                                <a class="collapse-panel" href="#"
+                                   title="Collapse/Uncollapse Panel"
+                                   data-rel="tooltip">
+                                    <i class="icon dripicons-chevron-up"></i>
+                                </a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" data-toggle="dropdown"
+                                   title="Panel Options" data-rel="tooltip">
+                                    <i class="icon dripicons-dots-3"></i>
+                                </a>
+                                <div class="dropdown-menu  dropdown-menu-right theme-media">
+                                    <div class="dropdown-menu-header">
+                                        <div class="dmh-inner">
+                                            <h4>Panel Options</h4>
+                                        </div>
+                                    </div>
+                                    <a class="dropdown-item cp" href="#"
+                                       title="">
+                                        <span class="color-fill-icon"
+                                              style="background-color:#fff;"></span>
+                                        Header Background Color
+                                    </a>
+                                    <a class="dropdown-item header-fontcolor"
+                                       href="#" title="">
+                                        <span class="color-fill-icon"
+                                              style="background-color:#333"></span>
+                                        Header Font Color Dark/Light
+                                    </a>
+                                </div>
+                            </li>
+                            <li>
+                                <a class="removeWidgets" href="#"
+                                   title="Remove Panel" data-rel="tooltip">
+                                    <i class="icon dripicons-cross"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="console-panel-body" style="border: 1px solid #ccc;border-radius: .25rem;position: relative;box-shadow: 0 0 1px rgba(0, 0, 0, .125), 0 1px 3px rgba(0, 0, 0, .2);flex: 1 1 18%;">
+                    <a href="/Site/Rectifier" data-rel="tooltip" data-original-title="Click to View full details">
+                        <div class="row" id="Solar">
+                            <div class="col-12">
+
+                                <div class="row">
+                                    <div class="col-12 text-center center-img">
+                                        <i class="fa fa-microchip" style="font-size:3em;"></i><br />
+                                    </div>
+
+                                    <div class="col-12 text-center">
+                                        <label id="NoofRectifier"></label><br />
+                                        <label class="text-warning">
+                                            No of Rectifier
+                                        </label><br />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6 text-center">
+                                        <Span id="RIPCt"></Span> <br />
+                                        <span class="text-warning ">I/P CT</span>
+                                    </div>
+                                    <div class="col-6 text-center">
+                                        <Span id="RIPVolt"></Span> <br />
+                                        <span class="text-warning ">I/P VOLT</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6 text-center">
+                                        <Span id="ROPCt"></Span> <br />
+                                        <span class="text-warning ">O/P CT</span>
+                                    </div>
+                                    <div class="col-6 text-center">
+                                        <Span id="OPVolt"></Span> <br />
+                                        <span class="text-warning ">O/P VOLT</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6 text-center">
+                                        <Span id="">O Hz</Span> <br />
+                                        <span class="text-warning ">Freq</span>
+                                    </div>
+                                    <div class="col-6 text-center">
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        `;
+            }
+            if (tempTenantData[i].IsPortableBatteryAvailable == true) {
+                tabcontentHtml += `<div class="grid-stack-item ${tempTenantData[i].IsPortableBatteryVisible == 1 ? '' : tempTenantData[i].IsPortableBatteryVisible == 2 ? 'notvisible ' : 'disable '}" data-gs-auto-position="true"
+             data-gs-width="4" data-gs-height="12" data-gs-min-height="12"
+             data-gs-min-width="4">
+            <div class="console-panel grid-stack-item-content">
+                <div class="console-panel-header light" style="background-color: rgb(12, 52, 61);">
+                    <div class="cph-left">
+                        <h5>Portable Battery <i class="icon dripicons-bell text-warning" style="font-size: 1em;"></i></h5>
+                    </div>
+                    <div class="cph-right">
+                        <ul class="top-header-btns">
+                            <li>
+                                <a class="collapse-panel" href="#"
+                                   title="Collapse/Uncollapse Panel"
+                                   data-rel="tooltip">
+                                    <i class="icon dripicons-chevron-up"></i>
+                                </a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" data-toggle="dropdown"
+                                   title="Panel Options" data-rel="tooltip">
+                                    <i class="icon dripicons-dots-3"></i>
+                                </a>
+                                <div class="dropdown-menu  dropdown-menu-right theme-media">
+                                    <div class="dropdown-menu-header">
+                                        <div class="dmh-inner">
+                                            <h4>Panel Options</h4>
+                                        </div>
+                                    </div>
+                                    <a class="dropdown-item cp" href="#"
+                                       title="">
+                                        <span class="color-fill-icon"
+                                              style="background-color:#fff;"></span>
+                                        Header Background Color
+                                    </a>
+                                    <a class="dropdown-item header-fontcolor"
+                                       href="#" title="">
+                                        <span class="color-fill-icon"
+                                              style="background-color:#333"></span>
+                                        Header Font Color Dark/Light
+                                    </a>
+                                </div>
+                            </li>
+                            <li>
+                                <a class="removeWidgets" href="#"
+                                   title="Remove Panel" data-rel="tooltip">
+                                    <i class="icon dripicons-cross"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="console-panel-body" style="border: 1px solid #ccc;border-radius: .25rem;position: relative;box-shadow: 0 0 1px rgba(0, 0, 0, .125), 0 1px 3px rgba(0, 0, 0, .2);flex: 1 1 18%;">
+                    <a href="/Site/PortableBattery" data-rel="tooltip" data-original-title="Click to View full details">
+                        <div class="row" id="Battery">
+                            <div class="col-12">
+
+                                <div class="row">
+                                    <div class="col-12 text-center center-img">
+                                        <i class="fa fa-solid fa-charging-station" style="font-size:3em;"></i><br />
+                                    </div>
+                                    <div class="col-12 text-center">
+                                        <label>1 Nos</label><br />
+                                        <label class="text-warning">
+                                            Portable Battery
+                                        </label><br />
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-6 text-center">
+                                        <Span id="BattreyType">Lithium</Span> <br />
+                                        <span class="text-warning ">
+                                            Battery
+                                            Type
+                                        </span>
+                                    </div>
+                                    <div class="col-6 text-center">
+                                        <Span id="NoOfBattery">22 Nos</Span> <br />
+                                        <span class="text-warning ">
+                                            No of
+                                            Battery
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6 text-center">
+                                        <Span id="Ct">-76.00 A</Span> <br />
+                                        <span class="text-warning ">CT</span>
+                                    </div>
+                                    <div class="col-6 text-center">
+                                        <Span id="Volt">48.01 V</Span> <br />
+                                        <span class="text-warning ">VOLT</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6 text-center">
+                                        <Span id="AvgBatTemp">26.64 C</Span> <br />
+                                        <span class="text-warning ">
+                                            Avg
+                                            Bat.Temp
+                                        </span>
+                                    </div>
+                                    <div class="col-6 text-center">
+                                        <Span id="AvgEngTemp">26.64 C</Span> <br />
+                                        <span class="text-warning ">
+                                            Avg
+                                            Eng.Temp
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>`;
+            }
+        }
+        tabcontentHtml += ` </div>
+        </div>`;
+    }
+    $(".tab-content").html('');
+    $(".tab-content").html(tabcontentHtml);
+
+
+
+
+}
 //function FillPaymentHistoryChartData() {
 //    $.ajax({
 //        type: "GET",
@@ -530,102 +1258,111 @@ function FillCardDataList() {
 //}
 
 var alarmsstable;
-$(window).on("load", function () {
-    alarmsstable = $('#alarmsstable').DataTable({
-        //"ajax": '/js/JSON/data1.json',
-        "ajax": {
-            "url": '/Site/GetCardDataList',
-            "dataSrc": function (json) {
-                debugger;
-                var data = $.parseJSON(json.response);
-                // Manipulate the JSON response data if needed
-                return data.Table1; // Assuming your data is nested under a 'data' key
-            }
-        },
-        "dom": '<"top"<"dt-filters"f>>rFt<"dt-bottom"<"dt-information"li><"dt-pagination"p>>',
-        "columns": [
-            { "data": "srNo" },
-            { "data": "alarms" },
-            { "data": "alarmsDate" },
-            { "data": "severvity" },
-            // Add more column definitions as needed
-        ],
-        "columnDefs": [{
-            "targets": 'no-sort',
-            "orderable": false,
-        }],
-        "responsive": true,
-        "colReorder": {
-            realtime: false
-        },
-        "stateSave": false,
-        "createdRow": function (row, data, dataIndex) {
-            debugger;
-            var lastCellData = data.severvity; // Get data from the last cell
-            var $lastCell = $(row).children('td').last(); // Select the last cell
-            var badgeHTML = ''; // Initialize HTML content
-            if (lastCellData === 'Info') {
-                badgeHTML = '<span class="badge badge-success badge-pill">Success</span>';
-            } else if (lastCellData === 'Minor') {
-                badgeHTML = '<span class="badge badge-warning badge-pill">Warning</span>';
-            } else if (lastCellData === 'Danger') {
-                badgeHTML = '<span class="badge badge-danger badge-pill">Danger</span>';
-            }
-            $lastCell.html(badgeHTML);
-        },
-        initComplete: function () {
-            // Move Search To Panel Header
-            let _container = $(this).parents('.console-panel').find('.get_dt_search')
-            let _bottom_container = $(this).parents('.console-panel').find('.dt-bottom-container')
+//$(window).on("load", function () {
+//    alarmsstable = $('#alarmsstable').DataTable({
+//        //"ajax": '/js/JSON/data1.json',
+//        "ajax": {
+//            "url": '/Site/GetCardDataList',
+//            "dataSrc": function (json) {
+//                var data = $.parseJSON(json.response);
+//                // Manipulate the JSON response data if needed
+//                return data.Table1; // Assuming your data is nested under a 'data' key
+//            }
+//        },
+//        "dom": '<"top"<"dt-filters"f>>rFt<"dt-bottom"<"dt-information"li><"dt-pagination"p>>',
+//        "columns": [
+//            { "data": "srNo" },
+//            { "data": "alarms" },
+//            { "data": "alarmsDate" },
+//            { "data": "severvity" },
+//            // Add more column definitions as needed
+//        ],
+//        "columnDefs": [{
+//            "targets": 'no-sort',
+//            "orderable": false,
+//        }],
+//        "responsive": true,
+//        "colReorder": {
+//            realtime: false
+//        },
+//        "stateSave": false,
+//        "createdRow": function (row, data, dataIndex) {
 
-            $("#alarmsstable_wrapper .dataTables_filter input").appendTo(_container);
-            $("#alarmsstable_wrapper  .dt-filters").css("display", "none");
-            $(_container).find("input").attr('placeholder', 'Search From Table');
-            $("#alarmsstable_wrapper  .dt-bottom").appendTo(_bottom_container);
-            dashboardFilters();
+//            var lastCellData = data.severvity; // Get data from the last cell
+//            var $lastCell = $(row).children('td').last(); // Select the last cell
+//            var badgeHTML = ''; // Initialize HTML content
+//            if (lastCellData === 'Info') {
+//                badgeHTML = '<span class="badge badge-success badge-pill">Success</span>';
+//            } else if (lastCellData === 'Minor') {
+//                badgeHTML = '<span class="badge badge-warning badge-pill">Warning</span>';
+//            } else if (lastCellData === 'Danger') {
+//                badgeHTML = '<span class="badge badge-danger badge-pill">Danger</span>';
+//            }
+//            $lastCell.html(badgeHTML);
+//        },
+//        initComplete: function () {
+//            // Move Search To Panel Header
+//            let _container = $(this).parents('.console-panel').find('.get_dt_search')
+//            let _bottom_container = $(this).parents('.console-panel').find('.dt-bottom-container')
 
-            $(colvis.button()).insertAfter(_container);
+//            $("#alarmsstable_wrapper .dataTables_filter input").appendTo(_container);
+//            $("#alarmsstable_wrapper  .dt-filters").css("display", "none");
+//            $(_container).find("input").attr('placeholder', 'Search From Table');
+//            $("#alarmsstable_wrapper  .dt-bottom").appendTo(_bottom_container);
+//            dashboardFilters();
 
-        }
-    });
+//            $(colvis.button()).insertAfter(_container);
 
-    // ======= Filters Code Start ======= //
-    function dashboardFilters() {
-        $(".filterhead").each(function (i) {
-            var select = $('<select multiple class="multiselect"></select>')
-                .appendTo($(this).empty())
-                .on('change', function () {
-                    var term = $(this).val() || [];
-                    regExSearch = '^(' + term.join('|') + ')';
-                    alarmsstable.column(i).search(regExSearch, true, false).draw();
-                });
-            alarmsstable.column(i).data().unique().sort().each(function (d, j) {
-                d = `<span>` + d + `</span>`;
-                d = $.parseHTML(d);
-                d = $(d).text();
-                if (!$(select).find("option:contains('" + d + "')").length) {
-                    select.append('<option value="' + d + '">' + d + '</option>')
-                }
-            });
-        });
-        $(".multiselect").SumoSelect({ search: true, searchText: 'Enter here.' });
-    }
+//        }
+//    });
 
-    // ======= Filters Code End ======= //
+//    // ======= Filters Code Start ======= //
+//    function dashboardFilters() {
+//        $(".filterhead").each(function (i) {
+//            var select = $('<select multiple class="multiselect"></select>')
+//                .appendTo($(this).empty())
+//                .on('change', function () {
+//                    var term = $(this).val() || [];
+//                    regExSearch = '^(' + term.join('|') + ')';
+//                    alarmsstable.column(i).search(regExSearch, true, false).draw();
+//                });
+//            alarmsstable.column(i).data().unique().sort().each(function (d, j) {
+//                d = `<span>` + d + `</span>`;
+//                d = $.parseHTML(d);
+//                d = $(d).text();
+//                if (!$(select).find("option:contains('" + d + "')").length) {
+//                    select.append('<option value="' + d + '">' + d + '</option>')
+//                }
+//            });
+//        });
+//        $(".multiselect").SumoSelect({ search: true, searchText: 'Enter here.' });
+//    }
 
-    // Enable Column Show Hide Option
-    var colvis = new $.fn.dataTable.ColVis(alarmsstable, {
-        showAll: "Restore Defaults"
-    });
+//    // ======= Filters Code End ======= //
 
-    //$('#alarmsstable').on('click', 'tbody tr', function () {
-    //    // Get the data of the clicked row
-    //    let rowData = alarmsstable.row(this).data();
+//    // Enable Column Show Hide Option
+//    var colvis = new $.fn.dataTable.ColVis(alarmsstable, {
+//        showAll: "Restore Defaults"
+//    });
 
-    //    // Extract the URL from the row data (assuming the URL is stored in a specific column)
-    //    let url = rowData.urlColumn; // Replace 'urlColumn' with the actual column name or index
+//    //$('#alarmsstable').on('click', 'tbody tr', function () {
+//    //    // Get the data of the clicked row
+//    //    let rowData = alarmsstable.row(this).data();
 
-    //    // Navigate to the URL
-    //    window.location.href = "/SiteDashboard.html";
-    //});
-});
+//    //    // Extract the URL from the row data (assuming the URL is stored in a specific column)
+//    //    let url = rowData.urlColumn; // Replace 'urlColumn' with the actual column name or index
+
+//    //    // Navigate to the URL
+//    //    window.location.href = "/SiteDashboard.html";
+//    //});
+//});
+
+function getParameterByName(name) {
+    var url = window.location.href;
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
