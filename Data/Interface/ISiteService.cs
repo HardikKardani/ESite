@@ -29,7 +29,8 @@ namespace ESite.Data.Interface
         ResponseViewModel GetSysytemData();
         ResponseViewModel GetAlertList();
         Task<ResponseViewModel> Getbyid(RequestViewModel model);
-        Task<ResponseViewModel> Delete(RequestViewModel model);
+		Task<ResponseViewModel> GetbyParameterType(RequestViewModel model);
+		Task<ResponseViewModel> Delete(RequestViewModel model);
 		Task<bool> CheckDuplicateName(RequestViewModel model);
         ResponseViewModel GetSimCard();
         ResponseViewModel GetWeather();

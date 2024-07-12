@@ -1,0 +1,92 @@
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
+<div class="console-panel" style="margin-top: 55px;">
+    <div class="console-panel-header">
+        <div class="cph-left">
+            <h5>Parameter Status</h5>
+        </div>
+    </div><!-- Panel Header -->
+
+    <div class="console-panel-body" id="data">
+        <!--<div class="row mb-2">
+            <div class="col-lg-12">
+                <label>Battery Type :</label>
+                <span class="text-warning" id="BatteryType">Lithum</span>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-lg-12">
+                <label>No of Battery :</label>
+                <span class="text-warning" id="NoofBattery">22</span>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-lg-12">
+                <label>Current :</label>
+                <span class="text-warning" id="Current">-61.00 A</span>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-lg-12">
+                <label>Voltage :</label>
+                <span class="text-warning" id="Voltage">49.49 V</span>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-lg-12">
+                <label>Avg Battery Temperature :</label>
+                <span class="text-warning" id="ABT">30.55 C</span>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-lg-12">
+                <label>Avg Environment Temperature :</label>
+                <span class="text-warning" id="AET">30.55 C</span>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-lg-12">
+                <label>Data Received On:</label>
+                <span class="text-warning" id="DRO"></span>
+            </div>-->
+        </div>
+    </div>
+
+</div>
+<script>
+    $(document).ready(function () {
+
+        var url = window.location.href;
+
+        // Split the URL by '/' and get the last segment
+        var _parameterName = url.split('/').filter(segment => segment.length > 0).pop();
+
+        $.ajax({
+            type: "GET",
+            url: "/Site/GetbyParameterType/",
+            data: { ParameterName: _parameterName },
+            success: function (response) {
+                debugger;
+                // Assuming response is already parsed JSON, or you can use $.parseJSON(response) if needed
+                var data = $.parseJSON(response.response); // Adjust based on your actual response structure
+                let html = '';
+
+                for (let key in data[0]) {
+                    if (data[0].hasOwnProperty(key)) {
+                        html += '<div class="row mb-2">';
+                        html += '<div class="col-lg-12">';
+                        html += '<label>' + key + ' :</label>';
+                        html += '<span class="text-warning">' + data[0][key] + '</span>';
+                        html += '</div>';
+                        html += '</div>';
+                    }
+                }
+                $('#data').append(html);
+                
+            },
+            error: function (xhr, status, error) {
+                // Handle errors here
+                console.error("Error:", error);
+            }
+        });
+    })
+</Script>

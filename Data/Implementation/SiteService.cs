@@ -19,6 +19,8 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using static ESite.Data.ViewModel.SiteViewModel;
 using DocumentFormat.OpenXml.EMMA;
+using DocumentFormat.OpenXml.Office2010.Excel;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace ESite.Data.Implementation
 {
@@ -521,7 +523,31 @@ namespace ESite.Data.Implementation
             }
             return _Response;
         }
-        public async Task<ResponseViewModel> Delete(RequestViewModel model)
+		public async Task<ResponseViewModel> GetbyParameterType(RequestViewModel model)
+		{
+			ResponseViewModel _Response = new ResponseViewModel();
+			_Response.Status = false;
+			try
+			{
+				SqlParameter[] param =
+				{
+					 new SqlParameter("@parameter_name",model.Search),
+
+				};
+				string? constr = _context.Database.GetConnectionString() == null ? "" : _context.Database.GetConnectionString();
+				sqlhelper _sqlhelper = new sqlhelper(constr == null ? "" : constr);
+				DataTable data = _sqlhelper.GetDataTable(System.Data.CommandType.StoredProcedure, "SP_Parameterstatus", param);
+
+				_Response.Status = true;
+				_Response.Response = Newtonsoft.Json.JsonConvert.SerializeObject(data);
+			}
+			catch (Exception ex)
+			{
+				_Response.Message = DataComman.GetString(ex);
+			}
+			return _Response;
+		}
+		public async Task<ResponseViewModel> Delete(RequestViewModel model)
         {
             ResponseViewModel _Response = new ResponseViewModel();
             try

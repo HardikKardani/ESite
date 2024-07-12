@@ -90,6 +90,10 @@ namespace Esite.Controllers
         {
             return View();
         }
+        public IActionResult Copy()
+        {
+            return View();
+        }
         public IActionResult Weather()
         {
             return View();
@@ -423,6 +427,22 @@ namespace Esite.Controllers
 				bool isDuplicate = await _uow.siteService.CheckDuplicateName(requestModel);
 				responseViewModel.Status = true;
 				responseViewModel.Response = isDuplicate;
+			}
+			catch (Exception ex)
+			{
+				responseViewModel.Message = DataComman.GetString(ex);
+			}
+			return Json(responseViewModel);
+		}
+		[HttpGet]
+		public async Task<IActionResult> GetbyParameterType(string ParameterName)
+		{
+			ResponseViewModel responseViewModel = new ResponseViewModel();
+			try
+			{
+				RequestViewModel requestModel = new RequestViewModel();
+				requestModel.Search = ParameterName.ToLower();
+				responseViewModel = await _uow.siteService.GetbyParameterType(requestModel);
 			}
 			catch (Exception ex)
 			{

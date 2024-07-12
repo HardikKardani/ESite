@@ -1,0 +1,24 @@
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
+
+<div class="card">
+    <div class="card-body align-center" id="htmlData">
+    </div>
+</div>
+<script>
+
+    $(document).ready(function () {
+        $.ajax({
+            type: 'GET',
+            url: "/Site/GetParameter",
+            success: function (data) {
+                if (data.status) {
+                    
+                }
+                else {
+                    Messagealert('w', data.message);
+                }
+            }
+        });
+
+    });
+</script>

@@ -97,21 +97,27 @@
 				</div>
 			</div>
 
-
-			<div class="col-10">
-				<h5>Rectifier Detailss</h5><br />
+			<div class="col-8">
 			</div>
-			<div class="col-1">
+			<div class="col-2 d-flex justify-content-end">
 				<div class="form-group">
-					<button class="btn btn-accent ">Show</button>
+					<button class="btn btn-accent">Show</button>
 				</div>
 			</div>
-			<div class="col-1">
-				<div class="form-group" style="float: right;">
+			<div class="col-2 d-flex justify-content-start">
+				<div class="form-group">
 					<button class="btn btn-accent">Download</button>
 				</div>
 			</div>
-			
+			<div class="col-11">
+				<h5>Rectifier Details</h5><br />
+			</div>
+			<div class="col-1 text-right" style="align-content: center;">
+				<a href="javascript:void(0);" title="" data-rel="tooltip" data-placement="bottom" title="Parameter Status" onclick="toggleMenu()">
+					<i class="icon dripicons-align-left"></i>
+				</a>
+			</div>
+			<div id="sidebar" class="sidebar-container"></div>
 
 			<div class="col-12">
 				<div class="mytab theme1">
@@ -131,89 +137,8 @@
 							<div class="card">
 								<div class="card-body p-0">
 									<div class="grid-stack gs-area">
+										
 										<div class="grid-stack-item" data-gs-x="0" data-gs-y="0" data-gs-width="12"
-											 data-gs-height="6" data-gs-min-height="6" data-gs-min-width="4">
-											<div class="console-panel grid-stack-item-content">
-												<div class="console-panel-header">
-													<div class="cph-left">
-														<h5>Parameter Status</h5>
-													</div>
-													<div class="cph-right">
-														<ul class="top-header-btns">
-
-															<li>
-																<a class="collapse-panel" href="#" title="Collapse/Uncollapse Panel"
-																   data-rel="tooltip"> <i class="icon dripicons-chevron-up"></i></a>
-															</li>
-															<li class="dropdown">
-																<a href="#" data-toggle="dropdown" title="Panel Options" data-rel="tooltip">
-																	<i class="icon dripicons-dots-3"></i>
-																</a>
-																<div class="dropdown-menu  dropdown-menu-right theme-media">
-																	<div class="dropdown-menu-header">
-																		<div class="dmh-inner">
-																			<h4>Panel Options</h4>
-																		</div>
-																	</div>
-																	<a class="dropdown-item cp" href="#" title="">
-																		<span class="color-fill-icon" style="background-color:#fff;"></span>
-																		Header Background Color
-																	</a>
-																	<a class="dropdown-item header-fontcolor" href="#" title="">
-																		<span class="color-fill-icon" style="background-color:#333"></span>
-																		Header Font Color Dark/Light
-																	</a>
-																</div>
-															</li>
-															<li>
-																<a class="removeWidget" href="#" title="Remove Panel" data-rel="tooltip">
-																	<i class="icon dripicons-cross"></i>
-																</a>
-															</li>
-														</ul>
-													</div>
-												</div><!-- Panel Header -->
-
-												<div class="card-body">
-													<div class="row">
-														<div class="col-lg-2 col-md-12">
-															<label>Input Voltage (V):</label> <span class="text-warning" id="IV">8 nos</span>
-														</div>
-														<div class="col-lg-2 col-md-12">
-															<label>Input Voltage (V):</label> <span class="text-warning" id="IV">8 nos</span>
-														</div>
-														<div class="col-lg-2 col-md-12">
-															<label>Input Current (C) :</label> <span class="text-warning" id="IC">0 V</span>
-														</div>
-														<div class="col-lg-2 col-md-12">
-															<label>Output Voltage (V):</label> <span class="text-warning" id="OV">8 nos</span>
-														</div>
-														<div class="col-lg-2 col-md-12">
-															<label>Output Current (C) :</label> <span class="text-warning" id="OC">0 A</span>
-														</div>
-														<div class="col-lg-2 col-md-12">
-															<label>Power Use (KWH) :</label> <span class="text-warning" id="PowerUse">0 V</span>
-														</div>
-														<div class="col-lg-2 col-md-12">
-															<label>Max Power (KWH) :</label> <span class="text-warning" id="MaxPower">0 A</span>
-														</div>
-														<div class="col-lg-2 col-md-12">
-															<label>Temperature :</label> <span class="text-warning" id="Temperature"></span>
-														</div>
-														<div class="col-lg-2 col-md-12">
-															<label>Type :</label> <span class="text-warning" id="Type"></span>
-														</div>
-														<div class="col-lg-2 col-md-12">
-															<label>Status :</label> <span class="text-warning" id="Status"></span>
-														</div>
-														<div class="col-lg-3 col-md-12">
-															<label>Data Received On :</label> <span class="text-warning" id="DRO"></span>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="grid-stack-item" data-gs-x="4" data-gs-y="7" data-gs-width="12"
 											 data-gs-height="20" data-gs-min-height="20" data-gs-min-width="8">
 											<div class="console-panel grid-stack-item-content">
 												<div class="console-panel-header">
@@ -315,24 +240,7 @@
 											   id="Solartables">
 											<thead class="sorticon-pos">
 
-												<tr>
-													<th rowspan="2">Sr No</th>
-													<th rowspan="2">Site ID </th>
-													<th rowspan="2">Date Time</th>
-													<th colspan="2">Input</th>
-													<th colspan="2">Output</th>
-													<th rowspan="2">Max Power</th>
-													<th rowspan="2">Power Use</th>
-													<th rowspan="2">Temperature</th>
-													<th rowspan="2">Type</th>
-													<th rowspan="2">Status</th>
-												</tr>
-												<tr>
-													<th>Voltage</th>
-													<th>Current</th>
-													<th>Voltage</th>
-													<th>Current</th>
-												</tr>
+											
 											</thead>
 											<tbody></tbody>
 										</table>

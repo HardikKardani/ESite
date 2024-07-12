@@ -1,7 +1,5 @@
 ﻿$(document).ready(function () {
     
-    
-    
 })
 
 function FillCardDataList(data) {
@@ -196,73 +194,58 @@ function FillBCCchartdiv(data) {
 
 var Batterytables;
 $(window).on("load", function () {
-    debugger
-    Batterytables = $('#Batterytables').DataTable({
-        //"ajax": '/js/JSON/data1.json',
-        "ajax": {
-            "url": '/Site/GetBatteryData',
-            "dataSrc": function (json) {
-                debugger;
-                var data = $.parseJSON(json.response);
-                FillCardDataList(data.Table);
-                Fillchartdiv(JSON.stringify(data.Table1) );
-                //FillBCchartdiv(JSON.stringify(data.Table2));
-                //FillBCCchartdiv(JSON.stringify(data.Table3));
-                // Manipulate the JSON response data if needed
-                return data.Table5; // Assuming your data is nested under a 'data' key
-            }
-        },
-        "dom": '<"top"<"dt-filters"f>>rFt<"dt-bottom"<"dt-information"li><"dt-pagination"p>>',
-        "columns": [
-            { "data": "Slno" },
-            { "data": "SiteID" },
-            { "data": "Date" },
-            { "data": "PAckID" },
-            { "data": "BMSModel" },
-            { "data": "BMSVersion" },
-            { "data": "BMSSerialNo" },
-            { "data": "BMSVolt" },
-            { "data": "BMSCurrent" },
-            { "data": "Cell1" },
-            { "data": "Cell2" },
-            { "data": "Cell3" },
-            { "data": "Cell4" },
-            { "data": "Cell5" },
-            { "data": "Cell6" },
-            { "data": "Cell7" },
-            { "data": "Cell8" },
-            { "data": "Cell9" },
-            { "data": "Cell10" },
-            { "data": "Cell11" },
-            { "data": "Cell12" },
-            { "data": "CellMin" },
-            { "data": "CellMax" },
-            { "data": "PCB" },
-            { "data": "Ambient" },
-            { "data": "Max" }
-            
-            // Add more column definitions as needed
-        ],
-        "columnDefs": [{
-            "targets": 'no-sort',
-            "orderable": false,
-        }],
-        "responsive": true,
-        "colReorder": {
-            realtime: false
-        },
-        "stateSave": false,
-        initComplete: function () {
-            // Move Search To Panel Header
-            let _container = $(this).parents('.card').find('.get_dt_search')
-            let _bottom_container = $(this).parents('.card').find('.dt-bottom-container')
+    $.ajax({
+        url: '/Site/GetBatteryData',  // Replace with your actual API endpoint
+        method: 'GET',                  // Adjust the method as per your API
+        success: function (json) {
+            debugger;
+            debugger;
+            var data = $.parseJSON(json.response);
+            FillCardDataList(data.Table);
+            Fillchartdiv(JSON.stringify(data.Table1));
+            var columns = data.Table6;
+            var data = data.Table5;
+            // Initialize the DataTable with dynamic columns and data
+            Batterytables = $('#Batterytables').DataTable({
+                "dom": '<"top"B<"dt-filters"f>>rFt<"dt-bottom"<"dt-information"li><"dt-pagination"p>>',
+                "sorting": false,
+                data: data,
+                columns: columns,
+                "fixedHeader": true,
+                "columnDefs": [{
+                    "targets": 'no-sort',
+                    "orderable": false,
+                }],
+                "responsive": true,
+                "colReorder": {
+                    realtime: false
+                },
+                "buttons": [
+                    {
+                        extend: 'excelHtml5',
+                        text: 'Export'
+                    }
+                ],
+                "stateSave": false,
+                initComplete: function () {
+                    // Move Search To Panel Header
+                    let _container = $(this).parents('.card').find('.get_dt_search')
+                    let _bottom_container = $(this).parents('.card').find('.dt-bottom-container')
 
-            $("#Batterytables_wrapper .dataTables_filter input").appendTo(_container);
-            $("#Batterytables_wrapper  .dt-filters").css("display", "none");
-            $(_container).find("input").attr('placeholder', 'Search From Table');
-            $("#Batterytables_wrapper  .dt-bottom").appendTo(_bottom_container);
+                    $("#Batterytables_wrapper .dataTables_filter input").appendTo(_container);
+                    $("#Batterytables_wrapper  .dt-filters").css("display", "none");
+                    $(_container).find("input").attr('placeholder', 'Search From Table');
+                    $("#Batterytables_wrapper  .dt-bottom").appendTo(_bottom_container);
 
+                }
+
+            });
+        },
+        error: function (xhr, status, error) {
+            console.error('Error fetching data:', error);
+            // Handle error scenario
         }
     });
+
 
 });

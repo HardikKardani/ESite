@@ -1,0 +1,189 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "SiteDashboard";
+}
+<!-- AM Charts Start -->
+<script src="https://www.amcharts.com/lib/4/core.js"></script>
+<script src="https://www.amcharts.com/lib/4/charts.js"></script>
+<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+<!-- AM Charts End -->
+
+<style>
+
+    body {
+        background-color: #f8f9fa;
+    }
+
+    .card {
+        margin-top: 20px;
+    }
+
+    .sidebar {
+        background-color: #343a40;
+        color: #fff;
+    }
+
+        .sidebar a {
+            color: #fff;
+        }
+
+    .form-inline .form-control {
+        margin-right: 10px;
+    }
+
+    .table-responsive {
+        margin-top: 20px;
+    }
+
+    .btn-custom {
+        background-color: #d9534f;
+        color: white;
+        border: none;
+    }
+
+        .btn-custom:hover {
+            background-color: #c9302c;
+        }
+
+</style>
+<div class="content-area">
+    <div id="toparea" class="style4"></div>
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">Site Portable Battery</h1>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <form class="form-inline">
+                    <label class="my-1 mr-2" for="siteSelect">Select Site</label>
+                    <select class="custom-select my-1 mr-sm-2" id="siteSelect">
+                        <option selected>Site 1</option>
+                        <option value="1">Site 2</option>
+                        <option value="2">Site 3</option>
+                    </select>
+
+                    <label class="my-1 mr-2" for="chartTypeSelect">Select Chart Type</label>
+                    <select class="custom-select my-1 mr-sm-2" id="chartTypeSelect">
+                        <option selected>Line Chart</option>
+                        <option value="1">Bar Chart</option>
+                        <option value="2">Pie Chart</option>
+                    </select>
+
+                    <label class="my-1 mr-2" for="fromDate">From Date</label>
+                    <input type="date" class="form-control my-1 mr-sm-2" id="fromDate">
+
+                    <label class="my-1 mr-2" for="toDate">To Date</label>
+                    <input type="date" class="form-control my-1 mr-sm-2" id="toDate">
+
+                    <button type="submit" class="btn btn-primary my-1">Search</button>
+                </form>
+
+                <div class="mt-3">
+                    <button class="btn btn-custom my-1">Show</button>
+                    <button class="btn btn-secondary my-1">Download</button>
+                </div>
+
+                <ul class="nav nav-tabs mt-3" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="summary-tab" data-toggle="tab" href="#summary" role="tab" aria-controls="summary" aria-selected="true">Summary</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="rawdata-tab" data-toggle="tab" href="#rawdata" role="tab" aria-controls="rawdata" aria-selected="false">Raw Data</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="summary" role="tabpanel" aria-labelledby="summary-tab">Summary content goes here.</div>
+                    <div class="tab-pane fade" id="rawdata" role="tabpanel" aria-labelledby="rawdata-tab">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Sl No</th>
+                                        <th>Site ID</th>
+                                        <th>Pack ID</th>
+                                        <th>BMS Model</th>
+                                        <th>BMS Version</th>
+                                        <th>BMS Serial No</th>
+                                        <th>BMS Volt</th>
+                                        <th>BMS Current</th>
+                                        <th>Date</th>
+                                        <th>Battery No</th>
+                                        <th>Cell 1</th>
+                                        <th>Cell 2</th>
+                                        <th>Cell 3</th>
+                                        <th>Cell 4</th>
+                                        <th>Cell 5</th>
+                                        <th>Cell 6</th>
+                                        <th>Cell 7</th>
+                                        <th>Cell 8</th>
+                                        <th>Cell 9</th>
+                                        <th>Cell 10</th>
+                                        <th>Cell 11</th>
+                                        <th>Cell 12</th>
+                                        <th>Cell Max</th>
+                                        <th>Cell Min</th>
+                                        <th>PCB</th>
+                                        <th>Ambient</th>
+                                        <th>Max</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>1</td>
+                                        <td>1</td>
+                                        <td>Model</td>
+                                        <td>1</td>
+                                        <td>001</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>2024-05-22T00:52:59</td>
+                                        <td>1</td>
+                                        <td>7.909</td>
+                                        <td>7.987</td>
+                                        <td>6.455</td>
+                                        <td>5.344</td>
+                                        <td>4.681</td>
+                                        <td>7.402</td>
+                                        <td>4.005</td>
+                                        <td>4.011</td>
+                                        <td>3.38</td>
+                                        <td>4.901</td>
+                                        <td>4.783</td>
+                                        <td>6.913</td>
+                                        <td>8.882</td>
+                                        <td>8.882</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <nav>
+                                <ul class="pagination justify-content-end">
+                                    <li class="page-item disabled">
+                                        <a class="page-link" href="#" tabindex="-1">Previous</a>
+                                    </li>
+                                    <li class="page-item active">
+                                        <a class="page-link" href="#">1</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="#">Next</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="/JsController/SiteBatteryJs.js" asp-append-version="true"></script>
+    <!-- AM Charts Start -->
+    <script src="https://www.amcharts.com/lib/4/core.js"></script>
+    <script src="https://www.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+    <!-- AM Charts End -->

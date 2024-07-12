@@ -97,19 +97,27 @@
             </div>
 
 
-            <div class="col-10">
-                <h5>Solar Details</h5><br />
+            <div class="col-8">
             </div>
-            <div class="col-1">
+            <div class="col-2 d-flex justify-content-end">
                 <div class="form-group">
-                    <button class="btn btn-accent ">Show</button>
+                    <button class="btn btn-accent">Show</button>
                 </div>
             </div>
-            <div class="col-1">
-                <div class="form-group" style="float: right;">
+            <div class="col-2 d-flex justify-content-start">
+                <div class="form-group">
                     <button class="btn btn-accent">Download</button>
                 </div>
             </div>
+            <div class="col-11">
+                <h5>Solar Details</h5><br />
+            </div>
+            <div class="col-1 text-right" style="align-content: center;">
+                <a href="javascript:void(0);" title="" data-rel="tooltip" data-placement="bottom" title="Parameter Status" onclick="toggleMenu()">
+                    <i class="icon dripicons-align-left"></i>
+                </a>
+            </div>
+            <div id="sidebar" class="sidebar-container"></div>
 
             <div class="col-12">
                 <div class="mytab theme1">
@@ -129,71 +137,8 @@
                             <div class="card">
                                 <div class="card-body p-0">
                                     <div class="grid-stack gs-area">
-                                        <div class="grid-stack-item" data-gs-x="0" data-gs-y="0" data-gs-width="12"
-                                             data-gs-height="4" data-gs-min-height="4" data-gs-min-width="4">
-                                            <div class="console-panel grid-stack-item-content">
-                                                <div class="console-panel-header">
-                                                    <div class="cph-left">
-                                                        <h5>Parameter Status</h5>
-                                                    </div>
-                                                    <div class="cph-right">
-                                                        <ul class="top-header-btns">
-
-                                                            <li>
-                                                                <a class="collapse-panel" href="#" title="Collapse/Uncollapse Panel"
-                                                                   data-rel="tooltip"> <i class="icon dripicons-chevron-up"></i></a>
-                                                            </li>
-                                                            <li class="dropdown">
-                                                                <a href="#" data-toggle="dropdown" title="Panel Options" data-rel="tooltip">
-                                                                    <i class="icon dripicons-dots-3"></i>
-                                                                </a>
-                                                                <div class="dropdown-menu  dropdown-menu-right theme-media">
-                                                                    <div class="dropdown-menu-header">
-                                                                        <div class="dmh-inner">
-                                                                            <h4>Panel Options</h4>
-                                                                        </div>
-                                                                    </div>
-                                                                    <a class="dropdown-item cp" href="#" title="">
-                                                                        <span class="color-fill-icon" style="background-color:#fff;"></span>
-                                                                        Header Background Color
-                                                                    </a>
-                                                                    <a class="dropdown-item header-fontcolor" href="#" title="">
-                                                                        <span class="color-fill-icon" style="background-color:#333"></span>
-                                                                        Header Font Color Dark/Light
-                                                                    </a>
-                                                                </div>
-                                                            </li>
-                                                            <li>
-                                                                <a class="removeWidget" href="#" title="Remove Panel" data-rel="tooltip">
-                                                                    <i class="icon dripicons-cross"></i>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div><!-- Panel Header -->
-
-                                                <div class="card-body">
-                                                    <div class="row">
-                                                        <div class="col-lg-2 col-md-12">
-                                                            <label>Input Volatge :</label> <span class="text-warning" id="InputVolatge">194.8 V</span>
-                                                        </div>
-                                                        <div class="col-lg-2 col-md-12">
-                                                            <label>Input Current :</label> <span class="text-warning" id="InputCurrent">4.1 A</span>
-                                                        </div>
-                                                        <div class="col-lg-2 col-md-12">
-                                                            <label>Input Power :</label> <span class="text-warning" id="InputPower">957.17 W</span>
-                                                        </div>
-                                                        <div class="col-lg-2 col-md-12">
-                                                            <label>Solar Kwh :</label> <span class="text-warning" id="SolarKwh">1013.7 Kwh</span>
-                                                        </div>
-                                                        <div class="col-lg-2 col-md-12">
-                                                            <label>Solar Run Time :</label> <span class="text-warning" id="SolarRunTime">1345.43 Hrs</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                            <div class="grid-stack-item" data-gs-x="0" data-gs-y="5" data-gs-width="12"
+                                        
+                                            <div class="grid-stack-item" data-gs-x="0" data-gs-y="0" data-gs-width="12"
                                                  data-gs-height="20" data-gs-min-height="20" data-gs-min-width="12">
                                                 <div class="console-panel grid-stack-item-content">
                                                     <div class="console-panel-header">
@@ -294,21 +239,7 @@
                                             <table class="table table-striped console-table table-bordered table-hover mb-0"
                                                    id="Solartables">
                                                 <thead class="sorticon-pos">
-                                                    <tr>
-                                                        <th>Sr No</th>
-                                                        <th>Time</th>
-                                                        <th>Serial No</th>
-                                                        <th>I/P Voltage (V)</th>
-                                                        <th>I/P Current (A)</th>
-                                                        <th>I/P Power (KW)</th>
-                                                        <th>Solar (Kwh)</th>
-                                                        <th>Solar Run Time (Hrs)</th>
-                                                        <th>O/P Voltage (V)</th>
-                                                        <th>O/P Current (A)</th>
-                                                        <th>Temp (*C)</th>
-                                                        <th>DC State</th>
-                                                        <th>Status</th>
-                                                    </tr>
+                                                    
                                                 </thead>
                                                 <tbody></tbody>
                                             </table>

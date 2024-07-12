@@ -339,55 +339,57 @@ function FillBCCchartdiv(data) {
 var DGtables;
 $(window).on("load", function () {
     debugger
-    DGtables = $('#DGtables').DataTable({
-        //"ajax": '/js/JSON/data1.json',
-        "ajax": {
-            "url": '/Site/GetGridData',
-            "dataSrc": function (json) {
-                debugger;
-                var data = $.parseJSON(json.response);
-                FillCardDataList(data.Table);
-                Fillchartdiv(JSON.stringify(data.Table1));
-                //FillBCCCchartdiv(JSON.stringify(data.Table1));
-                //FillBCchartdiv(JSON.stringify(data.Table2));
-                //FillBCCchartdiv(JSON.stringify(data.Table2));
-                // Manipulate the JSON response data if needed
-                return data.Table5; // Assuming your data is nested under a 'data' key
-            }
-        },
-        "dom": '<"top"<"dt-filters"f>>rFt<"dt-bottom"<"dt-information"li><"dt-pagination"p>>',
-        "columns": [
-            { "data": "SlNo" },
-            { "data": "DateTime" },
-            { "data": "Rvolt" },
-            { "data": "Yvolt" },
-            { "data": "Bvolt" },
-            { "data": "Rcurrent" },
-            { "data": "Ycurrent" },
-            { "data": "Bcurrent" },
-            { "data": "Frequency" },
-            // Add more column definitions as needed
-        ],
-        "columnDefs": [{
-            "targets": 'no-sort',
-            "orderable": false,
-        }],
-        "responsive": true,
-        "colReorder": {
-            realtime: false
-        },
-        "stateSave": false,
-        initComplete: function () {
-            // Move Search To Panel Header
-            let _container = $(this).parents('.card').find('.get_dt_search')
-            let _bottom_container = $(this).parents('.card').find('.dt-bottom-container')
+    $.ajax({
+        url: '/Site/GetGridData',  // Replace with your actual API endpoint
+        method: 'GET',                  // Adjust the method as per your API
+        success: function (json) {
+            debugger;
+            debugger;
+            var data = $.parseJSON(json.response);
+            FillCardDataList(data.Table);
+            Fillchartdiv(JSON.stringify(data.Table1));
+            var columns = data.Table6;
+            var data = data.Table5;
+            // Initialize the DataTable with dynamic columns and data
+            DGtables = $('#DGtables').DataTable({
+                "dom": '<"top"B<"dt-filters"f>>rFt<"dt-bottom"<"dt-information"li><"dt-pagination"p>>',
+                "sorting": false,
+                data: data,
+                columns: columns,
+                "columnDefs": [{
+                    "targets": 'no-sort',
+                    "orderable": false,
+                }],
+                "responsive": true,
+                "colReorder": {
+                    realtime: false
+                },
+                "buttons": [
+                    {
+                        extend: 'excelHtml5',
+                        text: 'Export'
+                    }
+                ],
+                "stateSave": false,
+                initComplete: function () {
+                    // Move Search To Panel Header
+                    let _container = $(this).parents('.card').find('.get_dt_search')
+                    let _bottom_container = $(this).parents('.card').find('.dt-bottom-container')
 
-            $("#DGtables_wrapper .dataTables_filter input").appendTo(_container);
-            $("#DGtables_wrapper  .dt-filters").css("display", "none");
-            $(_container).find("input").attr('placeholder', 'Search From Table');
-            $("#DGtables_wrapper  .dt-bottom").appendTo(_bottom_container);
+                    $("#DGtables_wrapper .dataTables_filter input").appendTo(_container);
+                    $("#DGtables_wrapper  .dt-filters").css("display", "none");
+                    $(_container).find("input").attr('placeholder', 'Search From Table');
+                    $("#DGtables_wrapper  .dt-bottom").appendTo(_bottom_container);
 
+                }
+
+            });
+        },
+        error: function (xhr, status, error) {
+            console.error('Error fetching data:', error);
+            // Handle error scenario
         }
     });
+   
 
 });

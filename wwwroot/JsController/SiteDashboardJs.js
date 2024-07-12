@@ -1258,104 +1258,120 @@ function CreateNavTab(data) {
 //}
 
 var alarmsstable;
-//$(window).on("load", function () {
-//    alarmsstable = $('#alarmsstable').DataTable({
-//        //"ajax": '/js/JSON/data1.json',
-//        "ajax": {
-//            "url": '/Site/GetCardDataList',
-//            "dataSrc": function (json) {
-//                var data = $.parseJSON(json.response);
-//                // Manipulate the JSON response data if needed
-//                return data.Table1; // Assuming your data is nested under a 'data' key
-//            }
-//        },
-//        "dom": '<"top"<"dt-filters"f>>rFt<"dt-bottom"<"dt-information"li><"dt-pagination"p>>',
-//        "columns": [
-//            { "data": "srNo" },
-//            { "data": "alarms" },
-//            { "data": "alarmsDate" },
-//            { "data": "severvity" },
-//            // Add more column definitions as needed
-//        ],
-//        "columnDefs": [{
-//            "targets": 'no-sort',
-//            "orderable": false,
-//        }],
-//        "responsive": true,
-//        "colReorder": {
-//            realtime: false
-//        },
-//        "stateSave": false,
-//        "createdRow": function (row, data, dataIndex) {
+$(window).on("load", function () {
 
-//            var lastCellData = data.severvity; // Get data from the last cell
-//            var $lastCell = $(row).children('td').last(); // Select the last cell
-//            var badgeHTML = ''; // Initialize HTML content
-//            if (lastCellData === 'Info') {
-//                badgeHTML = '<span class="badge badge-success badge-pill">Success</span>';
-//            } else if (lastCellData === 'Minor') {
-//                badgeHTML = '<span class="badge badge-warning badge-pill">Warning</span>';
-//            } else if (lastCellData === 'Danger') {
-//                badgeHTML = '<span class="badge badge-danger badge-pill">Danger</span>';
-//            }
-//            $lastCell.html(badgeHTML);
-//        },
-//        initComplete: function () {
-//            // Move Search To Panel Header
-//            let _container = $(this).parents('.console-panel').find('.get_dt_search')
-//            let _bottom_container = $(this).parents('.console-panel').find('.dt-bottom-container')
+    alarmsstable = $('#alarmsstable').DataTable({
+        //"ajax": '/js/JSON/data1.json',
+        "ajax": {
+            "url": '/Site/GetCardDataList',
+            "dataSrc": function (json) {
+                var data = $.parseJSON(json.response);
+                // Manipulate the JSON response data if needed
+                return data.Table1; // Assuming your data is nested under a 'data' key
+            }
+        },
+        
+        "dom": '<"top"B<"dt-filters"f>>rFt<"dt-bottom"<"dt-information"li><"dt-pagination"p>>',
+        "columns": [
+            { "data": "srNo" },
+            { "data": "alarms" },
+            { "data": "alarmsDate" },
+            { "data": "severvity" },
+            // Add more column definitions as needed
+        ],
+        "columnDefs": [{
+            "targets": 'no-sort',
+            "orderable": false,
+        }],
+        "responsive": true,
+        "colReorder": {
+            realtime: false
+        },
+        "buttons": [
+            {
+                extend: 'excelHtml5',
+                text: 'Export'
+            }
+        ],
+        "stateSave": false,
+        "createdRow": function (row, data, dataIndex) {
 
-//            $("#alarmsstable_wrapper .dataTables_filter input").appendTo(_container);
-//            $("#alarmsstable_wrapper  .dt-filters").css("display", "none");
-//            $(_container).find("input").attr('placeholder', 'Search From Table');
-//            $("#alarmsstable_wrapper  .dt-bottom").appendTo(_bottom_container);
-//            dashboardFilters();
+            var lastCellData = data.severvity; // Get data from the last cell
+            var $lastCell = $(row).children('td').last(); // Select the last cell
+            var badgeHTML = ''; // Initialize HTML content
+            if (lastCellData === 'Info') {
+                badgeHTML = '<span class="badge badge-success badge-pill">Success</span>';
+            } else if (lastCellData === 'Minor') {
+                badgeHTML = '<span class="badge badge-warning badge-pill">Warning</span>';
+            } else if (lastCellData === 'Danger') {
+                badgeHTML = '<span class="badge badge-danger badge-pill">Danger</span>';
+            }
+            $lastCell.html(badgeHTML);
+        },
+        initComplete: function () {
 
-//            $(colvis.button()).insertAfter(_container);
+            // Move Search To Panel Header
+            let _container = $(this).parents('.console-panel').find('.get_dt_search')
+            let _bottom_container = $(this).parents('.console-panel').find('.dt-bottom-container')
 
-//        }
-//    });
+            $("#alarmsstable_wrapper .dataTables_filter input").appendTo(_container);
+            $("#alarmsstable_wrapper  .dt-filters").css("display", "none");
+            $(_container).find("input").attr('placeholder', 'Search From Table');
+            debugger;
+            $("#alarmsstable_wrapper  .dt-bottom").appendTo(_bottom_container);
+            $("#alarmsstable_wrapper  .dt-button").removeClass("dt-button buttons-excel buttons-html5");
+            $("#alarmsstable_wrapper .dt-buttons button")
+                .addClass("btn").css("background-color: rgb(12, 52, 61)"); // Add the desired Bootstrap class
 
-//    // ======= Filters Code Start ======= //
-//    function dashboardFilters() {
-//        $(".filterhead").each(function (i) {
-//            var select = $('<select multiple class="multiselect"></select>')
-//                .appendTo($(this).empty())
-//                .on('change', function () {
-//                    var term = $(this).val() || [];
-//                    regExSearch = '^(' + term.join('|') + ')';
-//                    alarmsstable.column(i).search(regExSearch, true, false).draw();
-//                });
-//            alarmsstable.column(i).data().unique().sort().each(function (d, j) {
-//                d = `<span>` + d + `</span>`;
-//                d = $.parseHTML(d);
-//                d = $(d).text();
-//                if (!$(select).find("option:contains('" + d + "')").length) {
-//                    select.append('<option value="' + d + '">' + d + '</option>')
-//                }
-//            });
-//        });
-//        $(".multiselect").SumoSelect({ search: true, searchText: 'Enter here.' });
-//    }
+            $("#alarmsstable_wrapper .dt-buttons").addClass("mr-2");
+            $("#alarmsstable_wrapper .dt-buttons").appendTo(_container);
+            dashboardFilters();
 
-//    // ======= Filters Code End ======= //
+           /* $(colvis.button()).insertAfter(_container);*/
 
-//    // Enable Column Show Hide Option
-//    var colvis = new $.fn.dataTable.ColVis(alarmsstable, {
-//        showAll: "Restore Defaults"
-//    });
+        }
+    });
 
-//    //$('#alarmsstable').on('click', 'tbody tr', function () {
-//    //    // Get the data of the clicked row
-//    //    let rowData = alarmsstable.row(this).data();
+    // ======= Filters Code Start ======= //
+    function dashboardFilters() {
+        $(".filterhead").each(function (i) {
+            var select = $('<select multiple class="multiselect"></select>')
+                .appendTo($(this).empty())
+                .on('change', function () {
+                    var term = $(this).val() || [];
+                    regExSearch = '^(' + term.join('|') + ')';
+                    alarmsstable.column(i).search(regExSearch, true, false).draw();
+                });
+            alarmsstable.column(i).data().unique().sort().each(function (d, j) {
+                d = `<span>` + d + `</span>`;
+                d = $.parseHTML(d);
+                d = $(d).text();
+                if (!$(select).find("option:contains('" + d + "')").length) {
+                    select.append('<option value="' + d + '">' + d + '</option>')
+                }
+            });
+        });
+        $(".multiselect").SumoSelect({ search: true, searchText: 'Enter here.' });
+    }
 
-//    //    // Extract the URL from the row data (assuming the URL is stored in a specific column)
-//    //    let url = rowData.urlColumn; // Replace 'urlColumn' with the actual column name or index
+    // ======= Filters Code End ======= //
 
-//    //    // Navigate to the URL
-//    //    window.location.href = "/SiteDashboard.html";
-//    //});
-//});
+    // Enable Column Show Hide Option
+    var colvis = new $.fn.dataTable.ColVis(alarmsstable, {
+        showAll: "Restore Defaults"
+    });
+
+    //$('#alarmsstable').on('click', 'tbody tr', function () {
+    //    // Get the data of the clicked row
+    //    let rowData = alarmsstable.row(this).data();
+
+    //    // Extract the URL from the row data (assuming the URL is stored in a specific column)
+    //    let url = rowData.urlColumn; // Replace 'urlColumn' with the actual column name or index
+
+    //    // Navigate to the URL
+    //    window.location.href = "/SiteDashboard.html";
+    //});
+});
 
 function getParameterByName(name) {
     var url = window.location.href;

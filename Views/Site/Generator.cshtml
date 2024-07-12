@@ -104,20 +104,27 @@
 			</div>
 
 
-			<div class="col-10">
-				<h5>DG Details</h5><br />
+			<div class="col-8">
 			</div>
-			<div class="col-1">
+			<div class="col-2 d-flex justify-content-end">
 				<div class="form-group">
-					<button class="btn btn-accent ">Show</button>
+					<button class="btn btn-accent">Show</button>
 				</div>
 			</div>
-			<div class="col-1">
-				<div class="form-group" style="float: right;">
+			<div class="col-2 d-flex justify-content-start">
+				<div class="form-group">
 					<button class="btn btn-accent">Download</button>
 				</div>
 			</div>
-			
+			<div class="col-11">
+				<h5>DG Details</h5><br />
+			</div>
+			<div class="col-1 text-right">
+				<a href="javascript:void(0);" title="" data-rel="tooltip" data-placement="bottom" title="Parameter Status" onclick="toggleMenu()">
+					<i class="icon dripicons-align-left"></i>
+				</a>
+			</div>
+			<div id="sidebar" class="sidebar-container"></div>
 
 			<div class="col-12">
 				<div class="mytab theme1">
@@ -133,87 +140,12 @@
 
 
 					<div class="card-body p-0">
+								<div class="tab-content p-0 pt-1">
 						<div class="tab-pane  show active" id="Summary">
 							<div class="card">
-								<div class="tab-content p-0 pt-1">
 									<div class="grid-stack gs-area">
+										
 										<div class="grid-stack-item" data-gs-x="0" data-gs-y="0" data-gs-width="12"
-											 data-gs-height="6" data-gs-min-height="6" data-gs-min-width="3">
-											<div class="console-panel grid-stack-item-content">
-												<div class="console-panel-header">
-													<div class="cph-left">
-														<h5>Parameter Status</h5>
-													</div>
-													<div class="cph-right">
-														<ul class="top-header-btns">
-
-															<li>
-																<a class="collapse-panel" href="#" title="Collapse/Uncollapse Panel"
-																   data-rel="tooltip"> <i class="icon dripicons-chevron-up"></i></a>
-															</li>
-															<li class="dropdown">
-																<a href="#" data-toggle="dropdown" title="Panel Options" data-rel="tooltip">
-																	<i class="icon dripicons-dots-3"></i>
-																</a>
-																<div class="dropdown-menu  dropdown-menu-right theme-media">
-																	<div class="dropdown-menu-header">
-																		<div class="dmh-inner">
-																			<h4>Panel Options</h4>
-																		</div>
-																	</div>
-																	<a class="dropdown-item cp" href="#" title="">
-																		<span class="color-fill-icon" style="background-color:#fff;"></span>
-																		Header Background Color
-																	</a>
-																	<a class="dropdown-item header-fontcolor" href="#" title="">
-																		<span class="color-fill-icon" style="background-color:#333"></span>
-																		Header Font Color Dark/Light
-																	</a>
-																</div>
-															</li>
-															<li>
-																<a class="removeWidget" href="#" title="Remove Panel" data-rel="tooltip">
-																	<i class="icon dripicons-cross"></i>
-																</a>
-															</li>
-														</ul>
-													</div>
-												</div><!-- Panel Header -->
-
-												<div class="card-body">
-													<div class="row">
-														<div class="col-lg-2 col-md-12">
-															<label>R Voltage :</label> <span class="text-warning" id="RVoltage">0 V</span>
-														</div>
-														<div class="col-lg-2 col-md-12">
-															<label>Y Volatge :</label> <span class="text-warning" id="YVoltage">0 V</span>
-														</div>
-														<div class="col-lg-2 col-md-12">
-															<label>B Voltage :</label> <span class="text-warning" id="BVoltage">0 V</span>
-														</div>
-														<div class="col-lg-2 col-md-12">
-															<label>R Current :</label> <span class="text-warning" id="RCurrent">0 A</span>
-														</div>
-														<div class="col-lg-2 col-md-12">
-															<label>Y Current :</label> <span class="text-warning" id="YCurrent">0 A</span>
-														</div>
-														<div class="col-lg-2 col-md-12">
-															<label>B Current :</label> <span class="text-warning" id="BCurrent">0 A</span>
-														</div>
-														<div class="col-lg-2 col-md-12">
-															<label>Fuel Level :</label> <span class="text-warning" id="FuelLevel">682.75 Ltrs</span>
-														</div>
-														<div class="col-lg-2 col-md-12">
-															<label>Frequency :</label> <span class="text-warning" id="Frequency"> KWH</span><br />
-														</div>
-														<div class="col-lg-3 col-md-12">
-															<label>Data Received On :</label> <span class="text-warning" id="DRO"> Hrs</span><br />
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="grid-stack-item" data-gs-x="0" data-gs-y="7" data-gs-width="12"
 											 data-gs-height="20" data-gs-min-height="20" data-gs-min-width="12">
 											<div class="console-panel grid-stack-item-content">
 												<div class="console-panel-header">
@@ -272,7 +204,6 @@
 
 
 							</div>
-						</div>
 						<div class="tab-pane  fade" id="RawData">
 							<div class="row mb-3">
 								<div class="col-lg-8 col-md-12">
@@ -304,6 +235,9 @@
 								</div>
 								<div class="col">
 									<button class="btn btn-success">Excel</button>
+
+
+
 								</div>
 
 							</div>
@@ -314,17 +248,7 @@
 										<table class="table table-striped console-table table-bordered table-hover mb-0"
 											   id="DGtables">
 											<thead class="sorticon-pos">
-												<tr>
-													<th>Sr No</th>
-													<th>Time</th>
-													<th>R volt</th>
-													<th>V volt</th>
-													<th>B volt</th>
-													<th>R current</th>
-													<th>Y Current</th>
-													<th>B Current</th>
-													<th>Frequency</th>
-												</tr>
+												
 											</thead>
 											<tbody></tbody>
 										</table>
@@ -334,6 +258,7 @@
 					<div class="dt-bottom-container"></div>
 				</div>
 							</div>
+						</div>
 						</div>
 					</div>
 				</div>

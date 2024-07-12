@@ -64,7 +64,7 @@
 		<div class="row">
 			<div class="col-4">
 				<div class="form-group">
-					<h5>Select Site</h5>
+					<h6>Select Site</h6>
 					<select class="select2 form-control">
 						<option value="Site1">Site 1</option>
 						<option value="Site1">Site 2</option>
@@ -73,15 +73,14 @@
 			</div>
 			<div class="col-4">
 				<div class="form-group">
-					<h5>Select Battery Type</h5>
+					<h6>Select Battery Type</h6>
 					<select class="select2 form-control">
 						<option value="Site1">Lithium</option>
 						<option value="Site1">VLRI</option>
 					</select>
 				</div>
 			</div>
-			<div class="col-4"></div>
-			<div class="col-3">
+			<div class="col-4">
 				<div class="form-group">
 					<h6>Select Chart Type:</h6>
 					<select class="form-control" id="chartTypeDropdown">
@@ -114,19 +113,26 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-1 mt-4">
+			<div class="col-2"></div>
+			<div class="col-2 d-flex justify-content-end mt-4">
 				<div class="form-group">
-					<button class="btn btn-accent ">Show</button>
+					<button class="btn btn-accent">Show</button>
 				</div>
 			</div>
-			<div class="col-1 mt-4">
-				<div class="form-group" style="float: right;">
+			<div class="col-2 d-flex justify-content-start mt-4">
+				<div class="form-group">
 					<button class="btn btn-accent">Download</button>
 				</div>
 			</div>
-				<div class="col-12">
+				<div class="col-11">
 					<h5>Battery Details</h5><br />
 				</div>
+			<div class="col-1 text-right">
+				<a href="javascript:void(0);" title="" data-rel="tooltip" data-placement="bottom" title="Parameter Status" onclick="toggleMenu()">
+					<i class="icon dripicons-align-left"></i>
+				</a>
+			</div>
+			<div id="sidebar" class="sidebar-container"></div>
 			
 			<div class="col-12">
 				<div class="mytab theme1">
@@ -147,83 +153,6 @@
 								<div class="card-body p-0">
 									<div class="grid-stack gs-area">
 										<div class="grid-stack-item" data-gs-x="0" data-gs-y="0" data-gs-width="12"
-											 data-gs-height="6" data-gs-min-height="6" data-gs-min-width="4">
-											<div class="console-panel grid-stack-item-content">
-												<div class="console-panel-header">
-													<div class="cph-left">
-														<h5>Parameter Status</h5>
-													</div>
-													<div class="cph-right">
-														<ul class="top-header-btns">
-
-															<li>
-																<a class="collapse-panel" href="#" title="Collapse/Uncollapse Panel"
-																   data-rel="tooltip"> <i class="icon dripicons-chevron-up"></i></a>
-															</li>
-															<li class="dropdown">
-																<a href="#" data-toggle="dropdown" title="Panel Options" data-rel="tooltip">
-																	<i class="icon dripicons-dots-3"></i>
-																</a>
-																<div class="dropdown-menu  dropdown-menu-right theme-media">
-																	<div class="dropdown-menu-header">
-																		<div class="dmh-inner">
-																			<h4>Panel Options</h4>
-																		</div>
-																	</div>
-																	<a class="dropdown-item cp" href="#" title="">
-																		<span class="color-fill-icon" style="background-color:#fff;"></span>
-																		Header Background Color
-																	</a>
-																	<a class="dropdown-item header-fontcolor" href="#" title="">
-																		<span class="color-fill-icon" style="background-color:#333"></span>
-																		Header Font Color Dark/Light
-																	</a>
-																</div>
-															</li>
-															<li>
-																<a class="removeWidget" href="#" title="Remove Panel" data-rel="tooltip">
-																	<i class="icon dripicons-cross"></i>
-																</a>
-															</li>
-														</ul>
-													</div>
-												</div><!-- Panel Header -->
-
-												<div class="card-body align-center">
-													<div class="row">
-														<div class="col-lg-2 col-md-12">
-															<label>Battery Type :</label> <span class="text-warning" id="BatteryType">Lithum</span>
-														</div>
-														<div class="col-lg-2 col-md-12">
-															<label>No of Battery :</label> <span class="text-warning" id="NoofBattery">22 </span>
-														</div>
-														<div class="col-lg-2 col-md-12">
-															<label>Current :</label> <span class="text-warning" id="Current"> -61.00 A</span>
-														</div>
-														<div class="col-lg-2 col-md-12">
-															<label>Voltage :</label> <span class="text-warning" id="Voltage ">49.49 V</span>
-														</div>
-														<div class="col-lg-2 col-md-12">
-															<label>Avg Battery Tempature :</label> <span class="text-warning" id="ABT">
-																30.55
-																C
-															</span>
-														</div>
-														<div class="col-lg-2 col-md-12">
-															<label>Avg Enviroment Tempature :</label> <span class="text-warning" id="AET">
-																30.55
-																C
-															</span>
-														</div>
-														<div class="col-lg-3 col-md-12">
-															<label>Data Received On:</label> <span class="text-warning" id="DRO"></span>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-										
-										<div class="grid-stack-item" data-gs-x="0" data-gs-y="7" data-gs-width="12"
 											 data-gs-height="20" data-gs-min-height="20" data-gs-min-width="6">
 											<div class="console-panel grid-stack-item-content">
 												<div class="console-panel-header">
@@ -317,62 +246,46 @@
 								</div>
 
 							</div>
-							<div class="card">
-								<div class="card-body">
-
-									<div class="table-containers">
-										<table class="table table-striped console-table table-bordered table-hover mb-0"
-											   id="Batterytables">
-											<thead class="sorticon-pos">
-												<tr>
-													<th rowspan="2">SlNo</th>
-													<th rowspan="2">Site ID</th>
-													<th rowspan="2">Time</th>
-													<th rowspan="2">Pack ID</th>
-													<th rowspan="2">BMS Model</th>
-													<th rowspan="2">BMS Version</th>
-													<th rowspan="2">BMS Serial No</th>
-													<th rowspan="2">BMS Volt</th>
-													<th rowspan="2">BMS Current</th>
-													<th colspan="14">Battery Cell Voltage (V)</th>
-													<th colspan="3">Temperature (Cel.)</th>
-												</tr>
-												<tr>
-													<th>Cell 1</th>
-													<th>Cell 2</th>
-													<th>Cell 3</th>
-													<th>Cell 4</th>
-													<th>Cell 5</th>
-													<th>Cell 6</th>
-													<th>Cell 7</th>
-													<th>Cell 8</th>
-													<th>Cell 9</th>
-													<th>Cell 10</th>
-													<th>Cell 11</th>
-													<th>Cell 12</th>
-													<th>Cell Min</th>
-													<th>Cell Max</th>
-													<th>PCB</th>
-													<th>Ambient</th>
-													<th>Max</th>
-												</tr>
-											</thead>
-											<tbody></tbody>
-										</table>
-									</div>
+							<div class="grid-stack gs-area">
+								<div class="grid-stack-item" data-gs-x="0" data-gs-y="46" data-gs-width="12" data-gs-height="12"
+									 data-gs-min-height="10" data-gs-min-width="12" data-gs-locked="yes" data-gs-no-move="true" data-gs-no-resize="true">
+									<div class="console-panel grid-stack-item-content">
+										<div class="console-panel-header light">
+											 <div class="cph-left">
+											</div>
+											<div class="cph-right">
+											<div class="get_dt_search"></div>
+											<ul class="top-header-btns">
+											<li>
+											<a class="switch-full" href="#" title="Expand Panel To Full Screen"
+											data-rel="tooltip"> <i class="icon dripicons-expand-2"></i></a>
+											</li>
+											</ul>
+											</div>
+										</div><!-- Panel Header -->
+										<div class="console-panel-body no-padding">
+											<div class="table-container">
+												<table class="table table-striped console-table table-bordered table-hover mb-0"
+													   id="Batterytables">
+													<thead class="sorticon-pos">
+													</thead>
+													<tbody></tbody>
+												</table>
+											</div>
+										</div>
+										<div class="console-footer">
+											<div class="dt-bottom-container"></div>
+										</div>
+									</div><!-- Console Panel -->
 								</div>
-								<div class="console-footer">
-					<div class="dt-bottom-container"></div>
-				</div>
 							</div>
-						</div>
+                        </div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div><!-- Content Area -->
 
-	<aside class="more-opt-panel"></aside>
 </div><!-- Theme Content -->
 <script src="/JsController/SiteBatteryJs.js" asp-append-version="true"></script>
 <!-- AM Charts Start -->

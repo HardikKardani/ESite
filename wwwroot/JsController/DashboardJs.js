@@ -233,6 +233,7 @@ $(window).on("load", function () {
             { "data": "SiteInChargeName" }
             // Add more column definitions as needed
         ],
+        "fixedHeader": true,
         "columnDefs": [{
             "targets": 'no-sort',
             "orderable": false,
@@ -250,14 +251,15 @@ $(window).on("load", function () {
                 //title: 'Data export'
             }
         ],
+        
         initComplete: function () {
             // Move Search To Panel Header
             let _container = $(this).parents('.console-panel').find('.get_dt_search')
             let _bottom_container = $(this).parents('.console-panel').find('.dt-bottom-container')
 
-            /*$("#ticketstable_wrapper .dataTables_filter input").appendTo(_container);*/
+            $("#ticketstable_wrapper .dataTables_filter input").appendTo(_container);
             $("#ticketstable_wrapper  .dt-filters").css("display", "none");
-            /*$(_container).find("input").attr('placeholder', 'Search From Table');*/
+            $(_container).find("input").attr('placeholder', 'Search From Table');
             $("#ticketstable_wrapper  .dt-bottom").appendTo(_bottom_container);
             $("#ticketstable_wrapper  .top").css("display", "none");
             $("#ticketstable_wrapper  .dt-button").removeClass("dt-button buttons-excel buttons-html5");
@@ -266,7 +268,7 @@ $(window).on("load", function () {
 
             $("#ticketstable_wrapper .dt-buttons").addClass("mr-2");
             $("#ticketstable_wrapper .dt-buttons").appendTo(_container);
-            dashboardFilters();
+            /*dashboardFilters();*/
 
             //$(colvis.button()).insertAfter(_container);
 
@@ -424,13 +426,6 @@ $(document).ready(function () {
             // Extract columns and data from the response
             var columns = data.Table1;
             var data = data.Table;
-
-            // Dynamically create table headers based on columns
-            var headerRow = $('#table-headers');
-            columns.forEach(function (column) {
-                headerRow.append('<th>' + column.title + '</th>');
-            });
-
             // Initialize the DataTable with dynamic columns and data
             Sitetable = $('#Sitetable').DataTable({
                 "dom": '<"top"B<"dt-filters"f>>rFt<"dt-bottom"<"dt-information"li><"dt-pagination"p>>',
@@ -457,9 +452,9 @@ $(document).ready(function () {
                     let _container = $(this).parents('.console-panel').find('.get_dt_search')
                     let _bottom_container = $(this).parents('.console-panel').find('.dt-bottom-container')
 
-                    /*$("#ticketstable_wrapper .dataTables_filter input").appendTo(_container);*/
+                    $("#Sitetable_wrapper .dataTables_filter input").appendTo(_container);
                     $("#Sitetable_wrapper  .dt-filters").css("display", "none");
-                    /*$(_container).find("input").attr('placeholder', 'Search From Table');*/
+                    $(_container).find("input").attr('placeholder', 'Search From Table');
                     $("#Sitetable_wrapper  .dt-bottom").appendTo(_bottom_container);
                     $("#Sitetable_wrapper  .top").css("display", "none");
                     $("#Sitetable_wrapper  .dt-button").removeClass("dt-button buttons-excel buttons-html5");

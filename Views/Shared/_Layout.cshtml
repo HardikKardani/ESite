@@ -22,6 +22,7 @@
 
 	<link rel="stylesheet" href="~/js/plugins/datatable/style.css">
 	<link rel="stylesheet" href="https://cdn.datatables.net/colvis/1.1.2/css/dataTables.colVis.css" />
+	<link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.2.1/css/fixedHeader.dataTables.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.sumoselect/3.0.2/sumoselect.min.css" />
 
 	<link rel="stylesheet" type="text/css" href="~/css/dripicon.css" />
@@ -54,11 +55,53 @@
 			width: 250px;
 			height: 100%;
 			transition: transform 0.3s ease;
+			padding-bottom: 55px;
 		}
 
 			.console-sidemenu.inactive {
 				transform: translateX(-250px);
 			}
+
+		.sidebar-container {
+			position: fixed;
+			right: -400px;
+			top: 0;
+			width: 400px;
+			height: 100%;
+			background: #fff;
+			/* box-shadow: -2px 0 5px rgba(0,0,0,0.5); */
+			transition: right 0.3s ease;
+			z-index: 1000;
+		}
+
+			.sidebar-container.active {
+				right: 0;
+			}
+
+		.content-area, .top-header-btns, .nav-tabs, .tab-content {
+			position: relative;
+			z-index: 1;
+		}
+
+		.table-container {
+			overflow-y: auto;
+			max-height: 100%;
+			position: relative;
+			width: 100%;
+			-ms-overflow-style: none;
+			scrollbar-width: none;
+		}
+
+			.table-container::-webkit-scrollbar {
+				display: none;
+			}
+
+		thead th {
+			position: sticky;
+			top: 0;
+			z-index: 1;
+			background-color: white;
+		}
 	</style>
 </head>
 
@@ -92,6 +135,7 @@
 	<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 	<script src="https://cdn.datatables.net/colreorder/1.5.1/js/dataTables.colReorder.min.js"></script>
 	<script src="https://cdn.datatables.net/colvis/1.1.2/js/dataTables.colVis.min.js"></script>
+	<script src="https://cdn.datatables.net/fixedheader/3.2.1/js/dataTables.fixedHeader.min.js"></script>
 	<!-- DataTable End -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.sumoselect/3.0.2/jquery.sumoselect.min.js"></script>
 	<!-- Sumoselect -->
@@ -103,7 +147,7 @@
 			<!-- Adjust padding to account for the side menu width -->
 			<aside class="console-sidemenu active" id="sidemenu" style="background-color: rgb(12, 52, 61); position: fixed; top: 0; left: 0; width: 250px; height: 100%; transition: transform 0.3s ease;overflow-y: scroll; scrollbar-width: none; -ms-overflow-style: none;"></aside>
 			@RenderBody()
-			@* <aside class="more-opt-panel"></aside> *@
+			@*  <aside class="more-opt-panel"></aside> *@
 		</div>
 		
 
@@ -112,6 +156,34 @@
 	<script src="https://code.highcharts.com/highcharts.js"></script>
 	@await RenderSectionAsync("Scripts", required: false)
 </body>
+<script>
+	function toggleMenu() {
+		debugger;
+		var sidebar = $("#sidebar");
+
+		if (sidebar.hasClass('active')) {
+			// If the sidebar is already active, remove the active class to close it
+			sidebar.removeClass('active');
+		} else {
+			// If the sidebar is inactive, load the content and then add the active class to open it
+			sidebar.load('/includes/sidebar.html', function (responseTxt, statusTxt, xhr) {
+				if (statusTxt == "success") {
+					// Open the sidebar
+					sidebar.addClass('active');
+				}
+			});
+		}
+	}
+
+	// Optional: Close the sidebar on clicking outside (if you want this behavior)
+	$(document).mouseup(function (e) {
+		var container = $("#sidebar");
+		var button = $("a[href='javascript:void(0);']");
+		if (!container.is(e.target) && container.has(e.target).length === 0 && !button.is(e.target) && button.has(e.target).length === 0) {
+			container.removeClass('active');
+		}
+	});
+</script>
 <script>
 	function toggleSideMenu() {
 		var sidemenu = document.getElementById('sidemenu');
