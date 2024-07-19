@@ -3,776 +3,145 @@
     Layout = "";
     ViewData["Title"] = "SiteDashboard";
 }
-
-@* <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
-<script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
-<script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
-
-<div class="content-area">
-    <div id="toparea" class="style4"></div>
-    <div>
-        <label for="chartType">Chart Type:</label>
-        <select id="chartType">
-            <option value="LineSeries">Line</option>
-            <option value="ColumnSeries">Column</option>
-            <option value="StepLineSeries">Step Line</option>
-            <option value="SplineSeries">Spline</option>
-        </select>
-        <label for="seriesSelect">Select Series:</label>
-        <select id="seriesSelect" multiple>
-            <option value="Current" selected>Current</option>
-            <option value="DGCurrent" selected>DGCurrent</option>
-            <option value="Vo" selected>Vo</option>
-        </select>
-    </div>
-    <div id="chartdiv" style="width: 100%; height: 500px;"></div>
-</div>
-
-<script>
-    // Parse the JSON data
-    var data = JSON.parse(JSON.stringify([
-        {
-            "date": "2023-01-01",
-            "Current": 100,
-            "DGCurrent": 200,
-            "Vo": 150
-        },
-        {
-            "date": "2023-01-02",
-            "Current": 120,
-            "DGCurrent": 210,
-            "Vo": 160
-        },
-        {
-            "date": "2023-01-03",
-            "Current": 130,
-            "DGCurrent": 220,
-            "Vo": 170
-        },
-        {
-            "date": "2023-01-04",
-            "Current": 140,
-            "DGCurrent": 230,
-            "Vo": 180
-        },
-        {
-            "date": "2023-01-05",
-            "Current": 150,
-            "DGCurrent": 240,
-            "Vo": 190
-        }
-    ]));
-
-    // Create chart instance
-    var root = am5.Root.new("chartdiv");
-    var chart = root.container.children.push(am5xy.XYChart.new(root, {}));
-
-    // Create X-axis
-    var xAxis = chart.xAxes.push(am5xy.DateAxis.new(root, {
-        baseInterval: { timeUnit: "day", count: 1 },
-        renderer: am5xy.AxisRendererX.new(root, {})
-    }));
-
-    // Create Y-axis
-    var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
-        renderer: am5xy.AxisRendererY.new(root, {})
-    }));
-
-    // Function to create series
-    function createSeries(name, type) {
-        var series = chart.series.push(am5xy[type].new(root, {
-            name: name,
-            xAxis: xAxis,
-            yAxis: yAxis,
-            valueYField: name,
-            valueXField: "date",
-            tooltip: am5.Tooltip.new(root, {
-                labelText: "{name}: {valueY}"
-            })
-        }));
-        series.data.setAll(data.map(item => {
-            return { date: new Date(item.date).getTime(), [name]: item[name] };
-        }));
-        return series;
-    }
-
-    // Initialize series
-    var seriesArray = ["Current", "DGCurrent", "Vo"];
-    var seriesObjects = {};
-
-    seriesArray.forEach(series => {
-        seriesObjects[series] = createSeries(series, "LineSeries");
-    });
-
-    // Update chart when options are changed
-    document.getElementById('chartType').addEventListener('change', function () {
-        var type = this.value;
-        seriesArray.forEach(series => {
-            chart.series.removeIndex(chart.series.indexOf(seriesObjects[series]));
-            seriesObjects[series] = createSeries(series, type);
-        });
-    });
-
-    document.getElementById('seriesSelect').addEventListener('change', function () {
-        var selectedOptions = Array.from(this.selectedOptions).map(option => option.value);
-        seriesArray.forEach(series => {
-            if (selectedOptions.includes(series)) {
-                if (!seriesObjects[series]) {
-                    seriesObjects[series] = createSeries(series, "LineSeries");
-                }
-            } else {
-                chart.series.removeIndex(chart.series.indexOf(seriesObjects[series]));
-                delete seriesObjects[series];
-            }
-        });
-    });
-</script> *@
-
-@* <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AmCharts 5 Chart Example with Bootstrap</title>
-
-    <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- AmCharts JS -->
-    <script src="https://cdn.amcharts.com/lib/5/core.js"></script>
-    <script src="https://cdn.amcharts.com/lib/5/charts.js"></script>
-    <script src="https://cdn.amcharts.com/lib/5/themes/animated.js"></script>
-</head>
-<body>
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-md-8">
-                <div id="chartDiv" style="height: 500px;"></div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Chart Options</h5>
-                        <div class="form-group">
-                            <label for="chartTypeSelect">Select Chart Type:</label>
-                            <select id="chartTypeSelect" class="form-control" onchange="changeChartType()">
-                                <option value="ColumnSeries">Column</option>
-                                <option value="BarSeries">Bar</option>
-                                <option value="LineSeries">Line</option>
-                                <option value="AreaSeries">Area</option>
-                                <option value="PieSeries">Pie</option>
-                                <option value="XYCursor">XY Scatter</option>
-                                <option value="CandlestickSeries">Candlestick</option>
-                                <option value="RadarSeries">Radar</option>
-                                <option value="SankeyDiagram">Sankey</option>
-                                <option value="WordCloud">Word Cloud</option>
-                            </select>
-                        </div>
-                        <div class="form-group" id="seriesSelection">
-                            <label>Select series to show:</label><br>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="series1" checked onclick="toggleSeries('series1')">
-                                <label class="form-check-label" for="series1">Series 1</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="series2" checked onclick="toggleSeries('series2')">
-                                <label class="form-check-label" for="series2">Series 2</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="series3" checked onclick="toggleSeries('series3')">
-                                <label class="form-check-label" for="series3">Series 3</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Bootstrap JS -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-    <script>
-        let chart = am5core.create("chartDiv", am5charts.XYChart);
-        let series1, series2, series3;
-
-        // Initialize the chart with default series
-        initChart("ColumnSeries");
-
-        function initChart(chartType) {
-            chart.disposeChildren(); // Clear existing series
-
-            // Create series based on chart type
-            switch (chartType) {
-                case "ColumnSeries":
-                    series1 = chart.series.push(new am5charts.ColumnSeries());
-                    series2 = chart.series.push(new am5charts.ColumnSeries());
-                    series3 = chart.series.push(new am5charts.ColumnSeries());
-                    break;
-                case "BarSeries":
-                    series1 = chart.series.push(new am5charts.BarSeries());
-                    series2 = chart.series.push(new am5charts.BarSeries());
-                    series3 = chart.series.push(new am5charts.BarSeries());
-                    break;
-                case "LineSeries":
-                    series1 = chart.series.push(new am5charts.LineSeries());
-                    series2 = chart.series.push(new am5charts.LineSeries());
-                    series3 = chart.series.push(new am5charts.LineSeries());
-                    break;
-                case "AreaSeries":
-                    series1 = chart.series.push(new am5charts.LineSeries());
-                    series2 = chart.series.push(new am5charts.LineSeries());
-                    series3 = chart.series.push(new am5charts.LineSeries());
-                    break;
-                case "PieSeries":
-                    series1 = chart.series.push(new am5charts.PieSeries());
-                    series2 = chart.series.push(new am5charts.PieSeries());
-                    series3 = chart.series.push(new am5charts.PieSeries());
-                    break;
-                case "XYCursor":
-                    series1 = chart.series.push(new am5charts.LineSeries());
-                    series2 = chart.series.push(new am5charts.LineSeries());
-                    series3 = chart.series.push(new am5charts.LineSeries());
-                    break;
-                case "CandlestickSeries":
-                    series1 = chart.series.push(new am5charts.CandlestickSeries());
-                    break;
-                case "RadarSeries":
-                    series1 = chart.series.push(new am5charts.RadarSeries());
-                    break;
-                case "SankeyDiagram":
-                    series1 = chart.series.push(new am5charts.SankeyDiagram());
-                    break;
-                case "WordCloud":
-                    series1 = chart.series.push(new am5charts.WordCloud());
-                    break;
-                default:
-                    series1 = chart.series.push(new am5charts.ColumnSeries());
-                    series2 = chart.series.push(new am5charts.ColumnSeries());
-                    series3 = chart.series.push(new am5charts.ColumnSeries());
-                    break;
-            }
-
-            // Configure series
-            series1.name = "Series 1";
-            series2.name = "Series 2";
-            series3.name = "Series 3";
-            series1.data = generateChartData();
-            series2.data = generateChartData();
-            series3.data = generateChartData();
-        }
-
-        function changeChartType() {
-            let chartType = document.getElementById("chartTypeSelect").value;
-            initChart(chartType);
-        }
-
-        function toggleSeries(seriesId) {
-            let series = chart.series.values.find(s => s.name === seriesId);
-            if (series) {
-                series.hidden = !series.hidden;
-            }
-        }
-
-        function generateChartData() {
-            let data = [];
-            for (let i = 1; i <= 10; i++) {
-                data.push({ category: "Category " + i, value: Math.round(Math.random() * 100) });
-            }
-            return data;
-        }
-    </script>
-</body>
-</html> *@
-@* <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- AmCharts 5 Core and Charts -->
-    <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
-    <script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
-    <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
-    <script src="https://cdn.amcharts.com/lib/5/locales/de_DE.js"></script>
-    <script src="https://cdn.amcharts.com/lib/5/geodata/germanyLow.js"></script>
-    <script src="https://cdn.amcharts.com/lib/5/fonts/notosans-sc.js"></script>
-    <script src="https://cdn.amcharts.com/lib/5/percent.js"></script>
-
-    <!-- jQuery (required by Bootstrap's JavaScript components) -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-
-    <!-- Bootstrap JS -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-    <title>AmCharts 5 Chart Example with Bootstrap</title>
-</head>
-<body>
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-md-8">
-                <div id="chartDiv" style="height: 500px;"></div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Chart Options</h5>
-                        <div class="form-group">
-                            <label for="chartTypeSelect">Select Chart Type:</label>
-                            <select id="chartTypeSelect" class="form-control" onchange="changeChartType()">
-                                <option value="ColumnChart">Column Chart</option>
-                                <option value="BarChart">Bar Chart</option>
-                                <option value="LineChart">Line Chart</option>
-                                <option value="AreaChart">Area Chart</option>
-                                <option value="PieChart">Pie Chart</option>
-                                <option value="Pie3DChart">3D Pie Chart</option>
-                                <option value="XYChart">XY Chart</option>
-                                <option value="CandlestickChart">Candlestick Chart</option>
-                                <option value="RadarChart">Radar Chart</option>
-                                <option value="SankeyDiagram">Sankey Diagram</option>
-                                <option value="WordCloud">Word Cloud</option>
-                            </select>
-                        </div>
-                        <div class="form-group" id="seriesSelection">
-                            <label>Select series to show:</label><br>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="series1" checked onclick="toggleSeries('Series 1')">
-                                <label class="form-check-label" for="series1">Series 1</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="series2" checked onclick="toggleSeries('Series 2')">
-                                <label class="form-check-label" for="series2">Series 2</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="series3" checked onclick="toggleSeries('Series 3')">
-                                <label class="form-check-label" for="series3">Series 3</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        am5.ready(function () {
-            var root = am5.Root.new("chartDiv");
-            root._logo.dispose();
-
-            root.setThemes([
-                am5themes_Animated.new(root)
-            ]);
-
-            var chart;
-
-            function initChart(chartType) {
-                // Check if there's already a chart to remove
-                if (root.container.children.length > 0) {
-                    root.container.children.removeIndex(0); // Remove existing chart
-                }
-
-                switch (chartType) {
-                    case "ColumnChart":
-                        chart = root.container.children.push(am5.charts.ColumnChart.new(root, {
-                            layout: root.verticalLayout
-                        }));
-                        break;
-                    case "BarChart":
-                        chart = root.container.children.push(am5.charts.BarChart.new(root, {
-                            layout: root.verticalLayout
-                        }));
-                        break;
-                    case "LineChart":
-                        chart = root.container.children.push(am5.charts.LineChart.new(root, {
-                            layout: root.verticalLayout
-                        }));
-                        break;
-                    case "AreaChart":
-                        chart = root.container.children.push(am5.charts.LineChart.new(root, {
-                            layout: root.verticalLayout
-                        }));
-                        break;
-                    case "PieChart":
-                        chart = root.container.children.push(am5.charts.PieChart.new(root, {
-                            layout: root.verticalLayout
-                        }));
-                        break;
-                    case "Pie3DChart":
-                        chart = root.container.children.push(am5.charts.PieChart3D.new(root, {
-                            layout: root.verticalLayout
-                        }));
-                        break;
-                    case "XYChart":
-                        chart = root.container.children.push(am5.charts.XYChart.new(root, {
-                            layout: root.verticalLayout
-                        }));
-                        break;
-                    case "CandlestickChart":
-                        chart = root.container.children.push(am5.charts.CandlestickChart.new(root, {
-                            layout: root.verticalLayout
-                        }));
-                        break;
-                    case "RadarChart":
-                        chart = root.container.children.push(am5.charts.RadarChart.new(root, {
-                            layout: root.verticalLayout
-                        }));
-                        break;
-                    case "SankeyDiagram":
-                        chart = root.container.children.push(am5.charts.SankeyDiagram.new(root, {
-                            layout: root.verticalLayout
-                        }));
-                        break;
-                    case "WordCloud":
-                        chart = root.container.children.push(am5.charts.WordCloud.new(root, {
-                            layout: root.verticalLayout
-                        }));
-                        break;
-                    default:
-                        chart = root.container.children.push(am5.charts.PieChart.new(root, { // Default to PieChart
-                            layout: root.verticalLayout
-                        }));
-                        break;
-                }
-
-                // Create series
-                var series1 = chart.series.push(new am5.series.ColumnSeries());
-                var series2 = chart.series.push(new am5.series.ColumnSeries());
-                var series3 = chart.series.push(new am5.series.ColumnSeries());
-
-                // Configure series
-                series1.name = "Series 1";
-                series2.name = "Series 2";
-                series3.name = "Series 3";
-
-                // Set initial data
-                var data = generateChartData();
-                series1.data.setAll(data);
-                series2.data.setAll(data);
-                series3.data.setAll(data);
-
-                chart.appear(1000, 100);
-            }
-
-            function changeChartType() {
-                var chartType = document.getElementById("chartTypeSelect").value;
-                initChart(chartType);
-            }
-
-            function toggleSeries(seriesName) {
-                var series = chart.series.values.find(function (s) {
-                    return s.name === seriesName;
-                });
-                if (series) {
-                    series.hidden = !series.hidden;
-                }
-            }
-
-            function generateChartData() {
-                var data = [];
-                for (var i = 1; i <= 10; i++) {
-                    data.push({ category: "Category " + i, value: Math.round(Math.random() * 100) });
-                }
-                return data;
-            }
-
-            // Initialize with default chart type
-            initChart("PieChart");
-        });
-    </script>
-</body>
-</html>
-
-  *@
-
-@* 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AmCharts Example</title>
-    <!-- Include AmCharts core JavaScript files -->
-    <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
-    <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
-    <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
-    <!-- Include AmCharts CSS for styling -->
-    <link rel="stylesheet" href="https://cdn.amcharts.com/lib/4/themes/animated.css">
-    <!-- Include jQuery (optional, for DOM manipulation) -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-</head>
-<body>
-    <div id="chartDiv" style="width: 100%; height: 400px;"></div>
-    <div>
-        <label for="chartType">Select Chart Type:</label>
-        <select id="chartType">
-            <option value="column">Column Chart</option>
-            <option value="bar">Bar Chart</option>
-            <option value="line">Line Chart</option>
-            <option value="area">Area Chart</option>
-            <option value="pie">Pie Chart</option>
-            <option value="scatter">Scatter Chart</option>
-            <option value="radar">Radar Chart</option>
-            <option value="polar">Polar Chart</option>
-            <option value="funnel">Funnel Chart</option>
-            <option value="gauge">Gauge Chart</option>
-        </select>
-        <label for="series">Select Series:</label>
-        <select id="series">
-            <option value="series1">Series 1</option>
-            <option value="series2">Series 2</option>
-        </select>
-    </div>
-
-    <script>
-        // JavaScript code for creating and updating AmCharts
-        $(document).ready(function () {
-            // Initialize variables for chart and series
-            var chart = null;
-            var series = null;
-
-            // Function to create chart instance
-            function createChart(chartType) {
-                // Clear any existing chart instance and reset series
-                if (chart) {
-                    chart.dispose();
-                    chart = null;
-                    series = null;
-                }
-
-                // Create new chart instance
-                chart = am4core.create("chartDiv", am4charts.XYChart);
-
-                // Add data
-                chart.data = [{
-                    category: "Category 1",
-                    value1: 10,
-                    value2: 15
-                }, {
-                    category: "Category 2",
-                    value1: 20,
-                    value2: 25
-                }, {
-                    category: "Category 3",
-                    value1: 15,
-                    value2: 10
-                }];
-
-                // Create axes
-                var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
-                categoryAxis.dataFields.category = "category";
-                categoryAxis.renderer.grid.template.location = 0;
-
-                var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-
-                // Create series based on chart type
-                if (chartType === "column") {
-                    series = chart.series.push(new am4charts.ColumnSeries());
-                } else if (chartType === "bar") {
-                    series = chart.series.push(new am4charts.ColumnSeries());
-                    series.columns.template.strokeOpacity = 0;
-                    series.columns.template.fillOpacity = 0.8;
-                    series.columns.template.adapter.add("fill", function (fill, target) {
-                        return chart.colors.getIndex(target.dataItem.index);
-                    });
-                } else if (chartType === "line") {
-                    series = chart.series.push(new am4charts.LineSeries());
-                } else if (chartType === "area") {
-                    series = chart.series.push(new am4charts.LineSeries());
-                    series.fillOpacity = 0.5;
-                    series.strokeWidth = 2;
-                    series.fill = am4core.color("#74B266");
-                } else if (chartType === "pie") {
-                    series = chart.series.push(new am4charts.PieSeries());
-                } else if (chartType === "scatter") {
-                    series = chart.series.push(new am4charts.ScatterSeries());
-                } else if (chartType === "radar") {
-                    series = chart.series.push(new am4charts.RadarSeries());
-                } else if (chartType === "polar") {
-                    series = chart.series.push(new am4charts.RadarSeries());
-                    chart.yAxes.clear();
-                    chart.xAxes.clear();
-                } else if (chartType === "funnel") {
-                    series = chart.series.push(new am4charts.FunnelSeries());
-                } else if (chartType === "gauge") {
-                    series = chart.series.push(new am4charts.GaugeSeries());
-                    series.dataFields.value = "value1";
-                    chart.yAxes.clear();
-                    chart.xAxes.clear();
-                }
-
-                // Configure series dataFields based on selected series
-                var selectedSeries = $("#series").val();
-                series.dataFields.valueY = selectedSeries === "series1" ? "value1" : "value2";
-
-                // Add cursor
-                chart.cursor = new am4charts.XYCursor();
-
-                // Add legend
-                chart.legend = new am4charts.Legend();
-            }
-
-            // Initial chart creation
-            createChart($("#chartType").val());
-
-            // Update chart on chart type change
-            $("#chartType").change(function () {
-                var selectedChartType = $(this).val();
-                createChart(selectedChartType);
-            });
-
-            // Update series on series change
-            $("#series").change(function () {
-                var selectedSeries = $(this).val();
-                if (series) {
-                    series.dataFields.valueY = selectedSeries === "series1" ? "value1" : "value2";
-                }
-            });
-        });
-    </script>
-</body>
-</html> *@
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@{
-    Layout = "";
-    ViewData["Title"] = "SiteDashboard";
-}
-
-<!DOCTYPE html>
-<html>
-<head>
+    <title>Dashboard</title>
     <style>
-        .chart-container {
-            width: 48%;
-            height: 400px;
-            display: inline-block;
-            margin: 1%;
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f4f4f4;
+            margin: 0;
+            height: 100vh;
         }
 
-        .chart-options {
-            margin: 20px 0;
+        .dashboard {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 90%;
+            max-width: 1400px;
+            flex-wrap: wrap;
+        }
+
+        .widget {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            padding: 20px;
+            flex: 1 1 calc(30% - 40px);
+            box-sizing: border-box;
+            min-height: 150px;
+            text-align: center;
+        }
+
+            .widget h3 {
+                margin: 0 0 10px;
+                font-size: 1.2em;
+            }
+
+            .widget .value {
+                font-size: 2em;
+                color: #333;
+            }
+
+            .widget .details {
+                color: #888;
+            }
+
+        .chart {
+            width: 100%;
+            height: 150px;
         }
     </style>
 </head>
 <body>
-
-    <div class="chart-options">
-        <label for="chartType">Select Chart Type:</label>
-        <select id="chartType">
-            <option value="ColumnSeries">Column Chart</option>
-            <option value="LineSeries">Line Chart</option>
-        </select>
+    <div class="dashboard">
+        <div class="widget">
+            <h3>Site Run On</h3>
+            <div class="value">EB</div>
+            <div class="details">EB Availability: 94%</div>
+            <div class="details">EB Downtime: 01:31 Hrs</div>
+            <div class="details">DG Uptime: 00:00 Hrs</div>
+            <div class="details">DC: 54.0 Volt</div>
+        </div>
+        <div class="widget">
+            <h3>Fuel Status</h3>
+            <div id="fuelChart" class="chart"></div>
+        </div>
+        <div class="widget">
+            <h3>Cabin Temp</h3>
+            <div class="value">14.9 °C</div>
+            <div class="details">Avg: 17.31 °C</div>
+        </div>
+        <div class="widget">
+            <h3>Grill Temp</h3>
+            <div class="value">NA</div>
+            <div class="details">Avg: NA</div>
+        </div>
+        <div class="widget">
+            <h3>Ambient Temp</h3>
+            <div class="value">11.3 °C</div>
+            <div class="details">Avg: 13.07 °C</div>
+        </div>
     </div>
-
-    <div class="chart-container" id="chart"></div>
-
-    <div class="chart-options" id="seriesSelector">
-        <label>Select Series:</label>
-    </div>
-
     <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
     <script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
     <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
     <script>
         am5.ready(function () {
-            const chartContainer = document.getElementById('chart');
-            const chartTypeSelect = document.getElementById('chartType');
-            const seriesSelector = document.getElementById('seriesSelector');
-            let root, currentChart, series;
+            // Create root element
+            var root = am5.Root.new("fuelChart");
 
-            function createRandomData() {
-                return Array.from({ length: 10 }, (_, i) => ({
-                    category: `Category ${i + 1}`,
-                    value: Math.round(Math.random() * 100)
-                }));
-            }
+            // Set themes
+            root.setThemes([
+                am5themes_Animated.new(root)
+            ]);
 
-            function createChart(type) {
-                if (root) {
-                    root.dispose();
-                }
-                root = am5.Root.new("chart");
+            // Create chart
+            var chart = root.container.children.push(am5xy.XYChart.new(root, {
+                panX: false,
+                panY: false,
+                wheelX: "none",
+                wheelY: "none"
+            }));
 
-                const chart = root.container.children.push(am5xy.XYChart.new(root, {
-                    layout: root.verticalLayout
-                }));
+            var data = [{
+                category: "Available",
+                value: 0
+            }, {
+                category: "Capacity",
+                value: 250
+            }, {
+                category: "Threshold",
+                value: 80
+            }];
 
-                const xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(root, {
-                    categoryField: "category",
-                    renderer: am5xy.AxisRendererX.new(root, {})
-                }));
+            var xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(root, {
+                categoryField: "category"
+            }));
 
-                const yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
-                    renderer: am5xy.AxisRendererY.new(root, {})
-                }));
+            xAxis.data.setAll(data);
 
-                switch (type) {
-                    case 'ColumnSeries':
-                        series = chart.series.push(am5xy.ColumnSeries.new(root, {
-                            xAxis: xAxis,
-                            yAxis: yAxis,
-                            valueYField: "value",
-                            categoryXField: "category"
-                        }));
-                        break;
+            var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {}));
 
-                    case 'LineSeries':
-                        series = chart.series.push(am5xy.LineSeries.new(root, {
-                            xAxis: xAxis,
-                            yAxis: yAxis,
-                            valueYField: "value",
-                            categoryXField: "category"
-                        }));
-                        break;
-                }
+            var series = chart.series.push(am5xy.ColumnSeries.new(root, {
+                name: "Series",
+                xAxis: xAxis,
+                yAxis: yAxis,
+                valueYField: "value",
+                categoryXField: "category"
+            }));
 
-                const data = createRandomData();
-                series.data.setAll(data);
-                xAxis.data.setAll(data);
-
-                currentChart = chart;
-
-                // Add checkboxes for series selection
-                seriesSelector.innerHTML = '';
-                seriesSelector.appendChild(createSeriesCheckbox("ColumnSeries", "Column Series", type === 'ColumnSeries'));
-                seriesSelector.appendChild(createSeriesCheckbox("LineSeries", "Line Series", type === 'LineSeries'));
-            }
-
-            function createSeriesCheckbox(seriesType, label, checked) {
-                const checkbox = document.createElement('input');
-                checkbox.type = 'checkbox';
-                checkbox.id = seriesType;
-                checkbox.className = 'series-checkbox';
-                checkbox.checked = checked;
-
-                const checkboxLabel = document.createElement('label');
-                checkboxLabel.htmlFor = seriesType;
-                checkboxLabel.textContent = label;
-
-                checkbox.addEventListener('change', function () {
-                    series.hidden = !this.checked;
-                });
-
-                const container = document.createElement('div');
-                container.appendChild(checkbox);
-                container.appendChild(checkboxLabel);
-
-                return container;
-            }
-
-            function updateChart() {
-                const selectedType = chartTypeSelect.value;
-                createChart(selectedType);
-            }
-
-            chartTypeSelect.addEventListener('change', updateChart);
-
-            // Initialize with the default chart type
-            updateChart();
+            series.data.setAll(data);
         });
     </script>
-
 </body>
 </html>
+

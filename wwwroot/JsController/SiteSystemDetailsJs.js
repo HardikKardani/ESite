@@ -348,7 +348,7 @@ function FillSummaryGreenchartdiv(jsonData) {
         am5.ready(function () {
             // Create root element
             var root = am5.Root.new("SummaryGreenchartdiv");
-
+            root._logo.dispose();
             // Set themes
             root.setThemes([
                 am5themes_Animated.new(root)
@@ -433,7 +433,7 @@ function FillSummaryRedchartdiv(jsonData) {
         am5.ready(function () {
             // Create root element
             var root = am5.Root.new("SummaryRedchartdiv");
-
+            root._logo.dispose();
             // Set themes
             root.setThemes([
                 am5themes_Animated.new(root)
@@ -569,6 +569,44 @@ $(window).on("load", function () {
                     $("#Batterytables_wrapper .dt-buttons").addClass("mr-2");
                     $("#Batterytables_wrapper .dt-buttons").appendTo(_container);
                 }
+            });
+            debugger;
+            var columns = data.Table9;
+            var data = data.Table4;
+            // Initialize the DataTable with dynamic columns and data
+            alarmsstables = $('#alarmsstables').DataTable({
+                "dom": '<"top"B<"dt-filters"f>>rFt<"dt-bottom"<"dt-information"li><"dt-pagination"p>>',
+                "sorting": false,
+                data: data,
+                columns: columns,
+                "fixedHeader": true,
+                "columnDefs": [{
+                    "targets": 'no-sort',
+                    "orderable": false,
+                }],
+                "responsive": true,
+                "colReorder": {
+                    realtime: false
+                },
+                "buttons": [
+                    {
+                        extend: 'excelHtml5',
+                        text: 'Export'
+                    }
+                ],
+                "stateSave": false,
+                initComplete: function () {
+                    // Move Search To Panel Header
+                    let _container = $(this).parents('.card').find('.get_dt_search')
+                    let _bottom_container = $(this).parents('.card').find('.dt-bottom-container')
+
+                    $("#alarmsstables_wrapper .dataTables_filter input").appendTo(_container);
+                    $("#alarmsstables_wrapper  .dt-filters").css("display", "none");
+                    $(_container).find("input").attr('placeholder', 'Search From Table');
+                    $("#alarmsstables_wrapper  .dt-bottom").appendTo(_bottom_container);
+
+                }
+
             });
         }
     });

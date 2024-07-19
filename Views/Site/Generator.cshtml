@@ -4,276 +4,536 @@
     ViewData["Title"] = "SiteDashboard";
 }
 <!-- AM Charts Start -->
-		<script src="https://www.amcharts.com/lib/4/core.js"></script>
-		<script src="https://www.amcharts.com/lib/4/charts.js"></script>
-		<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
-		<!-- AM Charts End -->
-
-<style>
-	.col .card {
-		display: flex;
-		flex-wrap: wrap;
-	}
-
-	.col .card {
-		width: calc(50% - 10px);
-		/* Adjust the width based on your preference */
-		margin: 1px;
-		/* Add some margin between images */
-		height: 30px;
-		width: 30px;
-		/* Maintain aspect ratio */
-		object-fit: cover;
-		text-align: center;
-		/* Ensure images cover the entire space */
-	}
-
-	#chartdiv {
-		width: 100%;
-		height: 500px;
-		max-width: 100%
-	}
-
-	#BCCCchartdiv {
-		width: 700px;
-		height: 300px;
-		max-width: 100%
-	}
-
-	#BCCchartdiv {
-		width: 700px;
-		height: 300px;
-		max-width: 100%
-	}
-
-	#BCchartdiv {
-		width: 700px;
-		height: 300px;
-		max-width: 100%
-	}
-
-	.card {
-		border: none;
-	}
-</style>
-<div class="content-area">
-	<div id="toparea" class="style4"></div>
-	<div class="card p-3">
-		<div class="row">
-			<div class="col-3">
-				<div class="form-group">
-					<h6>Select Site</h6>
-					<select class="form-control">
-						<option value="Site1">Site 1</option>
-						<option value="Site1">Site 2</option>
-					</select>
-				</div>
-			</div>
-			<div class="col-3">
-				<div class="form-group">
-					<h6>Select Chart Type:</h6>
-					<select class="form-control" id="chartTypeDropdown">
-						<option value="line">Line Chart</option>
-						<option value="column">Column Chart</option>
-					</select>
-				</div>
-			</div>
-			<div class="col-3">
-				<div class="form-group">
-					<h6>From Date:</h6>
-					<div class="input-group">
-						<div class="input-group-append">
-							<div class="input-group-text"><i class="far fa-calendar"></i></div>
-						</div>
-						<input type="text" class="form-control datepicker-here"
-							   data-language='en' data-date-format="MM dd,yyyy" placeholder="From">
-					</div>
-				</div>
-			</div>
-			<div class="col-3">
-				<div class="form-group">
-					<h6>To Date:</h6>
-					<div class="input-group">
-						<div class="input-group-append">
-							<div class="input-group-text"><i class="far fa-calendar"></i></div>
-						</div>
-						<input type="text" class="form-control datepicker-here"
-							   data-language='en' data-date-format="MM dd,yyyy" placeholder="To">
-					</div>
-				</div>
-			</div>
-
-
-			<div class="col-8">
-			</div>
-			<div class="col-2 d-flex justify-content-end">
-				<div class="form-group">
-					<button class="btn btn-accent">Show</button>
-				</div>
-			</div>
-			<div class="col-2 d-flex justify-content-start">
-				<div class="form-group">
-					<button class="btn btn-accent">Download</button>
-				</div>
-			</div>
-			<div class="col-11">
-				<h5>DG Details</h5><br />
-			</div>
-			<div class="col-1 text-right">
-				<a href="javascript:void(0);" title="" data-rel="tooltip" data-placement="bottom" title="Parameter Status" onclick="toggleMenu()">
-					<i class="icon dripicons-align-left"></i>
-				</a>
-			</div>
-			<div id="sidebar" class="sidebar-container"></div>
-
-			<div class="col-12">
-				<div class="mytab theme1">
-					<ul class="nav nav-tabs">
-						<li>
-							<a class="nav-link active" data-toggle="tab" data-target="#Summary">
-								Summary
-							</a>
-						</li>
-						<li> <a class="nav-link" data-toggle="tab" data-target="#RawData">Raw Data</a> </li>
-
-					</ul><!-- Selectors -->
-
-
-					<div class="card-body p-0">
-								<div class="tab-content p-0 pt-1">
-						<div class="tab-pane  show active" id="Summary">
-							<div class="card">
-									<div class="grid-stack gs-area">
-										
-										<div class="grid-stack-item" data-gs-x="0" data-gs-y="0" data-gs-width="12"
-											 data-gs-height="20" data-gs-min-height="20" data-gs-min-width="12">
-											<div class="console-panel grid-stack-item-content">
-												<div class="console-panel-header">
-													<div class="cph-left">
-														<h5>Chart</h5>
-													</div>
-													<div class="cph-right">
-														<ul class="top-header-btns">
-
-															<li>
-																<a class="collapse-panel" href="#" title="Collapse/Uncollapse Panel"
-																   data-rel="tooltip"> <i class="icon dripicons-chevron-up"></i></a>
-															</li>
-															<li class="dropdown">
-																<a href="#" data-toggle="dropdown" title="Panel Options" data-rel="tooltip">
-																	<i class="icon dripicons-dots-3"></i>
-																</a>
-																<div class="dropdown-menu  dropdown-menu-right theme-media">
-																	<div class="dropdown-menu-header">
-																		<div class="dmh-inner">
-																			<h4>Panel Options</h4>
-																		</div>
-																	</div>
-																	<a class="dropdown-item cp" href="#" title="">
-																		<span class="color-fill-icon" style="background-color:#fff;"></span>
-																		Header Background Color
-																	</a>
-																	<a class="dropdown-item header-fontcolor" href="#" title="">
-																		<span class="color-fill-icon" style="background-color:#333"></span>
-																		Header Font Color Dark/Light
-																	</a>
-																</div>
-															</li>
-															<li>
-																<a class="removeWidget" href="#" title="Remove Panel" data-rel="tooltip">
-																	<i class="icon dripicons-cross"></i>
-																</a>
-															</li>
-														</ul>
-													</div>
-												</div><!-- Panel Header -->
-												<div class="card-body align-center">
-
-													<div class="chart-container">
-														<div id="chartdiv"></div>
-													</div>
-
-												</div>
-											</div>
-										</div>
-										
-										
-									</div>
-
-								</div>
-
-
-							</div>
-						<div class="tab-pane  fade" id="RawData">
-							<div class="row mb-3">
-								<div class="col-lg-8 col-md-12">
-									<div class="row">
-
-										<div class="col">
-											<div class="input-group">
-												<div class="input-group-append">
-													<div class="input-group-text"><i class="far fa-calendar"></i></div>
-												</div>
-												<input type="text" class="form-control datepicker-here"
-													   data-language='en' data-date-format="MM dd,yyyy" placeholder="From">
-											</div>
-										</div>
-										<div class="col">
-											<div class="input-group">
-												<div class="input-group-append">
-													<div class="input-group-text"><i class="far fa-calendar"></i></div>
-												</div>
-												<input type="text" class="form-control datepicker-here"
-													   data-language='en' data-date-format="MM dd,yyyy" placeholder="To">
-											</div>
-										</div>
-
-									</div>
-								</div>
-								<div class="col-lg-auto">
-									<button class="btn btn-accent ">Search</button>
-								</div>
-								<div class="col">
-									<button class="btn btn-success">Excel</button>
-
-
-
-								</div>
-
-							</div>
-							<div class="card">
-								<div class="card-body">
-
-									<div class="table-container">
-										<table class="table table-striped console-table table-bordered table-hover mb-0"
-											   id="DGtables">
-											<thead class="sorticon-pos">
-												
-											</thead>
-											<tbody></tbody>
-										</table>
-									</div>
-								</div>
-								<div class="console-footer">
-					<div class="dt-bottom-container"></div>
-				</div>
-							</div>
-						</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-
-	</div><!-- Content Area -->
-
-	<aside class="more-opt-panel"></aside>
-</div><!-- Theme Content -->
-<script src="https://cdn.amcharts.com/lib/5/index.js"></script>
-<script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
-<script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
-<script src="/JsController/SiteGeneratorJs.js" asp-append-version="true"></script>
 <script src="https://www.amcharts.com/lib/4/core.js"></script>
 <script src="https://www.amcharts.com/lib/4/charts.js"></script>
 <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+<!-- AM Charts End -->
+
+<style>
+    .col .card {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .col .card {
+        width: calc(50% - 10px);
+        /* Adjust the width based on your preference */
+        margin: 1px;
+        /* Add some margin between images */
+        height: 30px;
+        width: 30px;
+        /* Maintain aspect ratio */
+        object-fit: cover;
+        text-align: center;
+        /* Ensure images cover the entire space */
+    }
+
+    #chartdiv {
+        width: 100%;
+        height: 500px;
+        max-width: 100%
+    }
+
+    #BCCCchartdiv {
+        width: 700px;
+        height: 300px;
+        max-width: 100%
+    }
+
+    #BCCchartdiv {
+        width: 700px;
+        height: 300px;
+        max-width: 100%
+    }
+
+    #BCchartdiv {
+        width: 700px;
+        height: 300px;
+        max-width: 100%
+    }
+
+    .card {
+        border: none;
+    }
+</style>
+<div class="content-area">
+    <div id="toparea" class="style4"></div>
+    <div class="col-12 card mb-2">
+
+        <div class="card-body p-1" style="background-color: rgb(12, 52, 61);color:white;">
+
+            <div class="row">
+                <div class="col-lg-2 col-md-12">
+                    <label style="color:white;">Site ID</label> :<span id="siteID" class="text-warning"></span><br />
+                    <label style="color:white;">No of DG</label> :<span id="noOfDg" class="text-warning"> </span>
+                </div>
+                <div class="col-lg-2 col-md-12">
+                    <label style="color:white;">Site Name</label> :<span id="siteName" class="text-warning"></span><br />
+                    <label style="color:white;">Type Of cooling</label> :<span id="typeOfCooling" class="text-warning"></span>
+                </div>
+                <div class="col-lg-2 col-md-12">
+                    <label style="color:white;">Region</label> :<span id="region" class="text-warning"></span><br />
+                    <label style="color:white;">Site Running On</label> :<span class="text-success" id="siteRunningOn"></span>
+                </div>
+                <div class="col-lg-2 col-md-12">
+                    <label style="color:white;">State</label> :<span id="state" class="text-warning"></span><br />
+                    <label style="color:white;">No of Tenant :</label>: <span " id="noOfTenant" class="text-warning"></span>
+
+                </div>
+                <div class="col-lg-2 col-md-12">
+                    <label style="color:white;">Country</label> :<span id="country" class="text-warning"></span><br />
+                    <label style="color:white;">As on</label>:<span id="searchOn" class="text-warning">
+                    </span>
+                </div>
+                <div class="col-lg-2 col-md-12">
+                    <label style="color:white;">Site Type</label> :<span id="siteType" class="text-warning"></span><br />
+                    <a class="" href="/Site/Map" title="" data-rel="tooltip" data-original-title="Site Location"><i class="icon dripicons-location"></i></a>
+                    <a class="" href="/Site/LiveData" data-toggle="modal" data-target=".siteImages" title="" data-rel="tooltip" data-original-title="Site Image"><i class="fa fa-building"></i> </a>
+                    <a class="" href="#" data-toggle="modal" data-target=".siteImages" title="" data-rel="tooltip" data-original-title="GSM Signal Strength at Site">
+                        <i class="fa fa-signal"></i>
+
+                    </a>
+                    <a class="" href="#" data-toggle="modal" data-target=".siteImages" title="" data-rel="tooltip" data-original-title="RMS Battery Status"><i class="fa fa-battery-full"></i> </a>
+                </div>
+
+            </div>
+
+
+
+        </div>
+    </div><!-- Console Panel -->
+
+    <div class="card p-3">
+        <div class="row">
+            <div class="col-12">
+                <div class="mytab theme1">
+                    <ul class="nav nav-tabs">
+                        <li>
+                            <a class="nav-link active" data-toggle="tab" data-target="#Summary">
+                                Summary
+                            </a>
+                        </li>
+                        <li> <a class="nav-link" data-toggle="tab" data-target="#RawData">Raw Data</a> </li>
+                        <li> <a class="nav-link" data-toggle="tab" data-target="#KPI">KPI</a> </li>
+
+                    </ul><!-- Selectors -->
+
+
+                    <div class="card-body p-0">
+                        <div class="tab-content p-0 pt-1">
+                            <div class="tab-pane  show active" id="Summary">
+                                <div class="card">
+                                    <div class="card-body  p-0">
+
+                                        <div class="grid-stack gs-area">
+                                            <div class="grid-stack-item" data-gs-x="0" data-gs-y="0" data-gs-width="3"
+                                                 data-gs-height="24" data-gs-min-height="24" data-gs-min-width="3">
+                                                <div class="console-panel grid-stack-item-content">
+                                                    <div class="console-panel-header">
+                                                        <div class="cph-left">
+                                                            <h5>Parameter Status</h5>
+                                                        </div>
+                                                        <div class="cph-right">
+                                                            <ul class="top-header-btns">
+
+                                                                <li>
+                                                                    <a class="collapse-panel" href="#" title="Collapse/Uncollapse Panel"
+                                                                       data-rel="tooltip"> <i class="icon dripicons-chevron-up"></i></a>
+                                                                </li>
+                                                                <li class="dropdown">
+                                                                    <a href="#" data-toggle="dropdown" title="Panel Options" data-rel="tooltip">
+                                                                        <i class="icon dripicons-dots-3"></i>
+                                                                    </a>
+                                                                    <div class="dropdown-menu  dropdown-menu-right theme-media">
+                                                                        <div class="dropdown-menu-header">
+                                                                            <div class="dmh-inner">
+                                                                                <h4>Panel Options</h4>
+                                                                            </div>
+                                                                        </div>
+                                                                        <a class="dropdown-item cp" href="#" title="">
+                                                                            <span class="color-fill-icon" style="background-color:#fff;"></span>
+                                                                            Header Background Color
+                                                                        </a>
+                                                                        <a class="dropdown-item header-fontcolor" href="#" title="">
+                                                                            <span class="color-fill-icon" style="background-color:#333"></span>
+                                                                            Header Font Color Dark/Light
+                                                                        </a>
+                                                                    </div>
+                                                                </li>
+                                                                <li>
+                                                                    <a class="removeWidget" href="#" title="Remove Panel" data-rel="tooltip">
+                                                                        <i class="icon dripicons-cross"></i>
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div><!-- Panel Header -->
+
+                                                    <div class="console-panel-body align-center">
+                                                        <label>Battery Type </label>:<span class="text-warning" id="BatteryType">Lithum</span><br />
+                                                        <label>No of Battery </label>:<span class="text-warning" id="NoofBattery">22 </span><br />
+                                                        <label>Current </label>:<span class="text-warning" id="Current"> -61.00 A</span><br />
+                                                        <label>Voltage </label>:<span class="text-warning" id="Voltage ">49.49 V</span><br />
+                                                        <label>Avg Battery Tempature </label>:<span class="text-warning" id="ABT">30.55 C</span><br />
+                                                        <label>Avg Enviroment Tempature</label>:<span class="text-warning" id="AET">30.55 C</span><br />
+                                                        <label>Data Received On</label>:<span class="text-warning" id="DRO"></span><br />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="grid-stack-item" data-gs-x="3" data-gs-y="0" data-gs-width="6"
+                                                 data-gs-height="18" data-gs-min-height="18" data-gs-min-width="6">
+                                                <div class="console-panel grid-stack-item-content">
+                                                    <div class="console-panel-header">
+                                                        <div class="cph-left">
+                                                            <h5>Voltage (V)</h5>
+                                                        </div>
+                                                        <div class="cph-right">
+                                                            <ul class="top-header-btns">
+
+                                                                <li>
+                                                                    <a class="collapse-panel" href="#" title="Collapse/Uncollapse Panel"
+                                                                       data-rel="tooltip"> <i class="icon dripicons-chevron-up"></i></a>
+                                                                </li>
+                                                                <li class="dropdown">
+                                                                    <a href="#" data-toggle="dropdown" title="Panel Options" data-rel="tooltip">
+                                                                        <i class="icon dripicons-dots-3"></i>
+                                                                    </a>
+                                                                    <div class="dropdown-menu  dropdown-menu-right theme-media">
+                                                                        <div class="dropdown-menu-header">
+                                                                            <div class="dmh-inner">
+                                                                                <h4>Panel Options</h4>
+                                                                            </div>
+                                                                        </div>
+                                                                        <a class="dropdown-item cp" href="#" title="">
+                                                                            <span class="color-fill-icon" style="background-color:#fff;"></span>
+                                                                            Header Background Color
+                                                                        </a>
+                                                                        <a class="dropdown-item header-fontcolor" href="#" title="">
+                                                                            <span class="color-fill-icon" style="background-color:#333"></span>
+                                                                            Header Font Color Dark/Light
+                                                                        </a>
+                                                                    </div>
+                                                                </li>
+                                                                <li>
+                                                                    <a class="removeWidget" href="#" title="Remove Panel" data-rel="tooltip">
+                                                                        <i class="icon dripicons-cross"></i>
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div><!-- Panel Header -->
+                                                    <div class="card-body align-center">
+                                                        <div class="chart-container">
+                                                            <div id="BCchartdiv" style="width: 100%; height: 450px;"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="grid-stack-item" data-gs-x="9" data-gs-y="0" data-gs-width="3"
+                                                 data-gs-height="12" data-gs-min-height="12" data-gs-min-width="3">
+                                                <div class="console-panel grid-stack-item-content">
+                                                    <div class="console-panel-header">
+                                                        <div class="cph-left m-1">
+                                                            <h5>Up Time</h5>
+                                                        </div>
+                                                    </div><!-- Panel Header -->
+                                                    <div class="card-body align-center">
+                                                        <div class="chart-container">
+                                                            <div id="SummaryGreenchartdiv" style="width: 100%; height: 300px;"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="grid-stack-item" data-gs-x="3" data-gs-y="19" data-gs-width="6" data-gs-height="10" data-gs-min-height="10" data-gs-min-width="6">
+                                                <div class="console-panel grid-stack-item-content">
+                                                    <div class="card-body align-center">
+                                                        <ul class="nav nav-tabs">
+                                                            <li class="nav-item">
+                                                                <a class="nav-link active" data-toggle="tab" href="#Graphical">Graphical</a>
+                                                            </li>
+                                                            <li class="nav-item">
+                                                                <a class="nav-link" data-toggle="tab" href="#Alarms">Alarms</a>
+                                                            </li>
+                                                        </ul>
+
+                                                        <div class="tab-content">
+                                                            <!-- First Tab Content (Graphical) -->
+                                                            <div id="Graphical" class="tab-pane fade show active">
+                                                                <div class="row justify-content-center">
+                                                                    <div class="col-md-4">
+                                                                        <div class="card text-center" style="border-radius: 4px; padding: 5px;">
+                                                                            <div class="card-body p-0" style="color: #333;">
+                                                                                <h6 style="font-size: 10px; margin-bottom: 2px; color: #333; font-weight:bold;">Active Alarms</h6>
+                                                                                <i class="fa-solid fa-bell" style="font-size: 24px; color: yellow;"></i>
+                                                                                <p class="card-text" style="font-size:15px;">5</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <div class="card text-center" style=" border-radius: 4px; padding: 5px;">
+                                                                            <div class="card-body p-0" style="color: #333;">
+                                                                                <h6 style="font-size: 10px; margin-bottom: 2px; color: #333; font-weight:bold;">Inactive Alarms</h6>
+                                                                                <i class="fa fa-bell-slash" aria-hidden="true" style="font-size: 24px; color: red;"></i>
+                                                                                <p class="card-text" style="font-size:15px;">3</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <div class="card text-center" style=" border-radius: 4px; padding: 5px;">
+                                                                            <div class="card-body p-0" style="color: #333;">
+                                                                                <h6 style="font-size: 10px; margin-bottom: 2px; color: #333; font-weight:bold;">Acknowledged</h6>
+                                                                                <i class="fa-solid fa-thumbs-up" style="font-size: 24px; color: green;"></i>
+                                                                                <p class="card-text" style="font-size:15px;">10</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <!-- Second Tab Content (Alarms) -->
+                                                            <div id="Alarms" class="tab-pane fade">
+                                                                @*  <div class="table-container">
+                                                                <table class="table table-striped console-table table-bordered table-hover mb-0"
+                                                                id="alarmsstables">
+                                                                <thead class="sorticon-pos">
+                                                                </thead>
+                                                                <tbody></tbody>
+                                                                </table>
+                                                                </div> *@
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="grid-stack-item" data-gs-x="9" data-gs-y="13" data-gs-width="3"
+                                                 data-gs-height="12" data-gs-min-height="12" data-gs-min-width="3">
+                                                <div class="console-panel grid-stack-item-content">
+                                                    <div class="console-panel-header">
+                                                        <div class="cph-left m-1">
+                                                            <h5>Down Time</h5>
+                                                        </div>
+                                                    </div><!-- Panel Header -->
+                                                    <div class="card-body align-center">
+                                                        <div class="chart-container">
+                                                            <div id="SummaryRedchartdiv" style="width: 100%; height: 300px;"></div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane  fade" id="KPI">
+                                <div class="card">
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <div class="form-group">
+                                                <h6>Select Site</h6>
+                                                <select class="form-control">
+                                                    <option value="Site1">Site 1</option>
+                                                    <option value="Site1">Site 2</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-2">
+                                            <div class="form-group">
+                                                <h6>Select Chart Type:</h6>
+                                                <select class="form-control" id="chartTypeDropdown">
+                                                    <option value="line">Line Chart</option>
+                                                    <option value="column">Column Chart</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-2">
+                                            <div class="form-group">
+                                                <h6>From Date:</h6>
+                                                <div class="input-group">
+                                                    <div class="input-group-append">
+                                                        <div class="input-group-text"><i class="far fa-calendar"></i></div>
+                                                    </div>
+                                                    <input type="text" class="form-control datepicker-here"
+                                                           data-language='en' data-date-format="MM dd,yyyy" placeholder="From">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-2">
+                                            <div class="form-group">
+                                                <h6>To Date:</h6>
+                                                <div class="input-group">
+                                                    <div class="input-group-append">
+                                                        <div class="input-group-text"><i class="far fa-calendar"></i></div>
+                                                    </div>
+                                                    <input type="text" class="form-control datepicker-here"
+                                                           data-language='en' data-date-format="MM dd,yyyy" placeholder="To">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-1 mt-4 d-flex justify-content-end">
+                                            <div class="form-group">
+                                                <button class="btn btn-accent">Show</button>
+                                            </div>
+                                        </div>
+                                        <div class="col-2 mt-4 d-flex justify-content-start">
+                                            <div class="form-group">
+                                                <button class="btn btn-accent">Download</button>
+                                            </div>
+                                        </div>
+                                        <div class="col-1 mt-4 text-right">
+                                            <a href="javascript:void(0);" title="" data-rel="tooltip" data-placement="bottom" title="Parameter Status" onclick="toggleMenu()">
+                                                <i class="icon dripicons-align-left"></i>
+                                            </a>
+                                        </div>
+                                        <div id="sidebar" class="sidebar-container"></div>
+                                    </div>
+                                    <div class="grid-stack gs-area">
+
+                                        <div class="grid-stack-item" data-gs-x="0" data-gs-y="0" data-gs-width="12"
+                                             data-gs-height="20" data-gs-min-height="20" data-gs-min-width="12">
+                                            <div class="console-panel grid-stack-item-content">
+                                                <div class="console-panel-header">
+                                                    <div class="cph-left">
+                                                        <h5>Chart</h5>
+                                                    </div>
+                                                    <div class="cph-right">
+                                                        <ul class="top-header-btns">
+
+                                                            <li>
+                                                                <a class="collapse-panel" href="#" title="Collapse/Uncollapse Panel"
+                                                                   data-rel="tooltip"> <i class="icon dripicons-chevron-up"></i></a>
+                                                            </li>
+                                                            <li class="dropdown">
+                                                                <a href="#" data-toggle="dropdown" title="Panel Options" data-rel="tooltip">
+                                                                    <i class="icon dripicons-dots-3"></i>
+                                                                </a>
+                                                                <div class="dropdown-menu  dropdown-menu-right theme-media">
+                                                                    <div class="dropdown-menu-header">
+                                                                        <div class="dmh-inner">
+                                                                            <h4>Panel Options</h4>
+                                                                        </div>
+                                                                    </div>
+                                                                    <a class="dropdown-item cp" href="#" title="">
+                                                                        <span class="color-fill-icon" style="background-color:#fff;"></span>
+                                                                        Header Background Color
+                                                                    </a>
+                                                                    <a class="dropdown-item header-fontcolor" href="#" title="">
+                                                                        <span class="color-fill-icon" style="background-color:#333"></span>
+                                                                        Header Font Color Dark/Light
+                                                                    </a>
+                                                                </div>
+                                                            </li>
+                                                            <li>
+                                                                <a class="removeWidget" href="#" title="Remove Panel" data-rel="tooltip">
+                                                                    <i class="icon dripicons-cross"></i>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div><!-- Panel Header -->
+                                                <div class="card-body align-center">
+
+                                                    <div class="chart-container">
+                                                        <div id="chartdiv"></div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                            <div class="tab-pane  fade" id="RawData">
+                                    <div class="row">
+
+                                        <div class="col-3">
+                                            <div class="form-group">
+                                                <h6>From Date:</h6>
+                                                <div class="input-group">
+                                                    <div class="input-group-append">
+                                                        <div class="input-group-text"><i class="far fa-calendar"></i></div>
+                                                    </div>
+                                                    <input type="text" class="form-control datepicker-here"
+                                                           data-language='en' data-date-format="MM dd,yyyy" placeholder="From">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            <div class="form-group">
+                                                <h6>To Date:</h6>
+                                                <div class="input-group">
+                                                    <div class="input-group-append">
+                                                        <div class="input-group-text"><i class="far fa-calendar"></i></div>
+                                                    </div>
+                                                    <input type="text" class="form-control datepicker-here"
+                                                           data-language='en' data-date-format="MM dd,yyyy" placeholder="To">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-auto mt-4">
+                                            <button class="btn btn-accent ">Search</button>
+                                        </div>
+                                        <div id="sidebar" class="sidebar-container"></div>
+                                    </div>
+                                    
+                                <div class="grid-stack gs-area">
+                                    <div class="grid-stack-item" data-gs-x="0" data-gs-y="0" data-gs-width="12" data-gs-height="12"
+                                         data-gs-min-height="10" data-gs-min-width="12" data-gs-locked="yes" data-gs-no-move="true" data-gs-no-resize="true">
+                                        <div class="console-panel grid-stack-item-content">
+                                            <div class="console-panel-header light">
+                                                <div class="cph-left">
+                                                </div>
+                                                <div class="cph-right">
+                                                    <div class="get_dt_search"></div>
+                                                    @* <ul class="top-header-btns">
+                                                    <li>
+                                                    <a class="switch-full" href="#" title="Expand Panel To Full Screen"
+                                                    data-rel="tooltip"> <i class="icon dripicons-expand-2"></i></a>
+                                                    </li>
+                                                    </ul> *@
+                                                </div>
+                                            </div><!-- Panel Header -->
+                                            <div class="console-panel-body no-padding">
+                                                <div class="table-container">
+                                                    <table class="table table-striped console-table table-bordered table-hover mb-0"
+                                                           id="DGtables">
+                                                        <thead class="sorticon-pos">
+                                                        </thead>
+                                                        <tbody></tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="console-footer">
+                                                <div class="dt-bottom-container"></div>
+                                            </div>
+                                        </div><!-- Console Panel -->
+                                    </div>
+
+                                </div>
+                            </>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div><!-- Content Area -->
+
+        <aside class="more-opt-panel"></aside>
+    </div><!-- Theme Content -->
+    <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+    <script src="/JsController/SiteGeneratorJs.js" asp-append-version="true"></script>
+    <script src="https://www.amcharts.com/lib/4/core.js"></script>
+    <script src="https://www.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>

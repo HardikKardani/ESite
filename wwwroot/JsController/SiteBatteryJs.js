@@ -118,17 +118,17 @@ function Fillchartdiv(data) {
     // Create chart instance
   
 }
-function FillBCchartdiv(data) {
+function FillVchartdiv(data) {
     // Create chart instance
     am4core.ready(function () {
-        am4core.addLicense("ch-custom-attribution");
         // Themes begin
         am4core.useTheme(am4themes_animated);
         // Themes end
-
+        am4core.addLicense("ch-custom-attribution");
         // Create chart instance
-        var chart = am4core.create("BCchartdiv", am4charts.XYChart);
+        var chart = am4core.create("Vchartdiv", am4charts.XYChart);
 
+        // Add data
         chart.data = $.parseJSON(data);
 
         // Create axes
@@ -137,16 +137,69 @@ function FillBCchartdiv(data) {
         var valueAxis2 = chart.yAxes.push(new am4charts.ValueAxis());
 
         // Adjust value axis
-        valueAxis1.min = -100;
+        valueAxis1.min = 0;
         valueAxis1.max = 100;
         valueAxis1.renderer.opposite = true;
 
-        valueAxis2.min = -100;
+        valueAxis2.min = 0;
         valueAxis2.max = 100;
         valueAxis2.renderer.opposite = false;
 
         // Create series
-     
+        var series1 = chart.series.push(new am4charts.LineSeries());
+        series1.dataFields.valueY = "Volatge";
+        series1.dataFields.dateX = "date";
+        series1.yAxis = valueAxis1;
+        series1.name = "Battery Bank Volatge";
+        series1.tooltipText = "{name}: [bold]{valueY}[/]";
+        series1.strokeWidth = 2;
+
+       
+
+        // Add legend
+        chart.legend = new am4charts.Legend();
+
+        // Add cursor
+        chart.cursor = new am4charts.XYCursor();
+    });
+}
+function FillCchartdiv(data) {
+    // Create chart instance
+    am4core.ready(function () {
+        // Themes begin
+        am4core.useTheme(am4themes_animated);
+        // Themes end
+        am4core.addLicense("ch-custom-attribution");
+        // Create chart instance
+        var chart = am4core.create("Cchartdiv", am4charts.XYChart);
+
+        // Add data
+        chart.data = $.parseJSON(data);
+
+        // Create axes
+        var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
+        var valueAxis1 = chart.yAxes.push(new am4charts.ValueAxis());
+        var valueAxis2 = chart.yAxes.push(new am4charts.ValueAxis());
+
+        // Adjust value axis
+        valueAxis1.min = 0;
+        valueAxis1.max = 100;
+        valueAxis1.renderer.opposite = true;
+
+        valueAxis2.min = 0;
+        valueAxis2.max = 100;
+        valueAxis2.renderer.opposite = false;
+
+        // Create series
+        var series1 = chart.series.push(new am4charts.LineSeries());
+        series1.dataFields.valueY = "Temperature";
+        series1.dataFields.dateX = "date";
+        series1.yAxis = valueAxis1;
+        series1.name = "Battery Bank Current";
+        series1.tooltipText = "{name}: [bold]{valueY}[/]";
+        series1.strokeWidth = 2;
+
+
 
         // Add legend
         chart.legend = new am4charts.Legend();
@@ -158,14 +211,15 @@ function FillBCchartdiv(data) {
 function FillBCCchartdiv(data) {
     am4core.ready(function () {
         // Themes begin
-        am4core.addLicense("ch-custom-attribution");
         am4core.useTheme(am4themes_animated);
         // Themes end
-
+        am4core.addLicense("ch-custom-attribution");
         // Create chart instance
-        var chart = am4core.create("BCCchartdiv", am4charts.XYChart);
+        var chart = am4core.create("BCchartdiv", am4charts.XYChart);
 
+        // Add data
         chart.data = $.parseJSON(data);
+
         // Create axes
         var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
         var valueAxis1 = chart.yAxes.push(new am4charts.ValueAxis());
@@ -173,16 +227,37 @@ function FillBCCchartdiv(data) {
 
         // Adjust value axis
         valueAxis1.min = 0;
-        valueAxis1.max = 600;
+        valueAxis1.max = 100;
         valueAxis1.renderer.opposite = true;
 
         valueAxis2.min = 0;
-        valueAxis2.max = 600;
+        valueAxis2.max = 100;
         valueAxis2.renderer.opposite = false;
 
         // Create series
-      
+        var series1 = chart.series.push(new am4charts.LineSeries());
+        series1.dataFields.valueY = "Temperature";
+        series1.dataFields.dateX = "date";
+        series1.yAxis = valueAxis1;
+        series1.name = "Airtel";
+        series1.tooltipText = "{name}: [bold]{valueY}[/]";
+        series1.strokeWidth = 2;
 
+        var series2 = chart.series.push(new am4charts.LineSeries());
+        series2.dataFields.valueY = "Current";
+        series2.dataFields.dateX = "date";
+        series2.yAxis = valueAxis2;
+        series2.name = "Vodafone";
+        series2.tooltipText = "{name}: [bold]{valueY}[/]";
+        series2.strokeWidth = 2;
+
+        var series3 = chart.series.push(new am4charts.LineSeries());
+        series3.dataFields.valueY = "Volatge";
+        series3.dataFields.dateX = "date";
+        series3.yAxis = valueAxis2;
+        series3.name = "Idea";
+        series3.tooltipText = "{name}: [bold]{valueY}[/]";
+        series3.strokeWidth = 2;
 
         // Add legend
         chart.legend = new am4charts.Legend();
@@ -203,6 +278,10 @@ $(window).on("load", function () {
             var data = $.parseJSON(json.response);
             FillCardDataList(data.Table);
             Fillchartdiv(JSON.stringify(data.Table1));
+            FillBCCchartdiv(JSON.stringify(data.Table1));
+            FillVchartdiv(JSON.stringify(data.Table1));
+            FillCchartdiv(JSON.stringify(data.Table1));
+
             var columns = data.Table6;
             var data = data.Table5;
             // Initialize the DataTable with dynamic columns and data
